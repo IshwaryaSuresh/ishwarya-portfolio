@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import DynamicCursor from './components/DynamicCursor'
 import Home from './pages/Home'
 import Work from './pages/Work'
 import About from './pages/About'
@@ -10,6 +11,7 @@ import CaseStudy from './pages/work/CaseStudy'
 export default function App() {
   return (
     <BrowserRouter>
+      <DynamicCursor />
       <div className="min-h-screen flex flex-col">
         <Nav />
         <main className="flex-1">

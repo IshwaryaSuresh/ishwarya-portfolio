@@ -25,6 +25,25 @@ const services = [
   },
 ]
 
+const testimonials = [
+  {
+    quote: "Ishwarya's approach to UX is unlike anything I've seen. She understood our users better than we did and delivered a product that genuinely resonated.",
+    name: 'Sarah Mitchell',
+    role: 'Head of Product, HealthTech Startup',
+  },
+  {
+    quote: "The redesign increased our conversion rate by 40%. Ishwarya's research-first process meant every decision was justified and effective.",
+    name: 'James Okafor',
+    role: 'Founder, E-commerce Brand',
+    highlight: true,
+  },
+  {
+    quote: "Working with Ishwarya felt like having a strategic partner. She doesn't just design — she solves problems and makes the experience delightful.",
+    name: 'Priya Nair',
+    role: 'UX Lead, SaaS Platform',
+  },
+]
+
 const stats = [
   { value: '5+', label: 'Years of UX experience' },
   { value: '50+', label: 'Local authorities served (WCAG compliance)' },
@@ -127,6 +146,34 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 px-6 max-w-6xl mx-auto">
+        <div className="mb-10">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Happy clients</p>
+          <h2 className="text-3xl font-bold text-ink">What clients say</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map(t => (
+            <div
+              key={t.name}
+              className={`rounded-2xl p-8 flex flex-col justify-between gap-8 ${
+                t.highlight
+                  ? 'bg-ink text-paper'
+                  : 'border border-border bg-white'
+              }`}
+            >
+              <p className={`text-base leading-relaxed ${t.highlight ? 'text-paper/80' : 'text-muted'}`}>
+                "{t.quote}"
+              </p>
+              <div>
+                <p className={`font-semibold text-sm ${t.highlight ? 'text-paper' : 'text-ink'}`}>{t.name}</p>
+                <p className={`text-xs mt-0.5 ${t.highlight ? 'text-paper/50' : 'text-muted'}`}>{t.role}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

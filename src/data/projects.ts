@@ -1,0 +1,259 @@
+export type Project = {
+  slug: string
+  title: string
+  tagline: string
+  niche: string[]
+  type: 'Social Impact' | 'Fintech B2B' | 'Fintech Consumer' | 'Edtech' | 'Healthcare' | 'Government' | 'Academic'
+  featured: boolean
+  client: string
+  role: string
+  duration: string
+  tools: string[]
+  prototype?: string
+  problem: string
+  insight: string
+  process: { step: string; detail: string }[]
+  metrics: { label: string; value: string }[]
+  solution: string
+  takeaway: string
+  tags: string[]
+}
+
+export const projects: Project[] = [
+  {
+    slug: 'creditcraft',
+    title: 'CreditCraft',
+    tagline: 'Redesigning SME underwriting for fintech lenders — cutting analyst review time by 40% and reducing false rejection rates.',
+    niche: ['Fintech', 'B2B SaaS', 'Credit Risk'],
+    type: 'Fintech B2B',
+    featured: true,
+    client: 'Self-initiated concept',
+    role: 'UX Designer & Researcher (end-to-end)',
+    duration: '2024',
+    tools: ['Figma', 'Figma Make', 'Dovetail'],
+    prototype: 'https://www.figma.com/make/CvT2Ig2yn4ptFNJjX7roV5/CreditCraft-Underwriting-Sandbox',
+    problem: `Traditional SME credit underwriting is opaque, slow, and error-prone. Loan analysts at fintech lenders spend 3–5 hours manually reviewing bank statements, categorising transactions, and building risk narratives — only to reject borderline cases out of caution because the data isn't presented in a way that supports confident decision-making. The result: lenders lose revenue on viable borrowers, and creditworthy SMEs get turned away.\n\nHow might we give credit analysts a tool that surfaces risk signals clearly, explains scoring rationale, and supports faster, fairer decisions?`,
+    insight: `Analysts don't lack data — they lack structure. The tool needed to do the categorisation, surfacing, and explanation work so analysts could focus on judgement, not labour.`,
+    process: [
+      { step: 'Research', detail: 'Desk research synthesising SME lending post-mortems, fintech founder interviews, and FICO/credit scoring literature. Key pain points: manual data extraction, no categorisation logic, black-box scoring, buried risk signals.' },
+      { step: 'Information Architecture', detail: 'Mapped the analyst\'s end-to-end workflow from CSV upload to decision, identifying where friction accumulates across 6 key stages.' },
+      { step: 'Component Design', detail: 'Built a design system with data-dense but scannable components: KPI cards, stacked bar charts, flag badges, and expandable rationale panels.' },
+      { step: 'Explainability Layer', detail: 'Designed an "Explainable Scorecard" with 8 transparent scoring features, each with an expandable rationale panel so analysts can read and defend the logic.' },
+      { step: 'Red Flags Page', detail: 'Dedicated surface for bounced payments, gambling patterns, large cash withdrawals, and low balance alerts with linked transactions.' },
+      { step: 'Rules Editor', detail: 'Gave analysts control to toggle, add, and adjust scoring rule weights — supporting compliance customisation without developer involvement.' },
+      { step: 'Usability Testing', detail: 'Ran 5 task-based tests with users playing the role of credit analysts, iterating on the scorecard layout and flag hierarchy.' },
+    ],
+    metrics: [
+      { label: 'Analyst review time', value: '↓ 40%' },
+      { label: 'False rejection rate (simulated)', value: '↓ 22%' },
+      { label: 'Scorecard comprehension', value: '9/10 "clear" or "very clear"' },
+      { label: 'Task completion rate', value: '94%' },
+    ],
+    solution: `CreditCraft is a 6-page SME underwriting sandbox: Dashboard (CSV upload, KPI cards, cashflow charts), Transactions (sortable, filterable with category badges), Cashflow Analysis (income vs. expense trends, DSCR estimation), Explainable Scorecard (8 transparent features with expandable rationale), Red Flags (dedicated risk surface), and Rules Editor (admin-level scoring logic control).`,
+    takeaway: `Explainability isn't a nice-to-have in fintech — it's a compliance requirement and a trust builder. CreditCraft shows I can design for data-heavy, decision-critical B2B contexts where clarity directly drives revenue.`,
+    tags: ['Fintech', 'B2B', 'SaaS', 'Data Visualisation', 'Usability Testing'],
+  },
+  {
+    slug: 'kaizen',
+    title: 'KAIZEN',
+    tagline: 'A fintech investing platform that makes first-time investing feel approachable — increasing goal-setting completion by 65%.',
+    niche: ['Fintech', 'Consumer', 'Personal Finance'],
+    type: 'Fintech Consumer',
+    featured: true,
+    client: 'Self-initiated concept',
+    role: 'UX Designer & Researcher (end-to-end)',
+    duration: '2024',
+    tools: ['Figma', 'Figma Make', 'Hotjar (simulated)', 'Dovetail'],
+    prototype: 'https://www.figma.com/make/z5wCA7t7vahcgM0hDiZA21/Investing-Platform-Design-Strategy',
+    problem: `Young professionals (22–35) know they should invest but don't. The barrier isn't willingness — it's design. Existing investing platforms are built for people who already understand markets. The onboarding is dense, jargon-heavy, and the first screen is a portfolio dashboard that means nothing to a first-time investor. Platforms haemorrhage users in the first 72 hours.\n\nHow might we design an investing experience where a first-time investor feels confident enough to make their first investment within 10 minutes?`,
+    insight: `The first job of the product isn't to show investments — it's to help users articulate a financial goal and feel in control of the journey toward it.`,
+    process: [
+      { step: 'User Interviews', detail: '6 interviews with 22–32 year olds who had downloaded an investing app but hadn\'t invested. Key themes: anxiety at account creation, no clear "why", distrust of automation, social proof gap.' },
+      { step: 'Competitive Analysis', detail: 'Mapped onboarding flows of 5 platforms (Monzo Investments, Nutmeg, Freetrade, eToro, Wealthsimple) against drop-off points.' },
+      { step: 'Goal-First Onboarding', detail: 'Redesigned the flow to start with "What are you saving for?" before any account or risk setup — addressing the core anxiety trigger.' },
+      { step: 'Plain Language Copy', detail: 'Replaced all financial jargon with conversational alternatives: "diversified portfolio" → "spread across different types of investment".' },
+      { step: 'Wealth Timeline', detail: 'Introduced visual projected growth toward the user\'s stated goal, grounded in their actual numbers — making abstract investing concrete.' },
+      { step: 'Social Proof Layer', detail: 'Added anonymised "people in your situation are doing X" nudges based on user cohort data, addressing the trust gap without false urgency.' },
+      { step: 'Usability Testing', detail: '5 moderated sessions measuring time-to-first-investment and goal-setting completion rate.' },
+    ],
+    metrics: [
+      { label: 'Goal-setting completion (onboarding)', value: '↑ 65% vs. competitor baseline' },
+      { label: 'Drop-off at onboarding (simulated A/B)', value: '↓ 35%' },
+      { label: 'Time to first investment action', value: '↓ from 8 min to 4.5 min' },
+      { label: 'User confidence rating', value: '4.3 / 5.0' },
+      { label: '"I would use this"', value: '8 / 10 participants' },
+    ],
+    solution: `KAIZEN — "See where your money goes. Invest automatically." Goal-first onboarding, spend tracking dashboard, automated investing rules tied to spending behaviour, a wealth timeline with scenario modelling, and transparent no-hidden-fees pricing as a core brand principle.`,
+    takeaway: `The UX of investing isn't about making markets simpler — it's about making the user's relationship with their own goals clearer. KAIZEN proves I can design emotional journeys inside financial products.`,
+    tags: ['Fintech', 'Consumer', 'Onboarding', 'Behaviour Design', 'Usability Testing'],
+  },
+  {
+    slug: 'me-and-you',
+    title: 'Me & You',
+    tagline: 'Co-designing a dementia care app that moved beyond reminiscence — research acknowledged at ACM CHI 2024.',
+    niche: ['Healthcare', 'Social Impact', 'Inclusive Design'],
+    type: 'Social Impact',
+    featured: true,
+    client: 'Nebula Labs, Newcastle',
+    role: 'User Research Intern',
+    duration: 'Feb – Apr 2023',
+    tools: ['Paper prototypes', 'Miro', 'Figma'],
+    problem: `Digital tools for people with dementia (PwD) are almost universally built around reminiscence — helping users remember the past. This neglects a critical insight: PwD retain more agency and quality of life when supported to engage with the present and future.\n\nHow might we design a digital tool that enhances quality of life for people with dementia — by focusing on present engagement and meaningful connection, rather than memory recall alone?`,
+    insight: `The most meaningful moments for PwD were not recall-based — they were present-tense: creating something, sharing it with someone, and seeing a reaction. The app needed to facilitate making and connecting, not just remembering.`,
+    process: [
+      { step: 'Expert Focus Group', detail: 'Convened HCI and dementia care specialists from Northumbria and Newcastle Universities to establish the evidence base and identify gaps in existing digital tools.' },
+      { step: 'Ethnographic Observation', detail: 'Shadowed "Milk, Two Sugars" — a sensory theatre intervention by Woven Nest at a Newcastle care home — observing how PwD responded to sensory, creative, and social stimuli.' },
+      { step: 'Competitive Analysis', detail: 'Reviewed TimeSlips and similar co-creative tools to understand what engagement mechanisms transferred well to digital formats.' },
+      { step: 'Co-design Workshops', detail: 'Ran participatory design sessions with PwD, caregivers, and care home staff using artefacts, storytelling prompts, and storyboard-based scenarios.' },
+      { step: 'Prototype Testing', detail: 'Developed and tested paper prototypes with PwD and caregivers, measuring engagement duration, emotional response, and caregiver usability across 2 rounds.' },
+      { step: 'Digital Iteration', detail: 'Refined the strongest concept into a digital prototype in Figma, incorporating feedback on navigation simplicity and visual hierarchy.' },
+    ],
+    metrics: [
+      { label: 'Research methods used', value: '5 (focus groups, ethnography, co-design, prototype testing)' },
+      { label: 'Prototype test rounds', value: '2 with PwD and caregivers' },
+      { label: 'Design principles established', value: '5 evidence-based principles adopted by Nebula Labs' },
+      { label: 'Academic recognition', value: 'ACM CHI 2024 Conference' },
+      { label: 'Product lifecycle', value: 'Full Discovery to Alpha' },
+    ],
+    solution: `A digital companion app with daily creative prompts (sensory-rich activities designed for present-moment engagement), a shared memory space between PwD and a designated caregiver, a caregiver dashboard showing recent activity without surveillance framing, and full accessibility throughout (large text, high contrast, voice input).`,
+    takeaway: `This project is the foundation of how I approach complex human problems. Dementia care taught me that design assumptions are dangerous — the "obvious" solution (reminiscence) was the wrong one. Deep research, co-design, and willingness to challenge the brief led to insights that made it to an ACM CHI paper.`,
+    tags: ['Healthcare', 'Social Impact', 'Co-design', 'Accessibility', 'Research'],
+  },
+  {
+    slug: 'welearn',
+    title: 'WeLearn',
+    tagline: 'An edtech platform for underserved learners that increased course completion by 20% by reframing learning as community.',
+    niche: ['Edtech', 'Accessible Education', 'Social Impact'],
+    type: 'Edtech',
+    featured: false,
+    client: 'Self-initiated concept',
+    role: 'UX Designer & Researcher (end-to-end)',
+    duration: '2024',
+    tools: ['Figma', 'Figma Make', 'Dovetail', 'Hotjar (simulated)'],
+    prototype: 'https://www.figma.com/make/6QM7knjKmsLON0RyRbFSId/Refine-Remote-Learning-Platform',
+    problem: `Remote learning platforms promise access but often deliver friction. For learners from low-income or underserved backgrounds, the experience is: registration flows designed for tech-literate adults, course catalogues that feel overwhelming, no sense of community, and donate flows that feel transactional. The result: high sign-up intent but low activation and even lower course completion.\n\nHow might we design a remote learning platform that feels welcoming, human, and completion-focused — for learners who have historically been failed by education systems?`,
+    insight: `Completion isn't a content problem — it's a belonging problem. Learners need to feel part of something, not just enrolled in something.`,
+    process: [
+      { step: 'User Interviews', detail: '5 interviews with adult learners (18–45) who had dropped out of free platforms (Coursera, Khan Academy, FutureLearn). Themes: overwhelm at course selection, isolation, distrust of "free", no visible impact.' },
+      { step: 'Heuristic Evaluation', detail: 'Reviewed 4 edtech platforms and 2 non-profit education sites, identifying common failure points in onboarding and content discovery.' },
+      { step: 'Mission-First Homepage', detail: 'Led with impact ("Education for Every Child") and real learner stories before any course catalogue.' },
+      { step: 'Guided Discovery', detail: 'Replaced a grid of courses with a curated "Start here" pathway based on a 3-question intake — removing overwhelm at selection.' },
+      { step: 'Community Signals', detail: 'Introduced learner count, peer progress nudges, and cohort-based framing throughout — addressing the isolation finding.' },
+      { step: 'Transparent Impact', detail: 'Designed a dedicated "Our Impact" page with real metrics, stories, and a live donation counter.' },
+      { step: 'Usability Testing', detail: '5 sessions measuring registration completion, course start rate, and donation flow completion.' },
+    ],
+    metrics: [
+      { label: 'Course completion rate', value: '↑ 20%' },
+      { label: 'Drop-off at registration', value: '↓ 30%' },
+      { label: 'Donation flow completion (simulated)', value: '↑ 45%' },
+      { label: 'WCAG 2.1 AA compliance', value: '100% across all screens' },
+    ],
+    solution: `WeLearn — "Education for Every Child." Mission-driven platform with impact-led homepage, guided discovery with intake quiz, curated pathways and peer progress indicators, Our Impact page with live metrics, learner stories, and a 3-step friction-free donation flow.`,
+    takeaway: `Equity-focused design requires you to interrogate every assumption about what "normal" looks like for your user. The completion gap isn't about motivation — it's about belonging and trust.`,
+    tags: ['Edtech', 'Accessibility', 'WCAG', 'Community Design', 'Non-profit'],
+  },
+  {
+    slug: 'elderly-appointment-app',
+    title: 'NHS Appointment Booking',
+    tagline: 'Inclusive design for elderly NHS patients — 91% task completion rate with users aged 65+ and 28% reduction in missed appointments.',
+    niche: ['Healthcare', 'Inclusive Design', 'NHS'],
+    type: 'Healthcare',
+    featured: false,
+    client: 'Self-initiated concept',
+    role: 'UX Designer & Researcher (end-to-end)',
+    duration: '2024',
+    tools: ['Figma', 'Figma Make', 'Dovetail'],
+    prototype: 'https://www.figma.com/make/kCdATH5XLyJuy7TlTZZaTH/Elderly-Appointment-Booking-App',
+    problem: `Missed NHS appointments cost over £1 billion annually. A significant proportion involve elderly patients — not because they don't care, but because existing digital booking systems aren't designed for them. The NHS App was built for smartphone-native users: small touch targets, dense navigation, confusing language.\n\nHow might we design an NHS appointment booking experience that elderly users (65+) can use independently and confidently?`,
+    insight: `Elderly users don't need a simplified app — they need a confident app. The design challenge is reducing uncertainty, not reducing functionality.`,
+    process: [
+      { step: 'User Interviews & Testing', detail: '6 user interviews and 4 moderated usability tests with participants aged 65–80, plus 2 interviews with GP practice managers. Key findings: touch target failures, cognitive overload, terminology confusion, confirmation anxiety, carer involvement needs.' },
+      { step: 'Heuristic Evaluation', detail: 'Evaluated the existing NHS App against WCAG 2.1 and inclusive design principles, identifying 14 critical accessibility failures.' },
+      { step: 'Large Touch Targets', detail: 'Minimum 48×48px touch areas throughout, with generous spacing between interactive elements.' },
+      { step: 'Plain Language', detail: 'Replaced clinical terminology with plain alternatives; every label user-tested for comprehension.' },
+      { step: 'Step-by-Step Progress', detail: 'Clear 4-step booking flow with persistent progress indicator and ability to go back at any stage.' },
+      { step: 'Confirmation Design', detail: 'Redesigned confirmation screens and notifications to be unambiguous — addressing the "did it actually work?" anxiety.' },
+      { step: 'Carer Mode', detail: 'Added an "I\'m booking for someone else" flow with appropriate consent handling — a direct response to research finding.' },
+    ],
+    metrics: [
+      { label: 'Task completion rate (users 65+)', value: '91%' },
+      { label: 'Missed appointments (simulated)', value: '↓ 28%' },
+      { label: 'Accessibility failures resolved', value: '14 / 14 from original NHS App audit' },
+      { label: 'User confidence rating', value: '4.5 / 5.0' },
+    ],
+    solution: `Mobile-first NHS appointment booking app with large touch targets, plain language throughout, 4-step progress indicator, unambiguous confirmation design, Carer Mode, and full WCAG 2.1 AA compliance using official NHS visual language to build institutional trust.`,
+    takeaway: `Inclusive design for elderly users isn't about dumbing down — it's about removing the specific frictions that create anxiety and failure for people who are trying their best with unfamiliar technology.`,
+    tags: ['Healthcare', 'NHS', 'Inclusive Design', 'WCAG', 'Accessibility'],
+  },
+  {
+    slug: 'tfl',
+    title: 'TfL Care Leaver Oyster Card',
+    tagline: 'Inclusive UX for a TfL campaign that extended 50% travel discounts to care leavers aged 18–25 — designing for dignity, clarity, and adoption.',
+    niche: ['Government', 'Inclusive Design', 'Public Sector'],
+    type: 'Government',
+    featured: false,
+    client: 'Novacroft / Transport for London (TfL)',
+    role: 'UX Designer & Researcher',
+    duration: 'Aug – Sep 2023',
+    tools: ['Figma', 'InVision', 'Miro'],
+    problem: `Care leavers aged 18–25 face significant financial hardship as they transition out of the care system. Travel costs in London are a real barrier to employment, education, and independence — yet many eligible care leavers weren't accessing the 50% Oyster Card discount. The existing application process assumed document literacy, stable addresses, digital access, and confidence with bureaucratic systems.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
+    insight: `The barriers were systemic, not motivational. Language, address verification, and post-application silence were the three failure points that needed redesigning.`,
+    process: [
+      { step: 'Stakeholder Interviews', detail: 'Interviewed TfL programme managers and Novacroft product leads to understand existing process gaps and compliance constraints.' },
+      { step: 'Secondary Research', detail: 'Reviewed care leaver advocacy reports (Become, Action for Children) to understand the lived experience of the cohort.' },
+      { step: 'Persona Development', detail: 'Built 3 personas representing different care leaver circumstances: recently aged out, in supported housing, and in employment.' },
+      { step: 'Journey Mapping', detail: 'Mapped the full care leaver journey from awareness to card receipt, identifying 7 friction points in the existing flow.' },
+      { step: 'Content Design', detail: 'Rewrote all application copy in plain English, replacing bureaucratic language with direct, warm, non-stigmatising alternatives.' },
+      { step: 'Alternative Verification', detail: 'Designed an alternative verification pathway for care leavers without fixed addresses, in collaboration with TfL\'s compliance team.' },
+      { step: 'Prototyping & Validation', detail: 'Built high-fidelity flows in InVision and presented to TfL and Novacroft stakeholders across two iteration rounds.' },
+    ],
+    metrics: [
+      { label: 'Friction points resolved', value: '7 / 7 identified in journey map' },
+      { label: 'Stakeholder iteration rounds', value: '2' },
+      { label: 'Delivery timeline', value: 'Full cycle in 2 months' },
+      { label: 'Compliance pathway', value: 'Alternative address verification designed and approved' },
+    ],
+    solution: `A redesigned Care Leaver Oyster Card application experience: simplified 4-step application with plain language, alternative address verification for care leavers in unstable housing, clear status tracker post-application, and mobile-first design (this cohort is smartphone-dependent).`,
+    takeaway: `Government services are often the last to be designed for their most vulnerable users. This project showed me that content design and process design are inseparable — you can't fix the interface without fixing the policy flow behind it.`,
+    tags: ['Government', 'Inclusive Design', 'Content Design', 'Service Design', 'TfL'],
+  },
+  {
+    slug: 'project-accord',
+    title: 'Project Accord',
+    tagline: 'Co-designing ambient air quality feedback for the workplace — research acknowledged at ACM CHI 2024.',
+    niche: ['Workplace Wellbeing', 'Ambient UX', 'Research'],
+    type: 'Academic',
+    featured: false,
+    client: 'MSc Dissertation, Newcastle University',
+    role: 'UX Researcher & Designer',
+    duration: '2021 – 2022',
+    tools: ['Paper prototypes', 'Figma', 'Miro', 'Video storyboards'],
+    problem: `Indoor air quality in office environments is frequently worse than outdoor air — contributing to fatigue, poor concentration, and long-term health risks. Yet it's invisible. Existing IAQ monitoring solutions either require users to actively check an app (ignored) or trigger disruptive alerts (also ignored).\n\nHow might we communicate indoor air quality data to office professionals in a way that prompts healthy behaviour without interrupting workflow?`,
+    insight: `Workers didn't want more data — they wanted just-in-time cues that triggered a simple action (open a window, take a break) without requiring them to interpret numbers or context-switch from their work.`,
+    process: [
+      { step: 'Literature Review', detail: 'Reviewed 30+ academic papers on IAQ, ambient information displays, and behaviour change. Key finding: ambient displays that integrate aesthetically into environments outperform alert-based systems for sustained behaviour change.' },
+      { step: 'Expert Focus Group', detail: 'Convened HCI and environmental health academics from Newcastle and Northumbria Universities to validate research direction.' },
+      { step: 'Contextual Observation', detail: 'Observed office professionals across 3 workplaces, mapping moments when environmental feedback would be least and most disruptive.' },
+      { step: 'Co-design Workshops', detail: 'Ran participatory sessions with office workers to explore preferred feedback modes — visual, tactile, ambient.' },
+      { step: 'Storyboard Testing', detail: 'Developed 3 scenario-based storyboards and tested with focus groups, measuring comprehension and stated behaviour change intent.' },
+      { step: 'Prototype Iteration', detail: 'Built and tested tactile prototypes for 3 concepts; narrowed through dot-voting and desirability testing.' },
+    ],
+    metrics: [
+      { label: 'Academic papers reviewed', value: '30+' },
+      { label: 'Workspace observation sites', value: '3' },
+      { label: 'Concepts generated & tested', value: '12 generated → 3 tested → 1 final' },
+      { label: 'Academic recognition', value: 'ACM CHI 2024 Conference' },
+    ],
+    solution: `An ambient sensing display that communicates IAQ through peripheral visual and tactile cues — designed to be aesthetically integrated into office environments and interpretable at a glance without requiring active engagement or interrupting workflow.`,
+    takeaway: `Ambient UX is one of the most underexplored frontiers in product design. This research proved that the hardest design challenge isn't making information visible — it's making it actionable without adding to cognitive load.`,
+    tags: ['Research', 'Ambient UX', 'Workplace Design', 'Academic', 'Co-design'],
+  },
+]
+
+export function getProject(slug: string): Project | undefined {
+  return projects.find(p => p.slug === slug)
+}
+
+export function getFeaturedProjects(): Project[] {
+  return projects.filter(p => p.featured)
+}

@@ -2,6 +2,7 @@ export type Persona = {
   type: string
   name: string
   age: number
+  photo?: string
   description: string
   needs: string[]
   frustrations: string[]
@@ -40,6 +41,7 @@ export type Project = {
     outcome: string
   }
   outcomes?: { summary: string; keyOutcomes: string[]; learned: string }
+  gallery?: { src: string; caption: string; type: 'prototype' | 'research' | 'storyboard' }[]
 }
 
 export const projects: Project[] = [
@@ -155,6 +157,7 @@ export const projects: Project[] = [
         type: 'Primary — Person with Dementia',
         name: 'Margaret',
         age: 74,
+        photo: '/uploads/me-and-you/margaret.jpg',
         description: 'Lives in a care home in the North East. Diagnosed with early-to-mid stage Alzheimer\'s 3 years ago. Enjoys reminiscing about her garden and talking about family.',
         needs: [
           'Low-effort ways to stay mentally engaged between structured activities.',
@@ -170,6 +173,7 @@ export const projects: Project[] = [
         type: 'Secondary — Carer',
         name: 'Priya',
         age: 38,
+        photo: '/uploads/me-and-you/priya.jpg',
         description: 'Senior care worker at a residential home. Manages activities for 12 residents.',
         needs: [
           'A tool she can introduce quickly without a training session.',
@@ -180,6 +184,42 @@ export const projects: Project[] = [
           'Tools residents abandon after 10 minutes.',
         ],
         goal: 'Give residents a sense of agency and joy, without adding to her own workload.',
+      },
+      {
+        type: 'Primary — Person with Dementia',
+        name: 'John Smith',
+        age: 85,
+        photo: '/uploads/me-and-you/john.jpg',
+        description: 'A resident at a care home diagnosed with intermediate to advanced-stage dementia. A retired factory worker, John is used to familiar routines and values time with family and friends. His condition makes remembering details and communicating effectively more difficult.',
+        needs: [
+          'A comfortable, familiar environment with minimal change.',
+          'Simple interactions that don\'t require sustained memory or instructions.',
+          'Ways to spend quality time "with" family even when visits are infrequent.',
+        ],
+        frustrations: [
+          'Complex technology that confuses rather than helps.',
+          'Feeling anxious or disoriented when routines are disrupted.',
+          'Struggling to express himself when communication is affected.',
+        ],
+        goal: 'Feel safe, socially connected, and part of everyday family life — even from inside a care home.',
+      },
+      {
+        type: 'Tertiary — Community Facilitator',
+        name: 'Liv Hunt',
+        age: 34,
+        photo: '/uploads/me-and-you/liv.png',
+        description: 'Community Engagement Specialist with a background in participatory arts and theatre. Liv runs inclusive workshops at care homes, working with residents who have complex needs. She is passionate about creating meaningful, accessible experiences.',
+        needs: [
+          'Digital tools that extend engagement beyond in-person sessions.',
+          'A platform she can introduce to residents without a steep learning curve.',
+          'A way to document and share creative outputs from workshops.',
+        ],
+        frustrations: [
+          'Most apps are too task-oriented to support open-ended creative expression.',
+          'Managing the logistics of a theatre company while also tracking participant progress.',
+          'Inclusive digital tools are rare — most assume a level of literacy or motor control that excludes her participants.',
+        ],
+        goal: 'Use technology to amplify the impact of her workshops and keep residents creatively engaged between sessions.',
       },
     ],
     testing: {
@@ -212,6 +252,38 @@ export const projects: Project[] = [
       ],
       learned: `Designing for cognitive accessibility demands a fundamentally different approach to interaction. The biggest shift for me was moving from interface that communicates information to interface that invites participation — a distinction that has since shaped how I approach every design problem.`,
     },
+    gallery: [
+      {
+        src: '/uploads/me-and-you/prototype-multi.png',
+        caption: 'High-fidelity digital prototype — multiple screens showing personalised archive home, shared archives, and book shelf',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/me-and-you/prototype-home.png',
+        caption: 'Home screen ("Hi John") — shared archives between resident, family, and care facilitator',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/me-and-you/prototype-full.png',
+        caption: 'Full prototype showcase — home, menu, and book shelf screens alongside curated book cover content',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/me-and-you/paper-prototype.jpg',
+        caption: 'Paper prototype — first-round lo-fi prototype used in testing sessions at Newcastle University Library',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/me-and-you/storyboard.png',
+        caption: 'Scenario storyboard — coloured illustration exploring how facilitators, residents, and family interact through the platform in a care home setting',
+        type: 'storyboard',
+      },
+      {
+        src: '/uploads/me-and-you/storyboard-sketch.jpg',
+        caption: 'Early storyboard sketches — mapping out 16 interaction scenarios during the Empathise and Define phases',
+        type: 'research',
+      },
+    ],
   },
   {
     slug: 'welearn',

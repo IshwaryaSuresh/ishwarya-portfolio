@@ -144,7 +144,17 @@ export default function CaseStudy() {
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">User personas</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.personas.map((persona: Persona) => (
-                <div key={persona.name} className="border border-border rounded-2xl p-6 space-y-4">
+                <div key={persona.name} className="border border-border rounded-2xl overflow-hidden">
+                  {persona.photo && (
+                    <div className="h-44 overflow-hidden bg-paper">
+                      <img
+                        src={persona.photo}
+                        alt={persona.name}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6 space-y-4">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">{persona.type}</p>
                     <h3 className="font-bold text-ink text-lg">{persona.name}, {persona.age}</h3>
@@ -175,6 +185,7 @@ export default function CaseStudy() {
                       <p className="text-xs font-semibold text-ink mb-1">Goal</p>
                       <p className="text-sm text-muted italic">"{persona.goal}"</p>
                     </div>
+                  </div>
                   </div>
                 </div>
               ))}
@@ -272,6 +283,33 @@ export default function CaseStudy() {
             <div className="bg-ink rounded-2xl p-6">
               <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-3">What I learned</p>
               <p className="text-paper/80 leading-relaxed">{project.outcomes.learned}</p>
+            </div>
+          </section>
+        )}
+
+        {/* Gallery — prototype & research images */}
+        {project.gallery && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Prototype &amp; process</p>
+            <div className="space-y-4">
+              {project.gallery.map((item, i) => (
+                <figure key={i} className="rounded-2xl overflow-hidden border border-border">
+                  <img
+                    src={item.src}
+                    alt={item.caption}
+                    className="w-full object-cover"
+                    style={{ maxHeight: item.type === 'prototype' ? '480px' : '360px', objectPosition: 'top' }}
+                  />
+                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed">
+                    <span className={`inline-block mr-2 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide ${
+                      item.type === 'prototype' ? 'bg-blue-50 text-blue-600' :
+                      item.type === 'storyboard' ? 'bg-emerald-50 text-emerald-700' :
+                      'bg-amber-50 text-amber-700'
+                    }`}>{item.type}</span>
+                    {item.caption}
+                  </figcaption>
+                </figure>
+              ))}
             </div>
           </section>
         )}

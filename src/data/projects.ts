@@ -1,3 +1,13 @@
+export type Persona = {
+  type: string
+  name: string
+  age: number
+  description: string
+  needs: string[]
+  frustrations: string[]
+  goal: string
+}
+
 export type Project = {
   slug: string
   title: string
@@ -17,6 +27,19 @@ export type Project = {
   solution: string
   takeaway: string
   tags: string[]
+  // Extended fields (optional — populated per-project)
+  overview?: { team: string; industry: string; status: string }
+  background?: { understandingNeeds: string; personalDrive: string; innovativeMethods: string }
+  personas?: Persona[]
+  testing?: {
+    description: string
+    participants: string
+    questions: string[]
+    worked: string[]
+    changed: string[]
+    outcome: string
+  }
+  outcomes?: { summary: string; keyOutcomes: string[]; learned: string }
 }
 
 export const projects: Project[] = [
@@ -118,6 +141,79 @@ export const projects: Project[] = [
     solution: `A digital companion app with daily creative prompts (sensory-rich activities designed for present-moment engagement), a shared memory space between PwD and a designated caregiver, a caregiver dashboard showing recent activity without surveillance framing, and full accessibility throughout (large text, high contrast, voice input).`,
     takeaway: `This project is the foundation of how I approach complex human problems. Dementia care taught me that design assumptions are dangerous — the "obvious" solution (reminiscence) was the wrong one. Deep research, co-design, and willingness to challenge the brief led to insights that made it to an ACM CHI paper.`,
     tags: ['Healthcare', 'Social Impact', 'Co-design', 'Accessibility', 'Research'],
+    overview: {
+      team: 'Solo researcher & designer',
+      industry: 'Healthcare / Social Care',
+      status: 'Discovery to Alpha complete. Development paused pending council funding.',
+    },
+    background: {
+      understandingNeeds: `Dementia affects over 900,000 people in the UK, with numbers expected to reach 1.6 million by 2040. People living with dementia (PwD) experience progressive cognitive decline that affects memory, communication, and daily orientation. Existing digital tools in this space overwhelmingly focus on reminiscence — prompting memory of the past — but research suggests that forward-orientation (thinking about what comes next) can meaningfully reduce disorientation and anxiety. There was a clear gap: almost no tools were designed to support future thinking for PwD.`,
+      personalDrive: `My interest in this space grew from exploring how creative and sensory interventions — such as immersive theatre and group storytelling — were already being used in care homes to positive effect. I shadowed workshops by Woven Nest Theatre at a local care home and conducted a focus group with HCI and dementia specialists at Northumbria and Newcastle Universities. A recurring theme emerged: practitioners wanted a tool that could extend creative engagement beyond in-person sessions and into everyday routines — something lightweight, non-clinical, and genuinely enjoyable to use.`,
+      innovativeMethods: `Rather than defaulting to screen-heavy interfaces, I looked at how tactile and creative formats could translate digitally. The 8-fold zine — a physical storytelling format — became a central inspiration. Its non-linear, low-pressure structure aligned well with the cognitive patterns of PwD: open-ended prompts rather than correctness, sensory engagement rather than instruction-following. I used this format to inform the app's interaction model.`,
+    },
+    personas: [
+      {
+        type: 'Primary — Person with Dementia',
+        name: 'Margaret',
+        age: 74,
+        description: 'Lives in a care home in the North East. Diagnosed with early-to-mid stage Alzheimer\'s 3 years ago. Enjoys reminiscing about her garden and talking about family.',
+        needs: [
+          'Low-effort ways to stay mentally engaged between structured activities.',
+          'Prompts that feel like conversation, not tests.',
+        ],
+        frustrations: [
+          'Apps that feel clinical or require sustained attention.',
+          'Touchscreens that are hard to use with arthritic hands.',
+        ],
+        goal: 'Feel a sense of pride and connection through small, creative acts.',
+      },
+      {
+        type: 'Secondary — Carer',
+        name: 'Priya',
+        age: 38,
+        description: 'Senior care worker at a residential home. Manages activities for 12 residents.',
+        needs: [
+          'A tool she can introduce quickly without a training session.',
+          'Something residents can use independently between visits.',
+        ],
+        frustrations: [
+          'Apps that require constant facilitation.',
+          'Tools residents abandon after 10 minutes.',
+        ],
+        goal: 'Give residents a sense of agency and joy, without adding to her own workload.',
+      },
+    ],
+    testing: {
+      description: 'We tested two paper prototype variants with 10 participants, including 5 people with dementia (supported by carers) and 5 care staff. Sessions lasted approximately 20–30 minutes each.',
+      participants: '5 people with dementia + 5 care staff',
+      questions: [
+        'Could users understand the prompts without verbal explanation?',
+        'Did the non-linear structure feel freeing or confusing?',
+        'Which interaction patterns felt natural on a touchscreen?',
+      ],
+      worked: [
+        'Open-ended image prompts (rather than text) were consistently engaging and required no explanation.',
+        'The zine-inspired, non-sequential layout reduced anxiety compared to step-by-step flows.',
+        'Carers noted that the low-stakes format encouraged participation from residents who typically disengaged from structured activities.',
+      ],
+      changed: [
+        'Touch target sizes needed to increase significantly — initial targets were too small for users with reduced motor control. Final targets set to 48×48px minimum.',
+        'Prompts written as questions ("What does this remind you of?") created more pressure than prompts written as invitations ("Tell me about…").',
+        'The prototype assumed independent navigation; testing revealed that a dedicated carer mode for guided use was also needed.',
+      ],
+      outcome: 'These findings directly shaped the re-iterated digital prototype — we increased touch targets to 48px minimum, rewrote all prompts in invitation format, and introduced a dual-mode navigation model.',
+    },
+    outcomes: {
+      summary: 'The project successfully completed the Discovery to Alpha lifecycle, producing a tested, iterated digital prototype validated with real users and domain experts.',
+      keyOutcomes: [
+        '10 participants across 2 rounds of usability testing (PwD and care staff)',
+        '2 design iterations completed based on direct user feedback',
+        'Positive stakeholder reception from Teesside Council — development earmarked to continue once current funding cycle completes',
+        'Research acknowledged at ACM CHI 2024 Conference',
+        'Identified a genuine product gap in forward-orientation tools for dementia care — an area significantly underserved by existing digital solutions',
+      ],
+      learned: `Designing for cognitive accessibility demands a fundamentally different approach to interaction. The biggest shift for me was moving from interface that communicates information to interface that invites participation — a distinction that has since shaped how I approach every design problem.`,
+    },
   },
   {
     slug: 'welearn',

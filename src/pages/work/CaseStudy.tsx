@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { getProject } from '../../data/projects'
+import { getProject, type Persona } from '../../data/projects'
 
 const typeColors: Record<string, string> = {
   'Fintech B2B': 'bg-blue-50 text-blue-700 border-blue-200',
@@ -44,8 +44,12 @@ export default function CaseStudy() {
           {[
             { label: 'Client', value: project.client },
             { label: 'Role', value: project.role },
-            { label: 'Duration', value: project.duration },
+            { label: 'Timeline', value: project.duration },
             { label: 'Tools', value: project.tools.join(', ') },
+            ...(project.overview ? [
+              { label: 'Team', value: project.overview.team },
+              { label: 'Industry', value: project.overview.industry },
+            ] : []),
           ].map(m => (
             <div key={m.label}>
               <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">{m.label}</p>
@@ -53,6 +57,14 @@ export default function CaseStudy() {
             </div>
           ))}
         </div>
+
+        {/* Status banner */}
+        {project.overview?.status && (
+          <div className="mt-4 inline-flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800">
+            <span className="mt-0.5">⏸</span>
+            <span>{project.overview.status}</span>
+          </div>
+        )}
 
         {project.prototype && (
           <div className="mt-6">
@@ -89,12 +101,31 @@ export default function CaseStudy() {
       {/* Body */}
       <div className="max-w-3xl mx-auto px-6 space-y-16">
 
+        {/* Background — only if extended data present */}
+        {project.background && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-8">Background &amp; inspiration</p>
+            <div className="space-y-10">
+              {[
+                { heading: 'Understanding Dementia Care Needs', body: project.background.understandingNeeds },
+                { heading: 'Personal Drive and Research Insights', body: project.background.personalDrive },
+                { heading: 'Embracing Innovative Methods', body: project.background.innovativeMethods },
+              ].map(({ heading, body }) => (
+                <div key={heading}>
+                  <h3 className="font-semibold text-ink text-base mb-3">{heading}</h3>
+                  <p className="text-muted leading-relaxed">{body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Problem */}
         <section>
           <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The problem</p>
-          <div className="prose prose-sm max-w-none">
+          <div className="space-y-4">
             {project.problem.split('\n\n').map((para, i) => (
-              <p key={i} className={`text-ink leading-relaxed ${i === project.problem.split('\n\n').length - 1 ? 'text-accent font-medium italic' : 'text-muted'}`}>
+              <p key={i} className={`leading-relaxed ${i === project.problem.split('\n\n').length - 1 ? 'text-accent font-medium italic' : 'text-muted'}`}>
                 {para}
               </p>
             ))}
@@ -106,6 +137,50 @@ export default function CaseStudy() {
           <p className="text-xs font-medium uppercase tracking-widest text-accent mb-3">Key insight</p>
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
         </section>
+
+        {/* Personas — only if present */}
+        {project.personas && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">User personas</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.personas.map((persona: Persona) => (
+                <div key={persona.name} className="border border-border rounded-2xl p-6 space-y-4">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">{persona.type}</p>
+                    <h3 className="font-bold text-ink text-lg">{persona.name}, {persona.age}</h3>
+                    <p className="text-muted text-sm mt-1 leading-relaxed">{persona.description}</p>
+                  </div>
+                  <div className="space-y-4 pt-4 border-t border-border">
+                    <div>
+                      <p className="text-xs font-semibold text-ink mb-2">Needs</p>
+                      <ul className="space-y-1">
+                        {persona.needs.map(n => (
+                          <li key={n} className="text-sm text-muted flex items-start gap-2">
+                            <span className="text-accent mt-0.5 flex-shrink-0">✓</span>{n}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-ink mb-2">Frustrations</p>
+                      <ul className="space-y-1">
+                        {persona.frustrations.map(f => (
+                          <li key={f} className="text-sm text-muted flex items-start gap-2">
+                            <span className="text-rose-400 mt-0.5 flex-shrink-0">✕</span>{f}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="bg-paper rounded-xl p-3">
+                      <p className="text-xs font-semibold text-ink mb-1">Goal</p>
+                      <p className="text-sm text-muted italic">"{persona.goal}"</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Process */}
         <section>
@@ -125,11 +200,81 @@ export default function CaseStudy() {
           </div>
         </section>
 
+        {/* Prototype testing — only if present */}
+        {project.testing && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Prototype testing</p>
+            <div className="space-y-6">
+              <div className="border border-border rounded-2xl p-6">
+                <h3 className="font-semibold text-ink mb-2">What we tested</h3>
+                <p className="text-muted text-sm mb-4">{project.testing.description}</p>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-xs font-medium uppercase tracking-widest text-muted">Participants</span>
+                  <span className="text-xs bg-paper border border-border rounded-full px-3 py-1 text-ink">{project.testing.participants}</span>
+                </div>
+                <p className="text-xs font-semibold text-ink mb-2">Key questions</p>
+                <ul className="space-y-1.5">
+                  {project.testing.questions.map(q => (
+                    <li key={q} className="text-sm text-muted flex items-start gap-2">
+                      <span className="text-muted mt-0.5 flex-shrink-0">→</span>{q}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
+                  <p className="text-xs font-semibold text-emerald-800 uppercase tracking-widest mb-3">What worked well</p>
+                  <ul className="space-y-2">
+                    {project.testing.worked.map(w => (
+                      <li key={w} className="text-sm text-emerald-900 flex items-start gap-2">
+                        <span className="mt-0.5 flex-shrink-0">✓</span>{w}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-rose-50 border border-rose-200 rounded-2xl p-6">
+                  <p className="text-xs font-semibold text-rose-800 uppercase tracking-widest mb-3">What needed to change</p>
+                  <ul className="space-y-2">
+                    {project.testing.changed.map(c => (
+                      <li key={c} className="text-sm text-rose-900 flex items-start gap-2">
+                        <span className="mt-0.5 flex-shrink-0">→</span>{c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <p className="text-muted text-sm italic">{project.testing.outcome}</p>
+            </div>
+          </section>
+        )}
+
         {/* Solution */}
         <section>
           <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The solution</p>
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
+
+        {/* Outcomes — only if present */}
+        {project.outcomes && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Outcomes &amp; impact</p>
+            <p className="text-muted leading-relaxed mb-6">{project.outcomes.summary}</p>
+            <ul className="space-y-3 mb-8">
+              {project.outcomes.keyOutcomes.map(o => (
+                <li key={o} className="flex items-start gap-3 text-sm text-ink">
+                  <span className="w-5 h-5 rounded-full bg-accent-light border border-blue-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-accent text-xs">✓</span>
+                  </span>
+                  {o}
+                </li>
+              ))}
+            </ul>
+            <div className="bg-ink rounded-2xl p-6">
+              <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-3">What I learned</p>
+              <p className="text-paper/80 leading-relaxed">{project.outcomes.learned}</p>
+            </div>
+          </section>
+        )}
 
         {/* Takeaway */}
         <section className="border-l-4 border-accent pl-6">

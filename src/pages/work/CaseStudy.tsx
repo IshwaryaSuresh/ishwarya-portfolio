@@ -120,6 +120,42 @@ export default function CaseStudy() {
           </section>
         )}
 
+        {/* Zine inspiration — only if present */}
+        {project.zineInspiration && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">The 8-fold zine</p>
+            <p className="text-muted leading-relaxed mb-8">
+              The 8-fold zine, made from a single sheet of A4 folded into 8 panels, became the structural
+              inspiration for the app's interaction model. Its non-linear, open-ended, low-pressure format
+              aligned closely with how PwD engage: no right answers, no fixed sequence, just prompts
+              that invite participation.
+            </p>
+
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              {project.zineInspiration.references.map((ref, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-40 overflow-hidden bg-paper">
+                    <img src={ref.src} alt={ref.caption} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{ref.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">Zine-inspired prompt cards</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {project.zineInspiration.mockups.map((m, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-36 overflow-hidden bg-paper">
+                    <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{m.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Desk Research — only if present */}
         {project.deskResearch && (
           <section>
@@ -147,10 +183,33 @@ export default function CaseStudy() {
             </ul>
 
             {/* Gap callout */}
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8">
               <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Research gap identified</p>
               <p className="text-amber-900 text-sm leading-relaxed">{project.deskResearch.gap}</p>
             </div>
+
+            {/* Key reading */}
+            {project.deskResearch.books && (
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-5">Key reading</p>
+                <div className="space-y-4">
+                  {project.deskResearch.books.map(book => (
+                    <div key={book.title} className="flex gap-4 items-start border border-border rounded-2xl p-4 bg-paper">
+                      <img
+                        src={book.src}
+                        alt={book.title}
+                        className="w-14 h-20 object-cover rounded-lg flex-shrink-0 shadow-sm"
+                      />
+                      <div>
+                        <p className="font-semibold text-ink text-sm leading-snug">{book.title}</p>
+                        <p className="text-xs text-muted mb-2">{book.author}</p>
+                        <p className="text-xs text-muted leading-relaxed">{book.note}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         )}
 
@@ -321,6 +380,30 @@ export default function CaseStudy() {
           </section>
         )}
 
+        {/* Workshop images */}
+        {project.workshops && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">Workshop</p>
+            <p className="text-xs text-muted italic mb-6">Images showing participants have been blurred to protect privacy.</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {project.workshops.map((item, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border group">
+                  <div className="h-36 overflow-hidden bg-paper">
+                    <img
+                      src={item.src}
+                      alt={item.caption}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug line-clamp-2">
+                    {item.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Gallery — prototype & research images */}
         {project.gallery && (
           <section>
@@ -331,8 +414,8 @@ export default function CaseStudy() {
                   <img
                     src={item.src}
                     alt={item.caption}
-                    className="w-full object-cover"
-                    style={{ maxHeight: item.type === 'prototype' ? '480px' : '360px', objectPosition: 'top' }}
+                    className="w-full object-contain bg-paper"
+                    style={{ maxHeight: '680px' }}
                   />
                   <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed">
                     <span className={`inline-block mr-2 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide ${

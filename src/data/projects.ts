@@ -47,7 +47,13 @@ export type Project = {
     stats: { value: string; label: string }[]
     findings: string[]
     gap: string
+    books?: { src: string; title: string; author: string; note: string }[]
   }
+  zineInspiration?: {
+    references: { src: string; caption: string }[]
+    mockups: { src: string; caption: string }[]
+  }
+  workshops?: { src: string; caption: string; blurred?: boolean }[]
 }
 
 export const projects: Project[] = [
@@ -171,9 +177,63 @@ export const projects: Project[] = [
         'Clinical evidence suggests forward-orientation (engaging with the present and near future) can reduce disorientation and anxiety in PwD - but no commercial product addressed this.',
         'Creative and sensory engagement - particularly through participatory arts - showed strong evidence for improving quality of life and communication in PwD.',
         'Accessibility research flagged consistent failures in existing tools: small touch targets, complex navigation, clinical visual language, and absence of caregiver co-use modes.',
-        'The 8-fold zine format (used in art therapy) offered a structural model: non-linear, low-pressure, prompt-based - highly compatible with how PwD process and engage.',
+        'The 8-fold zine - a physical, non-linear storytelling format used in art therapy - offered a structural model directly applicable to digital interaction design: open-ended prompts, no correct answers, low cognitive load, and a format PwD could engage with at their own pace.',
       ],
       gap: `No product existed that combined present-moment creative engagement, shared family connection, and accessibility-first design for people living with dementia. That was the design opportunity.`,
+      books: [
+        {
+          src: '/uploads/me-and-you/book-kitwood.png',
+          title: 'Dementia Reconsidered, Revisited',
+          author: 'Tom Kitwood, ed. Dawn Brooker',
+          note: 'Foundational text on person-centred dementia care. Kitwood\'s concept of "personhood" directly shaped the design principle of facilitating making and connecting rather than testing memory.',
+        },
+        {
+          src: '/uploads/me-and-you/book-killick-craig.png',
+          title: 'Creativity and Communication in Persons with Dementia',
+          author: 'John Killick & Claire Craig',
+          note: 'Evidence base for creative engagement as a communication tool for PwD. Informed the decision to use open-ended image prompts rather than text-based interactions.',
+        },
+        {
+          src: '/uploads/me-and-you/book-bryden.png',
+          title: 'Dancing with Dementia',
+          author: 'Christine Bryden',
+          note: 'First-person account of living with dementia. Critical for grounding the research in lived experience and challenging assumptions about what PwD can and want to do.',
+        },
+      ],
+    },
+    zineInspiration: {
+      references: [
+        {
+          src: '/uploads/me-and-you/zine-template.png',
+          caption: '8-fold zine template - one A4 sheet folded into 8 panels, the structural model behind the app\'s non-linear interaction design',
+        },
+        {
+          src: '/uploads/me-and-you/zine-inspiration-illustrated.png',
+          caption: 'Illustrated zine reference - examples of sensory-rich, prompt-based zine formats showing how visual storytelling can replace linear text-heavy interaction',
+        },
+        {
+          src: '/uploads/me-and-you/zine-burnout.png',
+          caption: '"Burnt Out" zines - handmade zine examples showing the accessible, lo-fi, personal quality of the format that made it a strong inspiration for the app\'s tone',
+        },
+      ],
+      mockups: [
+        {
+          src: '/uploads/me-and-you/zine-mockup-warmth.png',
+          caption: 'Zine prompt card - warmth and connection theme, translating the physical zine format into a digital card-based prompt for the app',
+        },
+        {
+          src: '/uploads/me-and-you/zine-mockup-who-am-i.png',
+          caption: '"Who Am I" prompt card - identity and self-expression theme, one of the core open-ended prompts designed for PwD',
+        },
+        {
+          src: '/uploads/me-and-you/zine-mockup-she-him.png',
+          caption: 'Zine prompt card - relationships and memory theme, showing how personal connection prompts were visualised in the app',
+        },
+        {
+          src: '/uploads/me-and-you/zine-mockup-light-shadows.png',
+          caption: '"Light, Shadows & Magic" prompt card - sensory and atmospheric theme, designed to invite present-moment creative response',
+        },
+      ],
     },
     personas: [
       {
@@ -196,7 +256,7 @@ export const projects: Project[] = [
         type: 'Secondary - Carer',
         name: 'Priya',
         age: 38,
-        photo: '/uploads/me-and-you/priya.jpg',
+        photo: '/uploads/me-and-you/priya-avatar.svg',
         description: 'Senior care worker at a residential home. Manages activities for 12 residents.',
         needs: [
           'A tool she can introduce quickly without a training session.',
@@ -212,7 +272,7 @@ export const projects: Project[] = [
         type: 'Primary - Person with Dementia',
         name: 'John Smith',
         age: 85,
-        photo: '/uploads/me-and-you/john.jpg',
+        photo: '/uploads/me-and-you/john-avatar.svg',
         description: 'A resident at a care home diagnosed with intermediate to advanced-stage dementia. A retired factory worker, John is used to familiar routines and values time with family and friends. His condition makes remembering details and communicating effectively more difficult.',
         needs: [
           'A comfortable, familiar environment with minimal change.',
@@ -230,7 +290,7 @@ export const projects: Project[] = [
         type: 'Tertiary - Community Facilitator',
         name: 'Liv Hunt',
         age: 34,
-        photo: '/uploads/me-and-you/liv.jpg',
+        photo: '/uploads/me-and-you/liv-avatar.svg',
         description: 'Community Engagement Specialist with a background in participatory arts and theatre. Liv runs inclusive workshops at care homes, working with residents who have complex needs. She is passionate about creating meaningful, accessible experiences.',
         needs: [
           'Digital tools that extend engagement beyond in-person sessions.',
@@ -282,28 +342,23 @@ export const projects: Project[] = [
         type: 'research',
       },
       {
-        src: '/uploads/me-and-you/storyboard-sketch.jpg',
-        caption: 'Early storyboard sketches - 16 interaction scenarios mapped during the Empathise and Define phases to understand how different user types would encounter the app',
-        type: 'research',
-      },
-      {
         src: '/uploads/me-and-you/storyboard.png',
         caption: 'Scenario storyboard A - facilitator-led session in a care home: introducing the app, prompting residents, and sharing outputs with family',
         type: 'storyboard',
       },
       {
         src: '/uploads/me-and-you/storyboard-2.png',
-        caption: 'Scenario storyboard B - resident-initiated use: browsing the archive independently, engaging with content, and connecting remotely with family members',
+        caption: 'Scenario storyboard B - resident-initiated use: browsing the archive independently, engaging with content, and connecting with family members in person and remotely',
         type: 'storyboard',
       },
       {
-        src: '/uploads/me-and-you/paper-prototype.jpg',
-        caption: 'Paper prototype v1 - first lo-fi iteration tested with 5 PwD and 5 care staff at Newcastle University Library',
+        src: '/uploads/me-and-you/paper-prototype-2.jpg',
+        caption: 'Paper prototype v1 - first lo-fi iteration tested with 5 PwD and 5 care staff at the care home',
         type: 'prototype',
       },
       {
-        src: '/uploads/me-and-you/paper-prototype-2.jpg',
-        caption: 'Paper prototype v2 - revised iteration incorporating feedback: larger touch targets, invitation-style prompts, and a simplified navigation model',
+        src: '/uploads/me-and-you/ap-flow.png',
+        caption: 'App user flow - end-to-end journey from home screen through menu, archive, and Book Shelf, showing family member, facilitator, and carer pathways',
         type: 'prototype',
       },
       {
@@ -320,6 +375,24 @@ export const projects: Project[] = [
         src: '/uploads/me-and-you/prototype-full.png',
         caption: 'Full prototype showcase - home, navigation menu, and Book Shelf screens alongside curated book cover content',
         type: 'prototype',
+      },
+    ],
+    workshops: [
+      {
+        src: '/uploads/me-and-you/workshop-accordion-v2.png',
+        caption: 'Music and creative expression - resident playing the accordion during a sensory workshop session',
+      },
+      {
+        src: '/uploads/me-and-you/workshop-tea-v2.png',
+        caption: 'English Tea - residents sharing tea and conversation as a low-pressure social activity',
+      },
+      {
+        src: '/uploads/me-and-you/workshop-sensory-v2.png',
+        caption: 'Sensory engagement - resident exploring tactile materials during a co-design session',
+      },
+      {
+        src: '/uploads/me-and-you/workshop-artwork-v2.png',
+        caption: 'Creative expression - resident proudly displaying watercolour artwork made during the workshop',
       },
     ],
   },

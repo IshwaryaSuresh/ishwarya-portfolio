@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 type Project = {
   num: string
@@ -10,6 +11,7 @@ type Project = {
   tags: string[]
   image?: string
   placeholder: string
+  slug?: string
 }
 
 const PROJECTS: Project[] = [
@@ -43,6 +45,7 @@ const PROJECTS: Project[] = [
     tags: ['Healthcare', 'Research', 'Co-design'],
     image: '/uploads/Me&You.png',
     placeholder: 'Healthcare, dementia companion',
+    slug: 'me-and-you',
   },
   {
     num: '04',
@@ -82,7 +85,7 @@ const PROJECTS: Project[] = [
 type View = 'list' | 'grid'
 
 function ProjectRow({ p, onHover, onLeave }: { p: Project; onHover: (p: Project, e: React.MouseEvent) => void; onLeave: () => void }) {
-  return (
+  const inner = (
     <div
       className="proj-row"
       onMouseEnter={(e) => onHover(p, e)}
@@ -100,10 +103,11 @@ function ProjectRow({ p, onHover, onLeave }: { p: Project; onHover: (p: Project,
       </div>
     </div>
   )
+  return p.slug ? <Link to={`/work/${p.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>{inner}</Link> : inner
 }
 
 function ProjectCard({ p }: { p: Project }) {
-  return (
+  const inner = (
     <div className="proj-card">
       <div className="proj-card__media">
         {p.image
@@ -121,6 +125,7 @@ function ProjectCard({ p }: { p: Project }) {
       </div>
     </div>
   )
+  return p.slug ? <Link to={`/work/${p.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>{inner}</Link> : inner
 }
 
 export default function Projects() {

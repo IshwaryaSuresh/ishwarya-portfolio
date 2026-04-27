@@ -256,7 +256,7 @@ export const projects: Project[] = [
         type: 'Secondary - Carer',
         name: 'Priya',
         age: 38,
-        photo: '/uploads/me-and-you/priya-avatar.svg',
+        photo: '/uploads/me-and-you/priya-photo.png',
         description: 'Senior care worker at a residential home. Manages activities for 12 residents.',
         needs: [
           'A tool she can introduce quickly without a training session.',
@@ -272,7 +272,7 @@ export const projects: Project[] = [
         type: 'Primary - Person with Dementia',
         name: 'John Smith',
         age: 85,
-        photo: '/uploads/me-and-you/john-avatar.svg',
+        photo: '/uploads/me-and-you/john-photo.jpg',
         description: 'A resident at a care home diagnosed with intermediate to advanced-stage dementia. A retired factory worker, John is used to familiar routines and values time with family and friends. His condition makes remembering details and communicating effectively more difficult.',
         needs: [
           'A comfortable, familiar environment with minimal change.',
@@ -290,7 +290,7 @@ export const projects: Project[] = [
         type: 'Tertiary - Community Facilitator',
         name: 'Liv Hunt',
         age: 34,
-        photo: '/uploads/me-and-you/liv-avatar.svg',
+        photo: '/uploads/me-and-you/liv-photo.jpg',
         description: 'Community Engagement Specialist with a background in participatory arts and theatre. Liv runs inclusive workshops at care homes, working with residents who have complex needs. She is passionate about creating meaningful, accessible experiences.',
         needs: [
           'Digital tools that extend engagement beyond in-person sessions.',
@@ -348,7 +348,7 @@ export const projects: Project[] = [
       },
       {
         src: '/uploads/me-and-you/storyboard-2.png',
-        caption: 'Scenario storyboard B - resident-initiated use: browsing the archive independently, engaging with content, and connecting with family members in person and remotely',
+        caption: 'Scenario storyboard B - family member initiated use: family member browsing the archive, engaging with PwD and connecting with each other in person',
         type: 'storyboard',
       },
       {

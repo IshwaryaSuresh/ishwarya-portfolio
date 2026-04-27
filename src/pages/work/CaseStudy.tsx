@@ -395,7 +395,7 @@ export default function CaseStudy() {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug line-clamp-2">
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">
                     {item.caption}
                   </figcaption>
                 </figure>

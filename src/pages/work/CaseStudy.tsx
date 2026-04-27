@@ -120,6 +120,40 @@ export default function CaseStudy() {
           </section>
         )}
 
+        {/* Desk Research — only if present */}
+        {project.deskResearch && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Desk research</p>
+            <p className="text-muted leading-relaxed mb-8">{project.deskResearch.summary}</p>
+
+            {/* Stat callouts */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {project.deskResearch.stats.map(s => (
+                <div key={s.label} className="bg-paper border border-border rounded-2xl p-4 text-center">
+                  <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
+                  <p className="text-xs text-muted leading-snug">{s.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Findings list */}
+            <ul className="space-y-3 mb-6">
+              {project.deskResearch.findings.map((f, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted">
+                  <span className="w-5 h-5 rounded-full bg-paper border border-border flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-semibold text-ink">{i + 1}</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            {/* Gap callout */}
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Research gap identified</p>
+              <p className="text-amber-900 text-sm leading-relaxed">{project.deskResearch.gap}</p>
+            </div>
+          </section>
+        )}
+
         {/* Problem */}
         <section>
           <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The problem</p>

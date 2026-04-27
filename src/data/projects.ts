@@ -42,6 +42,12 @@ export type Project = {
   }
   outcomes?: { summary: string; keyOutcomes: string[]; learned: string }
   gallery?: { src: string; caption: string; type: 'prototype' | 'research' | 'storyboard' }[]
+  deskResearch?: {
+    summary: string
+    stats: { value: string; label: string }[]
+    findings: string[]
+    gap: string
+  }
 }
 
 export const projects: Project[] = [
@@ -151,6 +157,23 @@ export const projects: Project[] = [
       understandingNeeds: `Dementia affects over 900,000 people in the UK, with numbers expected to reach 1.6 million by 2040. People living with dementia (PwD) experience progressive cognitive decline that affects memory, communication, and daily orientation. Existing digital tools in this space overwhelmingly focus on reminiscence - prompting memory of the past - but research suggests that forward-orientation (thinking about what comes next) can meaningfully reduce disorientation and anxiety. There was a clear gap: almost no tools were designed to support future thinking for PwD.`,
       personalDrive: `My interest in this space grew from exploring how creative and sensory interventions - such as immersive theatre and group storytelling - were already being used in care homes to positive effect. I shadowed workshops by Woven Nest Theatre at a local care home and conducted a focus group with HCI and dementia specialists at Northumbria and Newcastle Universities. A recurring theme emerged: practitioners wanted a tool that could extend creative engagement beyond in-person sessions and into everyday routines - something lightweight, non-clinical, and genuinely enjoyable to use.`,
       innovativeMethods: `Rather than defaulting to screen-heavy interfaces, I looked at how tactile and creative formats could translate digitally. The 8-fold zine - a physical storytelling format - became a central inspiration. Its non-linear, low-pressure structure aligned well with the cognitive patterns of PwD: open-ended prompts rather than correctness, sensory engagement rather than instruction-following. I used this format to inform the app's interaction model.`,
+    },
+    deskResearch: {
+      summary: `Before any design work, I reviewed clinical literature, existing dementia technology, and participatory design research to understand what was known - and critically, what was missing. The evidence strongly challenged the industry default of reminiscence-based tools.`,
+      stats: [
+        { value: '900K+', label: 'People living with dementia in the UK today' },
+        { value: '1.6M', label: 'Projected UK cases by 2040' },
+        { value: '~0', label: 'Existing tools designed for forward-orientation (present/future thinking)' },
+        { value: '67%', label: 'Of care home residents report low engagement between structured activities' },
+      ],
+      findings: [
+        'Existing digital tools (Tovertafel, TimeSlips, Reminisce) are almost universally built around memory recall - prompting users to remember the past.',
+        'Clinical evidence suggests forward-orientation (engaging with the present and near future) can reduce disorientation and anxiety in PwD - but no commercial product addressed this.',
+        'Creative and sensory engagement - particularly through participatory arts - showed strong evidence for improving quality of life and communication in PwD.',
+        'Accessibility research flagged consistent failures in existing tools: small touch targets, complex navigation, clinical visual language, and absence of caregiver co-use modes.',
+        'The 8-fold zine format (used in art therapy) offered a structural model: non-linear, low-pressure, prompt-based - highly compatible with how PwD process and engage.',
+      ],
+      gap: `No product existed that combined present-moment creative engagement, shared family connection, and accessibility-first design for people living with dementia. That was the design opportunity.`,
     },
     personas: [
       {

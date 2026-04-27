@@ -304,6 +304,27 @@ export default function CaseStudy() {
           </div>
         </section>
 
+        {/* Design decisions — only if present */}
+        {project.designDecisions && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Design decisions</p>
+            <div className="space-y-5">
+              {project.designDecisions.map((d, i) => (
+                <div key={i} className="border border-border rounded-2xl p-6">
+                  <p className="font-semibold text-ink mb-3">
+                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-accent-light border border-blue-200 text-accent text-xs font-bold mr-3 flex-shrink-0">{i + 1}</span>
+                    {d.decision}
+                  </p>
+                  <div className="ml-9 border-l-2 border-border pl-4">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-1">Rationale</p>
+                    <p className="text-sm text-muted leading-relaxed">{d.rationale}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Prototype testing — only if present */}
         {project.testing && (
           <section>

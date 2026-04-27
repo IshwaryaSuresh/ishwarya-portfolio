@@ -29,7 +29,8 @@ export type Project = {
   takeaway: string
   tags: string[]
   // Extended fields (optional - populated per-project)
-  overview?: { team: string; industry: string; status: string }
+  overview?: { team: string; industry: string; status?: string }
+  designDecisions?: { decision: string; rationale: string }[]
   background?: { understandingNeeds: string; personalDrive: string; innovativeMethods: string }
   personas?: Persona[]
   testing?: {
@@ -465,34 +466,135 @@ export const projects: Project[] = [
   {
     slug: 'tfl',
     title: 'TfL Care Leaver Oyster Card',
-    tagline: 'Inclusive UX for a TfL campaign that extended 50% travel discounts to care leavers aged 18–25 - designing for dignity, clarity, and adoption.',
+    tagline: 'Inclusive UX for a TfL campaign that extended 50% travel discounts to care leavers aged 18–25 — designing for dignity, clarity, and adoption.',
     niche: ['Government', 'Inclusive Design', 'Public Sector'],
     type: 'Government',
     featured: false,
     client: 'Novacroft / Transport for London (TfL)',
-    role: 'UX Designer & Researcher',
+    role: 'Lead UX Designer',
     duration: 'Aug – Sep 2023',
-    tools: ['Figma', 'InVision', 'Miro'],
-    problem: `Care leavers aged 18–25 face significant financial hardship as they transition out of the care system. Travel costs in London are a real barrier to employment, education, and independence - yet many eligible care leavers weren't accessing the 50% Oyster Card discount. The existing application process assumed document literacy, stable addresses, digital access, and confidence with bureaucratic systems.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
-    insight: `The barriers were systemic, not motivational. Language, address verification, and post-application silence were the three failure points that needed redesigning.`,
+    tools: ['Figma', 'Wireframing', 'High-fidelity prototyping'],
+    overview: {
+      team: '1 UX Designer (lead), cross-functional collaboration with content, dev, and TfL stakeholders',
+      industry: 'Public Sector / Transport',
+    },
+    problem: `Care leavers are among the most socioeconomically vulnerable young people in the UK. After leaving the care system at 18, many face significant barriers to employment, education, and independence — often in cities where public transport is the only affordable means of getting around.\n\nTransport for London's Care Leaver Photocard offers 50% off all TfL travel for care leavers aged 18–25. But the existing application journey had a problem: it was unclear, inaccessible in places, and created unnecessary friction for a group that already faces multiple barriers in navigating official processes.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
+    insight: `The barriers were systemic, not motivational. Language, document requirements, and mobile accessibility were the three failure points that needed redesigning.`,
     process: [
       { step: 'Stakeholder Interviews', detail: 'Interviewed TfL programme managers and Novacroft product leads to understand existing process gaps and compliance constraints.' },
-      { step: 'Secondary Research', detail: 'Reviewed care leaver advocacy reports (Become, Action for Children) to understand the lived experience of the cohort.' },
-      { step: 'Persona Development', detail: 'Built 3 personas representing different care leaver circumstances: recently aged out, in supported housing, and in employment.' },
-      { step: 'Journey Mapping', detail: 'Mapped the full care leaver journey from awareness to card receipt, identifying 7 friction points in the existing flow.' },
-      { step: 'Content Design', detail: 'Rewrote all application copy in plain English, replacing bureaucratic language with direct, warm, non-stigmatising alternatives.' },
-      { step: 'Alternative Verification', detail: 'Designed an alternative verification pathway for care leavers without fixed addresses, in collaboration with TfL\'s compliance team.' },
-      { step: 'Prototyping & Validation', detail: 'Built high-fidelity flows in InVision and presented to TfL and Novacroft stakeholders across two iteration rounds.' },
+      { step: 'Journey Mapping & Audit', detail: 'Mapped the existing user journey end-to-end and audited it against WCAG 2.1 AA accessibility standards, identifying 7 friction points across the flow.' },
+      { step: 'Secondary Research', detail: 'Reviewed care leaver advocacy reports (Become, Action for Children) to understand the lived experience of the cohort, and examined comparable journeys (student discount applications, benefit claim forms) to identify patterns that worked well.' },
+      { step: 'Content Design', detail: 'Rewrote all application copy in plain English, replacing bureaucratic third-person language ("the applicant must provide…") with direct, warm, first-person alternatives — a deliberate shift for a user group that often has difficult relationships with official institutions.' },
+      { step: 'Information Architecture', detail: 'Moved the document checklist from mid-flow to the start of the journey — surfacing requirements upfront so users can prepare before they start, reducing mid-flow abandonment.' },
+      { step: 'Mobile-First Prototyping', detail: 'Built high-fidelity flows in Figma with 44px minimum touch targets throughout and form fields tagged to trigger the correct mobile keyboard type. Presented to TfL and Novacroft stakeholders across two iteration rounds.' },
+      { step: 'Error State Design', detail: 'Designed error states with specific, actionable recovery guidance — replacing generic messages ("Invalid entry") with clear instructions like "Please upload a JPG or PDF under 5MB".' },
     ],
     metrics: [
-      { label: 'Friction points resolved', value: '7 / 7 identified in journey map' },
+      { label: 'Friction points resolved', value: '7 / 7' },
+      { label: 'WCAG 2.1 AA issues addressed', value: '3' },
       { label: 'Stakeholder iteration rounds', value: '2' },
-      { label: 'Delivery timeline', value: 'Full cycle in 2 months' },
-      { label: 'Compliance pathway', value: 'Alternative address verification designed and approved' },
+      { label: 'Delivery timeline', value: '2 months' },
     ],
-    solution: `A redesigned Care Leaver Oyster Card application experience: simplified 4-step application with plain language, alternative address verification for care leavers in unstable housing, clear status tracker post-application, and mobile-first design (this cohort is smartphone-dependent).`,
-    takeaway: `Government services are often the last to be designed for their most vulnerable users. This project showed me that content design and process design are inseparable - you can't fix the interface without fixing the policy flow behind it.`,
+    solution: `A redesigned Care Leaver Oyster Card application experience: document checklist surfaced upfront so users can prepare, plain-language copy in warm first-person tone throughout, redesigned error states with specific recovery guidance, mobile-first design with 44px+ touch targets and keyboard-optimised form fields, and an alternative address verification pathway for care leavers in unstable housing.`,
+    takeaway: `Content and design are inseparable. The biggest improvements in this project came not from visual changes but from rewriting the language — a reminder that UX writing is as much a design tool as a wireframe. Government services are often the last to be designed for their most vulnerable users.`,
     tags: ['Government', 'Inclusive Design', 'Content Design', 'Service Design', 'TfL'],
+    deskResearch: {
+      summary: `Before any design work, I mapped the existing user journey and audited it against WCAG 2.1 AA standards. I also reviewed care leaver advocacy reports and comparable application journeys to understand what was failing — and for whom.`,
+      stats: [
+        { value: '80K+', label: 'Young people leaving care in the UK each year' },
+        { value: '50%', label: 'TfL travel discount available to eligible care leavers aged 18–25' },
+        { value: '7', label: 'Friction points identified in the existing application journey' },
+        { value: '3', label: 'WCAG 2.1 AA accessibility issues identified and addressed' },
+      ],
+      findings: [
+        'The existing flow required users to upload documentation mid-form — at the point where many had already abandoned. Requirements needed to move earlier, not later.',
+        'Language used throughout was formal and impersonal ("the applicant must provide…"), which felt distancing for a user group that often has difficult relationships with official institutions.',
+        'Several steps had no error states — users who made a mistake received no guidance on how to correct it, creating dead ends with no recovery path.',
+        'On mobile (the primary device for 18–25 year olds), several touch targets were below the 44px minimum, and form fields were not optimised for mobile keyboards.',
+        'Care leavers in unstable or temporary housing had no viable path through the address verification step — an invisible exclusion built into the original flow.',
+      ],
+      gap: `The existing journey assumed document literacy, stable addresses, digital confidence, and familiarity with bureaucratic systems — the opposite of the profile of most care leavers aged 18–25.`,
+    },
+    designDecisions: [
+      {
+        decision: 'Rewrote all content in plain English using a warm, direct tone',
+        rationale: 'Research into form design for vulnerable users consistently shows that first-person, conversational language reduces anxiety and increases completion rates compared to formal third-person language. For a cohort with often-difficult relationships with official institutions, language that feels human rather than bureaucratic is not cosmetic — it\'s structural.',
+      },
+      {
+        decision: 'Moved document checklist to the start of the journey',
+        rationale: 'Users who discover mid-form that they need documents they don\'t have are far more likely to abandon. Surfacing requirements upfront lets users prepare before they start, reducing drop-off at the point of maximum intent.',
+      },
+      {
+        decision: 'Redesigned error states with clear, specific recovery guidance',
+        rationale: 'Generic error messages ("Invalid entry") create confusion and dead ends. Specific guidance ("Please upload a JPG or PDF under 5MB") gives users a clear path forward. For a user group with limited experience navigating official digital services, unclear error states are a significant exclusion mechanism.',
+      },
+      {
+        decision: 'Optimised for mobile-first interaction',
+        rationale: 'Care leavers aged 18–25 overwhelmingly access services via smartphone. All touch targets were sized to 44px minimum, and form fields were tagged to trigger the correct mobile keyboard type — removing the small frictions that accumulate into abandonment.',
+      },
+    ],
+    outcomes: {
+      summary: 'The redesigned care leaver photocard journey simplified a previously friction-heavy process into a clear, accessible, mobile-optimised experience — designed specifically for a user group that the original journey had systematically excluded.',
+      keyOutcomes: [
+        'All 7 friction points identified in the journey map resolved through design, content, and IA changes',
+        '3 WCAG 2.1 AA accessibility improvements implemented across identified issues',
+        'Alternative address verification pathway designed and approved by TfL\'s compliance team — removing an invisible exclusion from the original flow',
+        'Full end-to-end prototype delivered and validated across 2 stakeholder iteration rounds within a 2-month timeline',
+      ],
+      learned: 'Content and design are inseparable. The biggest improvements in this project came not from visual changes but from rewriting the language — a reminder that UX writing is as much a design tool as a wireframe.',
+    },
+    gallery: [
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Overview%20mockup.png',
+        caption: 'High-fidelity prototype overview — the redesigned Care Leaver Oyster Card application journey',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Apply%20for-1.png',
+        caption: 'Apply for screen — plain language intro page explaining eligibility and what the user will need before they start',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Create%20an%20account-1.png',
+        caption: 'Create account — streamlined account creation with clear progress indication',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder-1.png',
+        caption: 'Cardholder details (redesigned) — warmer language and optimised mobile form fields',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo-1.png',
+        caption: 'Photo upload (redesigned) — clear file requirement guidance with specific error state copy replacing generic validation messages',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review-1.png',
+        caption: 'Review screen (redesigned) — application summary with clear edit affordances before final submission',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Payament.png',
+        caption: 'Payment screen — simplified payment step with clear summary of what is being paid for',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Confirmation.png',
+        caption: 'Confirmation screen — clear post-submission state with next steps, addressing the "did it actually work?" anxiety',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder.png',
+        caption: 'Cardholder details (original) — formal language and unoptimised form layout, before the content redesign',
+        type: 'research',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png',
+        caption: 'Photo upload (original) — lacking specific guidance and accessible error states, before the redesign',
+        type: 'research',
+      },
+    ],
   },
   {
     slug: 'project-accord',

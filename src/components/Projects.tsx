@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
     role: 'Research + UX',
     desc: 'Companion interactions for people living with dementia and their carers. A year of co-design, 28 participants, 3 piloted prototypes.',
     tags: ['Healthcare', 'Research', 'Co-design'],
-    image: '/uploads/Me&You.png',
+    image: '/uploads/me-and-you/prototype-multi.png',
     placeholder: 'Healthcare, dementia companion',
     slug: 'me-and-you',
   },

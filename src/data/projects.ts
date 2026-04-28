@@ -29,6 +29,7 @@ export type Project = {
   takeaway: string
   tags: string[]
   // Extended fields (optional - populated per-project)
+  heroImage?: string
   overview?: { team: string; industry: string; status?: string }
   designDecisions?: { decision: string; rationale: string }[]
   background?: { understandingNeeds: string; personalDrive: string; innovativeMethods: string }
@@ -481,6 +482,7 @@ export const projects: Project[] = [
     role: 'Lead UX Designer',
     duration: 'Aug – Sep 2023',
     tools: ['Figma', 'Wireframing', 'High-fidelity prototyping'],
+    heroImage: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Overview%20mockup.png',
     overview: {
       team: '1 UX Designer (lead), cross-functional collaboration with content, dev, and TfL stakeholders',
       industry: 'Public Sector / Transport',

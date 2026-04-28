@@ -39,6 +39,18 @@ export default function CaseStudy() {
         <h1 className="text-4xl md:text-5xl font-bold text-ink mb-4">{project.title}</h1>
         <p className="text-lg text-muted max-w-2xl leading-relaxed mb-8">{project.tagline}</p>
 
+        {/* Hero image */}
+        {project.heroImage && (
+          <div className="mb-8 rounded-2xl overflow-hidden border border-border">
+            <img
+              src={project.heroImage}
+              alt={`${project.title} — prototype overview`}
+              className="w-full object-contain bg-paper"
+              style={{ maxHeight: '520px' }}
+            />
+          </div>
+        )}
+
         {/* Meta grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-t border-b border-border">
           {[
@@ -81,21 +93,6 @@ export default function CaseStudy() {
             </a>
           </div>
         )}
-      </div>
-
-      {/* Metrics bar */}
-      <div className="bg-ink py-10 mb-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact & outcomes</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {project.metrics.map(m => (
-              <div key={m.label}>
-                <p className="text-xl md:text-2xl font-bold text-paper mb-1">{m.value}</p>
-                <p className="text-xs text-paper/50 leading-snug">{m.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Body */}
@@ -159,7 +156,7 @@ export default function CaseStudy() {
         {/* Desk Research — only if present */}
         {project.deskResearch && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Desk research</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Discovery</p>
             <p className="text-muted leading-relaxed mb-8">{project.deskResearch.summary}</p>
 
             {/* Stat callouts */}
@@ -224,6 +221,19 @@ export default function CaseStudy() {
             ))}
           </div>
         </section>
+
+        {/* Metrics bar — placed after problem so the numbers have context */}
+        <div className="bg-ink rounded-2xl py-8 px-8 -mx-0">
+          <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact &amp; outcomes</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {project.metrics.map(m => (
+              <div key={m.label}>
+                <p className="text-xl md:text-2xl font-bold text-paper mb-1">{m.value}</p>
+                <p className="text-xs text-paper/50 leading-snug">{m.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* Key insight */}
         <section className="bg-accent-light border border-blue-200 rounded-2xl p-8">
@@ -322,8 +332,8 @@ export default function CaseStudy() {
         {/* Process artifacts — user flows, audits, component studies */}
         {project.processArtifacts && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Process artifacts</p>
-            <p className="text-sm text-muted mb-6">Visual evidence of the research and audit work — user flows, component studies, and proposals produced during the project.</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Discovery — process artifacts</p>
+            <p className="text-sm text-muted mb-6">Visual outputs from the audit and mapping work — user flows, component studies, and redesign proposals.</p>
             <div className="space-y-4">
               {project.processArtifacts.map((item, i) => (
                 <figure key={i} className="rounded-2xl overflow-hidden border border-border">
@@ -470,16 +480,16 @@ export default function CaseStudy() {
         {project.gallery && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Prototype &amp; process</p>
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.gallery.map((item, i) => (
-                <figure key={i} className="rounded-2xl overflow-hidden border border-border">
+                <figure key={i} className="rounded-2xl overflow-hidden border border-border flex flex-col">
                   <img
                     src={item.src}
                     alt={item.caption}
-                    className="w-full object-contain bg-paper"
-                    style={{ maxHeight: '680px' }}
+                    className="w-full object-contain bg-paper flex-1"
+                    style={{ maxHeight: '400px' }}
                   />
-                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed">
+                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">
                     <span className={`inline-block mr-2 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide ${
                       item.type === 'prototype' ? 'bg-blue-50 text-blue-600' :
                       item.type === 'storyboard' ? 'bg-emerald-50 text-emerald-700' :

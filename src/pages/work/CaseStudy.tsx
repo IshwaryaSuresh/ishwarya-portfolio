@@ -103,16 +103,17 @@ export default function CaseStudy() {
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-8">Background &amp; inspiration</p>
             <div className="space-y-10">
-              {[
-                { heading: 'Understanding Dementia Care Needs', body: project.background.understandingNeeds },
-                { heading: 'Personal Drive and Research Insights', body: project.background.personalDrive },
-                { heading: 'Embracing Innovative Methods', body: project.background.innovativeMethods },
-              ].map(({ heading, body }) => (
-                <div key={heading}>
-                  <h3 className="font-semibold text-ink text-base mb-3">{heading}</h3>
-                  <p className="text-muted leading-relaxed">{body}</p>
-                </div>
-              ))}
+              <div>
+                <h3 className="font-semibold text-ink text-base mb-3">Understanding Dementia Care Needs</h3>
+                <p className="text-muted leading-relaxed">{project.background.understandingNeeds}</p>
+              </div>
+              <blockquote className="border-l-4 border-accent pl-6 py-2">
+                <p className="text-ink text-lg font-medium leading-relaxed italic">"{project.background.personalDrive}"</p>
+              </blockquote>
+              <div>
+                <h3 className="font-semibold text-ink text-base mb-3">Embracing Innovative Methods</h3>
+                <p className="text-muted leading-relaxed">{project.background.innovativeMethods}</p>
+              </div>
             </div>
           </section>
         )}
@@ -245,9 +246,9 @@ export default function CaseStudy() {
         {project.personas && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">User personas</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory">
               {project.personas.map((persona: Persona) => (
-                <div key={persona.name} className="border border-border rounded-2xl overflow-hidden">
+                <div key={persona.name} className="flex-shrink-0 w-72 border border-border rounded-2xl overflow-hidden snap-start">
                   {persona.photo && (
                     <div className="h-44 overflow-hidden bg-paper">
                       <img
@@ -293,6 +294,7 @@ export default function CaseStudy() {
                 </div>
               ))}
             </div>
+            <p className="text-xs text-muted mt-3 text-center">← scroll to see all personas →</p>
           </section>
         )}
 
@@ -455,12 +457,12 @@ export default function CaseStudy() {
         {/* Workshop images */}
         {project.workshops && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">Workshop</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">Ethnographic Study</p>
             <p className="text-xs text-muted italic mb-6">Images showing participants have been blurred to protect privacy.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {project.workshops.map((item, i) => (
                 <figure key={i} className="rounded-xl overflow-hidden border border-border group">
-                  <div className="h-36 overflow-hidden bg-paper">
+                  <div className="h-56 overflow-hidden bg-paper">
                     <img
                       src={item.src}
                       alt={item.caption}

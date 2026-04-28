@@ -140,6 +140,7 @@ export const projects: Project[] = [
     niche: ['Healthcare', 'Social Impact', 'Inclusive Design'],
     type: 'Social Impact',
     featured: true,
+    heroImage: '/uploads/me-and-you/prototype-full.png',
     client: 'Nebula Labs, Newcastle',
     role: 'User Research Intern',
     duration: 'Feb – Apr 2023',

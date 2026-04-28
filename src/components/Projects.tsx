@@ -57,6 +57,7 @@ const PROJECTS: Project[] = [
     tags: ['Enterprise', 'SaaS'],
     image: '/uploads/Accord.png',
     placeholder: 'Enterprise, Accord SaaS',
+    slug: 'project-accord',
   },
   {
     num: '05',
@@ -68,6 +69,7 @@ const PROJECTS: Project[] = [
     tags: ['Public sector', 'Conversion'],
     image: '/uploads/TFL.png',
     placeholder: 'Transit, TFL campaign',
+    slug: 'tfl',
   },
   {
     num: '06',
@@ -88,9 +90,9 @@ function ProjectRow({ p, onHover, onLeave }: { p: Project; onHover: (p: Project,
   const inner = (
     <div
       className="proj-row"
-      onMouseEnter={(e) => onHover(p, e)}
-      onMouseMove={(e) => onHover(p, e)}
-      onMouseLeave={onLeave}
+      onMouseEnter={p.slug ? (e) => onHover(p, e) : undefined}
+      onMouseMove={p.slug ? (e) => onHover(p, e) : undefined}
+      onMouseLeave={p.slug ? onLeave : undefined}
     >
       <div className="proj-row__num">{p.num}</div>
       <div className="proj-row__title">{p.title}</div>

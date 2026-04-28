@@ -55,6 +55,13 @@ export type Project = {
     mockups: { src: string; caption: string }[]
   }
   workshops?: { src: string; caption: string; blurred?: boolean }[]
+  beforeAfter?: {
+    label: string
+    change: string
+    before: { src: string; caption: string }
+    after: { src: string; caption: string }
+  }[]
+  processArtifacts?: { src: string; caption: string; label: string }[]
 }
 
 export const projects: Project[] = [
@@ -593,6 +600,73 @@ export const projects: Project[] = [
         src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png',
         caption: 'Photo upload (original) — lacking specific guidance and accessible error states, before the redesign',
         type: 'research',
+      },
+    ],
+    processArtifacts: [
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Frame%203%401x.png',
+        caption: 'User flow — end-to-end application journey from landing to card confirmation, mapping all 7 identified friction points',
+        label: 'User flow',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Group%207.png',
+        caption: 'Step indicator audit — original labels were ambiguous and non-descriptive; redesigned with clear, action-oriented labels and supporting icons',
+        label: 'Component audit',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Icon%20suggestion.png',
+        caption: 'Icon system proposals — suggested icon set to replace the text-only step indicators, improving scannability and reducing cognitive load',
+        label: 'Icon proposals',
+      },
+    ],
+    beforeAfter: [
+      {
+        label: 'Form language & tone',
+        change: 'Replaced formal third-person copy ("the applicant must provide…") with warm, direct first-person language. Research shows conversational tone reduces form anxiety and increases completion rates — especially for users who have difficult relationships with official institutions.',
+        before: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder.png',
+          caption: 'Original: formal bureaucratic language, unoptimised layout',
+        },
+        after: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder-1.png',
+          caption: 'Redesigned: plain English, warmer tone, mobile-optimised fields',
+        },
+      },
+      {
+        label: 'Photo upload & error states',
+        change: 'Original screen had no error guidance — a failed upload produced a generic message with no recovery path. Redesigned with specific file requirement guidance upfront and clear, actionable error copy ("Please upload a JPG or PDF under 5MB").',
+        before: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png',
+          caption: 'Original: no file guidance, generic error handling',
+        },
+        after: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo-1.png',
+          caption: 'Redesigned: explicit requirements, accessible error states',
+        },
+      },
+      {
+        label: 'Review & submission',
+        change: 'The original review screen lacked clear edit affordances — users couldn\'t easily go back and correct mistakes before submitting. Redesigned with inline edit links per section and a clear submission summary.',
+        before: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review.png',
+          caption: 'Original: no edit affordances, unclear submission state',
+        },
+        after: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review-1.png',
+          caption: 'Redesigned: per-section edit links, clear summary before submit',
+        },
+      },
+      {
+        label: 'Contact details',
+        change: 'Address verification was a silent blocker for care leavers in temporary housing. The redesigned screen introduces an alternative verification pathway and removes the assumption of a fixed address.',
+        before: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20Details.png',
+          caption: 'Original: assumed fixed address, no alternative pathway',
+        },
+        after: {
+          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20Details-1.png',
+          caption: 'Redesigned: alternative address verification option added',
+        },
       },
     ],
   },

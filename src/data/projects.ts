@@ -23,7 +23,7 @@ export type Project = {
   prototype?: string
   problem: string
   insight: string
-  process: { step: string; detail: string }[]
+  process: { step: string; detail: string; image?: string; imageCaption?: string }[]
   metrics: { label: string; value: string }[]
   solution: string
   takeaway: string
@@ -488,13 +488,44 @@ export const projects: Project[] = [
     problem: `Care leavers are among the most socioeconomically vulnerable young people in the UK. After leaving the care system at 18, many face significant barriers to employment, education, and independence — often in cities where public transport is the only affordable means of getting around.\n\nTransport for London's Care Leaver Photocard offers 50% off all TfL travel for care leavers aged 18–25. But the existing application journey had a problem: it was unclear, inaccessible in places, and created unnecessary friction for a group that already faces multiple barriers in navigating official processes.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
     insight: `The barriers were systemic, not motivational. Language, document requirements, and mobile accessibility were the three failure points that needed redesigning.`,
     process: [
-      { step: 'Stakeholder Interviews', detail: 'Interviewed TfL programme managers and Novacroft product leads to understand existing process gaps and compliance constraints.' },
-      { step: 'Journey Mapping & Audit', detail: 'Mapped the existing user journey end-to-end and audited it against WCAG 2.1 AA accessibility standards, identifying 7 friction points across the flow.' },
-      { step: 'Secondary Research', detail: 'Reviewed care leaver advocacy reports (Become, Action for Children) to understand the lived experience of the cohort, and examined comparable journeys (student discount applications, benefit claim forms) to identify patterns that worked well.' },
-      { step: 'Content Design', detail: 'Rewrote all application copy in plain English, replacing bureaucratic third-person language ("the applicant must provide…") with direct, warm, first-person alternatives — a deliberate shift for a user group that often has difficult relationships with official institutions.' },
-      { step: 'Information Architecture', detail: 'Moved the document checklist from mid-flow to the start of the journey — surfacing requirements upfront so users can prepare before they start, reducing mid-flow abandonment.' },
-      { step: 'Mobile-First Prototyping', detail: 'Built high-fidelity flows in Figma with 44px minimum touch targets throughout and form fields tagged to trigger the correct mobile keyboard type. Presented to TfL and Novacroft stakeholders across two iteration rounds.' },
-      { step: 'Error State Design', detail: 'Designed error states with specific, actionable recovery guidance — replacing generic messages ("Invalid entry") with clear instructions like "Please upload a JPG or PDF under 5MB".' },
+      {
+        step: 'Stakeholder Interviews',
+        detail: 'Interviewed TfL programme managers and Novacroft product leads to understand existing process gaps and compliance constraints. Identified 7 friction points in the existing journey: document upload timing, formal language, missing error states, mobile accessibility failures, and address verification as an exclusion barrier.',
+      },
+      {
+        step: 'Journey Mapping & Audit',
+        detail: 'Mapped the end-to-end application journey — from the TfL photocard landing page through to payment confirmation — and audited each step against WCAG 2.1 AA. The flow diagram below shows the full redesigned journey including the "Contact your borough" alternative verification branch.',
+        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Frame%203%401x.png',
+        imageCaption: 'User flow diagram — the complete redesigned application journey from review through to payment confirmation, with the alternative "Contact your borough" verification pathway branching off the main flow',
+      },
+      {
+        step: 'Secondary Research',
+        detail: 'Reviewed care leaver advocacy reports (Become, Action for Children) to understand the lived experience of the cohort. Examined comparable application journeys — student discount applications, benefit claim forms — to identify patterns that reduced friction for similar user groups.',
+      },
+      {
+        step: 'Content Design',
+        detail: 'Rewrote all application copy in plain English, replacing bureaucratic third-person language with direct, warm, first-person alternatives. The cardholder screen below shows the redesigned form — clean labels, clear layout, and a "Wrong details?" escape route for users whose pre-filled data is incorrect.',
+        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder.png',
+        imageCaption: 'Cardholder details screen — redesigned with plain language labels, clear field hierarchy, and a visible "Wrong details?" recovery link for users whose pre-filled information is incorrect',
+      },
+      {
+        step: 'Information Architecture',
+        detail: 'Redesigned the application flow to surface requirements upfront and handle edge cases gracefully. The "Contact your borough" screen below is the alternative verification pathway — designed for care leavers without a fixed address who would previously hit a silent dead end in the original flow.',
+        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20your%20borough.png',
+        imageCaption: '"Please contact your borough" screen — the alternative address verification pathway designed for care leavers in temporary or unstable housing, removing the invisible exclusion built into the original flow',
+      },
+      {
+        step: 'Mobile-First Prototyping',
+        detail: 'Built high-fidelity flows in Figma with 44px minimum touch targets throughout. Redesigned the step indicator with icons to improve scannability on small screens — replacing text-only labels with icon + label pairs that are easier to parse at a glance. Presented across two stakeholder iteration rounds.',
+        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Icon%20suggestion.png',
+        imageCaption: 'Redesigned step indicator — icon + label pairs replacing the original text-only progress bar, improving scannability on mobile and making the current step immediately identifiable',
+      },
+      {
+        step: 'Error State Design',
+        detail: 'Designed every step with specific, actionable recovery guidance. The photo upload screen below shows the approach: clear upfront requirements ("JPG, JPEG or PNG file, smaller than 10MB"), visual allowed/not-allowed examples, and a preview of the uploaded photo so users can verify before proceeding.',
+        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png',
+        imageCaption: 'Photo upload screen — upfront file requirements, visual examples of accepted and rejected photos, and a live preview eliminating the "did it upload correctly?" uncertainty',
+      },
     ],
     metrics: [
       { label: 'Friction points resolved', value: '7 / 7' },
@@ -552,121 +583,71 @@ export const projects: Project[] = [
     },
     gallery: [
       {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Overview%20mockup.png',
-        caption: 'High-fidelity prototype overview — the redesigned Care Leaver Oyster Card application journey',
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Apply.png',
+        caption: 'Step 1 — TfL photocard landing page. Users select the card type they need; the Care Leaver (18-25 CL Bus and Tram) option begins the application flow.',
         type: 'prototype',
       },
       {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Apply%20for-1.png',
-        caption: 'Apply for screen — plain language intro page explaining eligibility and what the user will need before they start',
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Apply%20for.png',
+        caption: 'Step 2 — "Who is this application for?" The application selection modal establishes who the card is for before collecting any personal details.',
         type: 'prototype',
       },
       {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Create%20an%20account-1.png',
-        caption: 'Create account — streamlined account creation with clear progress indication',
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Create%20an%20account.png',
+        caption: 'Step 3 — Account creation. Users register with date of birth, name, and email before starting the application — keeping registration lightweight.',
         type: 'prototype',
       },
       {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder-1.png',
-        caption: 'Cardholder details (redesigned) — warmer language and optimised mobile form fields',
-        type: 'prototype',
-      },
-      {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo-1.png',
-        caption: 'Photo upload (redesigned) — clear file requirement guidance with specific error state copy replacing generic validation messages',
-        type: 'prototype',
-      },
-      {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review-1.png',
-        caption: 'Review screen (redesigned) — application summary with clear edit affordances before final submission',
-        type: 'prototype',
-      },
-      {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Payament.png',
-        caption: 'Payment screen — simplified payment step with clear summary of what is being paid for',
-        type: 'prototype',
-      },
-      {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Confirmation.png',
-        caption: 'Confirmation screen — clear post-submission state with next steps, addressing the "did it actually work?" anxiety',
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20Details.png',
+        caption: 'Step 4 — Contact details and address. Borough residency verification and address capture, with a security question for account recovery.',
         type: 'prototype',
       },
       {
         src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder.png',
-        caption: 'Cardholder details (original) — formal language and unoptimised form layout, before the content redesign',
-        type: 'research',
+        caption: 'Step 5 — Cardholder details. Confirmation of name, date of birth, and address pre-filled from registration, with a clear "Wrong details?" escape route.',
+        type: 'prototype',
       },
       {
         src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png',
-        caption: 'Photo upload (original) — lacking specific guidance and accessible error states, before the redesign',
-        type: 'research',
+        caption: 'Step 6 — Photo upload. Explicit file requirements upfront, visual examples of accepted and rejected photos, and a live preview before proceeding.',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review.png',
+        caption: 'Step 7 — Review application. Full summary of the application before submission, giving users the opportunity to catch and correct errors.',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Payament.png',
+        caption: 'Step 8 — Payment. Straightforward payment screen with reference number and amount shown upfront before card details are entered.',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Confirmation.png',
+        caption: 'Step 9 — Payment confirmation. "What happens next" guidance removes post-submission anxiety and sets clear expectations for the applicant.',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20your%20borough.png',
+        caption: 'Alternative pathway — "Please contact your borough." Designed for care leavers who cannot verify via a fixed address, replacing the silent dead end in the original flow.',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Overview%20mockup.png',
+        caption: 'Post-application — Account overview. Reference number, application date, card type, and status all visible in one place. The "Contact your borough" status prompts next steps.',
+        type: 'prototype',
       },
     ],
     processArtifacts: [
       {
         src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Frame%203%401x.png',
-        caption: 'User flow — end-to-end application journey from landing to card confirmation, mapping all 7 identified friction points',
+        caption: 'User flow diagram — the redesigned end-to-end journey showing the main application path (Review → Payment → Confirmation) and the alternative "Contact your borough" verification branch for care leavers without a fixed address',
         label: 'User flow',
       },
       {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Group%207.png',
-        caption: 'Step indicator audit — original labels were ambiguous and non-descriptive; redesigned with clear, action-oriented labels and supporting icons',
-        label: 'Component audit',
-      },
-      {
         src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Icon%20suggestion.png',
-        caption: 'Icon system proposals — suggested icon set to replace the text-only step indicators, improving scannability and reducing cognitive load',
-        label: 'Icon proposals',
-      },
-    ],
-    beforeAfter: [
-      {
-        label: 'Form language & tone',
-        change: 'Replaced formal third-person copy ("the applicant must provide…") with warm, direct first-person language. Research shows conversational tone reduces form anxiety and increases completion rates — especially for users who have difficult relationships with official institutions.',
-        before: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder.png',
-          caption: 'Original: formal bureaucratic language, unoptimised layout',
-        },
-        after: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder-1.png',
-          caption: 'Redesigned: plain English, warmer tone, mobile-optimised fields',
-        },
-      },
-      {
-        label: 'Photo upload & error states',
-        change: 'Original screen had no error guidance — a failed upload produced a generic message with no recovery path. Redesigned with specific file requirement guidance upfront and clear, actionable error copy ("Please upload a JPG or PDF under 5MB").',
-        before: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png',
-          caption: 'Original: no file guidance, generic error handling',
-        },
-        after: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo-1.png',
-          caption: 'Redesigned: explicit requirements, accessible error states',
-        },
-      },
-      {
-        label: 'Review & submission',
-        change: 'The original review screen lacked clear edit affordances — users couldn\'t easily go back and correct mistakes before submitting. Redesigned with inline edit links per section and a clear submission summary.',
-        before: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review.png',
-          caption: 'Original: no edit affordances, unclear submission state',
-        },
-        after: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review-1.png',
-          caption: 'Redesigned: per-section edit links, clear summary before submit',
-        },
-      },
-      {
-        label: 'Contact details',
-        change: 'Address verification was a silent blocker for care leavers in temporary housing. The redesigned screen introduces an alternative verification pathway and removes the assumption of a fixed address.',
-        before: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20Details.png',
-          caption: 'Original: assumed fixed address, no alternative pathway',
-        },
-        after: {
-          src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20Details-1.png',
-          caption: 'Redesigned: alternative address verification option added',
-        },
+        caption: 'Redesigned step indicator component — icon + label pairs (Cardholder, Add photo, Review, Payment, Confirmation) replacing the original text-only progress bar to improve mobile scannability',
+        label: 'Component redesign',
       },
     ],
   },

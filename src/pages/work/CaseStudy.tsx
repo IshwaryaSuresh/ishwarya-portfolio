@@ -295,9 +295,24 @@ export default function CaseStudy() {
                 <div className="flex-shrink-0 w-8 h-8 bg-paper border border-border rounded-full flex items-center justify-center text-xs font-semibold text-muted">
                   {i + 1}
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold text-ink mb-1">{step.step}</h3>
                   <p className="text-muted text-sm leading-relaxed">{step.detail}</p>
+                  {step.image && (
+                    <figure className="mt-4 rounded-xl overflow-hidden border border-border">
+                      <img
+                        src={step.image}
+                        alt={step.imageCaption ?? step.step}
+                        className="w-full object-contain bg-paper"
+                        style={{ maxHeight: '520px' }}
+                      />
+                      {step.imageCaption && (
+                        <figcaption className="px-3 py-2.5 bg-paper text-xs text-muted leading-relaxed border-t border-border">
+                          {step.imageCaption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  )}
                 </div>
               </div>
             ))}
@@ -344,47 +359,6 @@ export default function CaseStudy() {
                   <div className="ml-9 border-l-2 border-border pl-4">
                     <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-1">Rationale</p>
                     <p className="text-sm text-muted leading-relaxed">{d.rationale}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Before / After comparisons */}
-        {project.beforeAfter && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Before &amp; after</p>
-            <p className="text-sm text-muted mb-8">Side-by-side comparisons showing the specific changes made and the reasoning behind each one.</p>
-            <div className="space-y-12">
-              {project.beforeAfter.map((item, i) => (
-                <div key={i}>
-                  {/* Change label + explanation */}
-                  <div className="flex items-start gap-3 mb-5">
-                    <span className="flex-shrink-0 w-7 h-7 rounded-full bg-ink text-paper flex items-center justify-center text-xs font-bold">{i + 1}</span>
-                    <div>
-                      <p className="font-semibold text-ink mb-1">{item.label}</p>
-                      <p className="text-sm text-muted leading-relaxed">{item.change}</p>
-                    </div>
-                  </div>
-                  {/* Side-by-side screens */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <figure className="rounded-xl overflow-hidden border-2 border-rose-200">
-                      <div className="bg-rose-50 px-3 py-1.5 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-rose-400 flex-shrink-0" />
-                        <span className="text-[10px] font-semibold uppercase tracking-widest text-rose-700">Before</span>
-                      </div>
-                      <img src={item.before.src} alt={item.before.caption} className="w-full object-contain bg-paper" style={{ maxHeight: '420px' }} />
-                      <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug border-t border-rose-100">{item.before.caption}</figcaption>
-                    </figure>
-                    <figure className="rounded-xl overflow-hidden border-2 border-emerald-200">
-                      <div className="bg-emerald-50 px-3 py-1.5 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
-                        <span className="text-[10px] font-semibold uppercase tracking-widest text-emerald-700">After</span>
-                      </div>
-                      <img src={item.after.src} alt={item.after.caption} className="w-full object-contain bg-paper" style={{ maxHeight: '420px' }} />
-                      <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug border-t border-emerald-100">{item.after.caption}</figcaption>
-                    </figure>
                   </div>
                 </div>
               ))}

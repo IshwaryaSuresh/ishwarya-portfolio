@@ -553,6 +553,7 @@ export const projects: Project[] = [
         'On mobile (the primary device for 18–25 year olds), several interactive elements — including the step indicator and action buttons — were below the 44×44px minimum. This breached WCAG 2.5.5 (Target Size, Level AA).',
         'The step indicator used text and position alone to communicate progress, with no icons or non-text cues. This breached WCAG 1.3.3 (Sensory Characteristics, Level A), which requires that instructions not rely solely on shape or position.',
         'Care leavers in unstable or temporary housing had no viable path through the address verification step — an invisible exclusion built into the original flow.',
+        'Form input fields used generic text inputs throughout, with no fields configured to trigger the appropriate mobile keyboard type. On a smartphone, date fields displayed a full QWERTY keyboard instead of a numeric pad, and email fields offered no shortcut to the @ symbol — small frictions that compound into abandonment for users completing the form on mobile.',
       ],
       gap: `The existing journey assumed document literacy, stable addresses, digital confidence, and familiarity with bureaucratic systems — the opposite of the profile of most care leavers aged 18–25.`,
     },

@@ -531,7 +531,7 @@ export const projects: Project[] = [
     ],
     metrics: [
       { label: 'Friction points resolved', value: '7 / 7' },
-      { label: 'WCAG 2.1 AA issues addressed', value: '3' },
+      { label: 'WCAG 2.1 criteria addressed', value: '3' },
       { label: 'Stakeholder iteration rounds', value: '2' },
       { label: 'Delivery timeline', value: '2 months' },
     ],
@@ -549,8 +549,9 @@ export const projects: Project[] = [
       findings: [
         'The existing flow required users to upload documentation mid-form — at the point where many had already abandoned. Requirements needed to move earlier, not later.',
         'Language used throughout was formal and impersonal ("the applicant must provide…"), which felt distancing for a user group that often has difficult relationships with official institutions.',
-        'Several steps had no error states — users who made a mistake received no guidance on how to correct it, creating dead ends with no recovery path.',
-        'On mobile (the primary device for 18–25 year olds), several touch targets were below the 44px minimum, and form fields were not optimised for mobile keyboards.',
+        'Several steps had no error states — users who made a mistake received no guidance on how to correct it. This breached WCAG 3.3.1 (Error Identification) and 3.3.3 (Error Suggestion), both Level AA requirements.',
+        'On mobile (the primary device for 18–25 year olds), several interactive elements — including the step indicator and action buttons — were below the 44×44px minimum. This breached WCAG 2.5.5 (Target Size, Level AA).',
+        'The step indicator used text and position alone to communicate progress, with no icons or non-text cues. This breached WCAG 1.3.3 (Sensory Characteristics, Level A), which requires that instructions not rely solely on shape or position.',
         'Care leavers in unstable or temporary housing had no viable path through the address verification step — an invisible exclusion built into the original flow.',
       ],
       gap: `The existing journey assumed document literacy, stable addresses, digital confidence, and familiarity with bureaucratic systems — the opposite of the profile of most care leavers aged 18–25.`,

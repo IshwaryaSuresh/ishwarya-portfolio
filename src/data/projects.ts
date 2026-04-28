@@ -367,7 +367,7 @@ export const projects: Project[] = [
         type: 'prototype',
       },
       {
-        src: '/uploads/me-and-you/ap-flow.png',
+        src: '/uploads/me-and-you/frame-254.png',
         caption: 'App user flow - end-to-end journey from home screen through menu, archive, and Book Shelf, showing family member, facilitator, and carer pathways',
         type: 'prototype',
       },

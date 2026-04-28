@@ -294,7 +294,9 @@ export default function CaseStudy() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-muted mt-3 text-center">← scroll to see all personas →</p>
+            {project.personas.length > 1 && (
+              <p className="text-xs text-muted mt-3 text-center">← scroll to see all personas →</p>
+            )}
           </section>
         )}
 

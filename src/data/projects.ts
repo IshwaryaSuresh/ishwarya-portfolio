@@ -663,7 +663,6 @@ export const projects: Project[] = [
     niche: ['Government', 'Public Sector', 'Design Sprint'],
     type: 'Government',
     featured: false,
-    heroImage: '/uploads/HMRC.png',
     client: 'HM Revenue & Customs',
     role: 'UX Designer (team participant)',
     duration: '5 days (Monday–Friday, structured sprint format)',
@@ -702,7 +701,7 @@ export const projects: Project[] = [
       {
         step: 'Prototype',
         detail: 'The team built two interconnected features: a Live Tax Dashboard showing a running tax liability based on year-to-date income, with a clear projection to the January deadline — requiring minimal input, income entries only; and an Expert Community Forum where small business owners could post tax questions and receive answers from HMRC-verified tax professionals. The dashboard addressed ongoing confidence; the forum addressed high-stakes, high-anxiety moments.',
-        image: '/uploads/HMRC%20Sprint/For%20Portfolio%401x.png',
+        image: '/uploads/HMRC%20Sprint/10-AE0Xrz6ogWFor3Mk.png',
         imageCaption: 'Prototype screens — Live Tax Dashboard with real-time liability projection and Expert Community Forum with HMRC-verified contributor profiles',
       },
       {

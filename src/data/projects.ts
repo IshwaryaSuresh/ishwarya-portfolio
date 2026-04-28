@@ -495,7 +495,7 @@ export const projects: Project[] = [
       {
         step: 'Journey Mapping & Audit',
         detail: 'Mapped the end-to-end application journey — from the TfL photocard landing page through to payment confirmation — and audited each step against WCAG 2.1 AA. The flow diagram below shows the full redesigned journey including the "Contact your borough" alternative verification branch.',
-        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Frame%203%401x.png',
+        image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/user-flow.png',
         imageCaption: 'User flow diagram — the complete redesigned application journey from review through to payment confirmation, with the alternative "Contact your borough" verification pathway branching off the main flow',
       },
       {
@@ -640,7 +640,7 @@ export const projects: Project[] = [
     ],
     processArtifacts: [
       {
-        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Frame%203%401x.png',
+        src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/user-flow.png',
         caption: 'User flow diagram — the redesigned end-to-end journey showing the main application path (Review → Payment → Confirmation) and the alternative "Contact your borough" verification branch for care leavers without a fixed address',
         label: 'User flow',
       },

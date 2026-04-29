@@ -1,8 +1,8 @@
 import { useRef, useEffect } from 'react'
 
 const MARQUEE_ITEMS = [
-  'Fintech', 'Edtech', 'Healthcare', 'B2C', 'Public sector',
-  'Brand systems', 'Product design', 'Strategy & discovery', 'Design ops',
+  'Fintech', 'Edtech', 'Healthcare', 'Public sector', 'Architecture',
+  'Service design', 'Product design', 'Strategy & discovery', 'Accessibility', 'GDS standards',
 ]
 const track = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
 
@@ -36,8 +36,8 @@ export default function Hero() {
       <div className="hero__cursor" ref={cursorRef} style={{ opacity: 0 }} />
 
       <div className="hero__top">
-        <span>MFH / Studio · Est. 2021</span>
-        <span>Ishwarya Suresh · Founder &amp; Lead Designer</span>
+        <span>MadeForHumans · Est. 2025</span>
+        <span>Ishwarya Suresh · Founder &amp; UX Consultant</span>
       </div>
 
       <div className="hero__main">
@@ -52,11 +52,11 @@ export default function Hero() {
       <div className="hero__meta">
         <div className="cell">
           <div className="lbl">[ Studio ]</div>
-          <div className="val">An independent design practice building calm, considered digital products with research-led teams. Remote worldwide.</div>
+          <div className="val">An independent UX consultancy delivering product design, service design, and accessibility for public sector, healthcare, edtech, and startups. Remote worldwide.</div>
         </div>
         <div className="cell">
           <div className="lbl">[ Now ]</div>
-          <div className="val">Taking on 2 briefs this quarter, product design, strategy &amp; discovery, and brand systems.</div>
+          <div className="val">Taking briefs in product design, strategy &amp; discovery, service design, and WCAG 2.2 accessibility. Previously at MHCLG.</div>
         </div>
         <div className="cell" style={{ alignSelf: 'end' }}>
           <div className="hero__actions">

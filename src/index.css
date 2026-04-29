@@ -543,39 +543,37 @@ body.hero-light .marquee {
   max-width: calc(var(--maxw) - 96px);
   margin-inline: auto;
   padding: 80px;
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   position: relative;
   overflow: hidden;
 }
-.about__portrait {
-  aspect-ratio: 3/4;
-  background: rgba(255,255,255,0.06);
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  text-align: center;
-  padding: 20px;
-  overflow: hidden;
-  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 10px);
+.about__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 0;
 }
-.about__portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-.about__body h2 {
+.about__left h2 {
   font-family: var(--font-display);
-  font-size: clamp(40px, 4.4vw, 64px);
-  line-height: 1;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.05;
   letter-spacing: -0.02em;
-  margin: 16px 0 28px;
+  margin: 16px 0 0;
   font-weight: 400;
 }
+.about__right p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  align-self: end;
+}
 .about__body p {
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
   max-width: 60ch;
   color: rgba(255,255,255,0.7);
   margin: 0 0 32px;
@@ -587,7 +585,7 @@ body.hero-light .marquee {
   padding: 40px 0;
   border-top: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  margin: 32px 0;
+  margin: 48px 0 40px;
 }
 .stat__num {
   font-family: var(--font-display);
@@ -1016,8 +1014,8 @@ body.hero-light .marquee {
   .proj-row { grid-template-columns: 32px 1fr; gap: 12px; padding: 20px 0; }
   .proj-row__desc, .proj-row__tags, .proj-row__meta { display: none; }
   .proj-grid, .help-grid, .journal-grid, .process { grid-template-columns: 1fr; }
-  .about { grid-template-columns: 1fr; padding: 40px; border-radius: 20px; }
-  .about__portrait { aspect-ratio: 16/9; }
+  .about { padding: 40px; border-radius: 20px; }
+  .about__top { grid-template-columns: 1fr; gap: 24px; }
   .stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .stat__num { font-size: 44px; }
   .quote { padding: 40px; }

@@ -657,7 +657,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'hmrc',
+    slug: 'hmrc-draft',
     title: 'HMRC Design Sprint',
     tagline: 'A 5-day structured sprint with HMRC\'s internal UX team — from HMW question to tested prototype addressing small business tax anxiety.',
     niche: ['Government', 'Public Sector', 'Design Sprint'],

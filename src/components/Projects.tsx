@@ -81,7 +81,6 @@ const PROJECTS: Project[] = [
     tags: ['Public sector', 'Sprint'],
     image: '/uploads/HMRC.png',
     placeholder: 'Public sector, HMRC sprint',
-    slug: 'hmrc',
   },
 ]
 

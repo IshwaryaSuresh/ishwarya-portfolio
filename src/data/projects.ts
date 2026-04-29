@@ -677,8 +677,6 @@ export const projects: Project[] = [
       {
         step: 'Empathise',
         detail: 'The sprint opened with structured empathy exercises — interviewing small business owners and mapping their experiences with tax management. We gathered qualitative insights around financial anxiety, confidence gaps, and the moments where users most needed help. Research was clustered using post-it affinity mapping across financial behaviours and emotional responses.',
-        image: '/uploads/HMRC%20Sprint/WhatsApp%20Image%202022-08-09%20at%201.14.png',
-        imageCaption: 'Empathy mapping session — capturing user pain points, emotions, and behaviours around tax management using post-it note clustering',
       },
       {
         step: 'Define',
@@ -707,8 +705,8 @@ export const projects: Project[] = [
       {
         step: 'Test',
         detail: 'We conducted three 30-minute usability sessions with participants matching the Harrison persona. Each session used a blink test (5-second first impression) to assess brand clarity, an expectancy test to check whether interactions mapped to user mental models, and task-based scenarios including "You\'ve just invoiced a client for £2,000 — where would you record this?" Findings directly informed two post-test iterations: the addition of "Verified by HMRC" badges and a simplified income entry flow.',
-        image: '/uploads/HMRC%20Sprint/9-Awv19G2rZ0fo4yba.png',
-        imageCaption: 'Usability testing session — participants completing task-based scenarios with the paper prototype',
+        image: '/uploads/HMRC%20Sprint/8-m5Kxn73wqnFO9b6z.png',
+        imageCaption: 'Usability testing session — participants completing task-based scenarios with the prototype',
       },
     ],
     metrics: [
@@ -767,16 +765,6 @@ export const projects: Project[] = [
     },
     gallery: [
       {
-        src: '/uploads/HMRC%20Sprint/WhatsApp%20Image%202022-08-09%20at%201.14%201.png',
-        caption: 'Empathy phase — post-it mapping session capturing user pain points and emotional responses to tax management',
-        type: 'research',
-      },
-      {
-        src: '/uploads/HMRC%20Sprint/WhatsApp%20Image%202022-08-09%20at%201.14-1.png',
-        caption: 'Empathy research artefacts — user quotes and observations clustered by theme',
-        type: 'research',
-      },
-      {
         src: '/uploads/HMRC%20Sprint/image%2031.png',
         caption: 'Storyboard — The Overwhelmed Founder: tracing the emotional journey from Q4 tax anxiety to a calmer, ongoing financial relationship',
         type: 'storyboard',
@@ -787,13 +775,23 @@ export const projects: Project[] = [
         type: 'storyboard',
       },
       {
+        src: '/uploads/HMRC%20Sprint/7-YKbwl9QJXjU67lGe.png',
+        caption: 'Prototype — Live Tax Dashboard screen: real-time tax liability projection with year-to-date income tracking',
+        type: 'prototype',
+      },
+      {
+        src: '/uploads/HMRC%20Sprint/4-AR043qRJx9i1jOz5.png',
+        caption: 'Prototype — income entry flow: the simplified 5-step recording journey iterated after usability testing',
+        type: 'prototype',
+      },
+      {
         src: '/uploads/HMRC%20Sprint/image%2033.png',
-        caption: 'Prototype — Live Tax Dashboard: running tax liability with year-to-date income and January deadline projection',
+        caption: 'Prototype — Expert Community Forum: moderated Q&A with HMRC-verified contributor badges for trust and credibility',
         type: 'prototype',
       },
       {
         src: '/uploads/HMRC%20Sprint/image%2034.png',
-        caption: 'Prototype — Expert Community Forum: moderated Q&A with HMRC-verified contributor badges for trust and credibility',
+        caption: 'Prototype — Forum question detail view: verified contributor profile and structured answer format',
         type: 'prototype',
       },
     ],

@@ -71,17 +71,6 @@ const PROJECTS: Project[] = [
     placeholder: 'Transit, TFL campaign',
     slug: 'tfl',
   },
-  {
-    num: '06',
-    title: 'HMRC, Design sprint',
-    client: 'HM Revenue & Customs',
-    year: '2022',
-    role: 'Design lead',
-    desc: 'A 5-day sprint to unblock a stuck citizen-facing form. Shipped wireframes, storyboards, and a validated direction.',
-    tags: ['Public sector', 'Sprint'],
-    image: '/uploads/HMRC.png',
-    placeholder: 'Public sector, HMRC sprint',
-  },
 ]
 
 type View = 'list' | 'grid'

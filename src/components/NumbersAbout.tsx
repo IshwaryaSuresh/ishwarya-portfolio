@@ -3,9 +3,9 @@ import { useCountUp } from '../hooks/useCountUp'
 
 const PILLARS = [
   { n: '01', t: 'The Practice', d: 'An independent UX consultancy working with startups, studios, and government. Embedded, senior, in-sprint — from kickoff to developer handover.' },
-  { n: '02', t: 'The Posture', d: 'Research-led, metric-driven. I find the real problem before drawing a pixel — through interviews, usability testing, synthesis in Dovetail, and opportunity mapping.' },
-  { n: '03', t: 'The Craft', d: 'WCAG 2.2 is built in from the first wireframe, not bolted on at QA. Colour, keyboard, screen-reader, cognitive load — all tested against real constraints.' },
-  { n: '04', t: 'The Range', d: 'Public sector (GDS), healthcare, edtech, fintech, architecture, and startups. MSc HCI, B.Arch — I bring systems thinking and research rigour across every domain.' },
+  { n: '02', t: 'The Posture', d: 'Research-led, metric-driven. I find the real problem before drawing a pixel - through interviews, usability testing, synthesis in Dovetail, and opportunity mapping.' },
+  { n: '03', t: 'The Craft', d: 'WCAG 2.2 is built in from the first wireframe, not bolted on at QA. Colour, keyboard, screen-reader, cognitive load - all tested against real constraints.' },
+  { n: '04', t: 'The Range', d: 'Public sector (GDS), healthcare, edtech, fintech, architecture, and startups. MSc HCI, B.Arch - I bring systems thinking and research rigour across every domain.' },
 ]
 
 function Stat({ target, suffix = '', label, start }: { target: number; suffix?: string; label: string; start: boolean }) {
@@ -23,9 +23,6 @@ export default function NumbersAbout() {
   return (
     <section className="section section--tight" id="about">
       <div ref={ref as React.RefObject<HTMLDivElement>} className="about" data-parallax="0.04">
-        <div className="about__portrait">
-          <img src="/uploads/pasted-1776596105683-0.png" alt="Ishwarya Suresh" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
-        </div>
         <div className="about__body">
           <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }}>[ About the studio ]</div>
           <h2>A product designer <span className="accent-teal">made for humans.</span></h2>

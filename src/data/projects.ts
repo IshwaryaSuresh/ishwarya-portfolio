@@ -809,6 +809,7 @@ export const projects: Project[] = [
     role: 'UX Designer & Researcher (Master\'s Dissertation)',
     duration: '4 months — MSc Dissertation',
     tools: ['Figma', 'Miro', 'Paper Prototyping', 'Video Storyboards'],
+    heroImage: '/uploads/Accord/Phone%20mockup_3@4x.png',
     overview: {
       team: 'Lenia Margariti (PhD Researcher, ActuAir technology)',
       industry: 'Workplace Wellbeing / HCI Research',
@@ -843,6 +844,8 @@ export const projects: Project[] = [
       {
         step: 'Literature Review',
         detail: 'Reviewed 30+ academic papers on indoor air quality, ambient information displays, and behaviour change theory. Key finding: ambient displays that integrate aesthetically into environments consistently outperform alert-based systems for sustained behaviour change — this became the theoretical backbone of the design direction.',
+        image: '/uploads/Accord/Ede39b6f-c191-49ae-849e-1d2050a230ed%20rw_1920@4x.png',
+        imageCaption: 'Concept sketches exploring a lichen-inspired inflation metaphor — mapping four device states to air quality levels (good → medium → poor → bad)',
       },
       {
         step: 'Expert Focus Group',
@@ -855,14 +858,20 @@ export const projects: Project[] = [
       {
         step: 'Co-Design Workshop 1 — Storyboard Interpretation',
         detail: 'Participants worked with scenario-based storyboards to articulate how they\'d interpret and respond to the ActuAir device in a real office context. Key insights: participants consistently preferred the device at eye level or within peripheral vision — "out of sight, out of mind" was a common concern. Inflation/deflation feedback was interpreted differently by different users; some found it intuitive, others needed a brief onboarding moment to make the metaphor their own.',
+        image: '/uploads/Accord/C143dd31-871a-4ec8-aff3-c7de47296496@4x.png',
+        imageCaption: 'Scenario 1 storyboard — a cold day in the office with windows closed, CO₂ builds up and the ActuAir device shifts from green to red. Participants were asked: what would you do?',
       },
       {
         step: 'Co-Design Workshop 2 — Companion App Design',
         detail: 'Participants co-created the companion app\'s direction through live device demonstrations and structured preference exercises. Key insights: users wanted to know why the air quality was poor, not just that it was. Positive framing — "Open a window for a 10-minute reset" — landed far better than "CO₂ level critical". Critically, users did not want notifications; they wanted an app they could open by choice, not one that interrupted them.',
+        image: '/uploads/Accord/E0829f52-5051-4805-85cf-836c7de3bd6e@4x.png',
+        imageCaption: 'Scenario 4 storyboard — ActuAir placed in a common area vs. a private cabin. Prompted participants to articulate how they\'d want IAQ communicated across different workspace contexts.',
       },
       {
         step: 'Prototype Iteration',
         detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on usability testing with 8 office professionals. A weekly summary view was added in response to direct participant feedback.',
+        image: '/uploads/Accord/D4d99d38-ee26-40da-9462-ad6d685dbaa3@4x.png',
+        imageCaption: 'Paper prototype cards — hand-drawn screens from the first iteration round, testing layout, navigation flow, and notification opt-in before moving to digital hi-fidelity.',
       },
     ],
     testing: {
@@ -886,6 +895,12 @@ export const projects: Project[] = [
       ],
       outcome: 'These findings contributed directly to the paper accepted at ACM CHI 2024 — one of the world\'s leading conferences on human-computer interaction, with an acceptance rate of approximately 25%.',
     },
+    workshops: [
+      { src: '/uploads/Accord/69c1064c-b190-4c28-b6d7-e8ecea3f099e%20rw_1920@4x.png', caption: 'Workshop 1 in session — participants reviewing ActuAir scenario scripts alongside the physical device' },
+      { src: '/uploads/Accord/187dea95-0d97-49c9-9c52-39873ee50318%20rw_3840@4x.png', caption: 'Participants working through storyboard scenarios at the workshop table' },
+      { src: '/uploads/Accord/8c058c0e-705d-48a8-b016-6c3d5779f6a7%20rw_1920@4x.png', caption: 'Close-up of paper ActuAir model exploration — participants physically handling the device prototype' },
+      { src: '/uploads/Accord/F0b98a8d-3b90-4629-820d-09873bec1433%20rw_1920@4x.png', caption: 'Hands-on session with the paper ActuAir — interpreting the inflation metaphor through touch and arrangement' },
+    ],
     metrics: [
       { label: 'Took at least one air quality action', value: '100%' },
       { label: 'Reported increased IAQ awareness', value: '50%' },
@@ -904,6 +919,18 @@ export const projects: Project[] = [
       ],
       learned: 'Ambient UX is one of the most underexplored frontiers in product design. This project sits at the intersection of academic rigour and practical design — a combination I find genuinely energising. The hardest design challenge here wasn\'t making information visible; it was making it actionable without adding to cognitive load.',
     },
+    gallery: [
+      { src: '/uploads/Accord/Phone%20mockup_3@4x.png', caption: 'App prototype — splash screen, \'Your Spaces\' dashboard with room-by-room IAQ status, and notification settings', type: 'prototype' },
+      { src: '/uploads/Accord/Frame%2015.png', caption: 'High-fidelity screens: colour-coded space cards give at-a-glance IAQ status with positive action prompts', type: 'prototype' },
+      { src: '/uploads/Accord/Frame%2011.png', caption: 'Annotated prototype mapped to Nielsen\'s usability heuristics — login, \'Your Spaces\', and dashboard flows', type: 'prototype' },
+      { src: '/uploads/Accord/Frame%2014.png', caption: 'ActuAir functions guide explaining colour and inflation states, alongside the main dashboard', type: 'prototype' },
+      { src: '/uploads/Accord/Frame%207.png', caption: 'Full hi-fidelity prototype flow — onboarding through IAQ response, with usability annotations', type: 'prototype' },
+      { src: '/uploads/Accord/Ab0cc8d7-15e5-4c20-91e7-9f692f345fdc@4x.png', caption: 'The ActuAir device — a shape-changing textile installation that physically responds to CO₂ levels in the room', type: 'research' },
+      { src: '/uploads/Accord/5ef9eb13-b071-496a-b0ea-0d0e49ddf8b4@4x.png', caption: 'ActuAir glowing (Metaphor 4) — good air quality state visualised through ambient green light and relaxed form', type: 'research' },
+      { src: '/uploads/Accord/8927c115-126b-4ad1-a2d5-3de970194e4a@4x.png', caption: 'Scenario 2 storyboard — conference room IAQ depletion as occupancy rises, used in Workshop 1', type: 'storyboard' },
+      { src: '/uploads/Accord/E14a2029-d61e-4ffb-84c5-c5341ef85357@4x.png', caption: 'Scenario 3 storyboard — open-plan office: IAQ degrading across the working day as colleagues arrive', type: 'storyboard' },
+      { src: '/uploads/Accord/77c1b772-3f8f-44e1-b673-cde8a591072a%20rw_1920@4x.png', caption: 'Concept sketch — ActuAir inflation states mapped to air quality levels, inspired by lichen discolouration', type: 'storyboard' },
+    ],
     takeaway: `Ambient UX is one of the most underexplored frontiers in product design. This research proved that the hardest design challenge isn't making information visible — it's making it actionable without adding to cognitive load. And the most powerful design decisions aren't always visual: they're about when not to show something, and how to invite engagement rather than demand it.`,
     tags: ['Research', 'Ambient UX', 'Workplace Design', 'Academic', 'Co-design', 'HCI', 'ACM CHI 2024'],
   },

@@ -30,9 +30,9 @@ export type Project = {
   tags: string[]
   // Extended fields (optional - populated per-project)
   heroImage?: string
-  overview?: { team: string; industry: string; status?: string }
+  overview?: { team: string; industry: string; status?: string; recognition?: string }
   designDecisions?: { decision: string; rationale: string }[]
-  background?: { understandingNeeds: string; personalDrive: string; innovativeMethods: string }
+  background?: { understandingNeedsTitle?: string; understandingNeeds: string; personalDrive: string; innovativeMethods: string }
   personas?: Persona[]
   testing?: {
     description: string
@@ -801,33 +801,111 @@ export const projects: Project[] = [
   {
     slug: 'project-accord',
     title: 'Project Accord',
-    tagline: 'Co-designing ambient air quality feedback for the workplace - research acknowledged at ACM CHI 2024.',
-    niche: ['Workplace Wellbeing', 'Ambient UX', 'Research'],
+    tagline: 'Co-designing a digital companion for ambient air quality technology — research accepted at ACM CHI 2024.',
+    niche: ['Workplace Wellbeing', 'Ambient UX', 'HCI Research'],
     type: 'Academic',
     featured: false,
-    client: 'MSc Dissertation, Newcastle University',
-    role: 'UX Researcher & Designer',
-    duration: '2021 – 2022',
-    tools: ['Paper prototypes', 'Figma', 'Miro', 'Video storyboards'],
-    problem: `Indoor air quality in office environments is frequently worse than outdoor air - contributing to fatigue, poor concentration, and long-term health risks. Yet it's invisible. Existing IAQ monitoring solutions either require users to actively check an app (ignored) or trigger disruptive alerts (also ignored).\n\nHow might we communicate indoor air quality data to office professionals in a way that prompts healthy behaviour without interrupting workflow?`,
-    insight: `Workers didn't want more data - they wanted just-in-time cues that triggered a simple action (open a window, take a break) without requiring them to interpret numbers or context-switch from their work.`,
+    client: 'Newcastle University / Open Lab',
+    role: 'UX Designer & Researcher (Master\'s Dissertation)',
+    duration: '4 months — MSc Dissertation',
+    tools: ['Figma', 'Miro', 'Paper Prototyping', 'Video Storyboards'],
+    overview: {
+      team: 'Lenia Margariti (PhD Researcher, ActuAir technology)',
+      industry: 'Workplace Wellbeing / HCI Research',
+      recognition: 'Findings accepted at ACM CHI 2024 — one of the world\'s leading HCI conferences',
+    },
+    background: {
+      understandingNeedsTitle: 'Understanding Indoor Air Quality Challenges',
+      understandingNeeds: `Indoor air quality (IAQ) is a largely invisible problem. Research shows that CO₂ levels in poorly ventilated offices regularly exceed 1000ppm — a threshold associated with reduced cognitive performance, fatigue, and difficulty concentrating. Despite this, most office workers have no awareness of the air quality around them, and buildings rarely provide any feedback beyond a blinking thermostat.\n\nThe challenge is not just technical — it is behavioural. Even when people are given access to air quality data, they tend not to act on it. Meaningful behaviour change requires feedback that is ambient, non-intrusive, and contextually appropriate.`,
+      personalDrive: `This project began with a question from my dissertation research: if ambient interactive technologies can communicate data without demanding attention, can they also change behaviour? I was particularly drawn to the work of Lenia Margariti and the ActuAir device — a shape-changing display that physically responds to CO₂ levels. The device offered a rare opportunity: a real-world ambient technology to design for and test with, rather than a hypothetical system. Prior research into digital nudging and ambient displays gave me confidence that subtle, contextual interventions could be more effective than dashboard-style alerts. The challenge was to design a companion digital layer that extended ActuAir's ambient feedback into actionable, personalised suggestions.`,
+      innovativeMethods: `I used co-design workshops as the primary method — not just to validate ideas, but to involve office professionals as genuine co-creators of the solution. Participants worked with storyboards and live device demonstrations to articulate their preferences, concerns, and interpretations of the technology. This participatory approach was essential: ambient technology is deeply personal in how it is perceived, and assumptions about what feels 'unobtrusive' vary significantly between individuals.`,
+    },
+    problem: `Indoor air quality in office environments is frequently worse than outdoor air — contributing to fatigue, poor concentration, and long-term health risks. Yet it's invisible. Existing IAQ monitoring solutions either require users to actively check an app (ignored) or trigger disruptive alerts (also ignored).\n\nHow might we communicate indoor air quality data to office professionals in a way that prompts healthy behaviour without interrupting workflow?`,
+    insight: `Workers didn't want more data — they wanted just-in-time cues that triggered a simple action (open a window, take a break) without requiring them to interpret numbers or context-switch from their work.`,
+    deskResearch: {
+      summary: 'Research into indoor air quality, ambient information systems, and workplace behaviour change formed the foundation of this project. I reviewed 30+ academic papers spanning environmental health, HCI ambient display research, and behavioural nudge theory — establishing both the problem\'s scale and the gap in existing solutions.',
+      stats: [
+        { value: '30+', label: 'Academic papers reviewed' },
+        { value: '1000ppm', label: 'CO₂ threshold linked to reduced cognitive performance' },
+        { value: '3', label: 'Workplaces observed for contextual research' },
+        { value: '~25%', label: 'Acceptance rate at ACM CHI 2024' },
+      ],
+      findings: [
+        'CO₂ levels in poorly ventilated offices regularly exceed 1000ppm — a threshold associated with reduced cognitive function, fatigue, and difficulty concentrating.',
+        'Most office workers have no awareness of the air quality around them; buildings provide little feedback beyond a blinking thermostat.',
+        'Alert-based IAQ systems are frequently ignored — they interrupt workflow at inopportune moments and do not support habitual behaviour change.',
+        'Ambient displays that integrate aesthetically into environments outperform alert-based systems for sustained behaviour change.',
+        'Effective behaviour change requires feedback that is ambient, non-intrusive, and contextually appropriate — not data dashboards.',
+      ],
+      gap: 'No prior research had explored the design of a companion digital layer for shape-changing ambient displays like ActuAir — a gap this project was uniquely positioned to address through co-design.',
+    },
     process: [
-      { step: 'Literature Review', detail: 'Reviewed 30+ academic papers on IAQ, ambient information displays, and behaviour change. Key finding: ambient displays that integrate aesthetically into environments outperform alert-based systems for sustained behaviour change.' },
-      { step: 'Expert Focus Group', detail: 'Convened HCI and environmental health academics from Newcastle and Northumbria Universities to validate research direction.' },
-      { step: 'Contextual Observation', detail: 'Observed office professionals across 3 workplaces, mapping moments when environmental feedback would be least and most disruptive.' },
-      { step: 'Co-design Workshops', detail: 'Ran participatory sessions with office workers to explore preferred feedback modes - visual, tactile, ambient.' },
-      { step: 'Storyboard Testing', detail: 'Developed 3 scenario-based storyboards and tested with focus groups, measuring comprehension and stated behaviour change intent.' },
-      { step: 'Prototype Iteration', detail: 'Built and tested tactile prototypes for 3 concepts; narrowed through dot-voting and desirability testing.' },
+      {
+        step: 'Literature Review',
+        detail: 'Reviewed 30+ academic papers on indoor air quality, ambient information displays, and behaviour change theory. Key finding: ambient displays that integrate aesthetically into environments consistently outperform alert-based systems for sustained behaviour change — this became the theoretical backbone of the design direction.',
+      },
+      {
+        step: 'Expert Focus Group',
+        detail: 'Convened HCI and environmental health academics from Newcastle and Northumbria Universities to validate the research direction and identify gaps in existing ambient technology design research.',
+      },
+      {
+        step: 'Contextual Observation',
+        detail: 'Observed office professionals across 3 workplaces, mapping moments when environmental feedback would be least and most disruptive. Key observation: existing IAQ solutions were almost universally ignored — either because they demanded active engagement or triggered alerts at the wrong moment.',
+      },
+      {
+        step: 'Co-Design Workshop 1 — Storyboard Interpretation',
+        detail: 'Participants worked with scenario-based storyboards to articulate how they\'d interpret and respond to the ActuAir device in a real office context. Key insights: participants consistently preferred the device at eye level or within peripheral vision — "out of sight, out of mind" was a common concern. Inflation/deflation feedback was interpreted differently by different users; some found it intuitive, others needed a brief onboarding moment to make the metaphor their own.',
+      },
+      {
+        step: 'Co-Design Workshop 2 — Companion App Design',
+        detail: 'Participants co-created the companion app\'s direction through live device demonstrations and structured preference exercises. Key insights: users wanted to know why the air quality was poor, not just that it was. Positive framing — "Open a window for a 10-minute reset" — landed far better than "CO₂ level critical". Critically, users did not want notifications; they wanted an app they could open by choice, not one that interrupted them.',
+      },
+      {
+        step: 'Prototype Iteration',
+        detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on usability testing with 8 office professionals. A weekly summary view was added in response to direct participant feedback.',
+      },
     ],
+    testing: {
+      description: 'Testing was conducted with 8 office professionals. Sessions combined task-based evaluation of the companion app prototype with observational notes on ActuAir device interaction.',
+      participants: '8 office professionals',
+      questions: [
+        'Does the ambient display make users more aware of air quality without disrupting their work?',
+        'Does positive framing ("reset" vs. "alert") affect willingness to act on suggestions?',
+        'Are users willing to engage with the app voluntarily — without push notifications?',
+      ],
+      worked: [
+        'The ActuAir device prompted behaviour change without demanding active attention — 100% of participants took at least one air quality action',
+        'Positive action framing significantly outperformed alert-based language across all participants',
+        'The app felt personal and non-intrusive — participants described it as "advice from a friend, not an alarm"',
+        '50% reported increased awareness of air quality compared to before the study',
+      ],
+      changed: [
+        'Several participants requested a weekly summary view — not in the original prototype, added in the next iteration',
+        'Onboarding flow needed a brief moment for users to set their own interpretation of the ambient signal',
+        'The inflation/deflation metaphor required clearer contextualisation for some users on first encounter',
+      ],
+      outcome: 'These findings contributed directly to the paper accepted at ACM CHI 2024 — one of the world\'s leading conferences on human-computer interaction, with an acceptance rate of approximately 25%.',
+    },
     metrics: [
-      { label: 'Academic papers reviewed', value: '30+' },
-      { label: 'Workspace observation sites', value: '3' },
-      { label: 'Concepts generated & tested', value: '12 generated → 3 tested → 1 final' },
-      { label: 'Academic recognition', value: 'ACM CHI 2024 Conference' },
+      { label: 'Took at least one air quality action', value: '100%' },
+      { label: 'Reported increased IAQ awareness', value: '50%' },
+      { label: 'Usability test participants', value: '8' },
+      { label: 'Published at', value: 'ACM CHI 2024' },
     ],
-    solution: `An ambient sensing display that communicates IAQ through peripheral visual and tactile cues - designed to be aesthetically integrated into office environments and interpretable at a glance without requiring active engagement or interrupting workflow.`,
-    takeaway: `Ambient UX is one of the most underexplored frontiers in product design. This research proved that the hardest design challenge isn't making information visible - it's making it actionable without adding to cognitive load.`,
-    tags: ['Research', 'Ambient UX', 'Workplace Design', 'Academic', 'Co-design'],
+    solution: `A companion app designed to extend the ActuAir ambient display's feedback into personalised, actionable suggestions — built on the principle of voluntary engagement. The app explains why air quality is poor, frames responses positively, and surfaces information only when users choose to look, not through interruptions. Paired with the shape-changing device, it forms a two-layer ambient system: passive peripheral awareness via the physical display, and on-demand context via the digital companion.`,
+    outcomes: {
+      summary: 'Accord produced a validated, user-tested prototype for a companion app to the ActuAir ambient technology, grounded in co-design research with real office professionals.',
+      keyOutcomes: [
+        'Research accepted at ACM CHI 2024 — one of the most competitive venues in HCI, with a ~25% acceptance rate',
+        '2 co-design sessions conducted with office professionals, generating validated design principles',
+        '8 usability test participants — 100% took at least one air quality action prompted by the device',
+        'Prototype iterated twice based on direct participant feedback, adding a weekly summary view',
+        'Validated a transferable principle: ambient technology is most effective when users author their own interpretation of feedback signals',
+      ],
+      learned: 'Ambient UX is one of the most underexplored frontiers in product design. This project sits at the intersection of academic rigour and practical design — a combination I find genuinely energising. The hardest design challenge here wasn\'t making information visible; it was making it actionable without adding to cognitive load.',
+    },
+    takeaway: `Ambient UX is one of the most underexplored frontiers in product design. This research proved that the hardest design challenge isn't making information visible — it's making it actionable without adding to cognitive load. And the most powerful design decisions aren't always visual: they're about when not to show something, and how to invite engagement rather than demand it.`,
+    tags: ['Research', 'Ambient UX', 'Workplace Design', 'Academic', 'Co-design', 'HCI', 'ACM CHI 2024'],
   },
 ]
 

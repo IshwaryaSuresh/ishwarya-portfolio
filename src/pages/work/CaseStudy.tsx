@@ -59,8 +59,9 @@ export default function CaseStudy() {
             { label: 'Timeline', value: project.duration },
             { label: 'Tools', value: project.tools.join(', ') },
             ...(project.overview ? [
-              { label: 'Team', value: project.overview.team },
+              { label: 'Collaborators', value: project.overview.team },
               { label: 'Industry', value: project.overview.industry },
+              ...(project.overview.recognition ? [{ label: 'Recognition', value: project.overview.recognition }] : []),
             ] : []),
           ].map(m => (
             <div key={m.label}>
@@ -104,8 +105,10 @@ export default function CaseStudy() {
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-8">Background &amp; inspiration</p>
             <div className="space-y-10">
               <div>
-                <h3 className="font-semibold text-ink text-base mb-3">Understanding Dementia Care Needs</h3>
-                <p className="text-muted leading-relaxed">{project.background.understandingNeeds}</p>
+                <h3 className="font-semibold text-ink text-base mb-3">{project.background.understandingNeedsTitle ?? 'Understanding the Challenge'}</h3>
+                {project.background.understandingNeeds.split('\n\n').map((para, i) => (
+                  <p key={i} className="text-muted leading-relaxed mb-3 last:mb-0">{para}</p>
+                ))}
               </div>
               <blockquote className="border-l-4 border-accent pl-6 py-2">
                 <p className="text-ink text-lg font-medium leading-relaxed italic">"{project.background.personalDrive}"</p>

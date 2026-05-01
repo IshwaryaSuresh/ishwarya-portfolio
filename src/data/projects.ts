@@ -829,7 +829,6 @@ export const projects: Project[] = [
         { value: '30+', label: 'Academic papers reviewed' },
         { value: '1000ppm', label: 'CO₂ threshold linked to reduced cognitive performance' },
         { value: '3', label: 'Workplaces observed for contextual research' },
-        { value: '~25%', label: 'Acceptance rate at ACM CHI 2024' },
       ],
       findings: [
         'CO₂ levels in poorly ventilated offices regularly exceed 1000ppm - a threshold associated with reduced cognitive function, fatigue, and difficulty concentrating.',

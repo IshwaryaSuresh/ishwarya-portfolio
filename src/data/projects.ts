@@ -934,6 +934,100 @@ export const projects: Project[] = [
     takeaway: `Ambient UX is one of the most underexplored frontiers in product design. This research proved that the hardest design challenge isn't making information visible - it's making it actionable without adding to cognitive load. And the most powerful design decisions aren't always visual: they're about when not to show something, and how to invite engagement rather than demand it.`,
     tags: ['Research', 'Ambient UX', 'Workplace Design', 'Academic', 'Co-design', 'HCI', 'ACM CHI 2024'],
   },
+  {
+    slug: 'ledgerline',
+    title: 'Ledgerline',
+    tagline: 'A fully interactive SME underwriting sandbox — 9 screens, 3 analyst personas, and an explainable risk scorecard built entirely in the browser.',
+    niche: ['Fintech', 'B2B SaaS', 'Credit Risk'],
+    type: 'Fintech B2B',
+    featured: true,
+    client: 'Self-initiated concept (CreditCraft 2.0)',
+    role: 'UX Designer & Prototype Engineer (end-to-end)',
+    duration: '2026',
+    tools: ['Claude Design', 'React', 'SVG Charts', 'CSS Design System'],
+    prototype: 'https://api.anthropic.com/v1/design/h/nrBfDOB9P2LmwU-uG2pfeA?open_file=index.html',
+    problem: `CreditCraft v1 proved that explainability matters in SME underwriting — but it lived in Figma. The gap: a static prototype can't show how data changes when you switch from a healthy borrower to a risky one, or how the scorecard reacts to a rules change in real-time.\n\nThe v2 challenge: build a fully interactive, data-driven underwriting tool that feels production-ready — where every screen responds to a real applicant profile, every metric is calculated from real data, and every design decision has a clear analyst rationale behind it.`,
+    insight: `A prototype that only shows the happy path teaches analysts nothing. The real insight: give three complete personas (healthy, borderline, risky) and let the analyst switch between them mid-flow — the contrast between Acme Trading (score 81) and Zenith Hardware (score 38) makes every design decision legible in a way static screens never can.`,
+    process: [
+      {
+        step: 'Workflow Mapping',
+        detail: 'Mapped the 9-stage analyst journey end-to-end: Queue → New Intake → Transactions → Cashflow → Collateral → Scorecard → Red Flags → Rules Editor → Cohort Compare → Experiments. Each stage owns a distinct analyst task, eliminating context-switching overhead.'
+      },
+      {
+        step: 'Design System',
+        detail: 'Built a CSS-first design system with semantic tokens: paper/ink colour scale, lime accent, good/warn/bad semantic trio. Two themes (light/dark), three accents (lime/mint/amber/cobalt), two densities (comfortable/compact) — all switchable at runtime via data-* attributes.'
+      },
+      {
+        step: 'Data Architecture',
+        detail: 'Modelled three complete applicant profiles covering all screens: Acme Trading (7yr FMCG, score 81, property-secured), Sundar Textiles (4yr textile, score 64, hybrid collateral), Zenith Hardware (2yr retail, score 38, unsecured + gambling flags). Every KPI, chart, and table is derived from these profiles at render time.'
+      },
+      {
+        step: 'Collateral Module',
+        detail: 'Identified a gap in v1: no first-class collateral concept. Designed a new screen with security panel (LTV with tonal coloring), document tray (drag-drop + status states: verified/pending/rejected/missing), PG guarantor card, and document checklist. Each profile tells a different collateral story.'
+      },
+      {
+        step: 'Hand-rolled SVG Charts',
+        detail: 'Built four custom charts with no charting library: cashflow line + area chart, balance strip (net cashflow bar chart), donut (expense breakdown), sparkline. Each chart reads directly from applicant data and adapts to theme changes.'
+      },
+      {
+        step: 'Explainability Layer',
+        detail: 'Expanded the scorecard to 8 transparent features with raw evidence strings ("CV 0.14 over 12mo"), per-feature scores, and a tonal bar (good/warn/bad). Score changes completely when switching profiles — making the model logic visible by contrast, not explanation.'
+      },
+      {
+        step: 'Rules Editor + Experiments',
+        detail: 'Built a toggle-based rules editor where analysts can enable/disable scoring rules and see their penalty weights and expressions. Companion Experiments screen shows three models (base vs challenger vs strict GB) with AUC, approval rate, and default rate.'
+      },
+    ],
+    metrics: [
+      { label: 'Screens in end-to-end flow', value: '9' },
+      { label: 'Sample analyst personas', value: '3 (healthy / borderline / risky)' },
+      { label: 'Scoring features (transparent)', value: '8' },
+      { label: 'Runtime themeable', value: 'Dark · Light · 4 accents · 2 densities' },
+    ],
+    solution: `Ledgerline is a single-file, zero-dependency React prototype that runs entirely in the browser. Nine analyst screens driven by three complete applicant datasets. An editorial design system (Inter + JetBrains Mono, dark-first, lime accents) that reads as analyst-grade tooling rather than consumer SaaS. The applicant switcher at the top-right regenerates every screen in real time — turning the prototype into a live demonstration of how scoring, flags, collateral, and charts respond to different borrower profiles.`,
+    takeaway: `Version 2 isn't just a more polished prototype — it's a different kind of artefact. By making data live and personas switchable, it demonstrates not just what the interface looks like but what it does. That's the difference between a design deliverable and a design argument.`,
+    tags: ['Fintech', 'B2B', 'SaaS', 'Data Visualisation', 'Interactive Prototype', 'Design Systems'],
+    overview: {
+      team: 'Solo designer & prototype engineer',
+      industry: 'Fintech / NBFC Credit',
+      status: 'Fully interactive prototype. Live in browser — no build step required.',
+    },
+    designDecisions: [
+      {
+        decision: 'Dark theme as the default',
+        rationale: 'Credit analysts work in low-light trading-floor environments. Dark themes reduce eye strain during extended review sessions and make the high-contrast lime accent pop as a clear action signal.',
+      },
+      {
+        decision: 'Inter sans-serif + JetBrains Mono — no serif',
+        rationale: 'Serif display fonts read as editorial / brand; analysts need data-density and scan speed. Mono for all numeric/code elements (scores, handles, expressions) makes tabular alignment effortless and signals "this is a real number, not a label".',
+      },
+      {
+        decision: 'Single-file, zero-dependency implementation',
+        rationale: 'React via CDN + Babel in-browser. No build step means anyone can open the file and see a fully working prototype. Reduces friction for stakeholder demos and ensures the prototype is self-contained for portfolio handoffs.',
+      },
+      {
+        decision: 'Three applicant personas driving all 9 screens',
+        rationale: 'Static personas in Figma tell; live personas show. The contrast between Acme\'s 52% LTV and Zenith\'s unsecured + gambling flags makes every design decision legible by example rather than annotation.',
+      },
+      {
+        decision: 'Collateral as a first-class screen',
+        rationale: 'v1 treated collateral as a metadata field on the scorecard. Real underwriters spend 30–40% of review time on security documentation. Giving collateral its own screen with document status, LTV tonal coloring, and a checklist validates the analyst\'s actual workflow.',
+      },
+    ],
+    outcomes: {
+      summary: 'A fully functional analyst tool prototype that demonstrates explainable AI scoring, live data switching, and a complete underwriting workflow — all in a single shareable HTML file.',
+      keyOutcomes: [
+        '9-screen workflow covering the full analyst journey from intake to decision',
+        'Three switchable applicant profiles — each generating distinct scores, flags, charts, and collateral states',
+        'Runtime theming (dark/light, 4 accents, 2 densities) with no page reload',
+        'Hand-rolled SVG charts: cashflow line, balance strip, expense donut, sparkline',
+        'Collateral screen with LTV coloring, document tray, PG guarantor, and status checklist',
+        'Rules editor with toggle-based scoring logic and expression strings',
+        'Experiments screen comparing three model variants on AUC, approval rate, default rate',
+      ],
+      learned: 'The jump from Figma prototype to coded prototype isn\'t just technical — it forces you to make every design decision explicit in data. You can\'t fake a "borderline" applicant in code: you have to actually define what borderline means across 8 scoring features, 12 months of cashflow, and 4 document statuses. That rigour makes the design argument much stronger.',
+    },
+  },
 ]
 
 export function getProject(slug: string): Project | undefined {

@@ -16,7 +16,7 @@ export default function Work() {
         <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Portfolio</p>
         <h1 className="text-4xl font-bold text-ink mb-3">All work</h1>
         <p className="text-muted max-w-xl">
-          7 case studies across fintech, healthcare, government, and edtech. Each one shows the full arc — research, design decisions, and measurable outcomes.
+          {projects.length} case studies across fintech, healthcare, government, and edtech. Each one shows the full arc — research, design decisions, and measurable outcomes.
         </p>
       </div>
 

@@ -945,7 +945,6 @@ export const projects: Project[] = [
     role: 'UX Designer & Prototype Engineer (end-to-end)',
     duration: '2026',
     tools: ['Claude Design', 'React', 'SVG Charts', 'CSS Design System'],
-    prototype: 'https://api.anthropic.com/v1/design/h/nrBfDOB9P2LmwU-uG2pfeA?open_file=index.html',
     problem: `CreditCraft v1 proved that explainability matters in SME underwriting — but it lived in Figma. The gap: a static prototype can't show how data changes when you switch from a healthy borrower to a risky one, or how the scorecard reacts to a rules change in real-time.\n\nThe v2 challenge: build a fully interactive, data-driven underwriting tool that feels production-ready — where every screen responds to a real applicant profile, every metric is calculated from real data, and every design decision has a clear analyst rationale behind it.`,
     insight: `A prototype that only shows the happy path teaches analysts nothing. The real insight: give three complete personas (healthy, borderline, risky) and let the analyst switch between them mid-flow — the contrast between Acme Trading (score 81) and Zenith Hardware (score 38) makes every design decision legible in a way static screens never can.`,
     process: [

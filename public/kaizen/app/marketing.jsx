@@ -79,7 +79,7 @@ function Hero({ theme }) {
 
           <p className="hero__lede">
             An automated budget, an index portfolio that rebalances itself, and a goal tracker
-            that feels like a diary. Small, daily improvements — for the next forty years.
+            that feels like a diary. Small, daily improvements, for the next forty years.
           </p>
 
           <div className="hero__cta">
@@ -196,7 +196,7 @@ function ProductPreview({ goTo, theme }) {
           </h2>
         </div>
         <p className="product-preview__lede">
-          Budgeting, goals, investing, and a tax-aware engine — in one quiet interface that
+          Budgeting, goals, investing, and a tax-aware engine. One quiet interface that
           reads like a financial diary, not a casino floor.
         </p>
       </div>
@@ -380,7 +380,7 @@ function PreviewMock({ tab }) {
   const tx = [
     { name: "Trader Joe's", cat: "Groceries", v: -42.18, d: "Today", icon: "cart" },
     { name: "Auto-invest deposit", cat: "Invest", v: -300, d: "Today", icon: "seed" },
-    { name: "Stripe — Salary", cat: "Income", v: 5840, d: "Yesterday", icon: "arrowDown" },
+    { name: "Stripe: Salary", cat: "Income", v: 5840, d: "Yesterday", icon: "arrowDown" },
     { name: "Verve Coffee", cat: "Dining", v: -7.25, d: "Yesterday", icon: "coffee" },
     { name: "Uber", cat: "Transit", v: -18.40, d: "Mon", icon: "car" },
     { name: "Vacation goal", cat: "Goal", v: -120, d: "Mon", icon: "plane" },
@@ -587,7 +587,7 @@ function TestimonialsRow() {
 function FAQ() {
   const items = [
     ["How do I connect my bank?", "Plaid integration. Works with 12,000+ US banks and most European institutions. Setup in under 60 seconds."],
-    ["Can I use Kaizen without investing?", "Yes — budgeting and goals are free for the first year. The 0.25% fee only kicks in on managed assets."],
+    ["Can I use Kaizen without investing?", "Yes. Budgeting and goals are free for the first year. The 0.25% fee only kicks in on managed assets."],
     ["What if I want to stop?", "Withdraw any time. No exit fees, no withdrawal limits. You own your portfolio."],
     ["Is my money insured?", "Cash up to $250K (FDIC). Investments up to $500K (SIPC). We hold custody at Apex Clearing."],
     ["Tax docs?", "Auto-generated 1099s in February. Loss harvesting summary downloadable any time."],

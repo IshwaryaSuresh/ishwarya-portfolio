@@ -139,7 +139,7 @@ function Dashboard() {
             {[
               ["Trader Joe's", "Groceries", -42.18, "Today", "cart"],
               ["Auto-invest deposit", "Invest", -300, "Today", "seed"],
-              ["Stripe — Salary", "Income", 5840, "Yesterday", "arrowDown"],
+              ["Stripe: Salary", "Income", 5840, "Yesterday", "arrowDown"],
               ["Verve Coffee", "Dining", -7.25, "Yesterday", "coffee"],
               ["Vacation goal", "Tokyo", -120, "Mon", "plane"],
             ].map((t, i) => (
@@ -281,9 +281,9 @@ function BudgetView() {
 /* ===== GOALS ===== */
 function GoalsView() {
   const goals = [
-    { name: "Tokyo trip", icon: "plane", saved: 4280, target: 6000, eta: "Oct 2026", weekly: 240, color: "var(--accent)", note: "October peak season — book flights early" },
+    { name: "Tokyo trip", icon: "plane", saved: 4280, target: 6000, eta: "Oct 2026", weekly: 240, color: "var(--accent)", note: "October peak season. Book flights early." },
     { name: "Down payment", icon: "house", saved: 18420, target: 60000, eta: "Mar 2028", weekly: 380, color: "var(--accent-2)", note: "Auto-invested in conservative portfolio" },
-    { name: "New bike", icon: "car", saved: 1240, target: 2200, eta: "Aug 2026", weekly: 60, color: "#c47a08", note: "Almost there — 56% complete" },
+    { name: "New bike", icon: "car", saved: 1240, target: 2200, eta: "Aug 2026", weekly: 60, color: "#c47a08", note: "Almost there, 56% complete." },
     { name: "Emergency fund", icon: "shield", saved: 9600, target: 12000, eta: "On schedule", weekly: 80, color: "var(--ink)", note: "6 months of expenses" },
     { name: "Wedding", icon: "sparkle", saved: 3100, target: 25000, eta: "Sep 2027", weekly: 280, color: "var(--negative)", note: "Just started saving" },
     { name: "Tuition", icon: "grad", saved: 8400, target: 18000, eta: "Aug 2026", weekly: 200, color: "var(--warn)", note: "On track for fall semester" },
@@ -423,14 +423,14 @@ function TransactionsView() {
       ["Spotify", "Subscriptions", -10.99, "Chase ••4421", "card"],
     ]},
     { d: "Yesterday", items: [
-      ["Stripe — Payroll", "Income", 5840.00, "Chase ••4421", "arrowDown"],
+      ["Stripe: Payroll", "Income", 5840.00, "Chase ••4421", "arrowDown"],
       ["Verve Coffee", "Dining", -7.25, "Chase ••4421", "coffee"],
       ["Lyft", "Transit", -14.20, "Chase ••4421", "car"],
-      ["Vacation goal — Tokyo", "Goal transfer", -120.00, "Goals reserve", "plane"],
+      ["Vacation goal: Tokyo", "Goal transfer", -120.00, "Goals reserve", "plane"],
     ]},
     { d: "Mon, May 5", items: [
       ["Whole Foods", "Groceries", -88.40, "Chase ••4421", "cart"],
-      ["Dividend — VTI", "Income", 142.31, "Kaizen Brokerage", "arrowDown"],
+      ["Dividend: VTI", "Income", 142.31, "Kaizen Brokerage", "arrowDown"],
       ["Comcast", "Subscriptions", -65.00, "Chase ••4421", "card"],
     ]},
     { d: "Sat, May 3", items: [
@@ -582,7 +582,7 @@ function OnbBank({ onNext }) {
       </div>
       <div style={{ marginTop: 32, display: "flex", gap: 12 }}>
         <button className="btn btn--accent btn--lg" onClick={onNext}>Continue → </button>
-        <button className="btn btn--lg">Skip — connect later</button>
+        <button className="btn btn--lg">Skip, connect later</button>
       </div>
     </div>
   );

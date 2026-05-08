@@ -29,6 +29,9 @@ export default function NumbersAbout() {
             <h2>A product designer <span className="accent-teal">made for humans.</span></h2>
           </div>
           <div className="about__right">
+            <div className="about__portrait">
+              <img src="/uploads/portrait.jpg" alt="Ishwarya Suresh" />
+            </div>
             <p>Ishwarya Suresh is a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, she now works with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
           </div>
         </div>

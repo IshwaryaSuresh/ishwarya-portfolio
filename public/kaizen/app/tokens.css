@@ -1,0 +1,262 @@
+/* =========================================================
+   KAIZEN — design tokens
+   Three visual themes share structure, swap surface palette.
+   ========================================================= */
+
+:root {
+  /* Type scale — fluid */
+  --t-xs: 11px;
+  --t-sm: 13px;
+  --t-base: 15px;
+  --t-md: 17px;
+  --t-lg: 21px;
+  --t-xl: 28px;
+  --t-2xl: 38px;
+  --t-3xl: 56px;
+  --t-4xl: 84px;
+  --t-5xl: 128px;
+  --t-6xl: 184px;
+
+  --lh-tight: 0.95;
+  --lh-snug: 1.1;
+  --lh-normal: 1.35;
+  --lh-loose: 1.55;
+
+  /* Spacing */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+
+  /* Radii */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-2xl: 32px;
+  --r-pill: 999px;
+
+  /* Type families — sans-serif throughout */
+  --f-display: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  --f-text: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  --f-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ====== Theme A: Editorial — paper + ember ====== */
+:root,
+[data-theme="editorial"] {
+  --bg: #f3eee5;          /* warm bone */
+  --bg-elev: #fbf7f0;     /* card */
+  --bg-deep: #ebe4d6;     /* sunken */
+  --ink: #1a1612;         /* near-black */
+  --ink-2: #4a4339;
+  --ink-3: #8a8071;
+  --line: #d8cfbe;
+  --line-2: #c5b9a3;
+  --accent: #d83a1f;      /* ember red */
+  --accent-ink: #fbf7f0;
+  --accent-2: #163a2b;    /* deep moss */
+  --positive: #2e6a4a;
+  --negative: #c2331a;
+  --warn: #c47a08;
+  --chip: #ebe4d6;
+
+  --shadow-1: 0 1px 0 rgba(26,22,18,.04), 0 1px 2px rgba(26,22,18,.06);
+  --shadow-2: 0 8px 24px -12px rgba(26,22,18,.18);
+  --shadow-3: 0 24px 48px -20px rgba(26,22,18,.25);
+
+  --display-italic: normal;
+  --display-weight: 600;
+}
+
+/* ====== Theme B: Quiet Premium — onyx + bone ====== */
+[data-theme="quiet"] {
+  --bg: #0d0d0e;
+  --bg-elev: #161618;
+  --bg-deep: #08080a;
+  --ink: #f4f1ea;
+  --ink-2: #b8b3a8;
+  --ink-3: #6b675f;
+  --line: #26262a;
+  --line-2: #383840;
+  --accent: #9bb7ff;       /* periwinkle blue */
+  --accent-ink: #0d0d0e;
+  --accent-2: #c4ff3d;      /* electric lime, used surgically */
+  --positive: #c4ff3d;
+  --negative: #ff7a59;
+  --warn: #ffd166;
+  --chip: #1d1d20;
+
+  --shadow-1: 0 1px 0 rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.4);
+  --shadow-2: 0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-3: 0 24px 60px -20px rgba(0,0,0,.7);
+
+  --display-italic: normal;
+  --display-weight: 500;
+}
+
+/* ====== Theme C: Confident Warm — Memphis grown up ====== */
+[data-theme="warm"] {
+  --bg: #f6f1ea;
+  --bg-elev: #ffffff;
+  --bg-deep: #ece4d3;
+  --ink: #181410;
+  --ink-2: #514a40;
+  --ink-3: #8e8678;
+  --line: #d9cfb9;
+  --line-2: #c2b59a;
+  --accent: #e15a2b;        /* terracotta */
+  --accent-ink: #fffaf0;
+  --accent-2: #2f5d3a;       /* sage */
+  --positive: #2f5d3a;
+  --negative: #c93826;
+  --warn: #d9a526;
+  --chip: #f0e6d2;
+
+  --shadow-1: 3px 3px 0 rgba(24,20,16,.08);
+  --shadow-2: 6px 6px 0 rgba(24,20,16,.12);
+  --shadow-3: 10px 10px 0 rgba(24,20,16,.15);
+
+  --display-italic: normal;
+  --display-weight: 600;
+}
+
+/* ====== Universal element resets ====== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--f-text);
+  font-size: var(--t-base);
+  line-height: var(--lh-normal);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button { font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ====== Typography utilities ====== */
+.display {
+  font-family: var(--f-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-italic);
+  letter-spacing: -0.02em;
+  line-height: var(--lh-tight);
+}
+.mono {
+  font-family: var(--f-mono);
+  font-feature-settings: "tnum" 1;
+}
+.tnum { font-variant-numeric: tabular-nums; }
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.label {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Wordmark */
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.18em;
+  font-family: var(--f-display);
+  font-style: var(--display-italic);
+  font-weight: var(--display-weight);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.wordmark__kanji {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-style: normal;
+  color: var(--accent);
+  font-size: 0.78em;
+  position: relative;
+  top: -0.05em;
+}
+
+/* Universal tiny chrome */
+.hairline { border: 0; border-top: 1px solid var(--line); margin: 0; }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  background: var(--bg-elev);
+}
+.tag.dot::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: var(--r-pill);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: var(--t-sm);
+  cursor: pointer;
+  transition: transform .15s var(--ease), background .15s var(--ease), border-color .15s var(--ease);
+}
+.btn:hover { border-color: var(--ink); }
+.btn--primary {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.btn--accent {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ink);
+}
+.btn--lg { height: 48px; padding: 0 22px; font-size: var(--t-base); }
+.btn--sm { height: 36px; padding: 0 16px; font-size: 15px; }
+
+/* Card */
+.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-6);
+}
+[data-theme="warm"] .card { box-shadow: var(--shadow-1); }

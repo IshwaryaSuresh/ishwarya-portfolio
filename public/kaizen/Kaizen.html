@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kaizen — small, daily improvements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Noto+Serif+SC:wght@400..600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="app/tokens.css"/>
+<link rel="stylesheet" href="app/marketing.css"/>
+<link rel="stylesheet" href="app/app.css"/>
+<style>
+  /* Tiny page-level glue */
+  body { transition: background .25s var(--ease), color .25s var(--ease); }
+  .route-fade-in { animation: fade .35s var(--ease); }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* Make Tweaks panel match in dark themes */
+  [data-theme="quiet"] .twk-panel { background: rgba(20,20,22,0.85) !important; color: #f4f1ea !important; border-color: rgba(255,255,255,.08) !important; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="app/tweaks-panel.jsx"></script>
+<script type="text/babel" src="app/atoms.jsx"></script>
+<script type="text/babel" src="app/marketing.jsx"></script>
+<script type="text/babel" src="app/product.jsx"></script>
+
+<script type="text/babel">
+  const { useState, useEffect } = React;
+
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "theme": "quiet",
+    "wordmark": "slash",
+    "accent": "#9bb7ff",
+    "showGrid": false,
+    "density": "comfy"
+  }/*EDITMODE-END*/;
+
+  // Per-theme accent options (themed swatches)
+  const ACCENT_OPTIONS_BY_THEME = {
+    editorial: ["#d83a1f", "#163a2b", "#0a4f8b", "#7a3b8a"],
+    quiet:     ["#9bb7ff", "#c4ff3d", "#ff7a59", "#d8d2c2"],
+    warm:      ["#e15a2b", "#2f5d3a", "#d9a526", "#7c3aed"],
+  };
+
+  function App() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+    const [view, setView] = useState(() => {
+      const h = (window.location.hash || "").replace("#", "");
+      return ["marketing","dashboard","budget","goals","invest","transactions","onboarding","settings"].includes(h) ? h : "marketing";
+    });
+
+    useEffect(() => {
+      window.location.hash = view;
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }, [view]);
+
+    // Sync hash → state on browser nav
+    useEffect(() => {
+      const onHash = () => {
+        const h = (window.location.hash || "").replace("#", "");
+        if (h && h !== view) setView(h);
+      };
+      window.addEventListener("hashchange", onHash);
+      return () => window.removeEventListener("hashchange", onHash);
+    }, [view]);
+
+    // Apply accent override to theme
+    useEffect(() => {
+      const targets = [document.documentElement, ...document.querySelectorAll("[data-theme]")];
+      // Compute brightness from hex to pick contrasting ink
+      const hex = t.accent.replace("#","");
+      const r = parseInt(hex.slice(0,2),16), g = parseInt(hex.slice(2,4),16), b = parseInt(hex.slice(4,6),16);
+      const luma = (0.299*r + 0.587*g + 0.114*b);
+      const isDark = luma < 150;
+      targets.forEach(el => {
+        el.style.setProperty("--accent", t.accent);
+        el.style.setProperty("--accent-ink", isDark ? "#fbf7f0" : "#1a1612");
+      });
+    }, [t.accent, t.theme]);
+
+    // Apply density
+    useEffect(() => {
+      const map = { compact: 13, regular: 15, comfy: 17 };
+      document.documentElement.style.setProperty("--t-base", (map[t.density] || 15) + "px");
+    }, [t.density]);
+
+    // body data-theme so global pages (onboarding) inherit
+    useEffect(() => {
+      document.body.setAttribute("data-theme", t.theme);
+    }, [t.theme]);
+
+    const goTo = (v) => setView(v);
+
+    let screen;
+    if (view === "marketing") {
+      screen = <MarketingPage goTo={goTo} theme={t.theme} setTheme={(v)=>setTweak("theme", v)} wordmark={t.wordmark} setWordmark={(v)=>setTweak("wordmark", v)}/>;
+    } else if (view === "onboarding") {
+      screen = <OnboardingView goTo={goTo} wordmark={t.wordmark}/>;
+    } else {
+      const screenMap = {
+        dashboard: <Dashboard/>,
+        budget: <BudgetView/>,
+        goals: <GoalsView/>,
+        invest: <InvestView/>,
+        transactions: <TransactionsView/>,
+        settings: <SettingsView/>,
+      };
+      screen = (
+        <AppShell goTo={goTo} view={view} theme={t.theme} wordmark={t.wordmark}>
+          {screenMap[view]}
+        </AppShell>
+      );
+    }
+
+    return (
+      <div data-theme={t.theme} key={view} className="route-fade-in" data-screen-label={view}>
+        {screen}
+        <TweaksPanel title="Tweaks">
+          <TweakSection label="Visual direction"/>
+          <TweakRadio label="Theme" value={t.theme} options={["editorial","quiet","warm"]} onChange={(v)=>{
+            setTweak("theme", v);
+            // reset accent to that theme's first option so colors stay coherent
+            setTweak("accent", ACCENT_OPTIONS_BY_THEME[v][0]);
+          }}/>
+          <TweakColor label="Accent" value={t.accent} options={ACCENT_OPTIONS_BY_THEME[t.theme]} onChange={(v)=>setTweak("accent", v)}/>
+
+          <TweakSection label="Brand"/>
+          <TweakRadio label="Wordmark" value={t.wordmark} options={["kanji","slash","plain"]} onChange={(v)=>setTweak("wordmark", v)}/>
+
+          <TweakSection label="Density"/>
+          <TweakRadio label="Type scale" value={t.density} options={["compact","regular","comfy"]} onChange={(v)=>setTweak("density", v)}/>
+
+          <TweakSection label="Navigate"/>
+          <TweakSelect label="Screen" value={view} options={[
+            ["marketing","Marketing site"],
+            ["onboarding","Onboarding"],
+            ["dashboard","Dashboard"],
+            ["budget","Budget"],
+            ["goals","Goals"],
+            ["invest","Invest"],
+            ["transactions","Activity"],
+            ["settings","Settings"],
+          ]} onChange={(v)=>setView(v)}/>
+        </TweaksPanel>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>

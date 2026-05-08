@@ -1,6 +1,35 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { getProject, type Persona } from '../../data/projects'
 
+function ProcessStep({ step, index }: { step: { step: string; detail: string; image?: string; imageCaption?: string; phase?: string }; index: number }) {
+  return (
+    <div className="flex gap-5">
+      <div className="flex-shrink-0 w-8 h-8 bg-paper border border-border rounded-full flex items-center justify-center text-xs font-semibold text-muted">
+        {index + 1}
+      </div>
+      <div className="flex-1">
+        <h3 className="font-semibold text-ink mb-1">{step.step}</h3>
+        <p className="text-muted text-sm leading-relaxed">{step.detail}</p>
+        {step.image && (
+          <figure className="mt-4 rounded-xl overflow-hidden border border-border">
+            <img
+              src={step.image}
+              alt={step.imageCaption ?? step.step}
+              className="w-full object-contain bg-paper"
+              style={{ maxHeight: '520px' }}
+            />
+            {step.imageCaption && (
+              <figcaption className="px-3 py-2.5 bg-paper text-xs text-muted leading-relaxed border-t border-border">
+                {step.imageCaption}
+              </figcaption>
+            )}
+          </figure>
+        )}
+      </div>
+    </div>
+  )
+}
+
 const typeColors: Record<string, string> = {
   'Fintech B2B': 'bg-blue-50 text-blue-700 border-blue-200',
   'Fintech Consumer': 'bg-indigo-50 text-indigo-700 border-indigo-200',
@@ -31,21 +60,21 @@ export default function CaseStudy() {
           <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${colorClass}`}>
             {project.type}
           </span>
-          {project.niche.map(n => (
+          {project.niche.filter(n => n !== project.type).map(n => (
             <span key={n} className="text-xs text-muted">{n}</span>
           ))}
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-ink mb-4">{project.title}</h1>
-        <p className="text-lg text-muted max-w-2xl leading-relaxed mb-8">{project.tagline}</p>
+        <p className="text-lg text-muted leading-relaxed mb-8">{project.tagline}</p>
 
         {/* Hero image */}
         {project.heroImage && (
-          <div className="mb-8 rounded-2xl overflow-hidden border border-border">
+          <div className="mb-8 rounded-2xl overflow-hidden border border-border bg-ink">
             <img
               src={project.heroImage}
               alt={`${project.title} — prototype overview`}
-              className="w-full object-contain bg-paper"
+              className="w-full object-cover"
               style={{ maxHeight: '520px' }}
             />
           </div>
@@ -251,48 +280,47 @@ export default function CaseStudy() {
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">User personas</p>
             <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory">
               {project.personas.map((persona: Persona) => (
-                <div key={persona.name} className="flex-shrink-0 w-72 border border-border rounded-2xl overflow-hidden snap-start">
+                <div key={persona.name} className="flex-shrink-0 w-80 border border-border rounded-2xl overflow-hidden snap-start">
                   {persona.photo && (
-                    <div className="h-44 overflow-hidden bg-paper">
+                    <div className="h-52 overflow-hidden bg-paper">
                       <img
                         src={persona.photo}
                         alt={persona.name}
-                        className="w-full h-full object-cover object-center"
+                        className="w-full h-full object-cover object-top"
                       />
                     </div>
                   )}
-                  <div className="p-6 space-y-4">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">{persona.type}</p>
-                    <h3 className="font-bold text-ink text-lg">{persona.name}, {persona.age}</h3>
-                    <p className="text-muted text-sm mt-1 leading-relaxed">{persona.description}</p>
-                  </div>
-                  <div className="space-y-4 pt-4 border-t border-border">
+                  <div className="p-5 space-y-4">
                     <div>
-                      <p className="text-xs font-semibold text-ink mb-2">Needs</p>
-                      <ul className="space-y-1">
-                        {persona.needs.map(n => (
-                          <li key={n} className="text-sm text-muted flex items-start gap-2">
-                            <span className="text-accent mt-0.5 flex-shrink-0">✓</span>{n}
-                          </li>
-                        ))}
-                      </ul>
+                      <p className="text-xs font-medium uppercase tracking-widest text-muted mb-1">{persona.type}</p>
+                      <h3 className="font-bold text-ink text-base">{persona.name}, {persona.age}</h3>
+                      <p className="text-muted text-sm mt-1 leading-relaxed">{persona.description}</p>
                     </div>
-                    <div>
-                      <p className="text-xs font-semibold text-ink mb-2">Frustrations</p>
-                      <ul className="space-y-1">
-                        {persona.frustrations.map(f => (
-                          <li key={f} className="text-sm text-muted flex items-start gap-2">
-                            <span className="text-rose-400 mt-0.5 flex-shrink-0">✕</span>{f}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="pt-4 border-t border-border space-y-4">
+                      <div>
+                        <p className="text-xs font-semibold text-ink mb-2">Needs</p>
+                        <ul className="space-y-1.5">
+                          {persona.needs.map(n => (
+                            <li key={n} className="flex items-start gap-2 text-sm text-muted">
+                              <span className="text-accent mt-0.5 flex-shrink-0">✓</span>{n}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-ink mb-2">Frustrations</p>
+                        <ul className="space-y-1.5">
+                          {persona.frustrations.map(f => (
+                            <li key={f} className="flex items-start gap-2 text-sm text-muted">
+                              <span className="text-rose-400 mt-0.5 flex-shrink-0">✕</span>{f}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="bg-paper rounded-xl p-3">
+                        <p className="text-sm text-muted italic">"{persona.goal}"</p>
+                      </div>
                     </div>
-                    <div className="bg-paper rounded-xl p-3">
-                      <p className="text-xs font-semibold text-ink mb-1">Goal</p>
-                      <p className="text-sm text-muted italic">"{persona.goal}"</p>
-                    </div>
-                  </div>
                   </div>
                 </div>
               ))}
@@ -306,34 +334,42 @@ export default function CaseStudy() {
         {/* Process */}
         <section>
           <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Design process</p>
-          <div className="space-y-6">
-            {project.process.map((step, i) => (
-              <div key={step.step} className="flex gap-5">
-                <div className="flex-shrink-0 w-8 h-8 bg-paper border border-border rounded-full flex items-center justify-center text-xs font-semibold text-muted">
-                  {i + 1}
+          {(() => {
+            const hasPhases = project.process.some(s => s.phase)
+            if (!hasPhases) {
+              return (
+                <div className="space-y-6">
+                  {project.process.map((step, i) => (
+                    <ProcessStep key={step.step} step={step} index={i} />
+                  ))}
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-ink mb-1">{step.step}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{step.detail}</p>
-                  {step.image && (
-                    <figure className="mt-4 rounded-xl overflow-hidden border border-border">
-                      <img
-                        src={step.image}
-                        alt={step.imageCaption ?? step.step}
-                        className="w-full object-contain bg-paper"
-                        style={{ maxHeight: '520px' }}
-                      />
-                      {step.imageCaption && (
-                        <figcaption className="px-3 py-2.5 bg-paper text-xs text-muted leading-relaxed border-t border-border">
-                          {step.imageCaption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  )}
-                </div>
+              )
+            }
+            // Group by phase, preserving order of first appearance
+            const phases: string[] = []
+            const grouped: Record<string, typeof project.process> = {}
+            project.process.forEach(step => {
+              const p = step.phase ?? 'Other'
+              if (!grouped[p]) { grouped[p] = []; phases.push(p) }
+              grouped[p].push(step)
+            })
+            let globalIndex = 0
+            return (
+              <div className="space-y-10">
+                {phases.map(phase => (
+                  <div key={phase}>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-5 pb-2 border-b border-border">{phase}</p>
+                    <div className="space-y-6">
+                      {grouped[phase].map(step => {
+                        const idx = globalIndex++
+                        return <ProcessStep key={step.step} step={step} index={idx} />
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            )
+          })()}
         </section>
 
         {/* Process artifacts — user flows, audits, component studies */}
@@ -437,28 +473,6 @@ export default function CaseStudy() {
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
 
-        {/* Outcomes — only if present */}
-        {project.outcomes && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Outcomes &amp; impact</p>
-            <p className="text-muted leading-relaxed mb-6">{project.outcomes.summary}</p>
-            <ul className="space-y-3 mb-8">
-              {project.outcomes.keyOutcomes.map(o => (
-                <li key={o} className="flex items-start gap-3 text-sm text-ink">
-                  <span className="w-5 h-5 rounded-full bg-accent-light border border-blue-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-accent text-xs">✓</span>
-                  </span>
-                  {o}
-                </li>
-              ))}
-            </ul>
-            <div className="bg-ink rounded-2xl p-6">
-              <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-3">What I learned</p>
-              <p className="text-paper/80 leading-relaxed">{project.outcomes.learned}</p>
-            </div>
-          </section>
-        )}
-
         {/* Workshop images */}
         {project.workshops && (
           <section>
@@ -506,6 +520,28 @@ export default function CaseStudy() {
                   </figcaption>
                 </figure>
               ))}
+            </div>
+          </section>
+        )}
+
+        {/* Outcomes — only if present */}
+        {project.outcomes && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Outcomes &amp; impact</p>
+            <p className="text-muted leading-relaxed mb-6">{project.outcomes.summary}</p>
+            <ul className="space-y-3 mb-8">
+              {project.outcomes.keyOutcomes.map(o => (
+                <li key={o} className="flex items-start gap-3 text-sm text-ink">
+                  <span className="w-5 h-5 rounded-full bg-accent-light border border-blue-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-accent text-xs">✓</span>
+                  </span>
+                  {o}
+                </li>
+              ))}
+            </ul>
+            <div className="bg-ink rounded-2xl p-6">
+              <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-3">What I learned</p>
+              <p className="text-paper/80 leading-relaxed">{project.outcomes.learned}</p>
             </div>
           </section>
         )}

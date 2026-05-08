@@ -73,7 +73,7 @@ export default function CaseStudy() {
           <div className="mb-8 rounded-2xl overflow-hidden border border-border bg-ink">
             <img
               src={project.heroImage}
-              alt={`${project.title} — prototype overview`}
+              alt={`${project.title}, prototype overview`}
               className="w-full object-cover"
               style={{ maxHeight: '520px' }}
             />
@@ -128,7 +128,7 @@ export default function CaseStudy() {
       {/* Body */}
       <div className="max-w-3xl mx-auto px-6 space-y-16">
 
-        {/* Background — only if extended data present */}
+        {/* Background, only if extended data present */}
         {project.background && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-8">Background &amp; inspiration</p>
@@ -150,7 +150,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Zine inspiration — only if present */}
+        {/* Zine inspiration, only if present */}
         {project.zineInspiration && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">The 8-fold zine</p>
@@ -186,7 +186,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Desk Research — only if present */}
+        {/* Desk Research, only if present */}
         {project.deskResearch && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Discovery</p>
@@ -255,7 +255,7 @@ export default function CaseStudy() {
           </div>
         </section>
 
-        {/* Metrics bar — placed after problem so the numbers have context */}
+        {/* Metrics bar, placed after problem so the numbers have context */}
         <div className="bg-ink rounded-2xl py-8 px-8 -mx-0">
           <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact &amp; outcomes</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -274,7 +274,7 @@ export default function CaseStudy() {
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
         </section>
 
-        {/* Personas — only if present */}
+        {/* Personas, only if present */}
         {project.personas && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">User personas</p>
@@ -372,11 +372,11 @@ export default function CaseStudy() {
           })()}
         </section>
 
-        {/* Process artifacts — user flows, audits, component studies */}
+        {/* Process artifacts, user flows, audits, component studies */}
         {project.processArtifacts && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Discovery — process artifacts</p>
-            <p className="text-sm text-muted mb-6">Visual outputs from the audit and mapping work — user flows, component studies, and redesign proposals.</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Discovery, process artifacts</p>
+            <p className="text-sm text-muted mb-6">Visual outputs from the audit and mapping work, user flows, component studies, and redesign proposals.</p>
             <div className="space-y-4">
               {project.processArtifacts.map((item, i) => (
                 <figure key={i} className="rounded-2xl overflow-hidden border border-border">
@@ -398,7 +398,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Design decisions — only if present */}
+        {/* Design decisions, only if present */}
         {project.designDecisions && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Design decisions</p>
@@ -419,7 +419,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Prototype testing — only if present */}
+        {/* Prototype testing, only if present */}
         {project.testing && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Prototype testing</p>
@@ -497,7 +497,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Gallery — prototype & research images */}
+        {/* Gallery, prototype & research images */}
         {project.gallery && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Prototype &amp; process</p>
@@ -524,7 +524,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Outcomes — only if present */}
+        {/* Outcomes, only if present */}
         {project.outcomes && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Outcomes &amp; impact</p>

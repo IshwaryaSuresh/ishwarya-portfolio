@@ -33,7 +33,7 @@ const PROJECTS: Project[] = [
     client: 'Self-initiated concept',
     year: '2026',
     role: 'UX Designer & Prototype Engineer',
-    desc: 'An AI-assisted budget, index portfolio, and goal tracker in one quiet interface. Three visual directions, fully interactive — from marketing site to onboarding to dashboard.',
+    desc: 'An AI-assisted budget, index portfolio, and goal tracker in one quiet interface. Three visual directions, fully interactive, from marketing site to onboarding to dashboard.',
     tags: ['Fintech Consumer', 'Product design', 'Prototype'],
     image: '/uploads/kaizen/hero.png',
     placeholder: 'Fintech Consumer, personal finance OS',

@@ -113,40 +113,40 @@ export const projects: Project[] = [
     prototype: '/kaizen/Kaizen.html',
     heroImage: '/uploads/kaizen/hero.png',
     background: {
-      understandingNeedsTitle: 'Why consumer fintech is fragmented — and who it fails',
+      understandingNeedsTitle: 'Why consumer fintech is fragmented, and who it fails',
       understandingNeeds: `Consumer fintech is a solved problem in parts. YNAB is the best budgeting tool ever built. Wealthsimple makes index investing frictionless. Monzo has redesigned what a bank account feels like. But none of them talk to each other. A 27-year-old designer in London who budgets in YNAB, invests with Wealthsimple, and tracks a house-deposit goal in a Notes doc is using three tools to do one job: build wealth deliberately. The gap isn't a missing feature. It's a missing product category.`,
       personalDrive: `CreditCraft v1 (now Ledgerline) was a coded prototype. That project proved that building in a real browser surfaces design decisions that Figma lets you defer: typography hierarchy, interaction polish, data coherence. Kaizen applied the same method to a different domain: what does a consumer fintech product look like when it's designed as a coherent system, not assembled from separate tools?`,
-      innovativeMethods: `Audit-first, prototype-last. A competitive audit of four leading tools provided the problem definition. Three personas grounded design decisions in real-cohort behaviour. The coded prototype was built to explore what connecting budget, goals, and investing feels like as a single interface — not to assert it.`,
+      innovativeMethods: `Audit-first, prototype-last. A competitive audit of four leading tools provided the problem definition. Three personas grounded design decisions in real-cohort behaviour. The coded prototype was built to explore what connecting budget, goals, and investing feels like as a single interface, not to assert it.`,
     },
-    problem: `Freya, 27. Junior product designer. Three apps open: YNAB for budget tracking, a Wealthsimple ISA she opened eighteen months ago and hasn't touched since, and a Notes doc where she tracks her Tokyo trip goal. None of them talk to each other. She knows she should be investing more. She doesn't know how much she can afford. She's not going to open a fourth app to find out.\n\nHow might we design a personal finance OS that treats money as a long-term practice — not a daily anxiety — and gives users budget, goals, and auto-investing in one quiet, confident interface?`,
-    insight: `After mapping onboarding and primary flows across four leading tools, the pattern was consistent: each one optimises for a single job. YNAB is the best budgeting tool in the world — and completely blind to investing. Wealthsimple handles portfolios beautifully — with no visibility into your rent. The gap isn't a missing feature. It's that no product connects the three financial practices into one coherent ledger. Users who want all three either use three apps, or give up on one of them.`,
+    problem: `Freya, 27. Junior product designer. Three apps open: YNAB for budget tracking, a Wealthsimple ISA she opened eighteen months ago and hasn't touched since, and a Notes doc where she tracks her Tokyo trip goal. None of them talk to each other. She knows she should be investing more. She doesn't know how much she can afford. She's not going to open a fourth app to find out.\n\nHow might we design a personal finance OS that treats money as a long-term practice, not a daily anxiety, and gives users budget, goals, and auto-investing in one quiet, confident interface?`,
+    insight: `After mapping onboarding and primary flows across four leading tools, the pattern was consistent: each one optimises for a single job. YNAB is the best budgeting tool in the world, and completely blind to investing. Wealthsimple handles portfolios beautifully, with no visibility into your rent. The gap isn't a missing feature. It's that no product connects the three financial practices into one coherent ledger. Users who want all three either use three apps, or give up on one of them.`,
     deskResearch: {
       summary: `Competitive audit of four leading consumer fintech products: Wealthsimple, Betterment, YNAB, and Monzo Investments. Mapped onboarding flows, primary navigation, data architecture, and visual identity for each. Identified the shared failure pattern driving the project brief.`,
       stats: [
-        { value: '4', label: 'Apps audited — Wealthsimple, Betterment, YNAB, Monzo Investments' },
+        { value: '4', label: 'Apps audited, Wealthsimple, Betterment, YNAB, Monzo Investments' },
         { value: '0/4', label: 'Products that connect budget, goals, and investing in one interface' },
         { value: '3', label: 'Visual directions explored before narrowing to the Quiet Premium theme' },
         { value: '12', label: 'Primary user flows mapped across the four audited products' },
       ],
       findings: [
-        'YNAB is the most powerful budgeting tool in the category — and has zero investing functionality. Users who invest separately carry permanent cognitive overhead across two completely disconnected tools.',
-        'Wealthsimple\'s goal-setting is disconnected from spending. You can create a "house deposit" goal, but the app has no visibility into your actual budget or monthly savings rate — the goal is decorative.',
+        'YNAB is the most powerful budgeting tool in the category, and has zero investing functionality. Users who invest separately carry permanent cognitive overhead across two completely disconnected tools.',
+        'Wealthsimple\'s goal-setting is disconnected from spending. You can create a "house deposit" goal, but the app has no visibility into your actual budget or monthly savings rate, the goal is decorative.',
         'Betterment (US) is the closest to a unified product, but goal-based investing has no connection to a budget view. Users can\'t see how their discretionary spending affects their auto-invest capacity.',
         'Monzo Investments is passive-first and deliberately lightweight: three ETF baskets, no goals, no budget integration, no meaningful data density for users who want visibility into their financial position.',
-        'All four products have coherent visual identities — but none look like they were designed for someone who takes their finances seriously. YNAB\'s colour-coding reads as gamification; Monzo feels like a bank extension, not a financial product built for intelligent adults.',
+        'All four products have coherent visual identities, but none look like they were designed for someone who takes their finances seriously. YNAB\'s colour-coding reads as gamification; Monzo feels like a bank extension, not a financial product built for intelligent adults.',
       ],
-      gap: 'All four tools solve one job well. None of them connect budget, goals, and investing into a single coherent practice. A user who wants all three either manages three apps — or quietly abandons the one that matters most.',
+      gap: 'All four tools solve one job well. None of them connect budget, goals, and investing into a single coherent practice. A user who wants all three either manages three apps, or quietly abandons the one that matters most.',
     },
     personas: [
       {
         name: 'Freya Walsh',
         age: 27,
         type: 'The Passive Investor',
-        description: 'Junior product designer at a London agency. Earns £42k. Has YNAB but abandoned it after three weeks — too granular for how she actually thinks about money. Has a Wealthsimple ISA she opened after a podcast and hasn\'t touched in 18 months. Tracks a Tokyo trip goal in a Notes doc.',
+        description: 'Junior product designer at a London agency. Earns £42k. Has YNAB but abandoned it after three weeks, too granular for how she actually thinks about money. Has a Wealthsimple ISA she opened after a podcast and hasn\'t touched in 18 months. Tracks a Tokyo trip goal in a Notes doc.',
         needs: [
           'One place that shows her full financial picture without requiring a spreadsheet',
-          'Auto-invest she can configure once and forget — she doesn\'t want to think about it weekly',
-          'A product that feels designed, not fintech-ified — she\'ll abandon anything that looks like a bank',
+          'Auto-invest she can configure once and forget, she doesn\'t want to think about it weekly',
+          'A product that feels designed, not fintech-ified, she\'ll abandon anything that looks like a bank',
         ],
         frustrations: [
           'Switching between three apps to construct a picture she can never quite see',
@@ -159,35 +159,35 @@ export const projects: Project[] = [
         name: 'Marcus Osei',
         age: 31,
         type: 'The Data-Hungry Saver',
-        description: 'Software engineer. Earns £78k. Saves inconsistently — good months and bad months, no system. Uses Monzo as his main account, has a S&S ISA from 2022 he hasn\'t added to. Budgets by checking his balance every few days. Has no idea what his net worth actually is.',
+        description: 'Software engineer. Earns £78k. Saves inconsistently, good months and bad months, no system. Uses Monzo as his main account, has a S&S ISA from 2022 he hasn\'t added to. Budgets by checking his balance every few days. Has no idea what his net worth actually is.',
         needs: [
           'A single dashboard that calculates net worth automatically across accounts',
-          'Meaningful data density — he\'s technical and wants to see the numbers, not a simplified score',
+          'Meaningful data density, he\'s technical and wants to see the numbers, not a simplified score',
           'Goal-based auto-invest that requires no manual action once configured',
         ],
         frustrations: [
           'Monzo shows transactions but not his portfolio; Wealthsimple shows his portfolio but not his life context',
           'No tool shows him the whole picture in one place',
-          'Budgeting "by feel" works until it doesn\'t — he\'s had three months this year where he saved nothing',
+          'Budgeting "by feel" works until it doesn\'t, he\'s had three months this year where he saved nothing',
         ],
-        goal: '"Tell me my number. Tell me if I\'m behind. Tell me what to do — and then leave me alone."',
+        goal: '"Tell me my number. Tell me if I\'m behind. Tell me what to do, and then leave me alone."',
       },
       {
         name: 'Aisha Patel',
         age: 34,
         type: 'The Paralysed High-Earner',
-        description: 'Senior management consultant. Earns £95k. Saves aggressively — into a 1.5% APY savings account, because she\'s been meaning to move it to a S&S ISA for two years and hasn\'t. Has a Hargreaves Lansdown account she doesn\'t understand how to use. Cares about product quality — she\'ll abandon anything that looks cheap.',
+        description: 'Senior management consultant. Earns £95k. Saves aggressively, into a 1.5% APY savings account, because she\'s been meaning to move it to a S&S ISA for two years and hasn\'t. Has a Hargreaves Lansdown account she doesn\'t understand how to use. Cares about product quality, she\'ll abandon anything that looks cheap.',
         needs: [
-          'Decision-reducing interface — a few portfolio options, not five hundred funds',
+          'Decision-reducing interface, a few portfolio options, not five hundred funds',
           'A product that earns aesthetic trust before it earns financial trust',
           'Clear evidence that her money is growing relative to a goal she actually has',
         ],
         frustrations: [
           'HL feels like 1998. Every robo-advisor marketing site looks identical.',
-          'No product has ever earned her visual trust — and if it doesn\'t look right, she won\'t enter her bank details',
+          'No product has ever earned her visual trust, and if it doesn\'t look right, she won\'t enter her bank details',
           'She knows she\'s losing thousands per year to inflation sitting in a savings account. She still hasn\'t moved it.',
         ],
-        goal: '"Give me one interface that looks like it was designed for someone who cares about quality — and I\'ll actually use it."',
+        goal: '"Give me one interface that looks like it was designed for someone who cares about quality, and I\'ll actually use it."',
       },
     ],
     process: [
@@ -199,22 +199,22 @@ export const projects: Project[] = [
       {
         phase: 'Research & Direction',
         step: 'Persona development',
-        detail: 'Built three composite archetypes from the audit findings and target demographic research: Freya (passive investor, 27), Marcus (data-hungry saver, 31), and Aisha (paralysed high-earner, 34). Each represents a distinct failure mode in existing products — and a distinct design requirement.',
+        detail: 'Built three composite archetypes from the audit findings and target demographic research: Freya (passive investor, 27), Marcus (data-hungry saver, 31), and Aisha (paralysed high-earner, 34). Each represents a distinct failure mode in existing products, and a distinct design requirement.',
       },
       {
         phase: 'Research & Direction',
         step: 'Visual direction exploration',
-        detail: 'Explored three visual directions — Editorial (warm bone + ember red), Quiet Premium (onyx + periwinkle, surgical sans-serif), and Confident Warm (terracotta + sage). Built all three as live, toggleable CSS themes sharing one token contract, so the comparison is interactive rather than static.',
+        detail: 'Explored three visual directions, Editorial (warm bone + ember red), Quiet Premium (onyx + periwinkle, surgical sans-serif), and Confident Warm (terracotta + sage). Built all three as live, toggleable CSS themes sharing one token contract, so the comparison is interactive rather than static.',
       },
       {
         phase: 'Design system',
         step: 'Token architecture',
-        detail: 'Designed a three-theme CSS custom property system covering type scale, spacing, radii, motion, and full surface palettes. Each theme exposes the same variable names — a component written once renders correctly in all three directions without modification.',
+        detail: 'Designed a three-theme CSS custom property system covering type scale, spacing, radii, motion, and full surface palettes. Each theme exposes the same variable names, a component written once renders correctly in all three directions without modification.',
       },
       {
         phase: 'Design system',
         step: 'Component library',
-        detail: 'Built prop-driven atoms in React: Wordmark (3 variants), Money (animated counter), Sparkline, Donut, BarChart, AreaChart, Progress, Avatar, and a 20-icon SVG set. All components consume tokens exclusively — no hardcoded colours anywhere in the codebase.',
+        detail: 'Built prop-driven atoms in React: Wordmark (3 variants), Money (animated counter), Sparkline, Donut, BarChart, AreaChart, Progress, Avatar, and a 20-icon SVG set. All components consume tokens exclusively, no hardcoded colours anywhere in the codebase.',
       },
       {
         phase: 'Product screens',
@@ -223,18 +223,18 @@ export const projects: Project[] = [
       },
       {
         phase: 'Product screens',
-        step: 'Core product — 6 screens',
-        detail: 'Built Dashboard (net worth hero, area chart, spending cards, AI insight — for Marcus\'s "tell me my number" need), Budget (donut + category bars, trend chart — for Freya\'s picture-in-one-place need), Goals, Invest, Transactions, and Settings. Every screen maps to a specific persona need identified in the audit phase.',
+        step: 'Core product, 6 screens',
+        detail: 'Built Dashboard (net worth hero, area chart, spending cards, AI insight, for Marcus\'s "tell me my number" need), Budget (donut + category bars, trend chart, for Freya\'s picture-in-one-place need), Goals, Invest, Transactions, and Settings. Every screen maps to a specific persona need identified in the audit phase.',
       },
       {
         phase: 'Product screens',
         step: '5-step onboarding flow',
-        detail: 'Goal-first onboarding: Welcome → Connect bank → Pick goals → Portfolio selection → Review. Starts with "What are you saving for?" — a question everyone can answer before any commitment is required. Directly counters the audit finding that competitors start with account creation or risk profile questionnaires, which users cited as the moment they abandoned onboarding.',
+        detail: 'Goal-first onboarding: Welcome → Connect bank → Pick goals → Portfolio selection → Review. Starts with "What are you saving for?", a question everyone can answer before any commitment is required. Directly counters the audit finding that competitors start with account creation or risk profile questionnaires, which users cited as the moment they abandoned onboarding.',
       },
       {
         phase: 'Iteration',
         step: 'Live design review',
-        detail: 'Ran a full design review in the browser prototype, applying 15+ iterations: hero viewport fix, accent-colour token correction, font hierarchy audit (removed all italic headings), stats row spacing, nav sizing, and settings card height consistency. All changes made directly in code — no Figma intermediary.',
+        detail: 'Ran a full design review in the browser prototype, applying 15+ iterations: hero viewport fix, accent-colour token correction, font hierarchy audit (removed all italic headings), stats row spacing, nav sizing, and settings card height consistency. All changes made directly in code, no Figma intermediary.',
       },
     ],
     metrics: [
@@ -244,7 +244,7 @@ export const projects: Project[] = [
       { label: 'Prototype fidelity', value: 'Fully interactive in-browser' },
     ],
     solution: `Kaizen is a live, fully interactive personal finance OS prototype. Open it and you get a full marketing site designed to earn Aisha's trust, a goal-first 5-step onboarding built to counter the drop-off pattern in every audited competitor, and six product screens covering every job Marcus and Freya need. All switchable between three visual directions via a floating Tweaks panel. Every screen uses real mocked data and live React components, not static frames.`,
-    takeaway: `Three things I would do next: (1) recruit 5 people from the target cohort and run task-based usability sessions — the onboarding flow and dashboard-first architecture are the highest-risk design hypotheses and need real user validation; (2) design the mobile experience — all screens were built desktop-first, and the budget and goals views need a mobile-native rethink; (3) connect the goals engine to the invest allocation logically, not just visually — the next version would calculate an auto-invest amount from goal target date and current balance automatically. What this project proved: building in code forces design quality that Figma defers. Hierarchy, token coherence, and interaction polish only surface in a real browser.`,
+    takeaway: `Three things I would do next: (1) recruit 5 people from the target cohort and run task-based usability sessions, the onboarding flow and dashboard-first architecture are the highest-risk design hypotheses and need real user validation; (2) design the mobile experience, all screens were built desktop-first, and the budget and goals views need a mobile-native rethink; (3) connect the goals engine to the invest allocation logically, not just visually, the next version would calculate an auto-invest amount from goal target date and current balance automatically. What this project proved: building in code forces design quality that Figma defers. Hierarchy, token coherence, and interaction polish only surface in a real browser.`,
     tags: ['Fintech Consumer', 'Product design', 'React prototype', 'Design tokens', 'Multi-screen', 'Self-initiated'],
     overview: {
       team: 'Solo (design + engineering)',
@@ -254,7 +254,7 @@ export const projects: Project[] = [
     designDecisions: [
       {
         decision: 'Three visual themes sharing one token contract',
-        rationale: 'Freya, Marcus, and Aisha have different aesthetic expectations — and a single visual direction would satisfy one at the expense of the others. Three switchable themes built on one token contract let a stakeholder compare all three positioning options in a live prototype, not a Figma presentation. A single attribute on a wrapper div switches every component simultaneously.',
+        rationale: 'Freya, Marcus, and Aisha have different aesthetic expectations, and a single visual direction would satisfy one at the expense of the others. Three switchable themes built on one token contract let a stakeholder compare all three positioning options in a live prototype, not a Figma presentation. A single attribute on a wrapper div switches every component simultaneously.',
       },
       {
         decision: 'Goal-first onboarding, not account-first',
@@ -266,18 +266,18 @@ export const projects: Project[] = [
       },
       {
         decision: 'All-sans-serif type, weight-only hierarchy',
-        rationale: 'An early iteration used editorial serif and italic headings. Dropped after recognising that bold + italic in the same heading breaks hierarchy — and that Aisha\'s trust threshold is closer to Stripe or Linear than to a financial magazine. Geist throughout, weight as the only hierarchy signal, no italic in any heading anywhere.',
+        rationale: 'An early iteration used editorial serif and italic headings. Dropped after recognising that bold + italic in the same heading breaks hierarchy, and that Aisha\'s trust threshold is closer to Stripe or Linear than to a financial magazine. Geist throughout, weight as the only hierarchy signal, no italic in any heading anywhere.',
       },
     ],
     outcomes: {
       summary: 'A research-informed, fully interactive consumer fintech prototype exploring what a coherent budget + goals + investing OS could look like.',
       keyOutcomes: [
         'Competitive audit of 4 apps (12 flows) surfaced the fragmentation gap that drove the entire design brief',
-        '3 personas grounded every major design decision — goal-first onboarding, dashboard architecture, and visual direction all trace to a specific persona need',
+        '3 personas grounded every major design decision, goal-first onboarding, dashboard architecture, and visual direction all trace to a specific persona need',
         'Three live CSS themes built on one token contract enable stakeholder comparison without rebuilding any UI',
-        'Fully interactive in-browser prototype validates design decisions that Figma prototypes cannot — hierarchy, token coherence, data density, and interaction polish all surface only in a real browser',
+        'Fully interactive in-browser prototype validates design decisions that Figma prototypes cannot, hierarchy, token coherence, data density, and interaction polish all surface only in a real browser',
       ],
-      learned: 'Consumer fintech\'s problem isn\'t missing features. Every tool is missing the same thing: the conviction that connecting budget, goals, and investing into one coherent interface is worth building. This project is a proof of concept that it is — and a method proof that building it in code from the start produces better design decisions than designing in Figma and coding later.',
+      learned: 'Consumer fintech\'s problem isn\'t missing features. Every tool is missing the same thing: the conviction that connecting budget, goals, and investing into one coherent interface is worth building. This project is a proof of concept that it is, and a method proof that building it in code from the start produces better design decisions than designing in Figma and coding later.',
     },
     gallery: [
       { src: '/uploads/kaizen/hero.png', caption: 'Marketing hero: fullscreen editorial layout with live net worth artefact and area chart. Designed to earn Aisha\'s visual trust before asking for financial commitment.', type: 'prototype' },

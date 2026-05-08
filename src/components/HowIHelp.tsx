@@ -20,7 +20,7 @@ const HELP = [
   {
     idx: 'Service 04',
     title: 'Accessibility as Craft',
-    desc: 'WCAG 2.2 is built in from the first wireframe, not bolted on at QA. Proven at scale — WCAG 2.1 AA compliance delivered for 50+ Local Authorities at MHCLG.',
+    desc: 'WCAG 2.2 is built in from the first wireframe, not bolted on at QA. Proven at scale, WCAG 2.1 AA compliance delivered for 50+ Local Authorities at MHCLG.',
     list: ['Colour & contrast', 'Keyboard & focus states', 'Screen-reader testing', 'Cognitive load'],
   },
 ]

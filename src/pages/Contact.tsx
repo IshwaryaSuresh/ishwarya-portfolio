@@ -9,7 +9,7 @@ export default function Contact() {
             <span className="text-accent">something together.</span>
           </h1>
           <p className="text-muted leading-relaxed mb-8">
-            I'm available for freelance projects, consulting engagements, and full-time roles across the Netherlands, UK, Australia, and New Zealand. If you're working on something interesting in fintech, healthcare, or edtech — I'd love to hear about it.
+            I'm available for freelance projects, consulting engagements, and full-time roles across the Netherlands, UK, Australia, and New Zealand. If you're working on something interesting in fintech, healthcare, or edtech, I'd love to hear about it.
           </p>
 
           <div className="space-y-6">

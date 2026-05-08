@@ -8,7 +8,7 @@ const experience = [
     location: 'Remote',
     points: [
       'Built lightweight design systems (design tokens, component variants) in Figma with annotated specs and Inspect-ready handoff for developers.',
-      'Embedded accessibility from the start — content design, colour contrast, focus/keyboard states — to WCAG 2.1 AA.',
+      'Embedded accessibility from the start, content design, colour contrast, focus/keyboard states, to WCAG 2.1 AA.',
       'Ran stakeholder & prospective-client interviews, competitive benchmarking, and produced research-driven IA and user flows in Framer.',
       'Led mixed-methods research (interviews, usability tests, surveys, card sorting, tree testing); synthesised with thematic analysis in Dovetail.',
     ],
@@ -52,7 +52,7 @@ const experience = [
     period: 'Feb – Apr 2023',
     location: 'Newcastle, UK',
     points: [
-      'Led research for the Me & You dementia care app — synthesising interviews, field studies, and co-design workshops into actionable design strategies.',
+      'Led research for the Me & You dementia care app, synthesising interviews, field studies, and co-design workshops into actionable design strategies.',
       'Research acknowledged in a paper accepted at ACM CHI 2024 Conference.',
     ],
   },
@@ -80,16 +80,16 @@ export default function About() {
           </div>
           <div className="space-y-4 text-muted leading-relaxed">
             <p>
-              I'm Ishwarya — a UX consultant based between India and the UK with a background in architecture, HCI research, and product design. I blend rigorous research with pragmatic design to move the metrics that actually matter.
+              I'm Ishwarya, a UX consultant based between India and the UK with a background in architecture, HCI research, and product design. I blend rigorous research with pragmatic design to move the metrics that actually matter.
             </p>
             <p>
-              My path has taken me through government services, healthcare startups, fintech concepts, and edtech platforms. That breadth isn't accidental — I believe the best UX practitioners carry patterns across domains that specialists miss.
+              My path has taken me through government services, healthcare startups, fintech concepts, and edtech platforms. That breadth isn't accidental, I believe the best UX practitioners carry patterns across domains that specialists miss.
             </p>
             <p>
               My MSc dissertation at Newcastle University (co-designed ambient air quality sensing) was acknowledged at the <strong className="text-ink">ACM CHI 2024 Conference</strong>. My architecture background gives me an unusual lens on systems, flows, and the relationship between space and behaviour.
             </p>
             <p>
-              I'm currently targeting roles and projects in the <strong className="text-ink">Netherlands, UK, Australia, and New Zealand</strong> — and actively taking on freelance work.
+              I'm currently targeting roles and projects in the <strong className="text-ink">Netherlands, UK, Australia, and New Zealand</strong>, and actively taking on freelance work.
             </p>
             <div className="flex gap-4 pt-2">
               <a
@@ -149,7 +149,7 @@ export default function About() {
             <p className="text-sm text-accent mb-1">Newcastle University</p>
             <p className="text-xs text-muted mb-3">2021 – 2022 · Newcastle upon Tyne, UK</p>
             <p className="text-sm text-muted leading-relaxed">
-              Specialising in Interaction Design, UX Research Methods, and Prototyping. Dissertation on ambient air quality sensing for workplace wellbeing — acknowledged at <strong className="text-ink">ACM CHI 2024</strong>.
+              Specialising in Interaction Design, UX Research Methods, and Prototyping. Dissertation on ambient air quality sensing for workplace wellbeing, acknowledged at <strong className="text-ink">ACM CHI 2024</strong>.
             </p>
           </div>
           <div className="border border-border rounded-2xl p-6">
@@ -157,7 +157,7 @@ export default function About() {
             <p className="text-sm text-accent mb-1">Anna University / IST Chennai</p>
             <p className="text-xs text-muted mb-3">2015 – 2020 · Chennai, India</p>
             <p className="text-sm text-muted leading-relaxed">
-              Five-year professional degree building a foundation in design thinking, sustainable design, and systems-level problem-solving — the lens I apply to every UX challenge.
+              Five-year professional degree building a foundation in design thinking, sustainable design, and systems-level problem-solving, the lens I apply to every UX challenge.
             </p>
           </div>
         </div>

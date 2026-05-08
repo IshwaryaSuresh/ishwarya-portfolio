@@ -111,7 +111,7 @@ export const projects: Project[] = [
     duration: '2026',
     tools: ['Figma', 'React', 'CSS design tokens', 'Claude Design'],
     prototype: '/kaizen/Kaizen.html',
-    heroImage: '/uploads/kaizen/dashboard.png',
+    heroImage: '/uploads/kaizen/hero.png',
     background: {
       understandingNeedsTitle: 'Why consumer fintech is fragmented — and who it fails',
       understandingNeeds: `Consumer fintech is a solved problem in parts. YNAB is the best budgeting tool ever built. Wealthsimple makes index investing frictionless. Monzo has redesigned what a bank account feels like. But none of them talk to each other. A 27-year-old designer in London who budgets in YNAB, invests with Wealthsimple, and tracks a house-deposit goal in a Notes doc is using three tools to do one job: build wealth deliberately. The gap isn't a missing feature. It's a missing product category.`,

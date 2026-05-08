@@ -107,7 +107,7 @@ export const projects: Project[] = [
     type: 'Fintech Consumer',
     featured: true,
     client: 'Self-initiated concept',
-    role: 'UX Designer',
+    role: 'UX Researcher, Product Designer & Prototype Engineer',
     duration: '8 weeks · 2026',
     tools: ['Figma', 'FigJam', 'CSS design tokens'],
     prototype: '/kaizen/Kaizen.html',

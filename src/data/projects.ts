@@ -101,8 +101,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'kaizen',
-    title: 'Kaizen — Personal Finance OS',
-    tagline: 'A research-informed personal finance OS connecting budget, goals, and auto-investing — built as a fully interactive in-browser prototype with three switchable visual directions.',
+    title: 'Kaizen: Personal Finance OS',
+    tagline: 'A research-informed personal finance OS connecting budget, goals, and auto-investing. Fully interactive in-browser prototype with three switchable visual directions.',
     niche: ['Fintech Consumer', 'Product design', 'Prototype engineering'],
     type: 'Fintech Consumer',
     featured: true,
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     background: {
       understandingNeedsTitle: 'Why consumer fintech is fragmented — and who it fails',
       understandingNeeds: `Consumer fintech is a solved problem in parts. YNAB is the best budgeting tool ever built. Wealthsimple makes index investing frictionless. Monzo has redesigned what a bank account feels like. But none of them talk to each other. A 27-year-old designer in London who budgets in YNAB, invests with Wealthsimple, and tracks a house-deposit goal in a Notes doc is using three tools to do one job: build wealth deliberately. The gap isn't a missing feature. It's a missing product category.`,
-      personalDrive: `CreditCraft v1 (now Ledgerline) was a coded prototype. That project proved that building in a real browser surfaces design decisions that Figma lets you defer — typography hierarchy, interaction polish, data coherence. Kaizen applied the same method to a different domain: what does a consumer fintech product look like when it's designed as a coherent system, not assembled from separate tools?`,
+      personalDrive: `CreditCraft v1 (now Ledgerline) was a coded prototype. That project proved that building in a real browser surfaces design decisions that Figma lets you defer: typography hierarchy, interaction polish, data coherence. Kaizen applied the same method to a different domain: what does a consumer fintech product look like when it's designed as a coherent system, not assembled from separate tools?`,
       innovativeMethods: `Audit-first, prototype-last. A competitive audit of four leading tools provided the problem definition. Three personas grounded design decisions in real-cohort behaviour. The coded prototype was built to explore what connecting budget, goals, and investing feels like as a single interface — not to assert it.`,
     },
     problem: `Freya, 27. Junior product designer. Three apps open: YNAB for budget tracking, a Wealthsimple ISA she opened eighteen months ago and hasn't touched since, and a Notes doc where she tracks her Tokyo trip goal. None of them talk to each other. She knows she should be investing more. She doesn't know how much she can afford. She's not going to open a fourth app to find out.\n\nHow might we design a personal finance OS that treats money as a long-term practice — not a daily anxiety — and gives users budget, goals, and auto-investing in one quiet, confident interface?`,
@@ -243,7 +243,7 @@ export const projects: Project[] = [
       { label: 'Product screens designed & built', value: '8 (marketing + 6 product + onboarding)' },
       { label: 'Prototype fidelity', value: 'Fully interactive in-browser' },
     ],
-    solution: `Kaizen is a live, fully interactive personal finance OS prototype. Open it and you get a full marketing site designed to earn Aisha's trust, a goal-first 5-step onboarding built to counter the drop-off pattern in every audited competitor, and six product screens covering every job Marcus and Freya need — all switchable between three visual directions via a floating Tweaks panel. Every screen uses real mocked data and live React components, not static frames.`,
+    solution: `Kaizen is a live, fully interactive personal finance OS prototype. Open it and you get a full marketing site designed to earn Aisha's trust, a goal-first 5-step onboarding built to counter the drop-off pattern in every audited competitor, and six product screens covering every job Marcus and Freya need. All switchable between three visual directions via a floating Tweaks panel. Every screen uses real mocked data and live React components, not static frames.`,
     takeaway: `Three things I would do next: (1) recruit 5 people from the target cohort and run task-based usability sessions — the onboarding flow and dashboard-first architecture are the highest-risk design hypotheses and need real user validation; (2) design the mobile experience — all screens were built desktop-first, and the budget and goals views need a mobile-native rethink; (3) connect the goals engine to the invest allocation logically, not just visually — the next version would calculate an auto-invest amount from goal target date and current balance automatically. What this project proved: building in code forces design quality that Figma defers. Hierarchy, token coherence, and interaction polish only surface in a real browser.`,
     tags: ['Fintech Consumer', 'Product design', 'React prototype', 'Design tokens', 'Multi-screen', 'Self-initiated'],
     overview: {
@@ -258,7 +258,7 @@ export const projects: Project[] = [
       },
       {
         decision: 'Goal-first onboarding, not account-first',
-        rationale: 'The audit finding: every competitor starts with account creation or a risk tolerance questionnaire. Users in the target cohort cited this as the moment they abandoned onboarding — "I don\'t know my risk tolerance, I just want to save for a house." Kaizen starts with "What are you saving for?" — a question Freya, Marcus, and Aisha can all answer before any commitment is required.',
+        rationale: 'The audit finding: every competitor starts with account creation or a risk tolerance questionnaire. Users in the target cohort cited this as the moment they abandoned onboarding: "I don\'t know my risk tolerance, I just want to save for a house." Kaizen starts with "What are you saving for?" A question Freya, Marcus, and Aisha can all answer before any commitment is required.',
       },
       {
         decision: 'Dashboard-first architecture, not transactions-first',
@@ -280,13 +280,13 @@ export const projects: Project[] = [
       learned: 'Consumer fintech\'s problem isn\'t missing features. Every tool is missing the same thing: the conviction that connecting budget, goals, and investing into one coherent interface is worth building. This project is a proof of concept that it is — and a method proof that building it in code from the start produces better design decisions than designing in Figma and coding later.',
     },
     gallery: [
-      { src: '/uploads/kaizen/hero.png', caption: 'Marketing hero — fullscreen editorial layout with live net worth artefact and area chart. Designed to earn Aisha\'s visual trust before asking for financial commitment.', type: 'prototype' },
-      { src: '/uploads/kaizen/dashboard.png', caption: 'Dashboard — net worth hero, dual-series area chart, spending cards, recent activity, and AI insight card. Answers Marcus\'s "tell me my number" need in the first viewport.', type: 'prototype' },
-      { src: '/uploads/kaizen/budget.png', caption: 'Budget — donut summary, 6 category progress bars, 6-month trend chart, and pattern-detected insight card. Freya\'s picture-in-one-place, without the YNAB complexity.', type: 'prototype' },
-      { src: '/uploads/kaizen/goals.png', caption: 'Goals — 6 active goals with progress bars, weekly auto-allocation amounts, and contextual notes. The missing link between Freya\'s Notes doc and her ISA.', type: 'prototype' },
-      { src: '/uploads/kaizen/invest.png', caption: 'Invest — holdings table, allocation donut (80/20), performance cells, and tax-loss harvesting card. Decision-reducing by design: a few clear positions, not 500 fund options.', type: 'prototype' },
-      { src: '/uploads/kaizen/transactions.png', caption: 'Transactions — day-grouped activity feed with summary bar (money in / out / net). Context for the dashboard, not the primary entry point.', type: 'prototype' },
-      { src: '/uploads/kaizen/onboarding.png', caption: 'Onboarding — goal-first 5-step flow. Starts with "What are you saving for?" — countering the account-first pattern that every audited competitor uses and users consistently abandon.', type: 'prototype' },
+      { src: '/uploads/kaizen/hero.png', caption: 'Marketing hero: fullscreen editorial layout with live net worth artefact and area chart. Designed to earn Aisha\'s visual trust before asking for financial commitment.', type: 'prototype' },
+      { src: '/uploads/kaizen/dashboard.png', caption: 'Dashboard: net worth hero, dual-series area chart, spending cards, recent activity, and AI insight card. Answers Marcus\'s "tell me my number" need in the first viewport.', type: 'prototype' },
+      { src: '/uploads/kaizen/budget.png', caption: 'Budget: donut summary, 6 category progress bars, 6-month trend chart, and pattern-detected insight card. Freya\'s picture-in-one-place, without the YNAB complexity.', type: 'prototype' },
+      { src: '/uploads/kaizen/goals.png', caption: 'Goals: 6 active goals with progress bars, weekly auto-allocation amounts, and contextual notes. The missing link between Freya\'s Notes doc and her ISA.', type: 'prototype' },
+      { src: '/uploads/kaizen/invest.png', caption: 'Invest: holdings table, allocation donut (80/20), performance cells, and tax-loss harvesting card. Decision-reducing by design: a few clear positions, not 500 fund options.', type: 'prototype' },
+      { src: '/uploads/kaizen/transactions.png', caption: 'Transactions: day-grouped activity feed with summary bar (money in / out / net). Context for the dashboard, not the primary entry point.', type: 'prototype' },
+      { src: '/uploads/kaizen/onboarding.png', caption: 'Onboarding: goal-first 5-step flow. Starts with "What are you saving for?" Counters the account-first pattern that every audited competitor uses and users consistently abandon.', type: 'prototype' },
     ],
   },
   {

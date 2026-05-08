@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
   },
   {
     num: '02',
-    title: 'Kaizen, Personal Finance OS',
+    title: 'Kaizen: Personal Finance OS',
     client: 'Self-initiated concept',
     year: '2026',
     role: 'UX Designer & Prototype Engineer',

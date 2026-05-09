@@ -141,6 +141,7 @@ export const projects: Project[] = [
       {
         name: 'Freya Walsh',
         age: 27,
+        photo: '/uploads/personas/freya.jpg',
         type: 'The Passive Investor',
         description: 'Junior product designer at a London agency. Earns £42k. Has YNAB but abandoned it after three weeks, too granular for how she actually thinks about money. Has a Wealthsimple ISA she opened after a podcast and hasn\'t touched in 18 months. Tracks a Tokyo trip goal in a Notes doc.',
         needs: [
@@ -158,6 +159,7 @@ export const projects: Project[] = [
       {
         name: 'Marcus Osei',
         age: 31,
+        photo: '/uploads/personas/marcus.jpg',
         type: 'The Data-Hungry Saver',
         description: 'Software engineer. Earns £78k. Saves inconsistently, good months and bad months, no system. Uses Monzo as his main account, has a S&S ISA from 2022 he hasn\'t added to. Budgets by checking his balance every few days. Has no idea what his net worth actually is.',
         needs: [
@@ -175,6 +177,7 @@ export const projects: Project[] = [
       {
         name: 'Aisha Patel',
         age: 34,
+        photo: '/uploads/personas/aisha.jpg',
         type: 'The Paralysed High-Earner',
         description: 'Senior management consultant. Earns £95k. Saves aggressively, into a 1.5% APY savings account, because she\'s been meaning to move it to a S&S ISA for two years and hasn\'t. Has a Hargreaves Lansdown account she doesn\'t understand how to use. Cares about product quality, she\'ll abandon anything that looks cheap.',
         needs: [

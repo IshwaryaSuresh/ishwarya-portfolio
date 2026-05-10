@@ -23,7 +23,7 @@ const PROJECTS: Project[] = [
     role: 'UX Designer & Prototype Engineer',
     desc: 'SME underwriting sandbox for credit analysts. 9 screens, 3 live applicant personas, explainable scoring, and a fully interactive browser prototype.',
     tags: ['Fintech B2B', 'Credit Risk', 'B2B SaaS'],
-    image: '/uploads/ledgerline/mockup.png',
+    image: '/uploads/ledgerline/hero.png',
     placeholder: 'Fintech B2B, SME underwriting',
     slug: 'ledgerline',
   },

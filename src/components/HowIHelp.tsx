@@ -23,6 +23,13 @@ const HELP = [
     desc: 'WCAG 2.2 is built in from the first wireframe, not bolted on at QA. Proven at scale, WCAG 2.1 AA compliance delivered for 50+ Local Authorities at MHCLG.',
     list: ['Colour & contrast', 'Keyboard & focus states', 'Screen-reader testing', 'Cognitive load'],
   },
+  {
+    idx: 'Service 05',
+    title: 'Full-Stack Design Partnership',
+    desc: 'All four disciplines in one engagement. Strategy and discovery to surface the right problem, service design to map the whole journey, interaction design to ship it, and accessibility baked in from day one. This is how complex products get built well — no handoff gaps, no siloed thinking.',
+    list: ['End-to-end discovery & strategy', 'Service blueprints & journey mapping', 'High-fidelity UI & dev handover', 'WCAG 2.2 accessibility throughout'],
+    featured: true,
+  },
 ]
 
 export default function HowIHelp() {
@@ -32,14 +39,14 @@ export default function HowIHelp() {
         <div className="sec-head">
           <div>
             <div className="eyebrow">[ How I can help ]</div>
-            <h2 className="h2">Four ways <span className="accent">to work together.</span></h2>
+            <h2 className="h2">Five ways <span className="accent">to work together.</span></h2>
           </div>
           <div className="sec-head__right">Pick one lane or combine them. Every engagement starts with a focused discovery to make sure we solve the right problem.</div>
         </div>
 
         <div className="help-grid">
           {HELP.map(h => (
-            <div key={h.idx} className="help-card">
+            <div key={h.idx} className={'help-card' + (h.featured ? ' help-card--featured' : '')}>
               <div className="help-card__idx">{h.idx}</div>
               <div className="help-card__title">{h.title}</div>
               <div className="help-card__desc">{h.desc}</div>

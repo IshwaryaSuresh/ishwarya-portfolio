@@ -6,7 +6,7 @@ const MARQUEE_ITEMS = [
 ]
 const track = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
 
-// Slowly drifting gradient orbs — aurora effect
+// Slowly drifting gradient orbs aurora effect
 const ORBS = [
   { bx: 0.18, by: 0.35, ax: 0.14, ay: 0.12, wx: 0.00038, wy: 0.00032, px: 0.0, py: 1.2, r: 0.62, h: 168, s: 68, l: 46, a: 0.13 },
   { bx: 0.72, by: 0.55, ax: 0.16, ay: 0.15, wx: 0.00029, wy: 0.00041, px: 2.1, py: 0.7, r: 0.70, h: 82,  s: 72, l: 53, a: 0.09 },

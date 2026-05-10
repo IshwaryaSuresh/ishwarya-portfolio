@@ -171,7 +171,7 @@ export const projects: Project[] = [
               { label: 'Budget / invest link', score: 'none' },
               { label: 'Design maturity', score: 'full' },
             ],
-            gap: 'Goal-setting is disconnected from spending. No budget visibility, no savings rate. You can create a "house deposit" goal — the app just has no idea if you can afford it.',
+            gap: 'Goal-setting is disconnected from spending. No budget visibility, no savings rate. You can create a "house deposit" goal, but the app has no idea if you can afford it.',
           },
           {
             name: 'Betterment',
@@ -197,7 +197,7 @@ export const projects: Project[] = [
               { label: 'Budget / invest link', score: 'none' },
               { label: 'Design maturity', score: 'partial' },
             ],
-            gap: 'Three ETF baskets, no goals, no budget integration, no data density. Feels like a bank extension — not a financial product built for someone who takes money seriously.',
+            gap: 'Three ETF baskets, no goals, no budget integration, no data density. Feels like a bank extension, not a financial product built for someone who takes money seriously.',
           },
         ],
       },
@@ -311,8 +311,8 @@ export const projects: Project[] = [
       { label: 'Product screens designed', value: '8 (marketing + onboarding + 6 product)' },
       { label: 'Design decisions traced to research', value: 'Every one' },
     ],
-    solution: `Kaizen is a fully designed personal finance OS. A full marketing site built to earn Aisha's trust, a goal-first 5-step onboarding that counters the drop-off pattern in every audited competitor, and six product screens covering every job Marcus and Freya need. Three visual directions — Editorial, Quiet Premium, and Confident Warm — each explored as complete design languages before narrowing.`,
-    takeaway: `Three things I would do next: (1) recruit 5 people from the target cohort and run task-based usability sessions — the onboarding flow and dashboard-first architecture are the highest-risk design hypotheses; (2) design the mobile experience — all screens were designed desktop-first, and the budget and goals views need a mobile-native layout rethink; (3) connect the goals engine to the invest allocation — the next iteration would calculate an auto-invest amount from goal target date and current balance, making the connection between saving and investing visible in the UI.`,
+    solution: `Kaizen is a fully designed personal finance OS. A full marketing site built to earn Aisha's trust, a goal-first 5-step onboarding that counters the drop-off pattern in every audited competitor, and six product screens covering every job Marcus and Freya need. Three visual directions (Editorial, Quiet Premium, and Confident Warm) each explored as complete design languages before narrowing.`,
+    takeaway: `Three things I would do next: (1) recruit 5 people from the target cohort and run task-based usability sessions: the onboarding flow and dashboard-first architecture are the highest-risk design hypotheses; (2) design the mobile experience: all screens were designed desktop-first, and the budget and goals views need a mobile-native layout rethink; (3) connect the goals engine to the invest allocation: the next iteration would calculate an auto-invest amount from goal target date and current balance, making the connection between saving and investing visible in the UI.`,
     tags: ['Fintech Consumer', 'Product design', 'Visual design', 'Design system', 'Multi-screen', 'Self-initiated'],
     overview: {
       team: 'Solo designer',
@@ -322,7 +322,7 @@ export const projects: Project[] = [
     designDecisions: [
       {
         decision: 'Three visual directions explored as complete design languages',
-        rationale: 'Freya, Marcus, and Aisha have different aesthetic expectations, and committing to one direction too early would have satisfied one persona at the expense of the others. Designing Editorial, Quiet Premium, and Confident Warm as complete, switchable design languages — not just colour swaps — forced each direction to stand on its own before a choice was made.',
+        rationale: 'Freya, Marcus, and Aisha have different aesthetic expectations, and committing to one direction too early would have satisfied one persona at the expense of the others. Designing Editorial, Quiet Premium, and Confident Warm as complete, switchable design languages (not just colour swaps) forced each direction to stand on its own before a choice was made.',
       },
       {
         decision: 'Goal-first onboarding, not account-first',
@@ -341,8 +341,8 @@ export const projects: Project[] = [
       summary: 'A research-informed, fully interactive consumer fintech prototype exploring what a coherent budget + goals + investing OS could look like.',
       keyOutcomes: [
         'Competitive audit of 4 apps (12 flows) surfaced the fragmentation gap that drove the entire design brief',
-        '3 personas grounded every major design decision — goal-first onboarding, dashboard architecture, and visual direction all trace to a specific persona need',
-        'Three complete visual directions explored before committing — each one pressure-tested as a full design language, not a colour swap',
+        '3 personas grounded every major design decision: goal-first onboarding, dashboard architecture, and visual direction all trace to a specific persona need',
+        'Three complete visual directions explored before committing; each one pressure-tested as a full design language, not a colour swap',
         'Every screen maps to a specific research finding; no design decision is arbitrary',
       ],
       learned: 'Consumer fintech\'s problem isn\'t missing features. Every tool is missing the same thing: the conviction that connecting budget, goals, and investing into one coherent visual and interaction language is worth designing. This project is the proof of concept.',

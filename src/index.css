@@ -164,11 +164,20 @@ body.hero-light .hero {
   color: var(--ink);
 }
 
+.hero__aurora {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
 .hero__grid {
   position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
+  z-index: 1;
   mask-image: radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%);
 }
 body.hero-light .hero__grid {
@@ -180,10 +189,10 @@ body.hero-light .hero__grid {
   width: 380px; height: 380px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(0,128,128,0.28), transparent 70%);
+  background: radial-gradient(circle, rgba(0,128,128,0.22), transparent 70%);
   transform: translate(-50%, -50%);
   transition: opacity .3s;
-  z-index: 1;
+  z-index: 3;
   mix-blend-mode: screen;
 }
 body.hero-light .hero__cursor {

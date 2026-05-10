@@ -1,5 +1,72 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { getProject, type Persona } from '../../data/projects'
+import { getProject, type Persona, type Project } from '../../data/projects'
+
+type CompetitiveTool = NonNullable<NonNullable<Project['deskResearch']>['competitiveAudit']>['tools'][number]
+
+function CompetitiveMatrix({ tools }: { tools: CompetitiveTool[] }) {
+  const features = tools[0]?.features.map(f => f.label) ?? []
+
+  const scoreConfig = {
+    full:    { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200', icon: '✓', label: 'Yes' },
+    partial: { bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-amber-200',   icon: '◐', label: 'Partial' },
+    none:    { bg: 'bg-rose-50',    text: 'text-rose-600',    border: 'border-rose-200',    icon: '✕', label: 'No' },
+  }
+
+  return (
+    <div className="mb-8">
+      <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-5">Competitive audit</p>
+
+      {/* Matrix table */}
+      <div className="overflow-x-auto rounded-2xl border border-border mb-5">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-paper border-b border-border">
+              <th className="text-left px-5 py-4 text-xs font-semibold text-muted uppercase tracking-wide w-40">Capability</th>
+              {tools.map(t => (
+                <th key={t.name} className="px-4 py-4 text-center min-w-[130px]">
+                  <div className="font-bold text-ink text-sm leading-tight">{t.name}</div>
+                  <div className="text-xs text-muted font-normal mt-0.5">{t.category}</div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {features.map((feat, fi) => (
+              <tr key={feat} className="border-b border-border last:border-0 even:bg-paper/40">
+                <td className="px-5 py-3.5 text-xs font-medium text-muted whitespace-nowrap">{feat}</td>
+                {tools.map(t => {
+                  const score = t.features[fi]?.score ?? 'none'
+                  const c = scoreConfig[score]
+                  return (
+                    <td key={t.name} className="px-4 py-3.5 text-center">
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${c.bg} ${c.text} ${c.border}`}>
+                        <span>{c.icon}</span>
+                        <span>{c.label}</span>
+                      </span>
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Tool verdict cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {tools.map(t => (
+          <div key={t.name} className="bg-paper border border-border rounded-xl p-4">
+            <div className="flex items-baseline gap-2 mb-1.5">
+              <span className="font-bold text-ink text-sm">{t.name}</span>
+              <span className="text-xs text-accent font-medium">{t.verdict}</span>
+            </div>
+            <p className="text-xs text-muted leading-relaxed">{t.gap}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function ProcessStep({ step, index }: { step: { step: string; detail: string; image?: string; imageCaption?: string; phase?: string }; index: number }) {
   return (
@@ -202,15 +269,20 @@ export default function CaseStudy() {
               ))}
             </div>
 
-            {/* Findings list */}
-            <ul className="space-y-3 mb-6">
-              {project.deskResearch.findings.map((f, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-muted">
-                  <span className="w-5 h-5 rounded-full bg-paper border border-border flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-semibold text-ink">{i + 1}</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
+            {/* Competitive audit matrix (if present) or plain findings list */}
+            {project.deskResearch.competitiveAudit
+              ? <CompetitiveMatrix tools={project.deskResearch.competitiveAudit.tools} />
+              : (
+                <ul className="space-y-3 mb-6">
+                  {project.deskResearch.findings.map((f, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-muted">
+                      <span className="w-5 h-5 rounded-full bg-paper border border-border flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-semibold text-ink">{i + 1}</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
 
             {/* Gap callout */}
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8">

@@ -50,6 +50,15 @@ export type Project = {
     findings: string[]
     gap: string
     books?: { src: string; title: string; author: string; note: string }[]
+    competitiveAudit?: {
+      tools: {
+        name: string
+        category: string
+        verdict: string
+        features: { label: string; score: 'full' | 'partial' | 'none' }[]
+        gap: string
+      }[]
+    }
   }
   zineInspiration?: {
     references: { src: string; caption: string }[]
@@ -136,6 +145,62 @@ export const projects: Project[] = [
         'All four products have coherent visual identities, but none look like they were designed for someone who takes their finances seriously. YNAB\'s colour-coding reads as gamification; Monzo feels like a bank extension, not a financial product built for intelligent adults.',
       ],
       gap: 'All four tools solve one job well. None of them connect budget, goals, and investing into a single coherent practice. A user who wants all three either manages three apps, or quietly abandons the one that matters most.',
+      competitiveAudit: {
+        tools: [
+          {
+            name: 'YNAB',
+            category: 'Budgeting',
+            verdict: 'Best-in-class budgeting',
+            features: [
+              { label: 'Budget view', score: 'full' },
+              { label: 'Goal tracking', score: 'partial' },
+              { label: 'Investing', score: 'none' },
+              { label: 'Budget / invest link', score: 'none' },
+              { label: 'Design maturity', score: 'partial' },
+            ],
+            gap: 'Most powerful budgeting tool in the category. Zero investing functionality. Users who invest separately carry permanent cognitive overhead across two disconnected tools.',
+          },
+          {
+            name: 'Wealthsimple',
+            category: 'Investing',
+            verdict: 'Goals are decorative',
+            features: [
+              { label: 'Budget view', score: 'none' },
+              { label: 'Goal tracking', score: 'partial' },
+              { label: 'Investing', score: 'full' },
+              { label: 'Budget / invest link', score: 'none' },
+              { label: 'Design maturity', score: 'full' },
+            ],
+            gap: 'Goal-setting is disconnected from spending. No budget visibility, no savings rate. You can create a "house deposit" goal — the app just has no idea if you can afford it.',
+          },
+          {
+            name: 'Betterment',
+            category: 'Robo-advisor (US)',
+            verdict: 'Closest to unified, still siloed',
+            features: [
+              { label: 'Budget view', score: 'none' },
+              { label: 'Goal tracking', score: 'full' },
+              { label: 'Investing', score: 'full' },
+              { label: 'Budget / invest link', score: 'partial' },
+              { label: 'Design maturity', score: 'full' },
+            ],
+            gap: 'Closest to a unified product. But goal-based investing has no connection to a budget view. Discretionary spending is invisible to the investment layer.',
+          },
+          {
+            name: 'Monzo',
+            category: 'Banking + Investing',
+            verdict: 'Passive-first, deliberately lightweight',
+            features: [
+              { label: 'Budget view', score: 'partial' },
+              { label: 'Goal tracking', score: 'none' },
+              { label: 'Investing', score: 'partial' },
+              { label: 'Budget / invest link', score: 'none' },
+              { label: 'Design maturity', score: 'partial' },
+            ],
+            gap: 'Three ETF baskets, no goals, no budget integration, no data density. Feels like a bank extension — not a financial product built for someone who takes money seriously.',
+          },
+        ],
+      },
     },
     personas: [
       {

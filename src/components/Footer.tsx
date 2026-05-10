@@ -23,7 +23,6 @@ export default function Footer() {
               <li><a href="https://www.linkedin.com/in/ishwarya-suresh-9123aa135/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
               <li><a href="https://medium.com/@ishwaryasuresh97" target="_blank" rel="noopener noreferrer">Medium</a></li>
               <li><a href="https://read.cv" target="_blank" rel="noopener noreferrer">Read.cv</a></li>
-              <li><a href="https://www.are.na" target="_blank" rel="noopener noreferrer">Are.na</a></li>
             </ul>
           </div>
           <div>

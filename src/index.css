@@ -562,8 +562,12 @@ body.hero-light .marquee {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
-  align-items: start;
+  align-items: stretch;
   margin-bottom: 0;
+}
+.about__left {
+  display: flex;
+  flex-direction: column;
 }
 .about__left h2 {
   font-family: var(--font-display);
@@ -580,7 +584,7 @@ body.hero-light .marquee {
 }
 .about__portrait {
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -590,11 +594,12 @@ body.hero-light .marquee {
   object-fit: cover;
   object-position: center top;
 }
-.about__right p {
-  font-size: 17px;
-  line-height: 1.6;
+.about__left p {
+  font-size: 20px;
+  line-height: 1.65;
   color: rgba(255,255,255,0.7);
-  margin: 0;
+  margin-top: auto;
+  padding-top: 32px;
 }
 .about__body p {
   font-size: 17px;

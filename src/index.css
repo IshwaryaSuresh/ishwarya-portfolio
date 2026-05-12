@@ -672,21 +672,6 @@ body.hero-light .marquee {
   overflow: hidden;
 }
 .help-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-.help-card--featured {
-  grid-column: 1 / -1;
-  background: var(--ink);
-  color: var(--white);
-  border-color: var(--ink);
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 40px;
-}
-.help-card--featured .help-card__idx { color: rgba(255,255,255,0.38); }
-.help-card--featured .help-card__title { color: var(--white); font-size: 34px; min-width: 280px; }
-.help-card--featured .help-card__desc { color: rgba(255,255,255,0.65); flex: 1; }
-.help-card--featured .help-card__list { border-top-color: rgba(255,255,255,0.12); min-width: 280px; }
-.help-card--featured .help-card__list li { color: rgba(255,255,255,0.55); }
-.help-card--featured:hover { border-color: var(--accent); }
 .help-card__idx {
   font-family: var(--font-mono);
   font-size: 11px;

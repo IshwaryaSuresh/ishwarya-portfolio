@@ -31,7 +31,7 @@ export default function NumbersAbout() {
           </div>
           <div className="about__right">
             <div className="about__portrait">
-              <img src="/uploads/portrait-square.jpg" alt="Ishwarya Suresh" />
+              <img src="/uploads/portrait-colour.jpg" alt="Ishwarya Suresh" />
             </div>
           </div>
         </div>

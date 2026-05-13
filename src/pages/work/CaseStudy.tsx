@@ -217,41 +217,6 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Zine inspiration, only if present */}
-        {project.zineInspiration && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">The 8-fold zine</p>
-            <p className="text-muted leading-relaxed mb-8">
-              The 8-fold zine, made from a single sheet of A4 folded into 8 panels, became the structural
-              inspiration for the app's interaction model. Its non-linear, open-ended, low-pressure format
-              aligned closely with how PwD engage: no right answers, no fixed sequence, just prompts
-              that invite participation.
-            </p>
-
-            <div className="grid grid-cols-3 gap-3 mb-8">
-              {project.zineInspiration.references.map((ref, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-40 overflow-hidden bg-paper">
-                    <img src={ref.src} alt={ref.caption} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{ref.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">Zine-inspired prompt cards</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {project.zineInspiration.mockups.map((m, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-36 overflow-hidden bg-paper">
-                    <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{m.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* Desk Research, only if present */}
         {project.deskResearch && (
@@ -544,6 +509,42 @@ export default function CaseStudy() {
           <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The solution</p>
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
+
+        {/* 8-fold zine — output artifact, only if present */}
+        {project.zineInspiration && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Physical output — the 8-fold zine</p>
+            <p className="text-muted leading-relaxed mb-8">
+              Once a session is complete, the app generates a printed template summarising the PwD's recorded story.
+              The carer prints this and turns it into an activity in itself — folding a single A4 sheet into 8 panels
+              to create a small, personal zine. The result is a tangible keepsake the PwD can take with them:
+              their own creative story, made by their own hands, to be cherished.
+            </p>
+
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              {project.zineInspiration.references.map((ref, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-40 overflow-hidden bg-paper">
+                    <img src={ref.src} alt={ref.caption} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{ref.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">Session output templates</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {project.zineInspiration.mockups.map((m, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-36 overflow-hidden bg-paper">
+                    <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{m.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Workshop images */}
         {project.workshops && (

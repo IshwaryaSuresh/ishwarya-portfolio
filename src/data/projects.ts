@@ -1169,7 +1169,7 @@ export const projects: Project[] = [
     role: 'UX Researcher, Product Designer & Prototype Engineer',
     duration: '8 weeks · Jan–Feb 2026',
     tools: ['Dovetail', 'Figma', 'React', 'SVG Charts', 'Affinity Mapping'],
-    prototype: 'http://localhost:8888',
+    prototype: '/ledgerline-prototype/',
     heroImage: '/uploads/ledgerline/hero.png',
     background: {
       understandingNeedsTitle: 'Why SME underwriting is broken - and who it breaks',

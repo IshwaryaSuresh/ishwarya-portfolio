@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Cursor from './components/Cursor'
@@ -10,11 +11,18 @@ import CaseStudy from './pages/work/CaseStudy'
 import { useParallax } from './hooks/useParallax'
 import { useScrollReveal } from './hooks/useScrollReveal'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
+
 function AppInner() {
   useParallax()
   useScrollReveal()
   return (
     <>
+      <ScrollToTop />
       <Cursor />
       <Nav />
       <main>

@@ -37,13 +37,20 @@
   gap: 28px;
   margin-left: 32px;
 }
-.mkt-nav__links a {
+.mkt-nav__links a,
+.mkt-nav__links button {
   font-size: 15px;
   color: var(--ink-2);
   text-decoration: none;
   font-weight: 500;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
 }
-.mkt-nav__links a:hover { color: var(--ink); }
+.mkt-nav__links a:hover,
+.mkt-nav__links button:hover { color: var(--ink); }
 .mkt-nav__actions { margin-left: auto; display: flex; gap: 10px; align-items: center; }
 
 /* ===== HERO — fullscreen editorial ===== */

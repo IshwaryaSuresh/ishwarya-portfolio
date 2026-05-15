@@ -12,7 +12,7 @@ function MarketingPage({ goTo, theme, setTheme, wordmark, setWordmark }) {
   return (
     <div className="mkt" data-theme={theme}>
       <Nav goTo={goTo} wordmark={wordmark} />
-      <Hero theme={theme} />
+      <Hero theme={theme} goTo={goTo} />
       <ProductPreview goTo={goTo} theme={theme}/>
       <FeatureGrid theme={theme}/>
       <NumbersBand />
@@ -41,10 +41,10 @@ function Nav({ goTo, wordmark }) {
           <Wordmark size={26} variant={wordmark}/>
         </button>
         <nav className="mkt-nav__links">
-          <a href="#product">Product</a>
-          <a href="#how">How it works</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#security">Security</a>
+          <button onClick={() => goTo("dashboard")}>Dashboard</button>
+          <button onClick={() => goTo("budget")}>Budget</button>
+          <button onClick={() => goTo("goals")}>Goals</button>
+          <button onClick={() => goTo("invest")}>Invest</button>
         </nav>
         <div className="mkt-nav__actions">
           <button className="btn btn--ghost btn--sm" onClick={() => goTo("dashboard")}>Sign in</button>
@@ -56,7 +56,7 @@ function Nav({ goTo, wordmark }) {
 }
 
 /* ----- HERO ----- */
-function Hero({ theme }) {
+function Hero({ theme, goTo }) {
   return (
     <section className="hero">
       <div className="hero__bg">
@@ -83,8 +83,8 @@ function Hero({ theme }) {
           </p>
 
           <div className="hero__cta">
-            <button className="btn btn--accent btn--lg">Open an account <Icon name="arrow" size={16}/></button>
-            <button className="btn btn--ghost btn--lg">Watch the 90-second tour ↗</button>
+            <button className="btn btn--accent btn--lg" onClick={() => goTo("onboarding")}>Open an account <Icon name="arrow" size={16}/></button>
+            <button className="btn btn--ghost btn--lg" onClick={() => goTo("dashboard")}>Watch the 90-second tour ↗</button>
           </div>
 
           <div className="hero__stats">

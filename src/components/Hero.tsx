@@ -145,7 +145,7 @@ export default function Hero() {
         <span />
       </div>
 
-      <div className="marquee">
+      <div className="marquee" aria-hidden="true">
         <div className="marquee__track">
           {track.map((t, i) => (
             <span key={i} className="marquee__item">{t}</span>

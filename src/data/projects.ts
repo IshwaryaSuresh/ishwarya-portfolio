@@ -1095,14 +1095,14 @@ export const projects: Project[] = [
       },
       {
         step: 'Prototype Iteration',
-        detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on usability testing with 8 office professionals. A weekly summary view was added in response to direct participant feedback.',
+        detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on usability testing with 5 office professionals. A weekly summary view was added in response to direct participant feedback.',
         image: '/uploads/Accord/D4d99d38-ee26-40da-9462-ad6d685dbaa3@4x.png',
         imageCaption: 'Paper prototype cards - hand-drawn screens from the first iteration round, testing layout, navigation flow, and notification opt-in before moving to digital hi-fidelity.',
       },
     ],
     testing: {
-      description: 'Testing was conducted with 8 office professionals. Sessions combined task-based evaluation of the companion app prototype with observational notes on ActuAir device interaction.',
-      participants: '8 office professionals',
+      description: 'Testing was conducted with 5 office professionals. Sessions combined task-based evaluation of the companion app prototype with observational notes on ActuAir device interaction.',
+      participants: '5 office professionals',
       questions: [
         'Does the ambient display make users more aware of air quality without disrupting their work?',
         'Does positive framing ("reset" vs. "alert") affect willingness to act on suggestions?',
@@ -1130,7 +1130,7 @@ export const projects: Project[] = [
     metrics: [
       { label: 'Took at least one air quality action', value: '100%' },
       { label: 'Reported increased IAQ awareness', value: '50%' },
-      { label: 'Usability test participants', value: '8' },
+      { label: 'Usability test participants', value: '5' },
       { label: 'Published at', value: 'ACM CHI 2024' },
     ],
     solution: `A companion app designed to extend the ActuAir ambient display's feedback into personalised, actionable suggestions - built on the principle of voluntary engagement. The app explains why air quality is poor, frames responses positively, and surfaces information only when users choose to look, not through interruptions. Paired with the shape-changing device, it forms a two-layer ambient system: passive peripheral awareness via the physical display, and on-demand context via the digital companion.`,
@@ -1139,7 +1139,7 @@ export const projects: Project[] = [
       keyOutcomes: [
         'Research accepted at ACM CHI 2024 - one of the most competitive venues in HCI, with a ~25% acceptance rate',
         '2 co-design sessions conducted with office professionals, generating validated design principles',
-        '8 usability test participants - 100% took at least one air quality action prompted by the device',
+        '5 usability test participants - 100% took at least one air quality action prompted by the device',
         'Prototype iterated twice based on direct participant feedback, adding a weekly summary view',
         'Validated a transferable principle: ambient technology is most effective when users author their own interpretation of feedback signals',
       ],

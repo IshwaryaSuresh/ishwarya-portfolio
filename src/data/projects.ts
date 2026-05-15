@@ -60,6 +60,7 @@ export type Project = {
       }[]
     }
   }
+  wip?: string
   zineInspiration?: {
     references: { src: string; caption: string }[]
     mockups: { src: string; caption: string }[]
@@ -120,6 +121,7 @@ export const projects: Project[] = [
     duration: '8 weeks · 2026',
     tools: ['Figma', 'FigJam', 'CSS design tokens'],
     prototype: '/kaizen/Kaizen.html',
+    wip: 'Mobile app version in progress',
     heroImage: '/uploads/kaizen/hero.png',
     background: {
       understandingNeedsTitle: 'Why consumer fintech is fragmented, and who it fails',

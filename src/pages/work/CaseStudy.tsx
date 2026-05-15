@@ -510,13 +510,13 @@ export default function CaseStudy() {
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
 
-        {/* 8-fold zine — output artifact, only if present */}
+        {/* 8-fold zine - output artifact, only if present */}
         {project.zineInspiration && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Physical output — the 8-fold zine</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Physical output - the 8-fold zine</p>
             <p className="text-muted leading-relaxed mb-8">
               Once a session is complete, the app generates a printed template summarising the PwD's recorded story.
-              The carer prints this and turns it into an activity in itself — folding a single A4 sheet into 8 panels
+              The carer prints this and turns it into an activity in itself - folding a single A4 sheet into 8 panels
               to create a small, personal zine. The result is a tangible keepsake the PwD can take with them:
               their own creative story, made by their own hands, to be cherished.
             </p>

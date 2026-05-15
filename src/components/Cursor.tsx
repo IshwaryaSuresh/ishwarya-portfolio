@@ -33,7 +33,7 @@ export default function Cursor() {
     const onOver = (e: MouseEvent) => {
       const t = e.target as Element | null
       if (!t) return
-      const interactive = t.closest("a, button, input, textarea, [role='button'], .faq__q, .proj-row, .proj-card, .help-card, .journal-card")
+      const interactive = t.closest("a, button, input, textarea, [role='button'], .faq__q")
       document.body.classList.toggle('cursor-hover', !!interactive)
     }
     const onLeave = () => document.body.classList.remove('cursor-ready')

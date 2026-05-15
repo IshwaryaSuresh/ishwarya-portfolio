@@ -119,21 +119,25 @@ export default function CaseStudy() {
     <article className="pt-28 pb-20">
       {/* Header */}
       <div className="max-w-6xl mx-auto px-6 mb-12">
-        <a href="/#work" className="text-sm text-muted hover:text-accent transition-colors flex items-center gap-1 mb-8">
-          ← Back to work
+        <a href="/#work" className="font-mono text-xs uppercase tracking-widest text-muted hover:text-accent transition-colors inline-flex items-center gap-2 mb-10">
+          <span>←</span> Back to work
         </a>
 
-        <div className="flex items-center gap-3 mb-4">
-          <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${colorClass}`}>
+        <div className="flex items-center gap-3 mb-5 font-mono text-[11px] tracking-widest uppercase text-muted">
+          <span className="inline-flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
             {project.type}
           </span>
           {project.niche.filter(n => n !== project.type).map(n => (
-            <span key={n} className="text-xs text-muted">{n}</span>
+            <span key={n} className="text-muted">· {n}</span>
           ))}
         </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold text-ink mb-4">{project.title}</h1>
-        <p className="text-lg text-muted leading-relaxed mb-8">{project.tagline}</p>
+        <h1 className="font-display font-normal text-ink mb-5 leading-[0.95] tracking-tight"
+            style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}>
+          {project.title}
+        </h1>
+        <p className="text-lg md:text-xl text-muted leading-relaxed mb-10 max-w-3xl">{project.tagline}</p>
 
         {/* Hero image */}
         {project.heroImage && (

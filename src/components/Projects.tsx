@@ -8,6 +8,7 @@ type Project = {
   year: string
   role: string
   desc: string
+  metric: string
   tags: string[]
   image?: string
   placeholder: string
@@ -22,6 +23,7 @@ const PROJECTS: Project[] = [
     year: '2026',
     role: 'UX Designer & Prototype Engineer',
     desc: 'SME underwriting sandbox for credit analysts. 9 screens, 3 live applicant personas, explainable scoring, and a fully interactive browser prototype.',
+    metric: '9 screens · 3 personas · live prototype',
     tags: ['Fintech B2B', 'Credit Risk', 'B2B SaaS'],
     image: '/uploads/ledgerline/hero.png',
     placeholder: 'Fintech B2B, SME underwriting',
@@ -34,6 +36,7 @@ const PROJECTS: Project[] = [
     year: '2026',
     role: 'UX Designer & Prototype Engineer',
     desc: 'An AI-assisted budget, index portfolio, and goal tracker in one quiet interface. Three visual directions, fully interactive, from marketing site to onboarding to dashboard.',
+    metric: '3 visual systems · onboarding → dashboard',
     tags: ['Fintech Consumer', 'Product design', 'Prototype'],
     image: '/uploads/kaizen/hero.png',
     placeholder: 'Fintech Consumer, personal finance OS',
@@ -46,6 +49,7 @@ const PROJECTS: Project[] = [
     year: '2024',
     role: 'Research + UX',
     desc: 'Companion interactions for people living with dementia and their carers. A year of co-design, 28 participants, 3 piloted prototypes.',
+    metric: '28 participants · 3 piloted prototypes',
     tags: ['Healthcare', 'Research', 'Co-design'],
     image: '/uploads/me-and-you/prototype-multi.png',
     placeholder: 'Healthcare, dementia companion',
@@ -58,6 +62,7 @@ const PROJECTS: Project[] = [
     year: '2023',
     role: 'Product Designer',
     desc: 'An enterprise approvals tool used by 3 UK regulators. Re-architected the review flow; approval turnaround dropped 62%.',
+    metric: '−62% approval turnaround · 3 UK regulators',
     tags: ['Enterprise', 'SaaS'],
     image: '/uploads/Accord/Phone%20mockup_3@4x.png',
     placeholder: 'Enterprise, Accord SaaS',
@@ -70,6 +75,7 @@ const PROJECTS: Project[] = [
     year: '2023',
     role: 'UX + Content',
     desc: 'A high-fidelity prototype guiding 8.4m daily riders through a simplified contactless sign-up journey.',
+    metric: '8.4M daily riders · conversion-focused',
     tags: ['Public sector', 'Conversion'],
     image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/mockup.png',
     placeholder: 'Transit, TFL campaign',
@@ -90,7 +96,10 @@ function ProjectRow({ p, onHover, onLeave, index }: { p: Project; onHover: (p: P
       onMouseLeave={p.slug ? onLeave : undefined}
     >
       <div className="proj-row__num">{p.num}</div>
-      <div className="proj-row__title">{p.title}</div>
+      <div className="proj-row__title">
+        {p.title}
+        <div className="proj-row__metric">{p.metric}</div>
+      </div>
       <div className="proj-row__desc">{p.desc}</div>
       <div className="proj-row__tags">
         {p.tags.map(t => <span key={t} className="proj-row__tag">{t}</span>)}

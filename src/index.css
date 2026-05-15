@@ -307,6 +307,35 @@ body.cursor-hover .cursor-ring {
 }
 body.cursor-hover .cursor-dot { opacity: 0; }
 
+/* ─── Keyboard focus styles (visible only for keyboard users) ─── */
+:focus { outline: none; }
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.proj-row:focus-visible,
+.faq__q:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* On the dark hero/about/work sections, brighter teal works better */
+.hero a:focus-visible,
+.hero button:focus-visible,
+.about a:focus-visible,
+.about button:focus-visible,
+.work a:focus-visible,
+.work button:focus-visible,
+.footer a:focus-visible,
+.brief a:focus-visible,
+.brief button:focus-visible,
+.brief input:focus-visible,
+.brief textarea:focus-visible,
+.nav__drawer a:focus-visible {
+  outline-color: var(--teal-300);
+}
+
 .parallax { will-change: transform; }
 
 .hero__top {
@@ -495,6 +524,15 @@ body.hero-light .marquee {
   line-height: 1.05;
   letter-spacing: -0.02em;
   transition: color .3s;
+}
+.proj-row__metric {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 8px;
+  font-weight: 500;
 }
 .proj-row:hover .proj-row__title { color: var(--accent); }
 .proj-row__desc {

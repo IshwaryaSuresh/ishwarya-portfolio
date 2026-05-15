@@ -4,15 +4,19 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans:    ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Instrument Serif"', '"Times New Roman"', 'serif'],
+        mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       colors: {
-        ink: '#111111',
-        paper: '#F7F6F3',
-        muted: '#6B7280',
-        accent: '#1D4ED8',
-        'accent-light': '#EFF6FF',
-        border: '#E5E7EB',
+        // Aligned with src/index.css design tokens
+        ink:           '#0D0D0D',
+        paper:         '#FAFAFA',
+        muted:         '#666666',
+        accent:        '#008080',
+        'accent-light':'#C2FFFF',
+        'accent-soft': '#61C0C0',
+        border:        '#E6E6E6',
       },
     },
   },

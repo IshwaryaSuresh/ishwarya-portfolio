@@ -1142,3 +1142,34 @@ body.hero-light .marquee {
   .footer__top { grid-template-columns: 1fr 1fr; }
   .footer__mega { font-size: clamp(60px, 14vw, 200px); }
 }
+
+/* ─── Scroll Reveal System ─────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+[data-reveal="up"]    { transform: translateY(52px); filter: blur(3px); }
+[data-reveal="left"]  { transform: translateX(-48px); filter: blur(3px); }
+[data-reveal="right"] { transform: translateX(48px); filter: blur(3px); }
+[data-reveal="scale"] { transform: scale(0.92) translateY(24px); filter: blur(3px); }
+[data-reveal="fade"]  { }
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+  filter: blur(0px);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}

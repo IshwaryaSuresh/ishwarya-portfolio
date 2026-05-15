@@ -79,10 +79,12 @@ const PROJECTS: Project[] = [
 
 type View = 'list' | 'grid'
 
-function ProjectRow({ p, onHover, onLeave }: { p: Project; onHover: (p: Project, e: React.MouseEvent) => void; onLeave: () => void }) {
+function ProjectRow({ p, onHover, onLeave, index }: { p: Project; onHover: (p: Project, e: React.MouseEvent) => void; onLeave: () => void; index: number }) {
   const inner = (
     <div
       className="proj-row"
+      data-reveal="up"
+      data-delay={index * 80}
       onMouseEnter={p.slug ? (e) => onHover(p, e) : undefined}
       onMouseMove={p.slug ? (e) => onHover(p, e) : undefined}
       onMouseLeave={p.slug ? onLeave : undefined}
@@ -101,9 +103,9 @@ function ProjectRow({ p, onHover, onLeave }: { p: Project; onHover: (p: Project,
   return p.slug ? <Link to={`/work/${p.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>{inner}</Link> : inner
 }
 
-function ProjectCard({ p }: { p: Project }) {
+function ProjectCard({ p, index }: { p: Project; index: number }) {
   const inner = (
-    <div className="proj-card">
+    <div className="proj-card" data-reveal="scale" data-delay={index * 80}>
       <div className="proj-card__media">
         {p.image
           ? <img src={p.image} alt={p.title} />
@@ -139,10 +141,10 @@ export default function Projects() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow">[ Selected work ]</div>
-            <h2 className="h2">Selected <span className="accent">work.</span></h2>
+            <div className="eyebrow" data-reveal="up">[ Selected work ]</div>
+            <h2 className="h2" data-reveal="up" data-delay="80">Selected <span className="accent">work.</span></h2>
           </div>
-          <div className="sec-head__right">
+          <div className="sec-head__right" data-reveal="up" data-delay="160">
             <div style={{ marginBottom: 12 }}>Six briefs across fintech, edtech, healthcare and public sector. Full case studies on request.</div>
             <div className="projects__view-toggle">
               <button className={view === 'list' ? 'is-active' : ''} onClick={() => setView('list')}>List</button>
@@ -153,13 +155,13 @@ export default function Projects() {
 
         {view === 'list' ? (
           <div className="proj-list">
-            {PROJECTS.map(p => (
-              <ProjectRow key={p.num} p={p} onHover={onHover} onLeave={onLeave} />
+            {PROJECTS.map((p, i) => (
+              <ProjectRow key={p.num} p={p} index={i} onHover={onHover} onLeave={onLeave} />
             ))}
           </div>
         ) : (
           <div className="proj-grid">
-            {PROJECTS.map(p => <ProjectCard key={p.num} p={p} />)}
+            {PROJECTS.map((p, i) => <ProjectCard key={p.num} p={p} index={i} />)}
           </div>
         )}
       </div>

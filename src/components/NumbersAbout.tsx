@@ -25,26 +25,26 @@ export default function NumbersAbout() {
       <div ref={ref as React.RefObject<HTMLDivElement>} className="about" data-parallax="0.04">
         <div className="about__top">
           <div className="about__left">
-            <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }}>[ About the studio ]</div>
-            <h2>A product designer <span className="accent-teal">made for humans.</span></h2>
-            <p>I'm a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, I now work with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
+            <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }} data-reveal="left">[ About the studio ]</div>
+            <h2 data-reveal="left" data-delay="100">A product designer <span className="accent-teal">made for humans.</span></h2>
+            <p data-reveal="left" data-delay="200">I'm a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, I now work with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
           </div>
           <div className="about__right">
-            <div className="about__portrait">
+            <div className="about__portrait" data-reveal="right">
               <img src="/uploads/portrait-colour.jpg" alt="Ishwarya Suresh" />
             </div>
           </div>
         </div>
 
         <div className="stats">
-          <Stat target={5} suffix="+" label="Years practising" start={inView} />
-          <Stat target={50} suffix="+" label="Local Authorities served (WCAG AA)" start={inView} />
-          <Stat target={20} suffix="%" label="Course completion lift" start={inView} />
+          <div data-reveal="up" data-delay="0"><Stat target={5} suffix="+" label="Years practising" start={inView} /></div>
+          <div data-reveal="up" data-delay="100"><Stat target={50} suffix="+" label="Local Authorities served (WCAG AA)" start={inView} /></div>
+          <div data-reveal="up" data-delay="200"><Stat target={20} suffix="%" label="Course completion lift" start={inView} /></div>
         </div>
 
         <div className="about__pillars">
-          {PILLARS.map(p => (
-            <div key={p.n} className="pillar">
+          {PILLARS.map((p, i) => (
+            <div key={p.n} className="pillar" data-reveal="up" data-delay={i * 80}>
               <div className="pillar__n">{p.n}</div>
               <div className="pillar__t">{p.t}</div>
               <div className="pillar__d">{p.d}</div>

@@ -80,10 +80,10 @@ export default function Journal() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow">[ Design Journal ]</div>
-            <h2 className="h2">The Design <span className="accent">Journal.</span></h2>
+            <div className="eyebrow" data-reveal="up">[ Design Journal ]</div>
+            <h2 className="h2" data-reveal="up" data-delay="80">The Design <span className="accent">Journal.</span></h2>
           </div>
-          <div className="sec-head__right">
+          <div className="sec-head__right" data-reveal="up" data-delay="160">
             Essays on research, craft, and the occasional rant. Published on Medium.
             <div style={{ marginTop: 12 }}>
               <a href="https://medium.com/@ishwaryasuresh97" target="_blank" rel="noopener noreferrer" className="mono" style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>All articles on Medium →</a>
@@ -93,8 +93,8 @@ export default function Journal() {
 
         {/* Featured 3 */}
         <div className="journal-grid">
-          {featured.map(a => (
-            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-card journal-card--link">
+          {featured.map((a, i) => (
+            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-card journal-card--link" data-reveal="up" data-delay={i * 100}>
               <div className="journal-card__cat">{a.cat}</div>
               <div className="journal-card__meta">
                 <span>{a.date}</span>
@@ -108,8 +108,8 @@ export default function Journal() {
 
         {/* Remaining as compact list */}
         <div className="journal-list">
-          {rest.map(a => (
-            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-list__item">
+          {rest.map((a, i) => (
+            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-list__item" data-reveal="up" data-delay={i * 60}>
               <span className="journal-list__cat">{a.cat}</span>
               <span className="journal-list__title">{a.title}</span>
               <span className="journal-list__date">{a.date}</span>

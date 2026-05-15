@@ -8,9 +8,11 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import CaseStudy from './pages/work/CaseStudy'
 import { useParallax } from './hooks/useParallax'
+import { useScrollReveal } from './hooks/useScrollReveal'
 
 function AppInner() {
   useParallax()
+  useScrollReveal()
   return (
     <>
       <Cursor />

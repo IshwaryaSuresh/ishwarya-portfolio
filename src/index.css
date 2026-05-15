@@ -1143,6 +1143,43 @@ body.hero-light .marquee {
   .footer__mega { font-size: clamp(60px, 14vw, 200px); }
 }
 
+/* ─── Hero Scroll-Progress Effects ────────────────────── */
+/* --p is set by JS: 0 at top, 1 when scrolled ~55% of hero height */
+.hero__main {
+  transform: translateY(calc(var(--p, 0) * -72px));
+  opacity: calc(1 - var(--p, 0) * 1.7);
+  will-change: transform, opacity;
+}
+.hero__top {
+  opacity: calc(1 - var(--p, 0) * 2);
+}
+
+/* Scroll hint — bouncing dot at bottom of hero */
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  opacity: calc(1 - var(--p, 0) * 3);
+  transition: opacity 0.2s;
+}
+.hero__scroll-hint span {
+  display: block;
+  width: 1.5px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+  margin: 0 auto;
+  animation: scrollDrop 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transform-origin: top;
+}
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); opacity: 0; transform-origin: top; }
+  30%  { opacity: 1; }
+  70%  { transform: scaleY(1); opacity: 1; transform-origin: top; }
+  100% { transform: scaleY(1); opacity: 0; transform-origin: bottom; }
+}
+
 /* ─── Scroll Reveal System ─────────────────────────────── */
 [data-reveal] {
   opacity: 0;

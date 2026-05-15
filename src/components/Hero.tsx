@@ -17,6 +17,7 @@ const ORBS = [
 export default function Hero() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
 
   // Aurora canvas animation
   useEffect(() => {
@@ -60,6 +61,27 @@ export default function Hero() {
     }
   }, [])
 
+  // Scroll progress — drives headline fade/lift and scroll hint opacity
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+    let raf: number | null = null
+
+    const tick = () => {
+      const h = hero.offsetHeight
+      const p = Math.min(window.scrollY / (h * 0.55), 1)
+      hero.style.setProperty('--p', p.toFixed(4))
+      raf = null
+    }
+    tick()
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick) }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
   // Cursor follow
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -83,7 +105,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="hero">
+    <section className="hero" ref={heroRef}>
       <canvas ref={canvasRef} className="hero__aurora" />
       <div className="hero__grid" data-parallax="-0.08" />
       <div className="hero__cursor" ref={cursorRef} style={{ opacity: 0 }} />
@@ -103,20 +125,24 @@ export default function Hero() {
       </div>
 
       <div className="hero__meta">
-        <div className="cell">
+        <div className="cell" data-reveal="up" data-delay="800">
           <div className="lbl">[ Studio ]</div>
           <div className="val">An independent UX consultancy delivering product design, service design, and accessibility for public sector, healthcare, edtech, and startups. Remote worldwide.</div>
         </div>
-        <div className="cell">
+        <div className="cell" data-reveal="up" data-delay="950">
           <div className="lbl">[ Now ]</div>
           <div className="val">Taking briefs in product design, strategy &amp; discovery, service design, and WCAG 2.2 accessibility. Previously at MHCLG.</div>
         </div>
-        <div className="cell" style={{ alignSelf: 'end' }}>
+        <div className="cell" style={{ alignSelf: 'end' }} data-reveal="up" data-delay="1100">
           <div className="hero__actions">
             <a href="#work" className="btn-primary">See selected work →</a>
             <a href="#brief" className="btn-ghost">Send a brief</a>
           </div>
         </div>
+      </div>
+
+      <div className="hero__scroll-hint" aria-hidden="true">
+        <span />
       </div>
 
       <div className="marquee">

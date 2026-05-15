@@ -149,6 +149,73 @@ body.hero-light .nav__inner {
 }
 .nav__cta:hover { background: var(--teal-700); }
 
+/* Hamburger button (hidden on desktop) */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0;
+  flex-shrink: 0;
+}
+.nav__burger span {
+  display: block;
+  width: 18px; height: 1.5px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+  transform-origin: center;
+}
+.nav__burger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav__burger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav__drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  background: rgba(13,13,13,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+.nav__drawer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav__drawer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  padding: 80px var(--gutter) 40px;
+  gap: 8px;
+}
+.nav__drawer-link {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 9vw, 56px);
+  color: var(--white);
+  opacity: 0.85;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  transition: opacity .2s, color .2s;
+}
+.nav__drawer-link:hover { opacity: 1; color: var(--teal-300); }
+.nav__drawer-cta {
+  margin-top: 32px;
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
 /* ===== HERO ===== */
 .hero {
   position: relative;
@@ -1120,27 +1187,157 @@ body.hero-light .marquee {
 }
 
 /* ===== RESPONSIVE ===== */
+
+/* ─── Large tablet / compact desktop (≤ 1100px) ─── */
+@media (max-width: 1100px) {
+  .help-grid    { grid-template-columns: repeat(2, 1fr); }
+  .process      { grid-template-columns: repeat(2, 1fr); }
+  .journal-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer__top  { grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 32px; }
+}
+
+/* ─── Tablet portrait (≤ 900px) ─── */
 @media (max-width: 900px) {
-  :root { --gutter: 20px; }
-  .section { padding: 80px 0; }
-  .sec-head { grid-template-columns: 1fr; }
-  .sec-head__right { text-align: left; }
-  .hero__meta { grid-template-columns: 1fr; gap: 24px; }
-  .proj-row { grid-template-columns: 32px 1fr; gap: 12px; padding: 20px 0; }
-  .proj-row__desc, .proj-row__tags, .proj-row__meta { display: none; }
-  .proj-grid, .help-grid, .journal-grid, .process { grid-template-columns: 1fr; }
+  :root { --gutter: 24px; }
+
+  /* Layout */
+  .section       { padding: 80px 0; }
+  .section--tight { padding: 56px 0; }
+  .sec-head      { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+  .sec-head__right { text-align: left; max-width: none; }
+
+  /* Nav — hide links, show hamburger */
+  .nav__links { display: none; }
+  .nav__cta--desktop { display: none; }
+  .nav__burger { display: flex; }
+  .nav__drawer { display: block; }
+  .nav__inner { gap: 16px; padding: 8px 8px 8px 20px; }
+
+  /* Hero */
+  .hero { padding: 120px 0 0; }
+  .hero__display { font-size: clamp(52px, 11vw, 130px); }
+  .hero__meta { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; }
+  .hero__scroll-hint { bottom: 110px; }
+
+  /* Projects */
+  .proj-row { grid-template-columns: 36px 1fr auto; gap: 16px; padding: 22px 0; }
+  .proj-row__desc, .proj-row__tags { display: none; }
+  .proj-grid { grid-template-columns: 1fr; }
+
+  /* About */
+  .about { padding: 48px; border-radius: 24px; }
+  .about__top { grid-template-columns: 1fr; gap: 32px; }
+  .about__portrait { aspect-ratio: 4/3; }
+  .about__left p { font-size: 17px; margin-top: 24px; padding-top: 0; }
+  .about__pillars { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stat__num { font-size: 48px; }
+
+  /* Services */
+  .help-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Process */
+  .process { grid-template-columns: repeat(2, 1fr); }
+
+  /* Testimonial */
+  .quote { padding: 48px 48px 48px 48px; }
+  .quote__body, .quote__attribution { margin-left: 0; }
+  .quote__mark { left: 24px; font-size: 130px; }
+
+  /* FAQ */
+  .faq { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Journal */
+  .journal-grid { grid-template-columns: repeat(2, 1fr); }
   .journal-list__item { grid-template-columns: 80px 1fr 24px; }
   .journal-list__date { display: none; }
-  .about { padding: 40px; border-radius: 20px; }
-  .about__top { grid-template-columns: 1fr; gap: 24px; }
-  .stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .stat__num { font-size: 44px; }
-  .quote { padding: 40px; }
-  .quote__body, .quote__attribution { margin-left: 0; }
-  .faq { grid-template-columns: 1fr; gap: 40px; }
-  .brief { grid-template-columns: 1fr; padding: 40px; }
-  .footer__top { grid-template-columns: 1fr 1fr; }
+
+  /* Brief */
+  .brief { grid-template-columns: 1fr; padding: 48px; }
+
+  /* Footer */
+  .footer__top { grid-template-columns: 1fr 1fr; gap: 40px; }
   .footer__mega { font-size: clamp(60px, 14vw, 200px); }
+}
+
+/* ─── Mobile (≤ 580px) ─── */
+@media (max-width: 580px) {
+  :root { --gutter: 16px; }
+
+  /* Layout */
+  .section       { padding: 60px 0; }
+  .section--tight { padding: 48px 0; }
+  .h2            { font-size: clamp(38px, 9vw, 64px); }
+
+  /* Nav */
+  .nav { top: 12px; }
+  .nav__inner { padding: 8px 8px 8px 16px; gap: 10px; font-size: 13px; }
+  .nav__burger { width: 32px; height: 32px; }
+
+  /* Hero */
+  .hero { padding: 100px 0 0; }
+  .hero__display { font-size: clamp(42px, 13vw, 80px); }
+  .hero__top { display: none; }
+  .hero__main { padding: 40px var(--gutter) 40px; }
+  .hero__meta { padding-bottom: 24px; }
+  .hero__meta .cell .val { font-size: 14px; }
+  .hero__actions { flex-wrap: wrap; gap: 10px; }
+  .hero__scroll-hint { bottom: 96px; }
+  .marquee__item { font-size: 22px; }
+  .marquee__track { gap: 40px; }
+  .marquee__item::after { font-size: 14px; }
+
+  /* Projects */
+  .proj-row { grid-template-columns: 1fr auto; gap: 12px; padding: 18px 0; }
+  .proj-row__num { display: none; }
+  .proj-row__meta { font-size: 10px; }
+  .proj-row__title { font-size: clamp(22px, 5.5vw, 36px); }
+
+  /* About */
+  .about { padding: 28px 20px; border-radius: 20px; }
+  .about__portrait { aspect-ratio: 1/1; }
+  .about__left p { font-size: 15px; }
+  .stats { grid-template-columns: 1fr; gap: 0; border-bottom: none; }
+  .stat { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .stat:last-child { border-bottom: none; }
+  .stat__num { font-size: 52px; }
+  .about__pillars { grid-template-columns: 1fr; }
+  .pillar:nth-child(odd)  { border-right: none; padding-right: 0; }
+  .pillar:nth-child(even) { padding-left: 0; }
+  .pillar { padding: 28px 0; }
+
+  /* Services */
+  .help-grid { grid-template-columns: 1fr; }
+  .help-card { padding: 28px; }
+
+  /* Process */
+  .process { grid-template-columns: 1fr; }
+  .step { min-height: auto; padding: 28px 24px; }
+
+  /* Testimonial */
+  .quote { padding: 28px 24px; border-radius: 20px; }
+  .quote__mark { font-size: 90px; top: 8px; left: 16px; }
+
+  /* FAQ */
+  .faq__q { font-size: 15px; padding: 18px 0; }
+
+  /* Journal */
+  .journal-grid { grid-template-columns: 1fr; }
+  .journal-card--link { padding: 24px 20px; }
+  .journal-list__item { grid-template-columns: 1fr 24px; gap: 12px; }
+  .journal-list__cat { display: none; }
+
+  /* Brief */
+  .brief { padding: 28px 20px; border-radius: 20px; }
+  .brief__row { flex-direction: column; gap: 8px; }
+  .brief__deco { font-size: 200px; }
+
+  /* Footer */
+  .footer { padding: 56px 0 24px; margin-top: 80px; }
+  .footer__top { grid-template-columns: 1fr; gap: 32px; }
+  .footer__brand { font-size: 32px; }
+  .footer__mega { font-size: clamp(44px, 16vw, 120px); padding: 24px 0 0; }
+  .footer__bottom { flex-direction: column; gap: 6px; align-items: flex-start; }
 }
 
 /* ─── Hero Scroll-Progress Effects ────────────────────── */

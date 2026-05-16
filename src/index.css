@@ -783,6 +783,54 @@ body.hero-light .marquee {
   color: var(--accent);
   margin-top: 4px;
 }
+.work-card__cta--locked {
+  color: var(--gray-400);
+}
+
+/* "Coming soon" pill in card eyebrow */
+.work-card__soon {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--gray-100);
+  color: var(--gray-500);
+  padding: 3px 8px;
+  border-radius: 100px;
+  margin-left: 6px;
+}
+
+/* Locked card state — visibly different, non-interactive */
+.work-card--locked {
+  cursor: not-allowed;
+  background: var(--gray-100);
+  opacity: 0.85;
+}
+.work-card--locked:hover {
+  border-color: var(--rule);
+  transform: none;
+  box-shadow: none;
+}
+.work-card--locked:hover .work-card__title {
+  color: var(--ink);
+}
+.work-card--locked .work-card__title {
+  color: var(--gray-700);
+}
+.work-card--locked::after {
+  content: "Coming soon";
+  position: absolute;
+  top: 16px; right: 16px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--white);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.work-card { position: relative; }
 .work-card__metrics {
   display: flex;
   flex-wrap: wrap;

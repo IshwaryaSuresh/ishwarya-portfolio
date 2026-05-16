@@ -112,6 +112,7 @@ export default function CaseStudy() {
   const project = getProject(slug ?? '')
 
   if (!project) return <Navigate to="/work" replace />
+  if (project.comingSoon) return <Navigate to="/work" replace />
 
   const colorClass = typeColors[project.type] ?? 'bg-gray-50 text-gray-600 border-gray-200'
 

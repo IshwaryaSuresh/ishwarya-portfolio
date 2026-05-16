@@ -19,7 +19,7 @@ const PROJECTS: Project[] = [
   {
     num: '01',
     title: 'Ledgerline, B2B Fintech',
-    client: 'Self-initiated (CreditCraft 2.0)',
+    client: 'Self-initiated',
     year: '2026',
     role: 'UX Designer & Prototype Engineer',
     desc: 'SME underwriting sandbox for credit analysts. 9 screens, 3 live applicant personas, explainable scoring, and a fully interactive browser prototype.',

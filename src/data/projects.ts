@@ -16,6 +16,7 @@ export type Project = {
   niche: string[]
   type: 'Social Impact' | 'Fintech B2B' | 'Fintech Consumer' | 'Edtech' | 'Healthcare' | 'Government' | 'Academic'
   featured: boolean
+  comingSoon?: boolean
   client: string
   role: string
   duration: string
@@ -76,39 +77,6 @@ export type Project = {
 }
 
 export const projects: Project[] = [
-  {
-    slug: 'creditcraft',
-    title: 'CreditCraft',
-    tagline: 'Redesigning SME underwriting for fintech lenders - cutting analyst review time by 40% and reducing false rejection rates.',
-    niche: ['Fintech', 'B2B SaaS', 'Credit Risk'],
-    type: 'Fintech B2B',
-    featured: true,
-    client: 'Self-initiated concept',
-    role: 'UX Designer & Researcher (end-to-end)',
-    duration: '2024',
-    tools: ['Figma', 'Figma Make', 'Dovetail'],
-    prototype: 'https://www.figma.com/make/CvT2Ig2yn4ptFNJjX7roV5/CreditCraft-Underwriting-Sandbox',
-    problem: `Traditional SME credit underwriting is opaque, slow, and error-prone. Loan analysts at fintech lenders spend 3–5 hours manually reviewing bank statements, categorising transactions, and building risk narratives - only to reject borderline cases out of caution because the data isn't presented in a way that supports confident decision-making. The result: lenders lose revenue on viable borrowers, and creditworthy SMEs get turned away.\n\nHow might we give credit analysts a tool that surfaces risk signals clearly, explains scoring rationale, and supports faster, fairer decisions?`,
-    insight: `Analysts don't lack data - they lack structure. The tool needed to do the categorisation, surfacing, and explanation work so analysts could focus on judgement, not labour.`,
-    process: [
-      { step: 'Research', detail: 'Desk research synthesising SME lending post-mortems, fintech founder interviews, and FICO/credit scoring literature. Key pain points: manual data extraction, no categorisation logic, black-box scoring, buried risk signals.' },
-      { step: 'Information Architecture', detail: 'Mapped the analyst\'s end-to-end workflow from CSV upload to decision, identifying where friction accumulates across 6 key stages.' },
-      { step: 'Component Design', detail: 'Built a design system with data-dense but scannable components: KPI cards, stacked bar charts, flag badges, and expandable rationale panels.' },
-      { step: 'Explainability Layer', detail: 'Designed an "Explainable Scorecard" with 8 transparent scoring features, each with an expandable rationale panel so analysts can read and defend the logic.' },
-      { step: 'Red Flags Page', detail: 'Dedicated surface for bounced payments, gambling patterns, large cash withdrawals, and low balance alerts with linked transactions.' },
-      { step: 'Rules Editor', detail: 'Gave analysts control to toggle, add, and adjust scoring rule weights - supporting compliance customisation without developer involvement.' },
-      { step: 'Usability Testing', detail: 'Ran 5 task-based tests with users playing the role of credit analysts, iterating on the scorecard layout and flag hierarchy.' },
-    ],
-    metrics: [
-      { label: 'Analyst review time', value: '↓ 40%' },
-      { label: 'False rejection rate (simulated)', value: '↓ 22%' },
-      { label: 'Scorecard comprehension', value: '9/10 "clear" or "very clear"' },
-      { label: 'Task completion rate', value: '94%' },
-    ],
-    solution: `CreditCraft is a 6-page SME underwriting sandbox: Dashboard (CSV upload, KPI cards, cashflow charts), Transactions (sortable, filterable with category badges), Cashflow Analysis (income vs. expense trends, DSCR estimation), Explainable Scorecard (8 transparent features with expandable rationale), Red Flags (dedicated risk surface), and Rules Editor (admin-level scoring logic control).`,
-    takeaway: `Explainability isn't a nice-to-have in fintech - it's a compliance requirement and a trust builder. CreditCraft shows I can design for data-heavy, decision-critical B2B contexts where clarity directly drives revenue.`,
-    tags: ['Fintech', 'B2B', 'SaaS', 'Data Visualisation', 'Usability Testing'],
-  },
   {
     slug: 'kaizen',
     title: 'Kaizen: Personal Finance OS',
@@ -639,6 +607,7 @@ export const projects: Project[] = [
     niche: ['Edtech', 'Accessible Education', 'Social Impact'],
     type: 'Edtech',
     featured: false,
+    comingSoon: true,
     client: 'Self-initiated concept',
     role: 'UX Designer & Researcher (end-to-end)',
     duration: '2024',
@@ -672,6 +641,7 @@ export const projects: Project[] = [
     niche: ['Healthcare', 'Inclusive Design', 'NHS'],
     type: 'Healthcare',
     featured: false,
+    comingSoon: true,
     client: 'Self-initiated concept',
     role: 'UX Designer & Researcher (end-to-end)',
     duration: '2024',
@@ -889,6 +859,7 @@ export const projects: Project[] = [
     niche: ['Government', 'Public Sector', 'Design Sprint'],
     type: 'Government',
     featured: false,
+    comingSoon: true,
     client: 'HM Revenue & Customs',
     role: 'UX Designer (team participant)',
     duration: '5 days (Monday–Friday, structured sprint format)',

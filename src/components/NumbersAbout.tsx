@@ -37,7 +37,7 @@ export default function NumbersAbout() {
         </div>
 
         <div className="stats">
-          <div data-reveal="up" data-delay="0"><Stat target={5} suffix="+" label="Years practising" start={inView} /></div>
+          <div data-reveal="up" data-delay="0"><Stat target={4} suffix="+" label="Years practising" start={inView} /></div>
           <div data-reveal="up" data-delay="100"><Stat target={50} suffix="+" label="Local Authorities served (WCAG AA)" start={inView} /></div>
           <div data-reveal="up" data-delay="200"><Stat target={20} suffix="%" label="Course completion lift" start={inView} /></div>
         </div>

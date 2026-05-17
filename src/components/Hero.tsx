@@ -1,11 +1,5 @@
 import { useRef, useEffect } from 'react'
 
-const MARQUEE_ITEMS = [
-  'Fintech', 'Edtech', 'Healthcare', 'Public sector', 'Architecture',
-  'Service design', 'Product design', 'Strategy & discovery', 'Accessibility', 'GDS standards',
-]
-const track = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
-
 // Typographic mural — words that ACTUALLY describe the practice, drifting
 // at very low opacity behind the headline. Replaces the generic aurora.
 // Hand-placed positions feel intentional, not generative.
@@ -102,11 +96,11 @@ export default function Hero() {
 
       <div className="hero__main">
         <h1 className="hero__display">
-          <span className="hero__line"><span>I'm Ishwarya.</span></span>
-          <span className="hero__line"><span>I make complicated</span></span>
-          <span className="hero__line"><span>services <em className="hero__teal">feel obvious.</em></span></span>
+          <span className="hero__line"><span>I design products</span></span>
+          <span className="hero__line"><span>for fintech, edtech,</span></span>
+          <span className="hero__line"><span>healthcare &amp; <em className="hero__teal">beyond,</em></span></span>
+          <span className="hero__line"><span><em className="hero__teal">made for humans.</em></span></span>
         </h1>
-        <div className="hero__sig" aria-hidden="true">~ made for humans</div>
       </div>
 
       <div className="hero__meta">
@@ -115,7 +109,7 @@ export default function Hero() {
           <div className="val">An independent UX consultancy delivering product design, service design, and accessibility for public sector, healthcare, edtech, and startups. Remote worldwide.</div>
         </div>
         <div className="cell" data-reveal="up" data-delay="950">
-          <div className="lbl">Currently</div>
+          <div className="lbl">Now</div>
           <div className="val">Taking briefs in product design, strategy &amp; discovery, service design, and WCAG 2.2 accessibility. Previously at MHCLG.</div>
         </div>
         <div className="cell" style={{ alignSelf: 'end' }} data-reveal="up" data-delay="1100">
@@ -128,14 +122,6 @@ export default function Hero() {
 
       <div className="hero__scroll-hint" aria-hidden="true">
         <span />
-      </div>
-
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee__track">
-          {track.map((t, i) => (
-            <span key={i} className="marquee__item">{t}</span>
-          ))}
-        </div>
       </div>
     </section>
   )

@@ -3,7 +3,6 @@ dist
 dist-ssr
 *.local
 .DS_Store
-.vercel
 *.fig
 portrait.JPG
 IMG_4433.JPG

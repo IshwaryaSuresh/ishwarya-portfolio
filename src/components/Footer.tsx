@@ -22,7 +22,7 @@ export default function Footer() {
             <ul>
               <li><a href="https://www.linkedin.com/in/ishwarya-suresh-9123aa135/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
               <li><a href="https://medium.com/@ishwaryasuresh97" target="_blank" rel="noopener noreferrer">Medium</a></li>
-              <li><a href="https://read.cv" target="_blank" rel="noopener noreferrer">Read.cv</a></li>
+              <li><a href="/uploads/Ishwarya_Suresh_CV_ATS.pdf" target="_blank" rel="noopener noreferrer">Read CV</a></li>
             </ul>
           </div>
           <div>

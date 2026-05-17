@@ -150,7 +150,7 @@ export default function Projects() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow" data-reveal="up">[ Selected work ]</div>
+            <div className="eyebrow" data-reveal="up">Selected work</div>
             <h2 className="h2" data-reveal="up" data-delay="80">Selected <span className="accent">work.</span></h2>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">

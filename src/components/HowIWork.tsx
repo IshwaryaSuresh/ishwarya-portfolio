@@ -11,7 +11,7 @@ export default function HowIWork() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow">[ How I work ]</div>
+            <div className="eyebrow">How I work</div>
             <h2 className="h2" style={{ color: 'var(--white)' }}>A clear process, <span style={{ color: 'var(--teal-300)' }}>no mystery meat.</span></h2>
           </div>
           <div className="sec-head__right">A predictable cadence from listening to launch, usually 6 to 10 weeks end-to-end.</div>

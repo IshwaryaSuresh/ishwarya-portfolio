@@ -80,7 +80,7 @@ export default function Journal() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow" data-reveal="up">[ Design Journal ]</div>
+            <div className="eyebrow" data-reveal="up">Design journal</div>
             <h2 className="h2" data-reveal="up" data-delay="80">The Design <span className="accent">Journal.</span></h2>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">

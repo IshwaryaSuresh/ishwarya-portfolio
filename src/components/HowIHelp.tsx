@@ -37,7 +37,7 @@ export default function HowIHelp() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow" data-reveal="up">[ How I can help ]</div>
+            <div className="eyebrow" data-reveal="up">How I can help</div>
             <h2 className="h2" data-reveal="up" data-delay="80">Five ways <span className="accent">to work together.</span></h2>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">Pick one lane or combine them. Every engagement starts with a focused discovery to make sure we solve the right problem.</div>

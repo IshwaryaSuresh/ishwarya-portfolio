@@ -6,60 +6,28 @@ const MARQUEE_ITEMS = [
 ]
 const track = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
 
-// Slowly drifting gradient orbs aurora effect
-const ORBS = [
-  { bx: 0.18, by: 0.35, ax: 0.14, ay: 0.12, wx: 0.00038, wy: 0.00032, px: 0.0, py: 1.2, r: 0.62, h: 168, s: 68, l: 46, a: 0.13 },
-  { bx: 0.72, by: 0.55, ax: 0.16, ay: 0.15, wx: 0.00029, wy: 0.00041, px: 2.1, py: 0.7, r: 0.70, h: 82,  s: 72, l: 53, a: 0.09 },
-  { bx: 0.50, by: 0.18, ax: 0.20, ay: 0.16, wx: 0.00025, wy: 0.00035, px: 1.0, py: 3.1, r: 0.58, h: 172, s: 58, l: 40, a: 0.11 },
-  { bx: 0.85, by: 0.78, ax: 0.11, ay: 0.18, wx: 0.00042, wy: 0.00027, px: 4.2, py: 1.5, r: 0.48, h: 155, s: 54, l: 36, a: 0.10 },
+// Typographic mural — words that ACTUALLY describe the practice, drifting
+// at very low opacity behind the headline. Replaces the generic aurora.
+// Hand-placed positions feel intentional, not generative.
+const MURAL: { word: string; top: string; left: string; rot: number; size: number; delay: number }[] = [
+  { word: 'research',         top: '6%',   left: '4%',  rot: -4, size: 120, delay: 0   },
+  { word: 'accessibility',    top: '14%',  left: '58%', rot: 3,  size: 96,  delay: 1.4 },
+  { word: 'service blueprints', top: '28%', left: '70%', rot: -2, size: 72, delay: 2.8 },
+  { word: 'discovery',        top: '46%',  left: '2%',  rot: 5,  size: 110, delay: 4.2 },
+  { word: 'WCAG 2.2',         top: '62%',  left: '74%', rot: -3, size: 100, delay: 5.6 },
+  { word: 'in-sprint',        top: '78%',  left: '8%',  rot: 2,  size: 84,  delay: 7.0 },
+  { word: 'embedded',         top: '82%',  left: '52%', rot: -4, size: 96,  delay: 8.4 },
+  { word: 'co-design',        top: '36%',  left: '36%', rot: 1,  size: 70,  delay: 9.8 },
+  { word: 'usability',        top: '8%',   left: '32%', rot: -2, size: 80,  delay: 11.2 },
+  { word: 'dovetail',         top: '54%',  left: '50%', rot: 4,  size: 86,  delay: 12.6 },
+  { word: 'opportunity maps', top: '70%',  left: '32%', rot: -1, size: 78,  delay: 14.0 },
+  { word: 'GDS',              top: '20%',  left: '85%', rot: 6,  size: 130, delay: 15.4 },
+  { word: 'fintech',          top: '90%',  left: '74%', rot: -5, size: 92,  delay: 16.8 },
 ]
 
 export default function Hero() {
   const cursorRef = useRef<HTMLDivElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
   const heroRef = useRef<HTMLElement>(null)
-
-  // Aurora canvas animation
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    let raf: number
-
-    const resize = () => {
-      canvas.width  = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-    resize()
-    const ro = new ResizeObserver(resize)
-    ro.observe(canvas)
-
-    const draw = (now: number) => {
-      const W = canvas.width, H = canvas.height
-      ctx.clearRect(0, 0, W, H)
-      const dim = Math.max(W, H)
-      for (const o of ORBS) {
-        const x = (o.bx + o.ax * Math.sin(o.wx * now + o.px)) * W
-        const y = (o.by + o.ay * Math.sin(o.wy * now + o.py)) * H
-        const r = o.r * dim
-        const g = ctx.createRadialGradient(x, y, 0, x, y, r)
-        g.addColorStop(0,   `hsla(${o.h},${o.s}%,${o.l}%,${o.a})`)
-        g.addColorStop(0.5, `hsla(${o.h},${o.s}%,${o.l}%,${o.a * 0.4})`)
-        g.addColorStop(1,   `hsla(${o.h},${o.s}%,${o.l}%,0)`)
-        ctx.fillStyle = g
-        ctx.fillRect(0, 0, W, H)
-      }
-      raf = requestAnimationFrame(draw)
-    }
-    raf = requestAnimationFrame(draw)
-
-    return () => {
-      cancelAnimationFrame(raf)
-      ro.disconnect()
-    }
-  }, [])
 
   // Scroll progress - drives headline fade/lift and scroll hint opacity
   useEffect(() => {
@@ -106,7 +74,24 @@ export default function Hero() {
 
   return (
     <section className="hero" ref={heroRef}>
-      <canvas ref={canvasRef} className="hero__aurora" />
+      {/* Typographic mural — replaces the generic aurora */}
+      <div className="hero__mural" aria-hidden="true">
+        {MURAL.map((m, i) => (
+          <span
+            key={i}
+            className="hero__mural-word"
+            style={{
+              top: m.top,
+              left: m.left,
+              fontSize: `${m.size}px`,
+              transform: `rotate(${m.rot}deg)`,
+              animationDelay: `${-m.delay}s`,
+            }}
+          >
+            {m.word}
+          </span>
+        ))}
+      </div>
       <div className="hero__grid" data-parallax="-0.08" />
       <div className="hero__cursor" ref={cursorRef} style={{ opacity: 0 }} />
 
@@ -117,20 +102,20 @@ export default function Hero() {
 
       <div className="hero__main">
         <h1 className="hero__display">
-          <span className="hero__line"><span>I design products</span></span>
-          <span className="hero__line"><span>for fintech, edtech,</span></span>
-          <span className="hero__line"><span>healthcare &amp; <em className="hero__teal">beyond,</em></span></span>
-          <span className="hero__line"><span><em className="hero__teal">made for humans.</em></span></span>
+          <span className="hero__line"><span>I'm Ishwarya.</span></span>
+          <span className="hero__line"><span>I make complicated</span></span>
+          <span className="hero__line"><span>services <em className="hero__teal">feel obvious.</em></span></span>
         </h1>
+        <div className="hero__sig" aria-hidden="true">~ made for humans</div>
       </div>
 
       <div className="hero__meta">
         <div className="cell" data-reveal="up" data-delay="800">
-          <div className="lbl">[ Studio ]</div>
+          <div className="lbl">Studio</div>
           <div className="val">An independent UX consultancy delivering product design, service design, and accessibility for public sector, healthcare, edtech, and startups. Remote worldwide.</div>
         </div>
         <div className="cell" data-reveal="up" data-delay="950">
-          <div className="lbl">[ Now ]</div>
+          <div className="lbl">Currently</div>
           <div className="val">Taking briefs in product design, strategy &amp; discovery, service design, and WCAG 2.2 accessibility. Previously at MHCLG.</div>
         </div>
         <div className="cell" style={{ alignSelf: 'end' }} data-reveal="up" data-delay="1100">

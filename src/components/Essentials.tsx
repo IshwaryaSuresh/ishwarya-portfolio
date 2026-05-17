@@ -18,7 +18,7 @@ export default function Essentials() {
       <div className="container">
         <div className="faq">
           <div className="faq__label">
-            <div className="eyebrow">[ FAQ ]</div>
+            <div className="eyebrow">The essentials</div>
             <h2>The <span className="accent">essentials.</span></h2>
             <p>A clear breakdown of how I work and what to expect when we partner on a brief.</p>
             <a href="#brief" className="btn-primary">Any specific questions? →</a>

@@ -16,7 +16,7 @@ export default function Work() {
         {/* Header */}
         <div className="sec-head" style={{ marginBottom: 40 }}>
           <div>
-            <div className="eyebrow" data-reveal="up">[ Portfolio ]</div>
+            <div className="eyebrow" data-reveal="up">Portfolio</div>
             <h1 className="h2" data-reveal="up" data-delay="80">
               All <span className="accent">work.</span>
             </h1>

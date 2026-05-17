@@ -10,11 +10,11 @@ export default function Footer() {
           <div>
             <h4>Menu</h4>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#work">Projects</a></li>
-              <li><a href="#journal">Articles</a></li>
-              <li><a href="#brief">Contact</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/#about">About</a></li>
+              <li><a href="/work">Projects</a></li>
+              <li><a href="/#journal">Articles</a></li>
+              <li><a href="/#brief">Contact</a></li>
             </ul>
           </div>
           <div>

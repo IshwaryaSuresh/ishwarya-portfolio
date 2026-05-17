@@ -28,10 +28,6 @@ export default function NumbersAbout() {
             <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }} data-reveal="left">About the studio</div>
             <h2 data-reveal="left" data-delay="100">A product designer <span className="accent-teal">made for humans.</span></h2>
             <p data-reveal="left" data-delay="200">I'm a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, I now work with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
-            <div className="about__sig" data-reveal="left" data-delay="280">
-              <span className="about__sig-name">Ishwarya</span>
-              <span className="about__sig-flourish" aria-hidden="true">~</span>
-            </div>
           </div>
           <div className="about__right">
             <div className="about__portrait" data-reveal="right">

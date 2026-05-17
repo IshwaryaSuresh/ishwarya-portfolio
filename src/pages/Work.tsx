@@ -22,7 +22,7 @@ export default function Work() {
             </h1>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">
-            {projects.length} case studies across fintech, healthcare, government, and edtech. Each one shows the full arc — research, decisions, and measurable outcomes.
+            {projects.length} case studies across fintech, healthcare, government, and edtech. Each one shows the full arc: research, decisions, and measurable outcomes.
           </div>
         </div>
 

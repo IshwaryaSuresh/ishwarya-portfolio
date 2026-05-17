@@ -800,7 +800,7 @@ body.hero-light .marquee {
   margin-left: 6px;
 }
 
-/* Locked card state — visibly different, non-interactive */
+/* Locked card state - visibly different, non-interactive */
 .work-card--locked {
   cursor: not-allowed;
   background: var(--gray-100);
@@ -1454,7 +1454,7 @@ body.hero-light .marquee {
   .sec-head      { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
   .sec-head__right { text-align: left; max-width: none; }
 
-  /* Nav — hide links, show hamburger */
+  /* Nav - hide links, show hamburger */
   .nav__links { display: none; }
   .nav__cta--desktop { display: none; }
   .nav__burger { display: flex; }
@@ -1525,7 +1525,7 @@ body.hero-light .marquee {
   .nav__inner { padding: 8px 8px 8px 16px; gap: 10px; font-size: 13px; }
   .nav__burger { width: 44px; height: 44px; }
 
-  /* Hero — put CTA buttons first on mobile so they aren't buried */
+  /* Hero - put CTA buttons first on mobile so they aren't buried */
   .hero__meta { display: flex; flex-direction: column; }
   .hero__meta .cell:last-child { order: -1; }
 
@@ -1611,7 +1611,7 @@ body.hero-light .marquee {
   opacity: calc(1 - var(--p, 0) * 2);
 }
 
-/* Scroll hint — bouncing dot at bottom of hero */
+/* Scroll hint - bouncing dot at bottom of hero */
 .hero__scroll-hint {
   position: absolute;
   bottom: 96px;

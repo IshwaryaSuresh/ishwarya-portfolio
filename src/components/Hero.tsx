@@ -61,7 +61,7 @@ export default function Hero() {
     }
   }, [])
 
-  // Scroll progress — drives headline fade/lift and scroll hint opacity
+  // Scroll progress - drives headline fade/lift and scroll hint opacity
   useEffect(() => {
     const hero = heroRef.current
     if (!hero) return

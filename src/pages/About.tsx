@@ -4,7 +4,7 @@ const experience = [
   {
     role: 'UX Consultant',
     company: 'MadeForHumans',
-    period: 'May 2025 – Present',
+    period: 'May 2025 to Present',
     location: 'Remote',
     points: [
       'Built lightweight design systems (design tokens, component variants) in Figma with annotated specs and Inspect-ready handoff for developers.',
@@ -16,7 +16,7 @@ const experience = [
   {
     role: 'User Researcher',
     company: 'Ministry of Housing, Communities and Local Government',
-    period: 'Jul 2024 – Apr 2025',
+    period: 'Jul 2024 to Apr 2025',
     location: 'Newcastle upon Tyne, UK',
     points: [
       'Led UX strategy for government grants services; achieved WCAG 2.1 AA compliance across 50+ Local Authorities.',
@@ -28,7 +28,7 @@ const experience = [
   {
     role: 'Freelance UX Consultant',
     company: 'Self-employed',
-    period: 'Sep 2023 – Jul 2024',
+    period: 'Sep 2023 to Jul 2024',
     location: 'UK, Remote',
     points: [
       'Led end-to-end product design for a healthcare mobile app; mapped IA and simplified navigation in Figma, resulting in ↑15% engagement.',
@@ -39,7 +39,7 @@ const experience = [
   {
     role: 'UX Designer & Researcher',
     company: 'Novacroft / Transport for London',
-    period: 'Aug – Sep 2023',
+    period: 'Aug to Sep 2023',
     location: 'UK, Remote',
     points: [
       'Led UX for the TfL Care Leaver Oyster Card campaign, focusing on inclusive design for vulnerable groups.',
@@ -49,7 +49,7 @@ const experience = [
   {
     role: 'User Research Intern',
     company: 'Nebula Labs',
-    period: 'Feb – Apr 2023',
+    period: 'Feb to Apr 2023',
     location: 'Newcastle, UK',
     points: [
       'Led research for the Me & You dementia care app, synthesising interviews, field studies, and co-design workshops into actionable design strategies.',
@@ -147,7 +147,7 @@ export default function About() {
           <div className="border border-border rounded-2xl p-6">
             <p className="text-sm font-semibold text-ink">MSc Human-Computer Interaction</p>
             <p className="text-sm text-accent mb-1">Newcastle University</p>
-            <p className="text-xs text-muted mb-3">2021 – 2022 · Newcastle upon Tyne, UK</p>
+            <p className="text-xs text-muted mb-3">2021 to 2022 · Newcastle upon Tyne, UK</p>
             <p className="text-sm text-muted leading-relaxed">
               Specialising in Interaction Design, UX Research Methods, and Prototyping. Dissertation on ambient air quality sensing for workplace wellbeing, acknowledged at <strong className="text-ink">ACM CHI 2024</strong>.
             </p>
@@ -155,7 +155,7 @@ export default function About() {
           <div className="border border-border rounded-2xl p-6">
             <p className="text-sm font-semibold text-ink">B.Arch (Bachelor of Architecture)</p>
             <p className="text-sm text-accent mb-1">Anna University / IST Chennai</p>
-            <p className="text-xs text-muted mb-3">2015 – 2020 · Chennai, India</p>
+            <p className="text-xs text-muted mb-3">2015 to 2020 · Chennai, India</p>
             <p className="text-sm text-muted leading-relaxed">
               Five-year professional degree building a foundation in design thinking, sustainable design, and systems-level problem-solving, the lens I apply to every UX challenge.
             </p>

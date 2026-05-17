@@ -510,7 +510,7 @@ export const projects: Project[] = [
       },
     ],
     testing: {
-      description: 'We tested two paper prototype variants with 10 participants, including 5 people with dementia (supported by carers) and 5 care staff. Sessions lasted approximately 20–30 minutes each.',
+      description: 'We tested two paper prototype variants with 10 participants, including 5 people with dementia (supported by carers) and 5 care staff. Sessions lasted approximately 20-30 minutes each.',
       participants: '5 people with dementia + 5 care staff',
       questions: [
         'Could users understand the prompts without verbal explanation?',
@@ -616,7 +616,7 @@ export const projects: Project[] = [
     problem: `Remote learning platforms promise access but often deliver friction. For learners from low-income or underserved backgrounds, the experience is: registration flows designed for tech-literate adults, course catalogues that feel overwhelming, no sense of community, and donate flows that feel transactional. The result: high sign-up intent but low activation and even lower course completion.\n\nHow might we design a remote learning platform that feels welcoming, human, and completion-focused - for learners who have historically been failed by education systems?`,
     insight: `Completion isn't a content problem - it's a belonging problem. Learners need to feel part of something, not just enrolled in something.`,
     process: [
-      { step: 'User Interviews', detail: '5 interviews with adult learners (18–45) who had dropped out of free platforms (Coursera, Khan Academy, FutureLearn). Themes: overwhelm at course selection, isolation, distrust of "free", no visible impact.' },
+      { step: 'User Interviews', detail: '5 interviews with adult learners (18-45) who had dropped out of free platforms (Coursera, Khan Academy, FutureLearn). Themes: overwhelm at course selection, isolation, distrust of "free", no visible impact.' },
       { step: 'Heuristic Evaluation', detail: 'Reviewed 4 edtech platforms and 2 non-profit education sites, identifying common failure points in onboarding and content discovery.' },
       { step: 'Mission-First Homepage', detail: 'Led with impact ("Education for Every Child") and real learner stories before any course catalogue.' },
       { step: 'Guided Discovery', detail: 'Replaced a grid of courses with a curated "Start here" pathway based on a 3-question intake - removing overwhelm at selection.' },
@@ -650,7 +650,7 @@ export const projects: Project[] = [
     problem: `Missed NHS appointments cost over £1 billion annually. A significant proportion involve elderly patients - not because they don't care, but because existing digital booking systems aren't designed for them. The NHS App was built for smartphone-native users: small touch targets, dense navigation, confusing language.\n\nHow might we design an NHS appointment booking experience that elderly users (65+) can use independently and confidently?`,
     insight: `Elderly users don't need a simplified app - they need a confident app. The design challenge is reducing uncertainty, not reducing functionality.`,
     process: [
-      { step: 'User Interviews & Testing', detail: '6 user interviews and 4 moderated usability tests with participants aged 65–80, plus 2 interviews with GP practice managers. Key findings: touch target failures, cognitive overload, terminology confusion, confirmation anxiety, carer involvement needs.' },
+      { step: 'User Interviews & Testing', detail: '6 user interviews and 4 moderated usability tests with participants aged 65-80, plus 2 interviews with GP practice managers. Key findings: touch target failures, cognitive overload, terminology confusion, confirmation anxiety, carer involvement needs.' },
       { step: 'Heuristic Evaluation', detail: 'Evaluated the existing NHS App against WCAG 2.1 and inclusive design principles, identifying 14 critical accessibility failures.' },
       { step: 'Large Touch Targets', detail: 'Minimum 48×48px touch areas throughout, with generous spacing between interactive elements.' },
       { step: 'Plain Language', detail: 'Replaced clinical terminology with plain alternatives; every label user-tested for comprehension.' },
@@ -671,7 +671,7 @@ export const projects: Project[] = [
   {
     slug: 'tfl',
     title: 'TfL Care Leaver Oyster Card',
-    tagline: 'Inclusive UX for a TfL campaign that extended 50% travel discounts to care leavers aged 18–25, with a focus on dignity, clarity, and adoption.',
+    tagline: 'Inclusive UX for a TfL campaign that extended 50% travel discounts to care leavers aged 18-25, with a focus on dignity, clarity, and adoption.',
     niche: ['Government', 'Inclusive Design', 'Public Sector'],
     type: 'Government',
     featured: false,
@@ -684,7 +684,7 @@ export const projects: Project[] = [
       team: '1 UX Designer (lead), cross-functional collaboration with content, dev, and TfL stakeholders',
       industry: 'Public Sector / Transport',
     },
-    problem: `Care leavers are among the most socioeconomically vulnerable young people in the UK. After leaving the care system at 18, many face significant barriers to employment, education, and independence. In cities where public transport is the only affordable way to get around, access to a travel discount is not a perk: it is a practical lifeline.\n\nTransport for London's Care Leaver Photocard offers 50% off all TfL travel for care leavers aged 18–25. But the existing application journey had a problem: it was unclear, inaccessible in places, and created unnecessary friction for a group that already faces multiple barriers in navigating official processes.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
+    problem: `Care leavers are among the most socioeconomically vulnerable young people in the UK. After leaving the care system at 18, many face significant barriers to employment, education, and independence. In cities where public transport is the only affordable way to get around, access to a travel discount is not a perk: it is a practical lifeline.\n\nTransport for London's Care Leaver Photocard offers 50% off all TfL travel for care leavers aged 18-25. But the existing application journey had a problem: it was unclear, inaccessible in places, and created unnecessary friction for a group that already faces multiple barriers in navigating official processes.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
     insight: `The barriers were systemic, not motivational. Language, document requirements, and mobile accessibility were the three failure points that needed redesigning.`,
     process: [
       {
@@ -739,7 +739,7 @@ export const projects: Project[] = [
       summary: `Before any design work, I mapped the existing user journey and audited it against WCAG 2.1 AA standards. I also reviewed care leaver advocacy reports and comparable application journeys to understand what was failing and for whom.`,
       stats: [
         { value: '80K+', label: 'Young people leaving care in the UK each year' },
-        { value: '50%', label: 'TfL travel discount available to eligible care leavers aged 18–25' },
+        { value: '50%', label: 'TfL travel discount available to eligible care leavers aged 18-25' },
         { value: '7', label: 'Friction points identified in the existing application journey' },
         { value: '3', label: 'WCAG 2.1 AA accessibility issues identified and addressed' },
       ],
@@ -747,12 +747,12 @@ export const projects: Project[] = [
         'The existing flow required users to upload documentation mid-form, at a point where many had already abandoned. Requirements needed to move earlier, not later.',
         'Language used throughout was formal and impersonal ("the applicant must provide…"), which felt distancing for a user group that often has difficult relationships with official institutions.',
         'Several steps had no error states: users who made a mistake received no guidance on how to correct it. This breached WCAG 3.3.1 (Error Identification) and 3.3.3 (Error Suggestion), both Level AA requirements.',
-        'On mobile (the primary device for 18–25 year olds), several interactive elements (including the step indicator and action buttons) were below the 44×44px minimum. This breached WCAG 2.5.5 (Target Size, Level AA).',
+        'On mobile (the primary device for 18-25 year olds), several interactive elements (including the step indicator and action buttons) were below the 44×44px minimum. This breached WCAG 2.5.5 (Target Size, Level AA).',
         'The step indicator used text and position alone to communicate progress, with no icons or non-text cues. This breached WCAG 1.3.3 (Sensory Characteristics, Level A), which requires that instructions not rely solely on shape or position.',
         'Care leavers in unstable or temporary housing had no viable path through the address verification step. It was an invisible exclusion built into the original flow.',
         'Form input fields used generic text inputs throughout, with no fields configured to trigger the appropriate mobile keyboard type. On a smartphone, date fields displayed a full QWERTY keyboard instead of a numeric pad, and email fields offered no shortcut to the @ symbol. These small frictions compound into abandonment for users completing the form on mobile.',
       ],
-      gap: `The existing journey assumed document literacy, stable addresses, digital confidence, and familiarity with bureaucratic systems. The opposite of the profile of most care leavers aged 18–25.`,
+      gap: `The existing journey assumed document literacy, stable addresses, digital confidence, and familiarity with bureaucratic systems. The opposite of the profile of most care leavers aged 18-25.`,
     },
     designDecisions: [
       {
@@ -769,7 +769,7 @@ export const projects: Project[] = [
       },
       {
         decision: 'Optimised for mobile-first interaction',
-        rationale: 'Care leavers aged 18–25 overwhelmingly access services via smartphone. All touch targets were sized to 44px minimum, and form fields were tagged to trigger the correct mobile keyboard type, removing the small frictions that accumulate into abandonment.',
+        rationale: 'Care leavers aged 18-25 overwhelmingly access services via smartphone. All touch targets were sized to 44px minimum, and form fields were tagged to trigger the correct mobile keyboard type, removing the small frictions that accumulate into abandonment.',
       },
     ],
     outcomes: {
@@ -1161,9 +1161,9 @@ export const projects: Project[] = [
         { value: '40%', label: 'Of analyst review time spent on collateral documentation - the gap that made it a first-class screen' },
       ],
       findings: [
-        'Credit officers context-switch between 4–6 tools per application: statement parser, GST lookup, scoring engine, document folder, personal spreadsheet. No tool unifies the workflow.',
+        'Credit officers context-switch between 4-6 tools per application: statement parser, GST lookup, scoring engine, document folder, personal spreadsheet. No tool unifies the workflow.',
         'Explainability is a regulatory requirement. RBI Digital Lending Guidelines (2022) require plain-language rejection reasons; EU AI Act classifies credit scoring as high-risk, requiring human oversight and the ability to contest automated decisions.',
-        'Collateral review consumed 30–45 minutes per application in every session - chasing documents across email threads. No tool surfaces this as a structured workflow.',
+        'Collateral review consumed 30-45 minutes per application in every session - chasing documents across email threads. No tool surfaces this as a structured workflow.',
         'Every competitor tool fails WCAG AA contrast on scorecard visualisations. Red flags are communicated through colour alone - invisible to colour-blind analysts.',
       ],
       gap: 'All existing tools solve data ingestion. None provide a unified, explainable decision workflow where the reasoning behind a score is as visible as the score itself.',
@@ -1174,7 +1174,7 @@ export const projects: Project[] = [
         age: 28,
         photo: '/uploads/personas/ravi.jpg',
         type: 'Junior Credit Analyst',
-        description: '2 years into his first NBFC role, Ravi handles 8–12 applications per day. He\'s fast with spreadsheets but anxious about making a wrong call on a borderline application without senior sign-off.',
+        description: '2 years into his first NBFC role, Ravi handles 8-12 applications per day. He\'s fast with spreadsheets but anxious about making a wrong call on a borderline application without senior sign-off.',
         needs: [
           'Clear guidance on what each screen is asking him to decide',
           'Transparent scoring explanations he can defend in a review meeting',
@@ -1329,11 +1329,11 @@ export const projects: Project[] = [
       },
       {
         decision: 'Dark theme as default, light theme as alternative',
-        rationale: 'Interview finding: credit officers reviewing applications for 5–7 hours a day in office environments strongly prefer dark themes for extended sessions. Dark also makes the WCAG-compliant lime accent pop as a clear action signal. Light theme is available for environments where dark backgrounds are prohibited by institutional IT policy.',
+        rationale: 'Interview finding: credit officers reviewing applications for 5-7 hours a day in office environments strongly prefer dark themes for extended sessions. Dark also makes the WCAG-compliant lime accent pop as a clear action signal. Light theme is available for environments where dark backgrounds are prohibited by institutional IT policy.',
       },
       {
         decision: 'Collateral as a first-class screen, not a metadata field',
-        rationale: 'Interviews showed 30–40% of review time spent chasing collateral documents - yet no existing tool surfaces this as a workflow. This is the feature most likely to be descoped without the research to back it. With the research, it\'s non-negotiable.',
+        rationale: 'Interviews showed 30-40% of review time spent chasing collateral documents - yet no existing tool surfaces this as a workflow. This is the feature most likely to be descoped without the research to back it. With the research, it\'s non-negotiable.',
       },
       {
         decision: 'Applicant-facing explanation scoped out - deliberately',

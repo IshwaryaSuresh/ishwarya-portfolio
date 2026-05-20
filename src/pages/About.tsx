@@ -19,7 +19,7 @@ const experience = [
     period: 'Jul 2024 to Apr 2025',
     location: 'Newcastle upon Tyne, UK',
     points: [
-      'Led UX strategy for government grants services; achieved WCAG 2.1 AA compliance across 50+ Local Authorities.',
+      'Led UX strategy for government grants services; achieved WCAG 2.1 AA compliance across 200+ Local Authorities.',
       'Planned and ran surveys, semi-structured interviews, and moderated usability testing; analysed with thematic analysis and affinity mapping.',
       'Presented insights and service design recommendations to senior stakeholders; influenced product roadmaps with data-informed decisions.',
       'Collaborated within an agile team of service designers, product managers, and developers.',

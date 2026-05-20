@@ -90,8 +90,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'mhclg-grants',
-    title: 'Grants Services for 50+ UK Local Authorities',
-    tagline: 'Research that evidenced WCAG 2.1 AA compliance across 50+ Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
+    title: 'Grants Services for 200+ UK Local Authorities',
+    tagline: 'Research that evidenced WCAG 2.1 AA compliance across 200+ Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
     niche: ['Government', 'GDS', 'Accessibility', 'User Research'],
     type: 'Government',
     featured: true,
@@ -103,7 +103,7 @@ export const projects: Project[] = [
       team: 'Product manager, delivery manager, 2 service designers, interaction designer, content designer, 2 developers, I was the sole researcher on the workstream',
       industry: 'UK Public Sector / GDS-assessed digital services',
     },
-    problem: `Grant officers across more than 50 UK Local Authorities use public-sector services that have to pass the GDS Service Standard. The challenge isn't shipping a feature. It's evidencing, to an assessor's standard, that the service meets Point 1 (Understand users and their needs) and Point 5 (Make sure everyone can use the service), with a research trail an assessor can audit and a service that actually works for assistive-technology users.\n\nHow do we make research strong enough to evidence the Service Standard, accessible enough to land WCAG 2.1 AA, and embedded enough that findings shape design in sprint rather than sit in a report nobody reads?`,
+    problem: `Grant officers across more than 200 UK Local Authorities use public-sector services that have to pass the GDS Service Standard. The challenge isn't shipping a feature. It's evidencing, to an assessor's standard, that the service meets Point 1 (Understand users and their needs) and Point 5 (Make sure everyone can use the service), with a research trail an assessor can audit and a service that actually works for assistive-technology users.\n\nHow do we make research strong enough to evidence the Service Standard, accessible enough to land WCAG 2.1 AA, and embedded enough that findings shape design in sprint rather than sit in a report nobody reads?`,
     insight: `GDS isn't a checklist. It's a way of evidencing your thinking. Once you internalise that, the work gets cleaner, research stops being a separate phase and becomes the through-line of how the team makes every decision.`,
     process: [
       {
@@ -136,13 +136,13 @@ export const projects: Project[] = [
       },
     ],
     metrics: [
-      { label: 'UK Local Authorities reached', value: '50+' },
+      { label: 'UK Local Authorities reached', value: '200+' },
       { label: 'Accessibility standard', value: 'WCAG 2.1 AA' },
       { label: 'GDS Service Standard points', value: 'Point 1 & 5' },
       { label: 'Research bottleneck on delivery', value: 'zero' },
     ],
     businessOutcomes: [
-      { metric: 'WCAG 2.1 AA across 50+ Local Authorities', translation: 'Public services that are legally compliant under the 2018 accessibility regulations and genuinely usable for assistive-technology users, not just passing a sign-off audit.' },
+      { metric: 'WCAG 2.1 AA across 200+ Local Authorities', translation: 'Public services that are legally compliant under the 2018 accessibility regulations and genuinely usable for assistive-technology users, not just passing a sign-off audit.' },
       { metric: 'Reusable insight repository', translation: 'Became an asset for the wider grants directorate, other teams could trace decisions through the same chain rather than rebuilding the research function from scratch each workstream.' },
       { metric: 'Sprint-ahead research cadence', translation: 'Delivery teams never blocked waiting on research findings. Research velocity matched engineering velocity for the duration of the engagement.' },
     ],
@@ -160,7 +160,7 @@ export const projects: Project[] = [
         reasoning: `Assessors don\'t want to see a thick deck. They want to see how research changed the product. So every output was shaped around three things I had to be able to show at any point: who we\'d spoken to and why those people, what we\'d learned from them mapped to specific journey steps, and how that learning had changed a design decision. The third thing is what passes the assessment.`,
       },
     ],
-    solution: `Research embedded into the delivery cadence rather than bolted onto it. Every design decision had a traceable evidence chain. Accessibility was tested with assistive-technology users from discovery onward, not as a final sign-off step. The team\'s insight repository was structured so any researcher, designer, or assessor could replay the path from observation to decision.\n\nThe shipped output was a set of grants services across 50+ Local Authorities that meet WCAG 2.1 AA across the full journey, not just the homepage. Colour contrast at 4.5:1, keyboard navigation through every flow, visible focus states, screen-reader compatibility, descriptive error messages, and content readable at a reasonable cognitive load.`,
+    solution: `Research embedded into the delivery cadence rather than bolted onto it. Every design decision had a traceable evidence chain. Accessibility was tested with assistive-technology users from discovery onward, not as a final sign-off step. The team\'s insight repository was structured so any researcher, designer, or assessor could replay the path from observation to decision.\n\nThe shipped output was a set of grants services across 200+ Local Authorities that meet WCAG 2.1 AA across the full journey, not just the homepage. Colour contrast at 4.5:1, keyboard navigation through every flow, visible focus states, screen-reader compatibility, descriptive error messages, and content readable at a reasonable cognitive load.`,
     takeaway: `You can\'t audit your way to AA at the end, you have to design for it from the first wireframe and test for it throughout. That\'s the difference between a service that scrapes through assessment and one that\'s actually usable. The same goes for GDS as a whole: it isn\'t a compliance gate, it\'s a discipline. Internalise it and the work gets cleaner.`,
     tags: ['Government', 'GDS', 'Public Sector', 'WCAG 2.1 AA', 'Accessibility', 'User Research', 'Service Standard', 'Assistive Technology'],
   },

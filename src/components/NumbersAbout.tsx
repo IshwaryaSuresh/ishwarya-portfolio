@@ -38,7 +38,7 @@ export default function NumbersAbout() {
 
         <div className="stats">
           <div data-reveal="up" data-delay="0"><Stat target={4} suffix="+" label="Years practising" start={inView} /></div>
-          <div data-reveal="up" data-delay="100"><Stat target={50} suffix="+" label="Local Authorities served (WCAG AA)" start={inView} /></div>
+          <div data-reveal="up" data-delay="100"><Stat target={200} suffix="+" label="Local Authorities served (WCAG AA)" start={inView} /></div>
           <div data-reveal="up" data-delay="200"><Stat target={20} suffix="%" label="Course completion lift" start={inView} /></div>
         </div>
 
@@ -70,7 +70,7 @@ export default function NumbersAbout() {
               <span className="about__cv-year">2023 to 2025</span>
               <div>
                 <p className="about__cv-role">User Researcher, Ministry of Housing, Communities &amp; Local Government (MHCLG)</p>
-                <p className="about__cv-meta">Shipped WCAG 2.1 AA compliance work to 50+ UK Local Authorities. Cross-functional with delivery managers, content designers, and engineering.</p>
+                <p className="about__cv-meta">Shipped WCAG 2.1 AA compliance work to 200+ UK Local Authorities. Cross-functional with delivery managers, content designers, and engineering.</p>
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="160">

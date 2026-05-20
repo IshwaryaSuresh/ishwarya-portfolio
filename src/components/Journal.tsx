@@ -1,5 +1,13 @@
 const ARTICLES = [
   {
+    cat: 'AI Practice',
+    date: 'In draft · 2026',
+    title: 'Designing with AI: what I learned rebuilding my portfolio in Claude Code',
+    desc: 'A real-time account of using Claude Code to prototype, design, and ship a UX consultant portfolio. What sped up, what slowed down, what I kept by hand, what I rejected. Notes from the build itself.',
+    url: 'https://medium.com/@ishwaryasuresh97',
+    draft: true,
+  },
+  {
     cat: 'AI & UX',
     date: 'Jan 2024',
     title: 'The Convergence of UX and AI',
@@ -94,14 +102,14 @@ export default function Journal() {
         {/* Featured 3 */}
         <div className="journal-grid">
           {featured.map((a, i) => (
-            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-card journal-card--link" data-reveal="up" data-delay={i * 100}>
-              <div className="journal-card__cat">{a.cat}</div>
+            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className={`journal-card journal-card--link${a.draft ? ' journal-card--draft' : ''}`} data-reveal="up" data-delay={i * 100}>
+              <div className="journal-card__cat">{a.cat}{a.draft && <span className="journal-card__draft-tag">In draft</span>}</div>
               <div className="journal-card__meta">
                 <span>{a.date}</span>
               </div>
               <h3 className="journal-card__title">{a.title}</h3>
               <p className="journal-card__desc">{a.desc}</p>
-              <span className="journal-card__read">Read on Medium →</span>
+              <span className="journal-card__read">{a.draft ? 'Follow on Medium →' : 'Read on Medium →'}</span>
             </a>
           ))}
         </div>

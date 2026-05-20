@@ -318,6 +318,21 @@ export default function CaseStudy() {
           </div>
         </div>
 
+        {/* Business outcome translation — only if present */}
+        {project.businessOutcomes && (
+          <section className="border border-accent/30 rounded-2xl p-8 bg-accent-light/50">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent mb-5">What those numbers mean for the business</p>
+            <div className="space-y-5">
+              {project.businessOutcomes.map(o => (
+                <div key={o.metric} className="grid md:grid-cols-[180px_1fr] gap-4 md:gap-6">
+                  <p className="font-mono text-xs uppercase tracking-wider text-accent font-semibold pt-1">{o.metric}</p>
+                  <p className="text-ink leading-relaxed">{o.translation}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Key insight */}
         <section className="bg-accent-light border border-blue-200 rounded-2xl p-8">
           <p className="text-xs font-medium uppercase tracking-widest text-accent mb-3">Key insight</p>
@@ -522,6 +537,68 @@ export default function CaseStudy() {
           <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The solution</p>
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
+
+        {/* Trade-offs — what I cut and why. Only if present. */}
+        {project.tradeoffs && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Trade-offs &amp; what I cut</p>
+            <p className="text-muted text-sm mb-6 leading-relaxed max-w-2xl">
+              Every design decision in scope implies one outside of it. These are the things I deliberately chose not to build, and the reasoning behind each cut.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {project.tradeoffs.map(t => (
+                <div key={t.decision} className="border border-border rounded-xl p-6 bg-paper">
+                  <p className="font-display text-lg text-ink mb-2 leading-tight" style={{ fontFamily: '"Instrument Serif", serif' }}>{t.decision}</p>
+                  <p className="text-sm text-muted leading-relaxed">{t.reasoning}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* AI in the process — only if present */}
+        {project.aiProcess && (
+          <section className="bg-ink rounded-2xl p-8 text-paper">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-5">AI in the design process</p>
+            <p className="text-paper/85 leading-relaxed mb-8 max-w-3xl">{project.aiProcess.summary}</p>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div>
+                <p className="text-xs font-mono uppercase tracking-widest text-accent-soft mb-3">Used AI for</p>
+                <ul className="space-y-2.5">
+                  {project.aiProcess.used.map(u => (
+                    <li key={u} className="text-sm text-paper/80 leading-relaxed flex gap-2">
+                      <span className="text-accent-soft mt-1">+</span>
+                      <span>{u}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-mono uppercase tracking-widest text-accent-soft mb-3">Kept by hand</p>
+                <ul className="space-y-2.5">
+                  {project.aiProcess.kept.map(k => (
+                    <li key={k} className="text-sm text-paper/80 leading-relaxed flex gap-2">
+                      <span className="text-accent-soft mt-1">·</span>
+                      <span>{k}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-mono uppercase tracking-widest text-accent-soft mb-3">Rejected</p>
+                <ul className="space-y-2.5">
+                  {project.aiProcess.rejected.map(r => (
+                    <li key={r} className="text-sm text-paper/80 leading-relaxed flex gap-2">
+                      <span className="text-accent-soft mt-1">−</span>
+                      <span>{r}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 8-fold zine - output artifact, only if present */}
         {project.zineInspiration && (

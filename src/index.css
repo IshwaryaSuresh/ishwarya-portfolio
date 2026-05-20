@@ -982,6 +982,61 @@ body.hero-light .marquee {
   padding-top: 20px;
 }
 
+/* Experience / "Where I've worked" — surfaces MHCLG and the rest */
+.about__experience {
+  margin-top: 56px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.about__experience-head {
+  margin-bottom: 32px;
+}
+.about__experience-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+}
+.about__cv {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.about__cv-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 32px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.about__cv-row:last-child { border-bottom: none; }
+.about__cv-year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-300);
+  padding-top: 4px;
+}
+.about__cv-role {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--white);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+.about__cv-meta {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.55;
+  margin: 0;
+}
+@media (max-width: 580px) {
+  .about__cv-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+}
+
 /* ===== HOW I HELP ===== */
 .help-grid {
   display: grid;
@@ -1220,7 +1275,21 @@ body.hero-light .marquee {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
+.journal-card__draft-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  border-radius: 100px;
+  background: var(--ink);
+  color: var(--white);
+}
+.journal-card--draft { border-style: dashed; }
+.journal-card--draft .journal-card__title { color: var(--gray-700); }
 .journal-card__meta {
   font-family: var(--font-mono);
   font-size: 10px;

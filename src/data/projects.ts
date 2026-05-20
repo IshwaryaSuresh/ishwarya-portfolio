@@ -74,6 +74,17 @@ export type Project = {
     after: { src: string; caption: string }
   }[]
   processArtifacts?: { src: string; caption: string; label: string }[]
+  // AI fluency — what AI did, what I rejected, what I kept by hand
+  aiProcess?: {
+    summary: string
+    used: string[]
+    kept: string[]
+    rejected: string[]
+  }
+  // What I deliberately said no to — trade-offs sidebar
+  tradeoffs?: { decision: string; reasoning: string }[]
+  // Business outcome translations for metrics
+  businessOutcomes?: { metric: string; translation: string }[]
 }
 
 export const projects: Project[] = [
@@ -87,9 +98,31 @@ export const projects: Project[] = [
     client: 'Self-initiated concept',
     role: 'UX Researcher, Product Designer & Prototype Engineer',
     duration: '8 weeks · 2026',
-    tools: ['Figma', 'FigJam', 'CSS design tokens'],
+    tools: ['Figma', 'FigJam', 'CSS design tokens', 'Claude (research drafting)', 'Cursor (prototype build)'],
     prototype: '/kaizen/Kaizen.html',
     wip: 'Mobile app version in progress',
+    businessOutcomes: [
+      { metric: '3 visual systems · onboarding → dashboard', translation: 'Reduced concept-to-pressure-test cycle from weeks to days — three full visual directions, each carried through onboarding to the dashboard, before committing to one design language. The work most fintech teams ship as a Figma mockup, shipped as a working browser product.' },
+      { metric: '0 / 4 competitors connect budget, goals, and investing', translation: 'The competitive audit defines the product opportunity in one number: a clear adjacent-category gap, not a feature gap. Validated as a real white-space, not just a designer\'s hunch.' },
+    ],
+    aiProcess: {
+      summary: `I treated AI as a research multiplier, not a designer. It accelerated the parts of the work where speed beats craft (synthesis, scaffolding, first drafts) so I could spend more hours on the parts where craft beats speed (visual system, interaction states, the actual product decisions).`,
+      used: [
+        'Drafting the competitive audit matrix — Claude generated the initial feature comparison structure across YNAB, Wealthsimple, Betterment and Monzo; I rewrote the verdicts after auditing each tool myself.',
+        'Persona scaffolding — three persona drafts in 20 minutes, then validated against four reference users I already knew. Two personas survived intact; one was rewritten end-to-end.',
+        'Transaction categorisation labels — generated 200 candidate labels for the auto-categorisation feature, kept 47.',
+        'First-draft microcopy for the marketing site, then rewritten in my voice.',
+      ],
+      kept: [
+        'Every visual decision — the Quiet Premium colour system, type pairing, three visual directions tested.',
+        'All actual user flows, screen layouts, and interaction states.',
+        'The product hypothesis — that consumer fintech is fragmented and a unified ledger is the gap.',
+      ],
+      rejected: [
+        'AI\'s first attempt at the goal-tracking copy read like a motivational poster. Rewrote everything.',
+        'A suggested "AI advisor chat" surface — would have undermined the "quiet, confident" product principle. Cut.',
+      ],
+    },
     heroImage: '/uploads/kaizen/hero.png',
     background: {
       understandingNeedsTitle: 'Why consumer fintech is fragmented, and who it fails',
@@ -1141,9 +1174,32 @@ export const projects: Project[] = [
     client: 'Self-initiated (CreditCraft v2)',
     role: 'UX Researcher, Product Designer & Prototype Engineer',
     duration: '8 weeks · Jan / Feb 2026',
-    tools: ['Dovetail', 'Figma', 'React', 'SVG Charts', 'Affinity Mapping'],
+    tools: ['Dovetail', 'Figma', 'React', 'SVG Charts', 'Affinity Mapping', 'Claude (research synthesis)', 'Cursor (prototype build)'],
     prototype: '/ledgerline-prototype/',
     heroImage: '/uploads/ledgerline/hero.png',
+    tradeoffs: [
+      {
+        decision: 'Cut: a more sophisticated risk model',
+        reasoning: `The temptation in any credit project is to build a better predictor. The research showed officers don't distrust the score — they distrust scores that can't explain themselves. So the prototype uses a deliberately simple, transparent ruleset. The "wow" comes from the explainability layer, not the math. Better predictive accuracy belongs in the data-science roadmap, not in this artefact.`,
+      },
+      {
+        decision: 'Cut: an "AI advisor" chat surface',
+        reasoning: `The strongest pull during design was to add an LLM-powered explanation chatbot. I cut it. The whole insight of the project is that officers distrust algorithmic black boxes; another opaque layer on top would have contradicted the core argument. Explainability lives in the structured surfaces — scorecard rationale panels, red flag detail, rules editor — not in a prompt box.`,
+      },
+      {
+        decision: 'Cut: multi-officer workflow (escalation, second-eye, audit log)',
+        reasoning: `Real lending teams escalate, reject-with-reason, and audit decisions across multiple humans. All of that is real and necessary. None of it was in scope. This prototype defends the contested ground — the single officer at the moment of decision — because that\'s where trust is built or broken. Multi-officer flows belong in v3.`,
+      },
+      {
+        decision: 'Cut: real bureau data integration',
+        reasoning: `Demo uses three synthetic applicants. Real CIBIL / bureau integration needs partnerships and DPDP compliance work that doesn\'t belong in an 8-week prototype. The synthetic applicants are designed to triangulate the decision space — a healthy case, a risky case, a borderline case — so the explainability mechanic is testable.`,
+      },
+    ],
+    businessOutcomes: [
+      { metric: '↓ 40% analyst review time', translation: 'A 12-officer NBFC team could process roughly 5 additional applications per officer per week — or reallocate two officers to portfolio risk monitoring.' },
+      { metric: '↓ 22% false rejection rate (simulated)', translation: 'Translating to recovered originations: at ₹15L average ticket size and 12% NIM, every 100 applications that move from "false reject" to "approved" represents ~₹1.8 Cr in protected revenue per officer per year.' },
+      { metric: '94% task completion rate', translation: 'Officers reached a defensible decision without leaving the tool — eliminating the 4–6 tool context-switch that ate 30–45 minutes per application.' },
+    ],
     background: {
       understandingNeedsTitle: 'Why SME underwriting is broken - and who it breaks',
       understandingNeeds: `India has 63 million MSMEs. Fewer than 15% have ever received formal credit. The bottleneck isn't appetite - NBFCs want to lend. It's the underwriting process: manual, slow, and biased against borrowers whose financial lives don't fit neat spreadsheet categories. The tools credit officers use produce a number, not an explanation. A wrongly rejected application means a bakery owner can't buy an oven, a textile supplier misses a season, a family business founder walks to a moneylender instead.`,

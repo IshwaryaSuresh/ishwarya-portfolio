@@ -318,7 +318,7 @@ export default function CaseStudy() {
           </div>
         </div>
 
-        {/* Business outcome translation — only if present */}
+        {/* Business outcome translation, only if present */}
         {project.businessOutcomes && (
           <section className="border border-accent/30 rounded-2xl p-8 bg-accent-light/50">
             <p className="text-xs font-medium uppercase tracking-widest text-accent mb-5">What those numbers mean for the business</p>
@@ -538,7 +538,7 @@ export default function CaseStudy() {
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
 
-        {/* Trade-offs — what I cut and why. Only if present. */}
+        {/* Trade-offs, what I cut and why. Only if present. */}
         {project.tradeoffs && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Trade-offs &amp; what I cut</p>
@@ -556,7 +556,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* AI in the process — only if present */}
+        {/* AI in the process, only if present */}
         {project.aiProcess && (
           <section className="bg-ink rounded-2xl p-8 text-paper">
             <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-5">AI in the design process</p>

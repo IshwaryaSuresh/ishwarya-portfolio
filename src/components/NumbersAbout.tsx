@@ -52,7 +52,7 @@ export default function NumbersAbout() {
           ))}
         </div>
 
-        {/* Where I've worked — surfaces MHCLG / government / team experience */}
+        {/* Where I've worked, surfaces MHCLG / government / team experience */}
         <div className="about__experience">
           <div className="about__experience-head" data-reveal="up">
             <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }}>Where I've worked</div>
@@ -62,28 +62,28 @@ export default function NumbersAbout() {
             <li className="about__cv-row" data-reveal="up" data-delay="0">
               <span className="about__cv-year">2026 →</span>
               <div>
-                <p className="about__cv-role">Founder &amp; UX Consultant — MadeForHumans</p>
+                <p className="about__cv-role">Founder &amp; UX Consultant, MadeForHumans</p>
                 <p className="about__cv-meta">Independent. Startups, studios &amp; SMEs across fintech, healthcare, edtech, public sector.</p>
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="80">
-              <span className="about__cv-year">2023 — 2025</span>
+              <span className="about__cv-year">2023 to 2025</span>
               <div>
-                <p className="about__cv-role">User Researcher — Ministry of Housing, Communities &amp; Local Government (MHCLG)</p>
+                <p className="about__cv-role">User Researcher, Ministry of Housing, Communities &amp; Local Government (MHCLG)</p>
                 <p className="about__cv-meta">Shipped WCAG 2.1 AA compliance work to 50+ UK Local Authorities. Cross-functional with delivery managers, content designers, and engineering.</p>
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="160">
-              <span className="about__cv-year">2022 — 2023</span>
+              <span className="about__cv-year">2022 to 2023</span>
               <div>
-                <p className="about__cv-role">MSc Human-Computer Interaction — Newcastle University</p>
+                <p className="about__cv-role">MSc Human-Computer Interaction, Newcastle University</p>
                 <p className="about__cv-meta">Dissertation research accepted at ACM CHI 2024.</p>
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="240">
               <span className="about__cv-year">earlier</span>
               <div>
-                <p className="about__cv-role">B.Arch — Architecture</p>
+                <p className="about__cv-role">B.Arch, Architecture</p>
                 <p className="about__cv-meta">The systems-thinking foundation I still draw on for service design and information architecture.</p>
               </div>
             </li>

@@ -22,7 +22,7 @@ const PROJECTS: Project[] = [
     client: 'Ministry of Housing, Communities & Local Government',
     year: '2023–25',
     role: 'Sole User Researcher on workstream',
-    desc: 'Research that evidenced WCAG 2.1 AA compliance across 50+ UK Local Authorities, and gave the delivery team an audit trail GDS assessors could trust — embedded into sprint, not bolted on at the end.',
+    desc: 'Research that evidenced WCAG 2.1 AA compliance across 50+ UK Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
     metric: '50+ Local Authorities · WCAG 2.1 AA · GDS-assessed',
     tags: ['Government', 'GDS', 'Accessibility', 'WCAG 2.1 AA'],
     placeholder: 'Government, MHCLG grants',

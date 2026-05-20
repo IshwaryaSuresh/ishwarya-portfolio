@@ -74,14 +74,14 @@ export type Project = {
     after: { src: string; caption: string }
   }[]
   processArtifacts?: { src: string; caption: string; label: string }[]
-  // AI fluency — what AI did, what I rejected, what I kept by hand
+  // AI fluency, what AI did, what I rejected, what I kept by hand
   aiProcess?: {
     summary: string
     used: string[]
     kept: string[]
     rejected: string[]
   }
-  // What I deliberately said no to — trade-offs sidebar
+  // What I deliberately said no to, trade-offs sidebar
   tradeoffs?: { decision: string; reasoning: string }[]
   // Business outcome translations for metrics
   businessOutcomes?: { metric: string; translation: string }[]
@@ -91,32 +91,32 @@ export const projects: Project[] = [
   {
     slug: 'mhclg-grants',
     title: 'Grants Services for 50+ UK Local Authorities',
-    tagline: 'Research that evidenced WCAG 2.1 AA compliance across 50+ Local Authorities, and gave the delivery team an audit trail GDS assessors could trust — embedded into sprint, not bolted on at the end.',
+    tagline: 'Research that evidenced WCAG 2.1 AA compliance across 50+ Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
     niche: ['Government', 'GDS', 'Accessibility', 'User Research'],
     type: 'Government',
     featured: true,
     client: 'Ministry of Housing, Communities & Local Government (MHCLG)',
     role: 'Sole User Researcher on workstream',
-    duration: '2023 — 2025',
+    duration: '2023 to 2025',
     tools: ['Semi-structured interviews', 'Usability testing', 'Affinity mapping', 'Dovetail', 'GDS Service Standard mapping'],
     overview: {
-      team: 'Product manager, delivery manager, 2 service designers, interaction designer, content designer, 2 developers — I was the sole researcher on the workstream',
+      team: 'Product manager, delivery manager, 2 service designers, interaction designer, content designer, 2 developers, I was the sole researcher on the workstream',
       industry: 'UK Public Sector / GDS-assessed digital services',
     },
-    problem: `Grant officers across more than 50 UK Local Authorities use public-sector services that have to pass the GDS Service Standard. The challenge isn't shipping a feature. It's evidencing — to an assessor's standard — that the service meets Point 1 (Understand users and their needs) and Point 5 (Make sure everyone can use the service), with a research trail an assessor can audit and a service that actually works for assistive-technology users.\n\nHow do we make research strong enough to evidence the Service Standard, accessible enough to land WCAG 2.1 AA, and embedded enough that findings shape design in sprint rather than sit in a report nobody reads?`,
-    insight: `GDS isn't a checklist. It's a way of evidencing your thinking. Once you internalise that, the work gets cleaner — research stops being a separate phase and becomes the through-line of how the team makes every decision.`,
+    problem: `Grant officers across more than 50 UK Local Authorities use public-sector services that have to pass the GDS Service Standard. The challenge isn't shipping a feature. It's evidencing, to an assessor's standard, that the service meets Point 1 (Understand users and their needs) and Point 5 (Make sure everyone can use the service), with a research trail an assessor can audit and a service that actually works for assistive-technology users.\n\nHow do we make research strong enough to evidence the Service Standard, accessible enough to land WCAG 2.1 AA, and embedded enough that findings shape design in sprint rather than sit in a report nobody reads?`,
+    insight: `GDS isn't a checklist. It's a way of evidencing your thinking. Once you internalise that, the work gets cleaner, research stops being a separate phase and becomes the through-line of how the team makes every decision.`,
     process: [
       {
         step: 'Service Standard mapping (before kickoff)',
-        detail: 'Mapped the research plan against the GDS Service Standard points before delivery started. So we were collecting the right evidence for assessment from day one — not retrofitting research to fit criteria at the end.',
+        detail: 'Mapped the research plan against the GDS Service Standard points before delivery started. So we were collecting the right evidence for assessment from day one, not retrofitting research to fit criteria at the end.',
       },
       {
         step: 'Mixed-method primary research',
-        detail: 'Surveys and semi-structured interviews with grant officers across multiple Local Authorities. The variation across LAs matters — a service that works in Westminster has to work in a rural district council too.',
+        detail: 'Surveys and semi-structured interviews with grant officers across multiple Local Authorities. The variation across LAs matters, a service that works in Westminster has to work in a rural district council too.',
       },
       {
         step: 'Accessibility built into recruitment',
-        detail: 'Included users of assistive technology as a planned research stream, not a sign-off step at the end. You can\'t audit your way to AA — you have to design for it from the first wireframe and test for it throughout.',
+        detail: 'Included users of assistive technology as a planned research stream, not a sign-off step at the end. You can\'t audit your way to AA, you have to design for it from the first wireframe and test for it throughout.',
       },
       {
         step: 'Moderated usability testing on prototypes',
@@ -124,11 +124,11 @@ export const projects: Project[] = [
       },
       {
         step: 'Cross-functional alignment with content designer',
-        detail: 'Worked closely with content design to align language with GDS style — plain English, no jargon, no assumed knowledge. Content and research are one decision, not two.',
+        detail: 'Worked closely with content design to align language with GDS style, plain English, no jargon, no assumed knowledge. Content and research are one decision, not two.',
       },
       {
         step: 'Structured insight repository',
-        detail: 'Maintained a repository where any design decision could be traced back to specific research evidence. The team — and any assessor — could replay the chain from observation → insight → design change.',
+        detail: 'Maintained a repository where any design decision could be traced back to specific research evidence. The team, and any assessor, could replay the chain from observation → insight → design change.',
       },
       {
         step: 'Working a sprint ahead',
@@ -142,8 +142,8 @@ export const projects: Project[] = [
       { label: 'Research bottleneck on delivery', value: 'zero' },
     ],
     businessOutcomes: [
-      { metric: 'WCAG 2.1 AA across 50+ Local Authorities', translation: 'Public services that are legally compliant under the 2018 accessibility regulations and genuinely usable for assistive-technology users — not just passing a sign-off audit.' },
-      { metric: 'Reusable insight repository', translation: 'Became an asset for the wider grants directorate — other teams could trace decisions through the same chain rather than rebuilding the research function from scratch each workstream.' },
+      { metric: 'WCAG 2.1 AA across 50+ Local Authorities', translation: 'Public services that are legally compliant under the 2018 accessibility regulations and genuinely usable for assistive-technology users, not just passing a sign-off audit.' },
+      { metric: 'Reusable insight repository', translation: 'Became an asset for the wider grants directorate, other teams could trace decisions through the same chain rather than rebuilding the research function from scratch each workstream.' },
       { metric: 'Sprint-ahead research cadence', translation: 'Delivery teams never blocked waiting on research findings. Research velocity matched engineering velocity for the duration of the engagement.' },
     ],
     tradeoffs: [
@@ -153,15 +153,15 @@ export const projects: Project[] = [
       },
       {
         decision: 'Didn\'t own: wider departmental ResearchOps',
-        reasoning: `There was a senior researcher community across the department maintaining broader insight repository governance and recruitment infrastructure. I contributed to it rather than ran it. Being honest about that boundary matters — it\'s the difference between "I owned research" and "I owned the wider research function." On this workstream, the research function was mine.`,
+        reasoning: `There was a senior researcher community across the department maintaining broader insight repository governance and recruitment infrastructure. I contributed to it rather than ran it. Being honest about that boundary matters, it\'s the difference between "I owned research" and "I owned the wider research function." On this workstream, the research function was mine.`,
       },
       {
         decision: 'Said no: research-as-a-stack-of-findings',
         reasoning: `Assessors don\'t want to see a thick deck. They want to see how research changed the product. So every output was shaped around three things I had to be able to show at any point: who we\'d spoken to and why those people, what we\'d learned from them mapped to specific journey steps, and how that learning had changed a design decision. The third thing is what passes the assessment.`,
       },
     ],
-    solution: `Research embedded into the delivery cadence rather than bolted onto it. Every design decision had a traceable evidence chain. Accessibility was tested with assistive-technology users from discovery onward, not as a final sign-off step. The team\'s insight repository was structured so any researcher, designer, or assessor could replay the path from observation to decision.\n\nThe shipped output was a set of grants services across 50+ Local Authorities that meet WCAG 2.1 AA across the full journey — not just the homepage. Colour contrast at 4.5:1, keyboard navigation through every flow, visible focus states, screen-reader compatibility, descriptive error messages, and content readable at a reasonable cognitive load.`,
-    takeaway: `You can\'t audit your way to AA at the end — you have to design for it from the first wireframe and test for it throughout. That\'s the difference between a service that scrapes through assessment and one that\'s actually usable. The same goes for GDS as a whole: it isn\'t a compliance gate, it\'s a discipline. Internalise it and the work gets cleaner.`,
+    solution: `Research embedded into the delivery cadence rather than bolted onto it. Every design decision had a traceable evidence chain. Accessibility was tested with assistive-technology users from discovery onward, not as a final sign-off step. The team\'s insight repository was structured so any researcher, designer, or assessor could replay the path from observation to decision.\n\nThe shipped output was a set of grants services across 50+ Local Authorities that meet WCAG 2.1 AA across the full journey, not just the homepage. Colour contrast at 4.5:1, keyboard navigation through every flow, visible focus states, screen-reader compatibility, descriptive error messages, and content readable at a reasonable cognitive load.`,
+    takeaway: `You can\'t audit your way to AA at the end, you have to design for it from the first wireframe and test for it throughout. That\'s the difference between a service that scrapes through assessment and one that\'s actually usable. The same goes for GDS as a whole: it isn\'t a compliance gate, it\'s a discipline. Internalise it and the work gets cleaner.`,
     tags: ['Government', 'GDS', 'Public Sector', 'WCAG 2.1 AA', 'Accessibility', 'User Research', 'Service Standard', 'Assistive Technology'],
   },
   {
@@ -178,25 +178,25 @@ export const projects: Project[] = [
     prototype: '/kaizen/Kaizen.html',
     wip: 'Mobile app version in progress',
     businessOutcomes: [
-      { metric: '3 visual systems · onboarding → dashboard', translation: 'Reduced concept-to-pressure-test cycle from weeks to days — three full visual directions, each carried through onboarding to the dashboard, before committing to one design language. The work most fintech teams ship as a Figma mockup, shipped as a working browser product.' },
+      { metric: '3 visual systems · onboarding → dashboard', translation: 'Reduced concept-to-pressure-test cycle from weeks to days, three full visual directions, each carried through onboarding to the dashboard, before committing to one design language. The work most fintech teams ship as a Figma mockup, shipped as a working browser product.' },
       { metric: '0 / 4 competitors connect budget, goals, and investing', translation: 'The competitive audit defines the product opportunity in one number: a clear adjacent-category gap, not a feature gap. Validated as a real white-space, not just a designer\'s hunch.' },
     ],
     aiProcess: {
       summary: `I treated AI as a research multiplier, not a designer. It accelerated the parts of the work where speed beats craft (synthesis, scaffolding, first drafts) so I could spend more hours on the parts where craft beats speed (visual system, interaction states, the actual product decisions).`,
       used: [
-        'Drafting the competitive audit matrix — Claude generated the initial feature comparison structure across YNAB, Wealthsimple, Betterment and Monzo; I rewrote the verdicts after auditing each tool myself.',
-        'Persona scaffolding — three persona drafts in 20 minutes, then validated against four reference users I already knew. Two personas survived intact; one was rewritten end-to-end.',
-        'Transaction categorisation labels — generated 200 candidate labels for the auto-categorisation feature, kept 47.',
+        'Drafting the competitive audit matrix, Claude generated the initial feature comparison structure across YNAB, Wealthsimple, Betterment and Monzo; I rewrote the verdicts after auditing each tool myself.',
+        'Persona scaffolding, three persona drafts in 20 minutes, then validated against four reference users I already knew. Two personas survived intact; one was rewritten end-to-end.',
+        'Transaction categorisation labels, generated 200 candidate labels for the auto-categorisation feature, kept 47.',
         'First-draft microcopy for the marketing site, then rewritten in my voice.',
       ],
       kept: [
-        'Every visual decision — the Quiet Premium colour system, type pairing, three visual directions tested.',
+        'Every visual decision, the Quiet Premium colour system, type pairing, three visual directions tested.',
         'All actual user flows, screen layouts, and interaction states.',
-        'The product hypothesis — that consumer fintech is fragmented and a unified ledger is the gap.',
+        'The product hypothesis, that consumer fintech is fragmented and a unified ledger is the gap.',
       ],
       rejected: [
         'AI\'s first attempt at the goal-tracking copy read like a motivational poster. Rewrote everything.',
-        'A suggested "AI advisor chat" surface — would have undermined the "quiet, confident" product principle. Cut.',
+        'A suggested "AI advisor chat" surface, would have undermined the "quiet, confident" product principle. Cut.',
       ],
     },
     heroImage: '/uploads/kaizen/hero.png',
@@ -1256,25 +1256,25 @@ export const projects: Project[] = [
     tradeoffs: [
       {
         decision: 'Cut: a more sophisticated risk model',
-        reasoning: `The temptation in any credit project is to build a better predictor. The research showed officers don't distrust the score — they distrust scores that can't explain themselves. So the prototype uses a deliberately simple, transparent ruleset. The "wow" comes from the explainability layer, not the math. Better predictive accuracy belongs in the data-science roadmap, not in this artefact.`,
+        reasoning: `The temptation in any credit project is to build a better predictor. The research showed officers don't distrust the score, they distrust scores that can't explain themselves. So the prototype uses a deliberately simple, transparent ruleset. The "wow" comes from the explainability layer, not the math. Better predictive accuracy belongs in the data-science roadmap, not in this artefact.`,
       },
       {
         decision: 'Cut: an "AI advisor" chat surface',
-        reasoning: `The strongest pull during design was to add an LLM-powered explanation chatbot. I cut it. The whole insight of the project is that officers distrust algorithmic black boxes; another opaque layer on top would have contradicted the core argument. Explainability lives in the structured surfaces — scorecard rationale panels, red flag detail, rules editor — not in a prompt box.`,
+        reasoning: `The strongest pull during design was to add an LLM-powered explanation chatbot. I cut it. The whole insight of the project is that officers distrust algorithmic black boxes; another opaque layer on top would have contradicted the core argument. Explainability lives in the structured surfaces, scorecard rationale panels, red flag detail, rules editor, not in a prompt box.`,
       },
       {
         decision: 'Cut: multi-officer workflow (escalation, second-eye, audit log)',
-        reasoning: `Real lending teams escalate, reject-with-reason, and audit decisions across multiple humans. All of that is real and necessary. None of it was in scope. This prototype defends the contested ground — the single officer at the moment of decision — because that\'s where trust is built or broken. Multi-officer flows belong in v3.`,
+        reasoning: `Real lending teams escalate, reject-with-reason, and audit decisions across multiple humans. All of that is real and necessary. None of it was in scope. This prototype defends the contested ground, the single officer at the moment of decision, because that\'s where trust is built or broken. Multi-officer flows belong in v3.`,
       },
       {
         decision: 'Cut: real bureau data integration',
-        reasoning: `Demo uses three synthetic applicants. Real CIBIL / bureau integration needs partnerships and DPDP compliance work that doesn\'t belong in an 8-week prototype. The synthetic applicants are designed to triangulate the decision space — a healthy case, a risky case, a borderline case — so the explainability mechanic is testable.`,
+        reasoning: `Demo uses three synthetic applicants. Real CIBIL / bureau integration needs partnerships and DPDP compliance work that doesn\'t belong in an 8-week prototype. The synthetic applicants are designed to triangulate the decision space, a healthy case, a risky case, a borderline case, so the explainability mechanic is testable.`,
       },
     ],
     businessOutcomes: [
-      { metric: '↓ 40% analyst review time', translation: 'A 12-officer NBFC team could process roughly 5 additional applications per officer per week — or reallocate two officers to portfolio risk monitoring.' },
+      { metric: '↓ 40% analyst review time', translation: 'A 12-officer NBFC team could process roughly 5 additional applications per officer per week, or reallocate two officers to portfolio risk monitoring.' },
       { metric: '↓ 22% false rejection rate (simulated)', translation: 'Translating to recovered originations: at ₹15L average ticket size and 12% NIM, every 100 applications that move from "false reject" to "approved" represents ~₹1.8 Cr in protected revenue per officer per year.' },
-      { metric: '94% task completion rate', translation: 'Officers reached a defensible decision without leaving the tool — eliminating the 4–6 tool context-switch that ate 30–45 minutes per application.' },
+      { metric: '94% task completion rate', translation: 'Officers reached a defensible decision without leaving the tool, eliminating the 4–6 tool context-switch that ate 30–45 minutes per application.' },
     ],
     background: {
       understandingNeedsTitle: 'Why SME underwriting is broken - and who it breaks',

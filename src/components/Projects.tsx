@@ -25,6 +25,7 @@ const PROJECTS: Project[] = [
     desc: 'Research that evidenced WCAG 2.1 AA compliance across 200+ UK Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
     metric: '200+ Local Authorities · WCAG 2.1 AA · GDS-assessed',
     tags: ['Government', 'GDS', 'Accessibility', 'WCAG 2.1 AA'],
+    image: '/uploads/mhclg-hero.png',
     placeholder: 'Government, MHCLG grants',
     slug: 'mhclg-grants',
   },

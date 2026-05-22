@@ -95,20 +95,27 @@ export default function NumbersAbout() {
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="400">
+              <span className="about__cv-year">Apr 2021 to Feb 2023</span>
+              <div>
+                <p className="about__cv-role">UX Designer, Freelance (Part-Time)</p>
+                <p className="about__cv-meta">Delivered UX design and research for clients across multiple sectors alongside postgraduate studies. Wireframes and prototypes in Figma and Sketch. User research, usability testing, and competitive analysis informing user-centred designs.</p>
+              </div>
+            </li>
+            <li className="about__cv-row" data-reveal="up" data-delay="480">
               <span className="about__cv-year">2021 to 2022</span>
               <div>
                 <p className="about__cv-role">MSc Human-Computer Interaction, Newcastle University</p>
                 <p className="about__cv-meta">Interaction Design, UX Research Methods, Prototyping. Dissertation co-designed and evaluated an ambient air-quality sensing technology for workplace well-being; acknowledged in a paper accepted at ACM CHI 2024.</p>
               </div>
             </li>
-            <li className="about__cv-row" data-reveal="up" data-delay="480">
+            <li className="about__cv-row" data-reveal="up" data-delay="560">
               <span className="about__cv-year">Jan to Mar 2021</span>
               <div>
                 <p className="about__cv-role">UX/UI Design Intern, AnywhereWorks / FULL Creative</p>
                 <p className="about__cv-meta">Redesigned AnywhereWorks platform UI and built a design system and style guide. Simplified onboarding workflows for the Switchboard app, increasing activation.</p>
               </div>
             </li>
-            <li className="about__cv-row" data-reveal="up" data-delay="560">
+            <li className="about__cv-row" data-reveal="up" data-delay="640">
               <span className="about__cv-year">2015 to 2020</span>
               <div>
                 <p className="about__cv-role">Bachelor of Architecture (B.Arch), Anna University</p>

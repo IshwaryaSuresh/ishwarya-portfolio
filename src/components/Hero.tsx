@@ -58,6 +58,10 @@ export default function Hero() {
       </div>
 
       <div className="hero__main">
+        <div className="hero__status" aria-live="polite">
+          <span className="hero__status-dot" aria-hidden="true" />
+          Currently interviewing: fintech and public sector roles
+        </div>
         <h1 className="hero__display">
           <span className="hero__line"><span>I design products</span></span>
           <span className="hero__line"><span>for fintech, edtech,</span></span>
@@ -79,6 +83,14 @@ export default function Hero() {
           <div className="hero__actions">
             <a href="#work" className="btn-primary">See selected work →</a>
             <a href="#brief" className="btn-ghost">Send a brief</a>
+            <a
+              href="/uploads/Ishwarya_Suresh_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-link"
+            >
+              Download CV ↓
+            </a>
           </div>
         </div>
       </div>

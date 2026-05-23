@@ -410,40 +410,6 @@ body.hero-light .hero__teal { color: var(--teal-500); }
 }
 .hero__actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 
-/* "Currently interviewing" status line above the headline */
-.hero__status {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--teal-300);
-  margin-bottom: 28px;
-  padding: 6px 14px 6px 12px;
-  border: 1px solid rgba(97, 192, 192, 0.25);
-  border-radius: 100px;
-  background: rgba(97, 192, 192, 0.06);
-  width: max-content;
-  max-width: 100%;
-}
-.hero__status-dot {
-  width: 8px; height: 8px;
-  background: var(--teal-300);
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(97, 192, 192, 0.7);
-  animation: heroStatusPulse 2s ease-out infinite;
-  flex-shrink: 0;
-}
-@keyframes heroStatusPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(97, 192, 192, 0.55); }
-  70%  { box-shadow: 0 0 0 10px rgba(97, 192, 192, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(97, 192, 192, 0); }
-}
-body.hero-light .hero__status { color: var(--teal-700); border-color: rgba(0,128,128,0.25); background: rgba(194,255,255,0.4); }
-body.hero-light .hero__status-dot { background: var(--teal-500); }
-
 /* Tertiary text-link CTA — quieter than btn-primary / btn-ghost */
 .btn-link {
   padding: 14px 14px;

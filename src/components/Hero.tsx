@@ -58,10 +58,6 @@ export default function Hero() {
       </div>
 
       <div className="hero__main">
-        <div className="hero__status" aria-live="polite">
-          <span className="hero__status-dot" aria-hidden="true" />
-          Currently interviewing: fintech and public sector roles
-        </div>
         <h1 className="hero__display">
           <span className="hero__line"><span>I design products</span></span>
           <span className="hero__line"><span>for fintech, edtech,</span></span>

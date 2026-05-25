@@ -1,11 +1,10 @@
 const ARTICLES = [
   {
     cat: 'AI Practice',
-    date: 'In draft · 2026',
+    date: 'May 2026',
     title: 'Designing with AI: what I learned rebuilding my portfolio in Claude Code',
     desc: 'A real-time account of using Claude Code to prototype, design, and ship a UX consultant portfolio. What sped up, what slowed down, what I kept by hand, what I rejected. Notes from the build itself.',
-    url: 'https://medium.com/@ishwaryasuresh97',
-    draft: true,
+    url: 'https://medium.com/@ishwaryasuresh97/designing-with-ai-what-i-learned-rebuilding-my-portfolio-in-claude-code-129fc7660aba',
   },
   {
     cat: 'AI & UX',

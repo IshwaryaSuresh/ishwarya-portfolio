@@ -25,7 +25,6 @@ export default function NumbersAbout() {
       <div ref={ref as React.RefObject<HTMLDivElement>} className="about" data-parallax="0.04">
         <div className="about__top">
           <div className="about__left">
-            <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }} data-reveal="left">About the studio</div>
             <h2 data-reveal="left" data-delay="100">A product designer <span className="accent-teal">made for humans.</span></h2>
             <p data-reveal="left" data-delay="200">I'm a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, I now work with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
           </div>
@@ -55,7 +54,6 @@ export default function NumbersAbout() {
         {/* Where I've worked, full timeline drawn from the live CV */}
         <div className="about__experience">
           <div className="about__experience-head" data-reveal="up">
-            <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.6)' }}>Where I've worked</div>
             <h3 className="about__experience-title">Public sector at scale, fintech in flight.</h3>
           </div>
           <ol className="about__cv">

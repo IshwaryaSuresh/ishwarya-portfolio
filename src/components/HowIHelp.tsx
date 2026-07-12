@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const HELP = [
   {
     idx: 'Service 01',
@@ -32,28 +34,47 @@ const HELP = [
 ]
 
 export default function HowIHelp() {
+  const [active, setActive] = useState(0)
+  const current = HELP[active]
+
   return (
     <section className="section" id="services">
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow" data-reveal="up">How I can help</div>
             <h2 className="h2" data-reveal="up" data-delay="80">Five ways <span className="accent">to work together.</span></h2>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">Pick one lane or combine them. Every engagement starts with a focused discovery to make sure we solve the right problem.</div>
         </div>
 
-        <div className="help-grid">
-          {HELP.map((h, i) => (
-            <div key={h.idx} className="help-card" data-reveal="up" data-delay={i * 80}>
-              <div className="help-card__idx">{h.idx}</div>
-              <div className="help-card__title">{h.title}</div>
-              <div className="help-card__desc">{h.desc}</div>
-              <ul className="help-card__list">
-                {h.list.map(item => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          ))}
+        <div className="svc" data-reveal="up" data-delay="200">
+          <ol className="svc__list">
+            {HELP.map((h, i) => (
+              <li key={h.idx}>
+                <button
+                  type="button"
+                  className={`svc__item${i === active ? ' is-active' : ''}`}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  aria-expanded={i === active}
+                >
+                  <span className="svc__num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="svc__name">{h.title}</span>
+                  <span className="svc__arrow" aria-hidden="true">→</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+
+          <div className="svc__panel" key={current.idx}>
+            <span className="svc__ghost" aria-hidden="true">{String(active + 1).padStart(2, '0')}</span>
+            <div className="svc__panel-idx">{current.idx}</div>
+            <p className="svc__panel-desc">{current.desc}</p>
+            <ul className="svc__panel-list">
+              {current.list.map(item => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 type Project = {
@@ -96,111 +95,70 @@ const PROJECTS: Project[] = [
   },
 ]
 
-type View = 'list' | 'grid'
+const PARALLAX_SPEEDS = ['0.09', '0.06', '0.11']
 
-function ProjectRow({ p, onHover, onLeave, index }: { p: Project; onHover: (p: Project, e: React.MouseEvent) => void; onLeave: () => void; index: number }) {
-  const inner = (
-    <div
-      className="proj-row"
-      data-reveal="up"
-      data-delay={index * 80}
-      onMouseEnter={p.slug ? (e) => onHover(p, e) : undefined}
-      onMouseMove={p.slug ? (e) => onHover(p, e) : undefined}
-      onMouseLeave={p.slug ? onLeave : undefined}
-    >
-      <div className="proj-row__num">{p.num}</div>
-      <div className="proj-row__title">
-        {p.title}
-        <div className="proj-row__metric">{p.metric}</div>
+function FeatureSpread({ p, index }: { p: Project; index: number }) {
+  const flip = index % 2 === 1
+  return (
+    <Link to={`/work/${p.slug}`} className={`spread${flip ? ' spread--flip' : ''}`}>
+      <figure className="spread__media">
+        <div className="spread__img-mask">
+          {p.image
+            ? <img src={p.image} alt={p.title} data-parallax={PARALLAX_SPEEDS[index % 3]} loading="lazy" />
+            : <div className="placeholder">{p.placeholder}</div>}
+        </div>
+        <figcaption className="spread__caption">{p.client} · {p.year}</figcaption>
+      </figure>
+
+      <div className="spread__body" data-reveal={flip ? 'left' : 'right'}>
+        <div className="spread__kicker">Feature № {p.num} · {p.tags[0]}</div>
+        <h3 className="spread__title">{p.title}</h3>
+        <p className="spread__standfirst">{p.desc}</p>
+        <div className="spread__metric">{p.metric}</div>
+        <span className="spread__cta">Read the story <em>p.{p.num}</em></span>
       </div>
-      <div className="proj-row__desc">{p.desc}</div>
-      <div className="proj-row__tags">
-        {p.tags.map(t => <span key={t} className="proj-row__tag">{t}</span>)}
-      </div>
-      <div className="proj-row__meta">
-        {p.year} <span className="arrow">→</span>
-      </div>
-    </div>
+    </Link>
   )
-  return p.slug ? <Link to={`/work/${p.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>{inner}</Link> : inner
 }
 
-function ProjectCard({ p, index }: { p: Project; index: number }) {
-  const inner = (
-    <div className="proj-card" data-reveal="scale" data-delay={index * 80}>
-      <div className="proj-card__media">
-        {p.image
-          ? <img src={p.image} alt={p.title} />
-          : <div className="placeholder">{p.placeholder}</div>
-        }
+function IndexRow({ p, index }: { p: Project; index: number }) {
+  return (
+    <Link to={`/work/${p.slug}`} className="mag-index__row" data-reveal="up" data-delay={index * 70}>
+      <div className="mag-index__thumb">
+        {p.image ? <img src={p.image} alt="" loading="lazy" /> : <div className="placeholder" />}
       </div>
-      <div className="proj-card__body">
-        <div className="proj-card__title">{p.title}</div>
-        <div className="proj-card__desc">{p.desc}</div>
-        <div className="proj-card__footer">
-          <span>{p.role}</span>
-          <span>{p.year} →</span>
-        </div>
+      <div className="mag-index__body">
+        <h4 className="mag-index__title">{p.title}</h4>
+        <p className="mag-index__desc">{p.desc}</p>
       </div>
-    </div>
+      <span className="mag-index__page">p.{p.num}</span>
+    </Link>
   )
-  return p.slug ? <Link to={`/work/${p.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>{inner}</Link> : inner
 }
 
 export default function Projects() {
-  const [view, setView] = useState<View>('list')
-  const [hover, setHover] = useState<Project | null>(null)
-  const [pos, setPos] = useState({ x: 0, y: 0 })
-
-  const onHover = (p: Project, e: React.MouseEvent) => {
-    setHover(p)
-    setPos({ x: e.clientX, y: e.clientY })
-  }
-  const onLeave = () => setHover(null)
+  const features = PROJECTS.slice(0, 3)
+  const rest = PROJECTS.slice(3)
 
   return (
     <section className="section projects" id="work">
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow" data-reveal="up">Selected work</div>
             <h2 className="h2" data-reveal="up" data-delay="80">Selected <span className="accent">work.</span></h2>
           </div>
-          <div className="sec-head__right" data-reveal="up" data-delay="160">
-            <div style={{ marginBottom: 12 }}>Six briefs across fintech, edtech, healthcare and public sector. Full case studies on request.</div>
-            <div className="projects__view-toggle">
-              <button className={view === 'list' ? 'is-active' : ''} onClick={() => setView('list')}>List</button>
-              <button className={view === 'grid' ? 'is-active' : ''} onClick={() => setView('grid')}>Grid</button>
-            </div>
-          </div>
+          <div className="sec-head__right" data-reveal="up" data-delay="160">Six briefs across fintech, edtech, healthcare and public sector. Full case studies on request.</div>
         </div>
 
-        {view === 'list' ? (
-          <div className="proj-list">
-            {PROJECTS.map((p, i) => (
-              <ProjectRow key={p.num} p={p} index={i} onHover={onHover} onLeave={onLeave} />
-            ))}
-          </div>
-        ) : (
-          <div className="proj-grid">
-            {PROJECTS.map((p, i) => <ProjectCard key={p.num} p={p} index={i} />)}
-          </div>
-        )}
+        <div className="spreads">
+          {features.map((p, i) => <FeatureSpread key={p.num} p={p} index={i} />)}
+        </div>
+
+        <div className="mag-index">
+          <div className="mag-index__label" data-reveal="up">Also in this issue</div>
+          {rest.map((p, i) => <IndexRow key={p.num} p={p} index={i} />)}
+        </div>
       </div>
-
-      {view === 'list' && (
-        <div
-          className={'proj-preview ' + (hover ? 'is-visible' : '')}
-          style={{ left: pos.x + 'px', top: pos.y + 'px' }}
-        >
-          <div className="proj-preview__inner">
-            {hover?.image
-              ? <img src={hover.image} alt={hover.title} />
-              : <div className="placeholder">{hover?.placeholder ?? ''}</div>
-            }
-          </div>
-        </div>
-      )}
     </section>
   )
 }

@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans:    ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"Instrument Serif"', '"Times New Roman"', 'serif'],
-        mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        sans:    ['maple', '"Schibsted Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['elena', '"Source Serif 4"', 'Georgia', 'serif'],
+        mono:    ['Ubuntu', '"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       colors: {
         // Aligned with src/index.css design tokens

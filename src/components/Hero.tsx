@@ -49,6 +49,8 @@ export default function Hero() {
 
   return (
     <section className="hero" ref={heroRef}>
+      <div className="hero__glow hero__glow--a" data-parallax="0.16" aria-hidden="true" />
+      <div className="hero__glow hero__glow--b" data-parallax="-0.12" aria-hidden="true" />
       <div className="hero__grid" data-parallax="-0.08" />
       <div className="hero__cursor" ref={cursorRef} style={{ opacity: 0 }} />
 
@@ -68,11 +70,9 @@ export default function Hero() {
 
       <div className="hero__meta">
         <div className="cell" data-reveal="up" data-delay="800">
-          <div className="lbl">Studio</div>
           <div className="val">An independent UX consultancy delivering product design, service design, and accessibility for public sector, healthcare, edtech, and startups. Remote worldwide.</div>
         </div>
         <div className="cell" data-reveal="up" data-delay="950">
-          <div className="lbl">Now</div>
           <div className="val">Taking briefs in product design, strategy &amp; discovery, service design, and WCAG 2.2 accessibility. Previously at MHCLG.</div>
         </div>
         <div className="cell" style={{ alignSelf: 'end' }} data-reveal="up" data-delay="1100">

@@ -23,7 +23,6 @@ export default function Brief() {
         <div className="brief__deco">&amp;</div>
 
         <div className="brief__body">
-          <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.72)' }}>Start a project</div>
           <h2>Have a brief? <span style={{ color: 'var(--teal-100)' }}>Let's build something.</span></h2>
           <p>Tell me a little about the work. I reply within two working days with a short intake and a time to talk.</p>
         </div>

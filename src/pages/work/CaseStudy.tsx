@@ -548,7 +548,7 @@ export default function CaseStudy() {
             <div className="grid md:grid-cols-2 gap-4">
               {project.tradeoffs.map(t => (
                 <div key={t.decision} className="border border-border rounded-xl p-6 bg-paper">
-                  <p className="font-display text-lg text-ink mb-2 leading-tight" style={{ fontFamily: '"Instrument Serif", serif' }}>{t.decision}</p>
+                  <p className="font-display text-lg text-ink mb-2 leading-tight">{t.decision}</p>
                   <p className="text-sm text-muted leading-relaxed">{t.reasoning}</p>
                 </div>
               ))}

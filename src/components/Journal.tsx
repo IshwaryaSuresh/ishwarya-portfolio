@@ -79,15 +79,13 @@ const ARTICLES = [
 ]
 
 export default function Journal() {
-  const featured = ARTICLES.slice(0, 3)
-  const rest = ARTICLES.slice(3)
+  const [lead, ...rest] = ARTICLES
 
   return (
     <section className="section" id="journal">
       <div className="container">
         <div className="sec-head">
           <div>
-            <div className="eyebrow" data-reveal="up">Design journal</div>
             <h2 className="h2" data-reveal="up" data-delay="80">The Design <span className="accent">Journal.</span></h2>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">
@@ -98,31 +96,30 @@ export default function Journal() {
           </div>
         </div>
 
-        {/* Featured 3 */}
-        <div className="journal-grid">
-          {featured.map((a, i) => (
-            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-card journal-card--link" data-reveal="up" data-delay={i * 100}>
-              <div className="journal-card__cat">{a.cat}</div>
-              <div className="journal-card__meta">
-                <span>{a.date}</span>
-              </div>
-              <h3 className="journal-card__title">{a.title}</h3>
-              <p className="journal-card__desc">{a.desc}</p>
-              <span className="journal-card__read">Read on Medium →</span>
-            </a>
-          ))}
-        </div>
+        <div className="jnl">
+          {/* Lead essay, typographic */}
+          <a href={lead.url} target="_blank" rel="noopener noreferrer" className="jnl__lead" data-reveal="up">
+            <div className="jnl__lead-kicker">{lead.cat} · {lead.date}</div>
+            <h3 className="jnl__lead-title">{lead.title}</h3>
+            <p className="jnl__lead-standfirst">{lead.desc}</p>
+            <span className="jnl__lead-cta">Read on Medium →</span>
+          </a>
 
-        {/* Remaining as compact list */}
-        <div className="journal-list">
-          {rest.map((a, i) => (
-            <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" className="journal-list__item" data-reveal="up" data-delay={i * 60}>
-              <span className="journal-list__cat">{a.cat}</span>
-              <span className="journal-list__title">{a.title}</span>
-              <span className="journal-list__date">{a.date}</span>
-              <span className="journal-list__arrow">→</span>
-            </a>
-          ))}
+          {/* Archive index */}
+          <div className="jnl__archive" data-reveal="up" data-delay="150">
+            <div className="jnl__archive-label">Archive</div>
+            <ol className="jnl__rows">
+              {rest.map((a, i) => (
+                <li key={a.title}>
+                  <a href={a.url} target="_blank" rel="noopener noreferrer" className="jnl__row">
+                    <span className="jnl__row-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="jnl__row-title">{a.title}</span>
+                    <span className="jnl__row-date">{a.date}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>

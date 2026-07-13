@@ -47,7 +47,7 @@ const experience = [
     ],
   },
   {
-    role: 'User Research Intern',
+    role: 'Product Design Intern',
     company: 'Nebula Labs',
     period: 'Feb to Apr 2023',
     location: 'Newcastle, UK',

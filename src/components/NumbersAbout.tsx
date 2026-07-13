@@ -88,7 +88,7 @@ export default function NumbersAbout() {
             <li className="about__cv-row" data-reveal="up" data-delay="320">
               <span className="about__cv-year">Feb to Apr 2023</span>
               <div>
-                <p className="about__cv-role">User Research Intern, Nebula Labs</p>
+                <p className="about__cv-role">Product Design Intern, Nebula Labs</p>
                 <p className="about__cv-meta">Led research for the Me &amp; You digital app, dementia care. Interviews, field studies, and co-design workshops with patients and carers, validated with Newcastle and Northumbria academics.</p>
               </div>
             </li>

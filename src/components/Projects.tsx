@@ -17,45 +17,6 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     num: '01',
-    title: 'MHCLG Grants Services',
-    client: 'Ministry of Housing, Communities & Local Government',
-    year: '2023–25',
-    role: 'Sole User Researcher on workstream',
-    desc: 'Research that evidenced WCAG 2.1 AA compliance across 200+ UK Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
-    metric: '200+ Local Authorities · WCAG 2.1 AA · GDS-assessed',
-    tags: ['Government', 'GDS', 'Accessibility', 'WCAG 2.1 AA'],
-    image: '/uploads/mhclg-hero.png',
-    placeholder: 'Government, MHCLG grants',
-    slug: 'mhclg-grants',
-  },
-  {
-    num: '02',
-    title: 'Ledgerline, B2B Fintech',
-    client: 'Self-initiated',
-    year: '2026',
-    role: 'UX Designer & Prototype Engineer',
-    desc: 'SME underwriting sandbox for credit analysts. 9 screens, 3 live applicant personas, explainable scoring, and a fully interactive browser prototype.',
-    metric: '9 screens · 3 personas · live prototype',
-    tags: ['Fintech B2B', 'Credit Risk', 'B2B SaaS'],
-    image: '/uploads/ledgerline/hero.png',
-    placeholder: 'Fintech B2B, SME underwriting',
-    slug: 'ledgerline',
-  },
-  {
-    num: '03',
-    title: 'Kaizen: Personal Finance OS',
-    client: 'Self-initiated concept',
-    year: '2026',
-    role: 'UX Designer & Prototype Engineer',
-    desc: 'An AI-assisted budget, index portfolio, and goal tracker in one quiet interface. Three visual directions, fully interactive, from marketing site to onboarding to dashboard.',
-    metric: '3 visual systems · onboarding → dashboard',
-    tags: ['Fintech Consumer', 'Product design', 'Prototype'],
-    image: '/uploads/kaizen/hero.png',
-    placeholder: 'Fintech Consumer, personal finance OS',
-    slug: 'kaizen',
-  },
-  {
-    num: '04',
     title: 'Me & You, Dementia care',
     client: 'NHS x King\'s College',
     year: '2024',
@@ -68,7 +29,7 @@ const PROJECTS: Project[] = [
     slug: 'me-and-you',
   },
   {
-    num: '05',
+    num: '02',
     title: 'Project Accord, Ambient air quality',
     client: 'Newcastle University · Open Lab',
     year: '2023',
@@ -79,6 +40,45 @@ const PROJECTS: Project[] = [
     image: '/uploads/Accord/Phone%20mockup_3@4x.png',
     placeholder: 'Academic, Accord ambient UX',
     slug: 'project-accord',
+  },
+  {
+    num: '03',
+    title: 'MHCLG Grants Services',
+    client: 'Ministry of Housing, Communities & Local Government',
+    year: '2023–25',
+    role: 'Sole User Researcher on workstream',
+    desc: 'Research that evidenced WCAG 2.1 AA compliance across 200+ UK Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
+    metric: '200+ Local Authorities · WCAG 2.1 AA · GDS-assessed',
+    tags: ['Government', 'GDS', 'Accessibility', 'WCAG 2.1 AA'],
+    image: '/uploads/mhclg-hero.png',
+    placeholder: 'Government, MHCLG grants',
+    slug: 'mhclg-grants',
+  },
+  {
+    num: '04',
+    title: 'Ledgerline, B2B Fintech',
+    client: 'Self-initiated',
+    year: '2026',
+    role: 'UX Designer & Prototype Engineer',
+    desc: 'SME underwriting sandbox for credit analysts. 9 screens, 3 live applicant personas, explainable scoring, and a fully interactive browser prototype.',
+    metric: '9 screens · 3 personas · live prototype',
+    tags: ['Fintech B2B', 'Credit Risk', 'B2B SaaS'],
+    image: '/uploads/ledgerline/hero.png',
+    placeholder: 'Fintech B2B, SME underwriting',
+    slug: 'ledgerline',
+  },
+  {
+    num: '05',
+    title: 'Kaizen: Personal Finance OS',
+    client: 'Self-initiated concept',
+    year: '2026',
+    role: 'UX Designer & Prototype Engineer',
+    desc: 'An AI-assisted budget, index portfolio, and goal tracker in one quiet interface. Three visual directions, fully interactive, from marketing site to onboarding to dashboard.',
+    metric: '3 visual systems · onboarding → dashboard',
+    tags: ['Fintech Consumer', 'Product design', 'Prototype'],
+    image: '/uploads/kaizen/hero.png',
+    placeholder: 'Fintech Consumer, personal finance OS',
+    slug: 'kaizen',
   },
   {
     num: '06',
@@ -121,25 +121,7 @@ function FeatureSpread({ p, index }: { p: Project; index: number }) {
   )
 }
 
-function IndexRow({ p, index }: { p: Project; index: number }) {
-  return (
-    <Link to={`/work/${p.slug}`} className="mag-index__row" data-reveal="up" data-delay={index * 70}>
-      <div className="mag-index__thumb">
-        {p.image ? <img src={p.image} alt="" loading="lazy" /> : <div className="placeholder" />}
-      </div>
-      <div className="mag-index__body">
-        <h4 className="mag-index__title">{p.title}</h4>
-        <p className="mag-index__desc">{p.desc}</p>
-      </div>
-      <span className="mag-index__page">p.{p.num}</span>
-    </Link>
-  )
-}
-
 export default function Projects() {
-  const features = PROJECTS.slice(0, 3)
-  const rest = PROJECTS.slice(3)
-
   return (
     <section className="section projects" id="work">
       <div className="container">
@@ -151,12 +133,7 @@ export default function Projects() {
         </div>
 
         <div className="spreads">
-          {features.map((p, i) => <FeatureSpread key={p.num} p={p} index={i} />)}
-        </div>
-
-        <div className="mag-index">
-          <div className="mag-index__label" data-reveal="up">Also in this issue</div>
-          {rest.map((p, i) => <IndexRow key={p.num} p={p} index={i} />)}
+          {PROJECTS.map((p, i) => <FeatureSpread key={p.num} p={p} index={i} />)}
         </div>
       </div>
     </section>

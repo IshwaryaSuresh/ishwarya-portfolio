@@ -445,7 +445,7 @@ export const projects: Project[] = [
     featured: true,
     heroImage: '/uploads/me-and-you/prototype-full.png',
     client: 'Nebula Labs, Newcastle',
-    role: 'User Research Intern',
+    role: 'Product Design Intern',
     duration: 'Feb · Apr 2023',
     tools: ['Paper prototypes', 'Miro', 'Figma'],
     problem: `Digital tools for people with dementia (PwD) are almost universally built around reminiscence - helping users remember the past. This neglects a critical insight: PwD retain more agency and quality of life when supported to engage with the present and future.\n\nHow might we design a digital tool that enhances quality of life for people with dementia - by focusing on present engagement and meaningful connection, rather than memory recall alone?`,

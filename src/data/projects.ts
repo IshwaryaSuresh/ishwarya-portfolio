@@ -93,6 +93,8 @@ export type Project = {
     references: { src: string; caption: string }[]
     mockups: { src: string; caption: string }[]
   }
+  workshopsTitle?: string
+  workshopsIntro?: string
   workshops?: { src: string; caption: string; blurred?: boolean }[]
   beforeAfter?: {
     label: string
@@ -836,6 +838,7 @@ export const projects: Project[] = [
         type: 'prototype',
       },
     ],
+    workshopsIntro: 'I shadowed "Milk, Two Sugars", a sensory theatre intervention by Woven Nest at a Newcastle care home. These sessions were the foundation of the research: the most engaged, joyful moments were present-tense, not recall-based, which set the app\'s focus on making and connecting.',
     workshops: [
       {
         src: '/uploads/me-and-you/workshop-accordion-v2.png',
@@ -1292,40 +1295,160 @@ export const projects: Project[] = [
       ],
       gap: 'No prior research had explored the design of a companion digital layer for shape-changing ambient displays like ActuAir - a gap this project was uniquely positioned to address through co-design.',
     },
+    processTitle: 'Process timeline',
     process: [
       {
+        phase: 'May 2022 · Discover',
         step: 'Literature Review',
         detail: 'Reviewed 30+ academic papers on indoor air quality, ambient information displays, and behaviour change theory. Key finding: ambient displays that integrate aesthetically into environments consistently outperform alert-based systems for sustained behaviour change - this became the theoretical backbone of the design direction.',
         image: '/uploads/Accord/Ede39b6f-c191-49ae-849e-1d2050a230ed%20rw_1920@4x.png',
         imageCaption: 'Concept sketches exploring a lichen-inspired inflation metaphor - mapping four device states to air quality levels (good → medium → poor → bad)',
       },
       {
+        phase: 'May 2022 · Discover',
         step: 'Expert Focus Group',
         detail: 'Convened HCI and environmental health academics from Newcastle and Northumbria Universities to validate the research direction and identify gaps in existing ambient technology design research.',
       },
       {
+        phase: 'Jun 2022 · Research',
         step: 'Contextual Observation',
         detail: 'Observed office professionals across 3 workplaces, mapping moments when environmental feedback would be least and most disruptive. Key observation: existing IAQ solutions were almost universally ignored - either because they demanded active engagement or triggered alerts at the wrong moment.',
       },
       {
+        phase: 'Jul 2022 · Co-design',
         step: 'Co-Design Workshop 1 - Storyboard Interpretation',
         detail: 'Participants worked with scenario-based storyboards to articulate how they\'d interpret and respond to the ActuAir device in a real office context. Key insights: participants consistently preferred the device at eye level or within peripheral vision - "out of sight, out of mind" was a common concern. Inflation/deflation feedback was interpreted differently by different users; some found it intuitive, others needed a brief onboarding moment to make the metaphor their own.',
         image: '/uploads/Accord/C143dd31-871a-4ec8-aff3-c7de47296496@4x.png',
         imageCaption: 'Scenario 1 storyboard - a cold day in the office with windows closed, CO₂ builds up and the ActuAir device shifts from green to red. Participants were asked: what would you do?',
       },
       {
+        phase: 'Jul 2022 · Co-design',
         step: 'Co-Design Workshop 2 - Companion App Design',
         detail: 'Participants co-created the companion app\'s direction through live device demonstrations and structured preference exercises. Key insights: users wanted to know why the air quality was poor, not just that it was. Positive framing - "Open a window for a 10-minute reset" - landed far better than "CO₂ level critical". Critically, users did not want notifications; they wanted an app they could open by choice, not one that interrupted them.',
         image: '/uploads/Accord/E0829f52-5051-4805-85cf-836c7de3bd6e@4x.png',
         imageCaption: 'Scenario 4 storyboard - ActuAir placed in a common area vs. a private cabin. Prompted participants to articulate how they\'d want IAQ communicated across different workspace contexts.',
       },
       {
+        phase: 'Aug - Sep 2022 · Test',
+        step: 'Prototype Testing',
+        detail: 'Ran task-based usability testing with 5 office professionals, combining evaluation of the companion app prototype with observational notes on ActuAir device interaction. 100% of participants took at least one air quality action prompted by the device; 50% reported increased IAQ awareness compared to before the study.',
+      },
+      {
+        phase: 'Oct 2022 · Iterate',
         step: 'Prototype Iteration',
-        detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on usability testing with 5 office professionals. A weekly summary view was added in response to direct participant feedback.',
+        detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on the usability testing findings. A weekly summary view was added in response to direct participant feedback.',
         image: '/uploads/Accord/D4d99d38-ee26-40da-9462-ad6d685dbaa3@4x.png',
         imageCaption: 'Paper prototype cards - hand-drawn screens from the first iteration round, testing layout, navigation flow, and notification opt-in before moving to digital hi-fidelity.',
       },
     ],
+    competitiveAnalysis: {
+      intro: 'I audited the ways offices already communicate air quality - from wall-mounted CO₂ monitors to mobile IAQ dashboards and building-level HVAC. The pattern was consistent: every existing solution either demanded active engagement or gave no signal at all. There was no product that combined a passive ambient signal with on-demand context.',
+      tools: [
+        {
+          name: 'Wall CO₂ monitors',
+          category: 'Numeric display',
+          verdict: 'Data without meaning',
+          features: [
+            { label: 'Ambient / peripheral', score: 'partial' },
+            { label: 'Voluntary engagement', score: 'partial' },
+            { label: 'Actionable framing', score: 'none' },
+            { label: 'Aesthetic integration', score: 'none' },
+            { label: 'Explains the "why"', score: 'none' },
+          ],
+          gap: 'Numbers with no interpretation. Users have to know what 850ppm means and what to do about it - almost no-one does.',
+        },
+        {
+          name: 'IAQ apps (Awair, Atmotube)',
+          category: 'Dashboard-first mobile',
+          verdict: 'Interrupts, then ignored',
+          features: [
+            { label: 'Ambient / peripheral', score: 'none' },
+            { label: 'Voluntary engagement', score: 'none' },
+            { label: 'Actionable framing', score: 'partial' },
+            { label: 'Aesthetic integration', score: 'none' },
+            { label: 'Explains the "why"', score: 'partial' },
+          ],
+          gap: 'Push notifications interrupt at the wrong moment. Dashboard-first design demands cognitive effort mid-work. Users disable notifications within a week.',
+        },
+        {
+          name: 'Building HVAC / thermostats',
+          category: 'Building-level control',
+          verdict: 'Invisible to occupants',
+          features: [
+            { label: 'Ambient / peripheral', score: 'none' },
+            { label: 'Voluntary engagement', score: 'none' },
+            { label: 'Actionable framing', score: 'none' },
+            { label: 'Aesthetic integration', score: 'partial' },
+            { label: 'Explains the "why"', score: 'none' },
+          ],
+          gap: 'IAQ is managed by facilities, invisible to occupants. Workers have no way to see, understand, or respond to their own air quality.',
+        },
+        {
+          name: 'ActuAir + Accord',
+          category: 'This project',
+          verdict: 'The gap it fills',
+          features: [
+            { label: 'Ambient / peripheral', score: 'full' },
+            { label: 'Voluntary engagement', score: 'full' },
+            { label: 'Actionable framing', score: 'full' },
+            { label: 'Aesthetic integration', score: 'full' },
+            { label: 'Explains the "why"', score: 'full' },
+          ],
+          gap: 'Passive peripheral signal via the physical display, plus on-demand context via the companion app. Visible when noticed, quiet when not.',
+        },
+      ],
+      takeaway: 'Every existing solution either demanded active engagement or gave no signal at all. The gap was a passive ambient signal paired with on-demand context - the two-layer model Accord occupies.',
+    },
+    assumptions: {
+      intro: 'I came in with assumptions inherited from IAQ product design. Research and co-design overturned most of them, and that is where the real design thinking happened.',
+      items: [
+        {
+          assumption: 'Alerts and push notifications drive behaviour change.',
+          finding: 'Interruptive alerts were universally dismissed. Users described existing IAQ apps as "annoying" and disabled notifications within days.',
+          pivot: 'Removed notifications entirely. The app is voluntary-open by default; the ambient device is the passive signal.',
+        },
+        {
+          assumption: 'Data dashboards help users make informed decisions.',
+          finding: 'Users did not want to interpret numeric CO₂ readings mid-work. They wanted to know what to do, not what the data said.',
+          pivot: 'Replaced dashboard-first framing with positive, action-first suggestions ("Open a window for a 10-minute reset").',
+        },
+        {
+          assumption: 'The lichen-inspired inflation metaphor is intuitive on first sight.',
+          finding: 'Users interpreted it differently. Some saw "breathing", some needed a legend. The metaphor only worked once users had claimed it as their own.',
+          pivot: 'Added a brief onboarding moment where each user authors their own interpretation of the ambient signal before use.',
+        },
+        {
+          assumption: 'Device placement is a secondary aesthetic decision.',
+          finding: 'Placement was the make-or-break variable. "Out of sight, out of mind" came up in every workshop. Eye-level or peripheral vision was non-negotiable.',
+          pivot: 'Placement guidance built into onboarding and setup, treating position as a first-class design decision.',
+        },
+        {
+          assumption: 'A companion app should mirror the device state exactly.',
+          finding: 'Users wanted the app to explain the "why" the device could not - context, cause, and what to do - rather than duplicate what they could already see.',
+          pivot: 'App became a cause-and-context layer, not a mirror. It fills the gap the ambient device cannot.',
+        },
+      ],
+    },
+    userJourney: {
+      intro: 'The target experience runs from a passive peripheral cue to a voluntary action, ending in a weekly reflective view. Every stage was designed to lower cognitive load and keep engagement optional.',
+      stages: [
+        { stage: 'Notice', action: 'The ActuAir device shifts colour and shape at the edge of the user\'s vision.', feeling: 'Aware, not interrupted', opportunity: 'Peripheral, not central - ambient by design.' },
+        { stage: 'Interpret', action: 'The user reads the shift against their own onboarded interpretation of the metaphor.', feeling: 'Confident, informed', opportunity: 'User-authored meaning replaces one-size-fits-all iconography.' },
+        { stage: 'Open (optional)', action: 'The user chooses to open the companion app for more context.', feeling: 'Curious, in control', opportunity: 'No push notifications - engagement is always voluntary.' },
+        { stage: 'Understand', action: 'The app explains why IAQ shifted (occupancy, ventilation, time of day).', feeling: 'Informed, oriented', opportunity: 'Cause-first, data-second framing.' },
+        { stage: 'Act', action: 'A positive, action-first suggestion prompts the user to open a window or take a break.', feeling: 'Empowered, unpressured', opportunity: '"Reset" framing outperformed "alert" framing across all participants.' },
+        { stage: 'Reflect', action: 'The user opens the weekly summary to see IAQ patterns across their week.', feeling: 'In control of their environment', opportunity: 'Voluntary review, added directly from participant feedback in usability testing.' },
+      ],
+    },
+    researchOps: {
+      intro: 'Working with office professionals in a live smart building meant research operations came first. How I recruited, gained consent, and ran sessions mattered as much as what I asked.',
+      items: [
+        { label: 'Ethical approval', detail: 'Obtained through Newcastle University / Open Lab prior to any workshop or in-situ deployment activity.' },
+        { label: 'Recruitment & access', detail: 'Participants recruited from occupants of a shared smart office building through purposive sampling, with support from the Open Lab research team. Participants were not incentivised.' },
+        { label: 'Consent & briefing', detail: 'Every participant briefed on the ActuAir device and the study aims before interaction. Consent was renewed at each session, and any participant was free to opt out at any point.' },
+        { label: 'Session design & safeguarding', detail: 'Workshops kept to ~60 minutes, run in familiar workspaces during working hours. Sessions combined the physical device demonstration with structured storyboard and preference exercises. Anonymised data handling throughout.' },
+      ],
+    },
     testing: {
       description: 'Testing was conducted with 5 office professionals. Sessions combined task-based evaluation of the companion app prototype with observational notes on ActuAir device interaction.',
       participants: '5 office professionals',
@@ -1347,6 +1470,8 @@ export const projects: Project[] = [
       ],
       outcome: 'These findings contributed directly to the paper accepted at ACM CHI 2024 - one of the world\'s leading conferences on human-computer interaction, with an acceptance rate of approximately 25%.',
     },
+    workshopsTitle: 'Co-design workshops',
+    workshopsIntro: 'Two co-design sessions with office professionals, run alongside live demonstrations of the ActuAir device. Participants worked through storyboards, articulated how they\'d interpret the ambient signal, and shaped the direction of the companion app.',
     workshops: [
       { src: '/uploads/Accord/69c1064c-b190-4c28-b6d7-e8ecea3f099e%20rw_1920@4x.png', caption: 'Workshop 1 in session - participants reviewing ActuAir scenario scripts alongside the physical device' },
       { src: '/uploads/Accord/187dea95-0d97-49c9-9c52-39873ee50318%20rw_3840@4x.png', caption: 'Participants working through storyboard scenarios at the workshop table' },

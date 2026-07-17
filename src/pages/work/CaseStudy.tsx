@@ -309,13 +309,10 @@ export default function CaseStudy() {
         {/* Ethnographic study, only if present */}
         {project.workshops && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Ethnographic study</p>
-            <p className="text-muted leading-relaxed mb-2">
-              I shadowed "Milk, Two Sugars", a sensory theatre intervention by Woven Nest at a Newcastle care home.
-              These sessions were the foundation of the research: the most engaged, joyful moments were present-tense,
-              not recall-based, which set the app's focus on making and connecting.
-            </p>
-            <p className="text-xs text-muted italic mb-6">Images showing participants have been blurred to protect privacy.</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.workshopsTitle ?? 'Ethnographic study'}</p>
+            {project.workshopsIntro && (
+              <p className="text-muted leading-relaxed mb-6">{project.workshopsIntro}</p>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {project.workshops.map((item, i) => (
                 <figure key={i} className="rounded-xl overflow-hidden border border-border group">

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Demo A — The Traveling Screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal-100:#C2FFFF; --teal-300:#61C0C0; --teal-500:#008080; --teal-700:#005F5F;
+    --ink:#0D0D0D; --off:#FAFAFA; --rule:#E6E6E6; --muted:#666;
+    --serif:"Instrument Serif",serif; --sans:"Inter",sans-serif; --mono:"JetBrains Mono",monospace;
+  }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:var(--sans); background:var(--off); color:var(--ink); overflow-x:hidden; }
+
+  .badge {
+    position:fixed; top:16px; left:16px; z-index:99;
+    font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    background:var(--ink); color:#fff; padding:8px 14px; border-radius:100px; opacity:.85;
+  }
+  .badge b { color:var(--teal-300); font-weight:500; }
+
+  section { min-height:100vh; display:flex; align-items:center; position:relative; padding:80px 6vw; }
+  .dark { background:var(--ink); color:#fff; }
+  .light { background:var(--off); color:var(--ink); }
+
+  .copy { max-width:560px; position:relative; z-index:2; }
+  .copy.right { margin-left:auto; }
+  .eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+  .eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--teal-500); }
+  .dark .eyebrow { color:rgba(255,255,255,.55); }
+  h1 { font-family:var(--serif); font-weight:400; font-size:clamp(52px,7.5vw,120px); line-height:.95; letter-spacing:-.02em; }
+  h2 { font-family:var(--serif); font-weight:400; font-size:clamp(40px,5vw,80px); line-height:.98; letter-spacing:-.02em; margin-bottom:20px; }
+  .teal { color:var(--teal-300); font-style:normal; }
+  .light .teal { color:var(--teal-500); }
+  p.lede { font-size:16px; line-height:1.6; color:var(--muted); max-width:44ch; }
+  .dark p.lede { color:rgba(255,255,255,.65); }
+  .metric { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal-500); margin-top:18px; }
+  .dark .metric { color:var(--teal-300); }
+
+  /* The traveler */
+  #traveler {
+    position:fixed; top:0; left:0; z-index:5;
+    width:min(44vw, 560px); aspect-ratio:16/10.5;
+    pointer-events:none; will-change:transform;
+    transform-origin:center;
+  }
+  .frame {
+    width:100%; height:100%;
+    background:#111; border-radius:14px; overflow:hidden;
+    box-shadow: 0 60px 120px -20px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
+    display:flex; flex-direction:column;
+  }
+  .chrome { height:30px; background:#1c1c1c; display:flex; align-items:center; gap:6px; padding:0 12px; flex-shrink:0; }
+  .chrome i { width:9px; height:9px; border-radius:50%; background:#3a3a3a; }
+  .chrome i:nth-child(1){ background:#e0655a; } .chrome i:nth-child(2){ background:#e0b25a; } .chrome i:nth-child(3){ background:#67b36a; }
+  .chrome span { font-family:var(--mono); font-size:9px; color:#777; margin-left:8px; letter-spacing:.06em; }
+  .screen { position:relative; flex:1; background:#000; }
+  .screen img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; opacity:0; transition:opacity .45s ease; }
+  .screen img.on { opacity:1; }
+
+  .scrollhint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); animation:pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity:.3; } }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.5); padding:60px 6vw; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; text-align:center; }
+
+  @media (max-width: 760px) {
+    #traveler { width:78vw; }
+    section { padding:64px 24px; align-items:flex-end; padding-bottom:46vh; }
+    .copy, .copy.right { margin:0; }
+  }
+</style>
+</head>
+<body>
+<div class="badge">Demo A · <b>The Traveling Screen</b> · scroll</div>
+
+<div id="traveler" aria-hidden="true">
+  <div class="frame">
+    <div class="chrome"><i></i><i></i><i></i><span id="urlbar">kaizen.app</span></div>
+    <div class="screen">
+      <img src="/uploads/kaizen/hero.png" alt="" class="on" />
+      <img src="/uploads/ledgerline/hero.png" alt="" />
+      <img src="/uploads/me-and-you/prototype-multi.png" alt="" />
+      <img src="/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/mockup.png" alt="" />
+    </div>
+  </div>
+</div>
+
+<section class="dark" data-kf='{"x":58,"y":26,"rx":8,"ry":-16,"rz":2,"s":1,"img":0,"url":"kaizen.app"}'>
+  <div class="copy">
+    <div class="eyebrow">MadeForHumans · Est. 2025</div>
+    <h1>I design products<br/>made <em class="teal">for humans.</em></h1>
+    <p class="lede" style="margin-top:24px">Scroll. The work follows you down the page.</p>
+  </div>
+  <div class="scrollhint">↓ scroll ↓</div>
+</section>
+
+<section class="light" data-kf='{"x":6,"y":22,"rx":6,"ry":14,"rz":-2,"s":0.94,"img":1,"url":"ledgerline.tools"}'>
+  <div class="copy right">
+    <div class="eyebrow">Selected work · 02</div>
+    <h2>Ledgerline, <span class="teal">B2B fintech.</span></h2>
+    <p class="lede">SME underwriting sandbox for credit analysts. Explainable scoring, red-flag surfaces, and a rules editor. Built as a working coded prototype.</p>
+    <div class="metric">↓ 40% analyst review time · 94% task completion</div>
+  </div>
+</section>
+
+<section class="dark" data-kf='{"x":56,"y":24,"rx":7,"ry":-12,"rz":1,"s":0.9,"img":2,"url":"me-and-you.health"}'>
+  <div class="copy">
+    <div class="eyebrow">Selected work · 03</div>
+    <h2 style="color:#fff">Me &amp; You, <span class="teal">dementia care.</span></h2>
+    <p class="lede">Companion interactions for people living with dementia and their carers. A year of co-design: 28 participants, 3 piloted prototypes.</p>
+    <div class="metric">28 participants · Discovery to Alpha</div>
+  </div>
+</section>
+
+<section class="light" data-kf='{"x":8,"y":20,"rx":5,"ry":10,"rz":-1,"s":0.92,"img":3,"url":"tfl.gov.uk"}'>
+  <div class="copy right">
+    <div class="eyebrow">Selected work · 04</div>
+    <h2>TfL, <span class="teal">payments campaign.</span></h2>
+    <p class="lede">Inclusive UX for the Care Leaver Oyster Card campaign. A high-fidelity prototype guiding 8.4m daily riders through a simplified sign-up journey.</p>
+    <div class="metric">8.4M daily riders · inclusive design</div>
+  </div>
+</section>
+
+<section class="dark" data-kf='{"x":31,"y":16,"rx":0,"ry":0,"rz":0,"s":1.04,"img":0,"url":"madeforhumans.tech"}'>
+  <div class="copy" style="text-align:center; margin:0 auto; padding-top:44vh">
+    <h2 style="color:#fff">Want this energy on <span class="teal">your product?</span></h2>
+    <p class="lede" style="margin:0 auto">The screen straightens out, docks centre, and hands over to the contact form.</p>
+  </div>
+</section>
+
+<footer>Demo A of 3 · madeforhumans.tech/demos/</footer>
+
+<script>
+(() => {
+  const traveler = document.getElementById('traveler');
+  const urlbar = document.getElementById('urlbar');
+  const imgs = [...document.querySelectorAll('.screen img')];
+  const sections = [...document.querySelectorAll('section[data-kf]')];
+  const KF = sections.map(s => JSON.parse(s.dataset.kf));
+  const isMobile = () => matchMedia('(max-width: 760px)').matches;
+
+  // On mobile, override x/y so the screen sits low-centre and copy reads above it
+  const mobileKF = KF.map(k => ({ ...k, x: 11, y: 52, s: 1 }));
+
+  let cur = { ...KF[0] };
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = t => t * t * (3 - 2 * t); // smoothstep
+
+  let activeImg = 0;
+  function setImg(i, url) {
+    if (i === activeImg) return;
+    imgs[activeImg].classList.remove('on');
+    imgs[i].classList.add('on');
+    activeImg = i;
+    urlbar.textContent = url;
+  }
+
+  function target() {
+    const kfs = isMobile() ? mobileKF : KF;
+    const vh = innerHeight;
+    const y = scrollY;
+    const anchors = sections.map(s => s.offsetTop - vh * 0.22);
+    let i = 0;
+    while (i < anchors.length - 1 && y >= anchors[i + 1]) i++;
+    const a = kfs[i];
+    const b = kfs[Math.min(i + 1, kfs.length - 1)];
+    const span = (anchors[i + 1] ?? (document.body.scrollHeight - vh)) - anchors[i];
+    const u = ease(Math.min(1, Math.max(0, (y - anchors[i]) / Math.max(1, span))));
+    // swap image at midpoint of a transition
+    const imgIdx = u > 0.5 ? b.img : a.img;
+    const url = u > 0.5 ? b.url : a.url;
+    setImg(imgIdx, url);
+    return {
+      x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u),
+      rx: lerp(a.rx, b.rx, u), ry: lerp(a.ry, b.ry, u), rz: lerp(a.rz, b.rz, u),
+      s: lerp(a.s, b.s, u),
+    };
+  }
+
+  function tick() {
+    const t = target();
+    // spring-ish smoothing
+    for (const k of ['x','y','rx','ry','rz','s']) cur[k] = lerp(cur[k], t[k], 0.09);
+    traveler.style.transform =
+      `translate(${cur.x}vw, ${cur.y}vh) perspective(1400px) ` +
+      `rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) rotateZ(${cur.rz}deg) scale(${cur.s})`;
+    requestAnimationFrame(tick);
+  }
+  cur = { ...(isMobile() ? mobileKF[0] : KF[0]) };
+  tick();
+})();
+</script>
+</body>
+</html>

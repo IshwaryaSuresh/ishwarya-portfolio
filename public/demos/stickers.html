@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Demo C — Sticker Physics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal-100:#C2FFFF; --teal-300:#61C0C0; --teal-500:#008080; --teal-700:#005F5F;
+    --ink:#0D0D0D; --off:#FAFAFA; --muted:#666;
+    --serif:"Instrument Serif",serif; --sans:"Inter",sans-serif; --mono:"JetBrains Mono",monospace;
+  }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:var(--sans); background:var(--off); color:var(--ink); overflow-x:hidden; }
+
+  .badge {
+    position:fixed; top:16px; left:16px; z-index:99;
+    font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    background:var(--ink); color:#fff; padding:8px 14px; border-radius:100px; opacity:.85;
+  }
+  .badge b { color:var(--teal-300); font-weight:500; }
+
+  .hero {
+    position:relative; height:100vh; overflow:hidden;
+    background:var(--ink); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    touch-action:none;
+  }
+  .hero__center { text-align:center; position:relative; z-index:1; pointer-events:none; }
+  .hero h1 { font-family:var(--serif); font-weight:400; font-size:clamp(48px,7vw,110px); line-height:.95; letter-spacing:-.02em; }
+  .hero .teal { color:var(--teal-300); font-style:normal; }
+  .hint {
+    margin-top:22px; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+  }
+  .hint b { color:var(--teal-300); font-weight:500; }
+
+  .sticker {
+    position:absolute; z-index:2;
+    padding:18px 22px; border-radius:14px;
+    cursor:grab; user-select:none; touch-action:none;
+    will-change:transform;
+    box-shadow: 0 18px 40px -12px rgba(0,0,0,.55);
+    max-width:250px;
+    transition:box-shadow .2s;
+  }
+  .sticker:active { cursor:grabbing; }
+  .sticker.drag { box-shadow: 0 34px 70px -12px rgba(0,0,0,.7); z-index:3; }
+  .sticker .cat { font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; opacity:.7; margin-bottom:6px; }
+  .sticker .name { font-family:var(--serif); font-size:26px; line-height:1.02; letter-spacing:-.01em; }
+  .sticker .met { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; margin-top:10px; opacity:.8; }
+  .s-white { background:#fff; color:var(--ink); }
+  .s-teal { background:var(--teal-500); color:#fff; }
+  .s-mint { background:var(--teal-100); color:var(--teal-700); }
+  .s-ink { background:#1a1a1a; color:#fff; border:1px solid rgba(255,255,255,.18); }
+  .s-star {
+    background:var(--teal-300); color:var(--ink); border-radius:50%;
+    width:110px; height:110px; max-width:none;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-size:44px; padding:0;
+  }
+
+  section.stub { min-height:70vh; display:flex; align-items:center; padding:80px 6vw; }
+  .stub h2 { font-family:var(--serif); font-weight:400; font-size:clamp(36px,4.5vw,64px); letter-spacing:-.02em; }
+  .stub .teal { color:var(--teal-500); font-style:normal; }
+  .stub p { color:var(--muted); margin-top:14px; max-width:52ch; line-height:1.6; }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.5); padding:60px 6vw; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; text-align:center; }
+</style>
+</head>
+<body>
+<div class="badge">Demo C · <b>Sticker Physics</b> · drag &amp; throw</div>
+
+<div class="hero" id="arena">
+  <div class="hero__center">
+    <h1>I design products<br/>made <em class="teal">for humans.</em></h1>
+    <div class="hint"><b>Grab a project</b> and throw it. Go on.</div>
+  </div>
+
+  <div class="sticker s-teal"  data-x="8"  data-y="14" data-r="-6"><div class="cat">Government</div><div class="name">MHCLG Grants</div><div class="met">200+ Local Authorities · WCAG AA</div></div>
+  <div class="sticker s-white" data-x="70" data-y="12" data-r="4"><div class="cat">Fintech B2B</div><div class="name">Ledgerline</div><div class="met">↓40% review time</div></div>
+  <div class="sticker s-mint"  data-x="76" data-y="62" data-r="-3"><div class="cat">Fintech consumer</div><div class="name">Kaizen</div><div class="met">3 visual systems</div></div>
+  <div class="sticker s-white" data-x="12" data-y="66" data-r="7"><div class="cat">Healthcare</div><div class="name">Me &amp; You</div><div class="met">28 co-design participants</div></div>
+  <div class="sticker s-ink"   data-x="44" data-y="76" data-r="-5"><div class="cat">Public sector</div><div class="name">TfL Oyster</div><div class="met">8.4M daily riders</div></div>
+  <div class="sticker s-star"  data-x="58" data-y="34" data-r="10">✦</div>
+</div>
+
+<section class="stub">
+  <div>
+    <h2>The rest of the site continues <span class="teal">as normal.</span></h2>
+    <p>The stickers live only in the hero. Below it, the current homepage sections (work list, about, services, process) carry on unchanged, so the playfulness stays in one contained, memorable moment.</p>
+  </div>
+</section>
+
+<footer>Demo C of 3 · madeforhumans.tech/demos/</footer>
+
+<script>
+(() => {
+  const arena = document.getElementById('arena');
+  const stickers = [...document.querySelectorAll('.sticker')];
+  const bodies = stickers.map(el => {
+    const W = arena.clientWidth, H = arena.clientHeight;
+    return {
+      el,
+      x: (+el.dataset.x / 100) * W,
+      y: (+el.dataset.y / 100) * H,
+      r: +el.dataset.r,
+      vx: 0, vy: 0, vr: 0,
+      drag: false, px: 0, py: 0, lastT: 0,
+    };
+  });
+
+  const FRICTION = 0.985, BOUNCE = 0.72, WOBBLE = 0.96;
+
+  bodies.forEach(b => {
+    b.el.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      b.drag = true; b.el.classList.add('drag');
+      b.el.setPointerCapture(e.pointerId);
+      b.px = e.clientX; b.py = e.clientY; b.lastT = performance.now();
+      b.vx = 0; b.vy = 0;
+    });
+    b.el.addEventListener('pointermove', e => {
+      if (!b.drag) return;
+      const now = performance.now();
+      const dt = Math.max(8, now - b.lastT);
+      const dx = e.clientX - b.px, dy = e.clientY - b.py;
+      b.x += dx; b.y += dy;
+      b.vx = dx / dt * 16; b.vy = dy / dt * 16;
+      b.vr = b.vx * 0.35;
+      b.px = e.clientX; b.py = e.clientY; b.lastT = now;
+    });
+    const drop = () => { b.drag = false; b.el.classList.remove('drag'); };
+    b.el.addEventListener('pointerup', drop);
+    b.el.addEventListener('pointercancel', drop);
+  });
+
+  function tick() {
+    const W = arena.clientWidth, H = arena.clientHeight;
+    for (const b of bodies) {
+      const w = b.el.offsetWidth, h = b.el.offsetHeight;
+      if (!b.drag) {
+        b.x += b.vx; b.y += b.vy; b.r += b.vr;
+        b.vx *= FRICTION; b.vy *= FRICTION; b.vr *= WOBBLE;
+        // bounce off arena walls
+        if (b.x < 0) { b.x = 0; b.vx = Math.abs(b.vx) * BOUNCE; b.vr = -b.vr * .6; }
+        if (b.x + w > W) { b.x = W - w; b.vx = -Math.abs(b.vx) * BOUNCE; b.vr = -b.vr * .6; }
+        if (b.y < 0) { b.y = 0; b.vy = Math.abs(b.vy) * BOUNCE; }
+        if (b.y + h > H) { b.y = H - h; b.vy = -Math.abs(b.vy) * BOUNCE; }
+      } else {
+        // clamp while dragging too
+        b.x = Math.min(Math.max(b.x, 0), W - w);
+        b.y = Math.min(Math.max(b.y, 0), H - h);
+      }
+      b.el.style.transform = `translate(${b.x}px, ${b.y}px) rotate(${b.r}deg)`;
+      b.el.style.left = '0'; b.el.style.top = '0';
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Demo B — The Brand Object</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal-100:#C2FFFF; --teal-300:#61C0C0; --teal-500:#008080; --teal-700:#005F5F;
+    --ink:#0D0D0D; --off:#FAFAFA; --muted:#666;
+    --serif:"Instrument Serif",serif; --sans:"Inter",sans-serif; --mono:"JetBrains Mono",monospace;
+  }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:var(--sans); background:var(--ink); color:#fff; overflow-x:hidden; }
+
+  .badge {
+    position:fixed; top:16px; left:16px; z-index:99;
+    font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    background:var(--teal-500); color:#fff; padding:8px 14px; border-radius:100px; opacity:.9;
+  }
+
+  section { min-height:100vh; display:flex; align-items:center; position:relative; padding:80px 6vw; }
+  .light { background:var(--off); color:var(--ink); }
+  .copy { max-width:560px; position:relative; z-index:2; }
+  .copy.right { margin-left:auto; }
+  .eyebrow { font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.5); display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+  .eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--teal-300); }
+  .light .eyebrow { color:var(--muted); }
+  .light .eyebrow::before { background:var(--teal-500); }
+  h1 { font-family:var(--serif); font-weight:400; font-size:clamp(52px,7.5vw,120px); line-height:.95; letter-spacing:-.02em; }
+  h2 { font-family:var(--serif); font-weight:400; font-size:clamp(40px,5vw,80px); line-height:.98; letter-spacing:-.02em; margin-bottom:20px; }
+  .teal { color:var(--teal-300); font-style:normal; }
+  .light .teal { color:var(--teal-500); }
+  p.lede { font-size:16px; line-height:1.6; color:rgba(255,255,255,.65); max-width:44ch; }
+  .light p.lede { color:var(--muted); }
+
+  /* The coin */
+  #obj {
+    position:fixed; top:0; left:0; z-index:5;
+    width:min(30vw, 340px); aspect-ratio:1;
+    pointer-events:none; will-change:transform;
+  }
+  .coin { position:absolute; inset:0; transform-style:preserve-3d; }
+  .slice {
+    position:absolute; inset:0; border-radius:50%;
+    background:var(--teal-700);
+  }
+  .face {
+    position:absolute; inset:0; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    backface-visibility:hidden;
+  }
+  .face--front {
+    background:radial-gradient(circle at 32% 28%, var(--teal-300), var(--teal-500) 55%, var(--teal-700));
+    box-shadow: inset 0 0 60px rgba(0,0,0,.25);
+  }
+  .face--back {
+    background:radial-gradient(circle at 68% 28%, var(--teal-300), var(--teal-500) 55%, var(--teal-700));
+    transform: rotateY(180deg) translateZ(22px);
+  }
+  .face--front { transform: translateZ(22px); }
+  .face span {
+    font-family:var(--serif); font-style:italic; color:var(--teal-100);
+    font-size:120px; line-height:1; text-shadow:0 4px 30px rgba(0,0,0,.3);
+    user-select:none;
+  }
+  .face--back span { font-size:72px; font-style:normal; }
+  .halo {
+    position:absolute; inset:-18%; border-radius:50%;
+    background:radial-gradient(circle, rgba(0,128,128,.35), transparent 65%);
+    filter:blur(12px); z-index:-1;
+  }
+
+  .scrollhint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); animation:pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity:.3; } }
+  footer { background:var(--ink); color:rgba(255,255,255,.5); padding:60px 6vw; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; text-align:center; }
+
+  @media (max-width:760px) {
+    #obj { width:52vw; }
+    section { padding:64px 24px; align-items:flex-end; padding-bottom:44vh; }
+    .copy, .copy.right { margin:0; }
+  }
+</style>
+</head>
+<body>
+<div class="badge">Demo B · The Brand Object · scroll</div>
+
+<div id="obj" aria-hidden="true">
+  <div class="coin" id="coin">
+    <div class="halo"></div>
+    <div class="slice" style="transform:translateZ(-20px)"></div>
+    <div class="slice" style="transform:translateZ(-14px)"></div>
+    <div class="slice" style="transform:translateZ(-8px)"></div>
+    <div class="slice" style="transform:translateZ(-2px)"></div>
+    <div class="slice" style="transform:translateZ(4px)"></div>
+    <div class="slice" style="transform:translateZ(10px)"></div>
+    <div class="slice" style="transform:translateZ(16px)"></div>
+    <div class="face face--front"><span>M</span></div>
+    <div class="face face--back"><span>✦</span></div>
+  </div>
+</div>
+
+<section data-kf='{"x":60,"y":24,"s":1}'>
+  <div class="copy">
+    <div class="eyebrow">MadeForHumans · Est. 2025</div>
+    <h1>I design products<br/>made <em class="teal">for humans.</em></h1>
+    <p class="lede" style="margin-top:24px">The monogram spins with your scroll and escorts you through the page.</p>
+  </div>
+  <div class="scrollhint">↓ scroll ↓</div>
+</section>
+
+<section class="light" data-kf='{"x":10,"y":30,"s":0.72}'>
+  <div class="copy right">
+    <div class="eyebrow">Selected work</div>
+    <h2>Six briefs, four <span class="teal">sectors.</span></h2>
+    <p class="lede">Fintech, healthcare, edtech and public sector. The object shrinks and tucks beside the work list, then keeps you company down the page.</p>
+  </div>
+</section>
+
+<section data-kf='{"x":62,"y":34,"s":0.6}'>
+  <div class="copy">
+    <div class="eyebrow">About the studio</div>
+    <h2 style="color:#fff">A product designer <span class="teal">made for humans.</span></h2>
+    <p class="lede">5+ years. 200+ Local Authorities at WCAG 2.1 AA. Previously MHCLG, now independent.</p>
+  </div>
+</section>
+
+<section class="light" data-kf='{"x":35,"y":18,"s":1.15}'>
+  <div class="copy" style="text-align:center; margin:0 auto; padding-top:38vh">
+    <h2>Want to work <span class="teal">together?</span></h2>
+    <p class="lede" style="margin:0 auto">It grows back to full size for the closing ask, spinning to a stop on the monogram face.</p>
+  </div>
+</section>
+
+<footer>Demo B of 3 · madeforhumans.tech/demos/</footer>
+
+<script>
+(() => {
+  const obj = document.getElementById('obj');
+  const coin = document.getElementById('coin');
+  const sections = [...document.querySelectorAll('section[data-kf]')];
+  const KF = sections.map(s => JSON.parse(s.dataset.kf));
+  const isMobile = () => matchMedia('(max-width:760px)').matches;
+  const mobileKF = KF.map(k => ({ ...k, x: 24, y: 54 }));
+
+  let cur = { ...KF[0], spin: 0 };
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = t => t * t * (3 - 2 * t);
+
+  function target() {
+    const kfs = isMobile() ? mobileKF : KF;
+    const vh = innerHeight;
+    const y = scrollY;
+    const anchors = sections.map(s => s.offsetTop - vh * 0.22);
+    let i = 0;
+    while (i < anchors.length - 1 && y >= anchors[i + 1]) i++;
+    const a = kfs[i], b = kfs[Math.min(i + 1, kfs.length - 1)];
+    const span = (anchors[i + 1] ?? (document.body.scrollHeight - vh)) - anchors[i];
+    const u = ease(Math.min(1, Math.max(0, (y - anchors[i]) / Math.max(1, span))));
+    // total scroll progress drives the spin: 2 full turns over the page
+    const p = y / (document.body.scrollHeight - vh);
+    return { x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u), s: lerp(a.s, b.s, u), spin: p * 720 };
+  }
+
+  function tick() {
+    const t = target();
+    for (const k of ['x','y','s','spin']) cur[k] = lerp(cur[k], t[k], 0.09);
+    obj.style.transform = `translate(${cur.x}vw, ${cur.y}vh) scale(${cur.s})`;
+    coin.style.transform = `perspective(1200px) rotateX(6deg) rotateY(${cur.spin}deg)`;
+    requestAnimationFrame(tick);
+  }
+  cur = { ...(isMobile() ? mobileKF[0] : KF[0]), spin: 0 };
+  tick();
+})();
+</script>
+</body>
+</html>

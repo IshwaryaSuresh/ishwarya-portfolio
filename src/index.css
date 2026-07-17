@@ -102,6 +102,18 @@ body.hero-light .nav__inner {
 .mono { font-family: var(--font-mono); }
 .rule { height: 1px; background: var(--rule); border: 0; margin: 0; }
 
+/* Case study: match homepage typography — serif display for headings, mono for labels */
+.case-study h1,
+.case-study h2,
+.case-study h3,
+.case-study h4,
+.case-study blockquote {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+.case-study h1 { font-weight: 500; }
+.case-study .uppercase { font-family: var(--font-mono); }
+
 .sec-head {
   display: grid;
   grid-template-columns: 1fr auto;

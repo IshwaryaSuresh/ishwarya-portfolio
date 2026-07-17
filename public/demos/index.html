@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Homepage interaction demos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --teal-300:#61C0C0; --teal-500:#008080; --ink:#0D0D0D; --off:#FAFAFA; --muted:#666; --rule:#E6E6E6; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:"Inter",sans-serif; background:var(--ink); color:#fff; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px; }
+  main { max-width:720px; width:100%; }
+  .eyebrow { font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:16px; }
+  h1 { font-family:"Instrument Serif",serif; font-weight:400; font-size:clamp(40px,6vw,72px); line-height:.98; letter-spacing:-.02em; margin-bottom:14px; }
+  h1 em { color:var(--teal-300); font-style:normal; }
+  p.lede { color:rgba(255,255,255,.6); line-height:1.6; margin-bottom:44px; max-width:52ch; }
+  a.card {
+    display:block; text-decoration:none; color:inherit;
+    border:1px solid rgba(255,255,255,.14); border-radius:16px;
+    padding:26px 28px; margin-bottom:14px;
+    transition:border-color .25s, transform .25s;
+  }
+  a.card:hover { border-color:var(--teal-300); transform:translateY(-2px); }
+  .card .tag { font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--teal-300); margin-bottom:8px; }
+  .card h2 { font-family:"Instrument Serif",serif; font-weight:400; font-size:30px; letter-spacing:-.01em; margin-bottom:6px; }
+  .card p { color:rgba(255,255,255,.55); font-size:14px; line-height:1.55; }
+  .note { margin-top:36px; font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.35); }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">MadeForHumans · internal</div>
+  <h1>Three ways to make the homepage <em>alive.</em></h1>
+  <p class="lede">Each demo uses your real headline, palette, and project content. Try all three on desktop and on your phone, then pick the one that should become the homepage.</p>
+
+  <a class="card" href="/demos/traveler.html">
+    <div class="tag">Demo A · scroll-driven</div>
+    <h2>The Traveling Screen</h2>
+    <p>A floating browser window carrying your real work travels down the page, docking beside each section and swapping screens as it goes. The closest translation of the yadom jar, but the object is your portfolio.</p>
+  </a>
+
+  <a class="card" href="/demos/orb.html">
+    <div class="tag">Demo B · scroll-driven</div>
+    <h2>The Brand Object</h2>
+    <p>A 3D teal monogram coin spins with your scroll and escorts the visitor through the page. More atmospheric, less literal. Keeps attention on the text.</p>
+  </a>
+
+  <a class="card" href="/demos/stickers.html">
+    <div class="tag">Demo C · drag &amp; throw</div>
+    <h2>Sticker Physics</h2>
+    <p>Your projects as loud draggable stickers scattered over the hero. Grab one, throw it, watch it bounce. Yadom's playful energy, contained to one memorable moment.</p>
+  </a>
+
+  <div class="note">Unlisted · not linked from the site · delete anytime</div>
+</main>
+</body>
+</html>

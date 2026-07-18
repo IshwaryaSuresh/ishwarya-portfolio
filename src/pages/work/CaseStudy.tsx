@@ -97,6 +97,61 @@ function ProcessStep({ step, index }: { step: { step: string; detail: string; im
   )
 }
 
+function PersonaCard({ persona }: { persona: Persona }) {
+  return (
+    <div className="border border-border rounded-2xl overflow-hidden">
+      {persona.photo && (
+        <div className="h-52 overflow-hidden bg-paper">
+          <img
+            src={persona.photo}
+            alt={persona.name}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: persona.photoPosition ?? '50% 20%' }}
+          />
+        </div>
+      )}
+      <div className="p-5 space-y-4">
+        <div>
+          <h4 className="font-bold text-ink text-base">{persona.name}, {persona.age}</h4>
+          <p className="text-xs font-medium uppercase tracking-widest text-accent mt-1">{persona.type}</p>
+          <p className="text-muted text-sm mt-2 leading-relaxed">{persona.description}</p>
+        </div>
+        <div className="pt-4 border-t border-border space-y-4">
+          <div>
+            <p className="text-xs font-semibold text-ink mb-2">Needs</p>
+            <ul className="space-y-1.5">
+              {persona.needs.map(n => (
+                <li key={n} className="flex items-start gap-2 text-sm text-muted">
+                  <span className="text-accent mt-0.5 flex-shrink-0">✓</span>{n}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-ink mb-2">Frustrations</p>
+            <ul className="space-y-1.5">
+              {persona.frustrations.map(f => (
+                <li key={f} className="flex items-start gap-2 text-sm text-muted">
+                  <span className="text-rose-400 mt-0.5 flex-shrink-0">✕</span>{f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-paper rounded-xl p-3">
+            <p className="text-sm text-muted italic">"{persona.goal}"</p>
+          </div>
+        </div>
+        {persona.reflection && (
+          <div className="pt-4 border-t border-border">
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-1.5">Design reflection</p>
+            <p className="text-sm text-muted leading-relaxed">{persona.reflection}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function FragmentRow({
   row,
   columns,
@@ -145,7 +200,7 @@ function FragmentRow({
 }
 
 const typeColors: Record<string, string> = {
-  'Fintech B2B': 'bg-blue-50 text-blue-700 border-blue-200',
+  'Fintech B2B': 'bg-paper text-ink border-border',
   'Fintech Consumer': 'bg-indigo-50 text-indigo-700 border-indigo-200',
   'Social Impact': 'bg-emerald-50 text-emerald-700 border-emerald-200',
   'Edtech': 'bg-purple-50 text-purple-700 border-purple-200',
@@ -420,7 +475,7 @@ export default function CaseStudy() {
         )}
 
         {/* Key insight */}
-        <section className="bg-accent-light border border-blue-200 rounded-2xl p-8">
+        <section className="bg-accent-light border border-accent/30 rounded-2xl p-8">
           <p className="text-xs font-medium uppercase tracking-widest text-accent mb-3">Key insight</p>
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
         </section>
@@ -443,14 +498,6 @@ export default function CaseStudy() {
                     <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-accent text-paper grid place-items-center text-sm font-semibold shadow-sm">
                       {i + 1}
                     </span>
-
-                    {/* phase label + skimmable headline */}
-                    {it.phase && (
-                      <p className="text-[11px] font-mono uppercase tracking-widest text-muted mb-1">{it.phase}</p>
-                    )}
-                    {it.headline && (
-                      <h3 className="text-base md:text-lg font-bold text-ink mb-3 leading-snug">{it.headline}</h3>
-                    )}
 
                     {/* compact assumed → found → pivoted */}
                     <div className="border border-border rounded-2xl overflow-hidden">
@@ -538,88 +585,50 @@ export default function CaseStudy() {
         {/* Roles & personas, only if present */}
         {project.personas && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Roles &amp; personas</p>
-            <p className="text-muted leading-relaxed mb-8">Three distinct roles shaped the design, each represented by a persona grounded in the co-design and ethnographic work.</p>
-            {(() => {
-              const roleOrder: string[] = []
-              const byRole: Record<string, Persona[]> = {}
-              project.personas.forEach(p => {
-                const role = p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type
-                if (!byRole[role]) { byRole[role] = []; roleOrder.push(role) }
-                byRole[role].push(p)
-              })
-              return (
-                <div className="space-y-10">
-                  {roleOrder.map(role => {
-                    const meta = project.personaRoles?.find(r => r.role === role)
-                    return (
-                      <div key={role}>
-                        <div className="mb-4 pb-3 border-b border-border">
-                          <div className="flex items-baseline gap-3 flex-wrap">
-                            <h3 className="font-bold text-ink text-lg">{role}</h3>
-                            {meta && <span className="text-xs font-medium uppercase tracking-widest text-accent">{meta.who}</span>}
-                          </div>
-                          {meta && <p className="text-sm text-muted mt-1 leading-relaxed">{meta.definition}</p>}
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {byRole[role].map(persona => (
-                            <div key={persona.name} className="border border-border rounded-2xl overflow-hidden">
-                              {persona.photo && (
-                                <div className="h-52 overflow-hidden bg-paper">
-                                  <img
-                                    src={persona.photo}
-                                    alt={persona.name}
-                                    className="w-full h-full object-cover"
-                                    style={{ objectPosition: persona.photoPosition ?? '50% 20%' }}
-                                  />
-                                </div>
-                              )}
-                              <div className="p-5 space-y-4">
-                                <div>
-                                  <h4 className="font-bold text-ink text-base">{persona.name}, {persona.age}</h4>
-                                  <p className="text-muted text-sm mt-1 leading-relaxed">{persona.description}</p>
-                                </div>
-                                <div className="pt-4 border-t border-border space-y-4">
-                                  <div>
-                                    <p className="text-xs font-semibold text-ink mb-2">Needs</p>
-                                    <ul className="space-y-1.5">
-                                      {persona.needs.map(n => (
-                                        <li key={n} className="flex items-start gap-2 text-sm text-muted">
-                                          <span className="text-accent mt-0.5 flex-shrink-0">✓</span>{n}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                  <div>
-                                    <p className="text-xs font-semibold text-ink mb-2">Frustrations</p>
-                                    <ul className="space-y-1.5">
-                                      {persona.frustrations.map(f => (
-                                        <li key={f} className="flex items-start gap-2 text-sm text-muted">
-                                          <span className="text-rose-400 mt-0.5 flex-shrink-0">✕</span>{f}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                  <div className="bg-paper rounded-xl p-3">
-                                    <p className="text-sm text-muted italic">"{persona.goal}"</p>
-                                  </div>
-                                </div>
-                                {persona.reflection && (
-                                  <div className="pt-4 border-t border-border">
-                                    <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-1.5">Design reflection</p>
-                                    <p className="text-sm text-muted leading-relaxed">{persona.reflection}</p>
-                                  </div>
-                                )}
-                              </div>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.personaRoles ? 'Roles & personas' : 'User personas'}</p>
+            {project.personaRoles && (
+              <p className="text-muted leading-relaxed mb-8">Three distinct roles shaped the design, each represented by a persona grounded in the co-design and ethnographic work.</p>
+            )}
+            {project.personaRoles ? (
+              (() => {
+                const roleOrder: string[] = []
+                const byRole: Record<string, Persona[]> = {}
+                project.personas.forEach(p => {
+                  const role = p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type
+                  if (!byRole[role]) { byRole[role] = []; roleOrder.push(role) }
+                  byRole[role].push(p)
+                })
+                return (
+                  <div className="space-y-10">
+                    {roleOrder.map(role => {
+                      const meta = project.personaRoles?.find(r => r.role === role)
+                      return (
+                        <div key={role}>
+                          <div className="mb-4 pb-3 border-b border-border">
+                            <div className="flex items-baseline gap-3 flex-wrap">
+                              <h3 className="font-bold text-ink text-lg">{role}</h3>
+                              {meta && <span className="text-xs font-medium uppercase tracking-widest text-accent">{meta.who}</span>}
                             </div>
-                          ))}
+                            {meta && <p className="text-sm text-muted mt-1 leading-relaxed">{meta.definition}</p>}
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {byRole[role].map(persona => (
+                              <PersonaCard key={persona.name} persona={persona} />
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              )
-            })()}
+                      )
+                    })}
+                  </div>
+                )
+              })()
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                {project.personas.map(persona => (
+                  <PersonaCard key={persona.name} persona={persona} />
+                ))}
+              </div>
+            )}
           </section>
         )}
 
@@ -796,7 +805,7 @@ export default function CaseStudy() {
                 )}
               </div>
               {project.assumptions && (
-                <p className="text-sm text-muted">The changes testing surfaced are unpacked in <span className="text-ink font-medium">Assumptions, findings &amp; pivots</span> above.</p>
+                <p className="text-sm text-muted">The changes testing surfaced are unpacked in the <span className="text-ink font-medium">assumption → finding → pivot</span> section above.</p>
               )}
               <p className="text-muted text-sm italic">{project.testing.outcome}</p>
             </div>
@@ -922,7 +931,7 @@ export default function CaseStudy() {
                   />
                   <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">
                     <span className={`inline-block mr-2 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide ${
-                      item.type === 'prototype' ? 'bg-blue-50 text-blue-600' :
+                      item.type === 'prototype' ? 'bg-accent-light text-accent' :
                       item.type === 'storyboard' ? 'bg-emerald-50 text-emerald-700' :
                       'bg-amber-50 text-amber-700'
                     }`}>{item.type}</span>

@@ -1663,7 +1663,47 @@ export const projects: Project[] = [
       innovativeMethods: `Research-first, prototype-last. Six interviews gave me the problem definition I couldn't have invented. Regulatory desk research gave me the design constraints. The coded prototype was the output, not the starting point.`,
     },
     problem: `A credit officer at a small NBFC in Tamil Nadu. Tuesday afternoon. A ₹15 lakh loan application from a textile supplier: 4-year-old business, GST-registered, 12 months of bank statements. Her tool gives her a score of 64 and a band of B. She needs to decide: approve, reject, or escalate. The score tells her nothing about why. She'll spend the next 45 minutes manually cross-referencing a spreadsheet she built herself.\n\nHow might we give NBFC credit officers an underwriting tool that shows its working - so they can make faster, more defensible, and fairer lending decisions?`,
-    insight: `Credit officers don't distrust algorithms. They distrust algorithms that can't explain themselves. The research insight that shaped everything: analysts need the evidence, not just the verdict. A score of 64 means nothing; "income CV 0.28 over 12 months, overdraft utilisation elevated, 2 cheque returns" means the analyst can form a view. Explainability isn't a feature - it's the foundation of trust between a human decision-maker and an automated system.`,
+    insight: `Credit officers don't distrust algorithms. They distrust algorithms that can't explain themselves. A score of 64 means nothing; "CV 0.28 over 12 months, overdraft elevated, 2 cheque returns" means the analyst can form a view. Explainability isn't a feature, it's the foundation of trust between a human and an automated system.`,
+    assumptions: {
+      intro: `Five assumptions I started with. Each one broke against research or testing, and each break moved the design. This is the chronological spine of the project, from the first interview to the last test.`,
+      items: [
+        {
+          phase: 'Weeks 1–2 · Research',
+          headline: 'Better score → better explanation',
+          assumption: `The problem was accuracy. A smarter credit model would give officers better decisions.`,
+          finding: `Across 6 interviews, officers didn't distrust the score's accuracy. They distrusted a score they couldn't defend to a manager. "Why is this a B?" had no answer.`,
+          pivot: `Stopped optimising the model. Designed the explanation instead: every point traceable to a feature, a rule, and a ledger line.`,
+        },
+        {
+          phase: 'Week 2 · Synthesis',
+          headline: 'Scoring flow → collateral bottleneck',
+          assumption: `The core job was upload → score → decide, so the scoring flow was where the design effort belonged.`,
+          finding: `Every officer lost 30–45 minutes per file chasing collateral documents across email threads. The real bottleneck sat outside the scoring flow entirely.`,
+          pivot: `Made collateral a first-class screen with a document tray and status states, not a metadata field buried in the profile.`,
+        },
+        {
+          phase: 'Week 3 · Constraints',
+          headline: 'One user → two users of one decision',
+          assumption: `I was designing for one user: the credit officer at the desk.`,
+          finding: `RBI mandates plain-language rejection reasons, yet every rejected applicant I spoke to had received nothing useful. Two people share every lending decision; only one is ever designed for.`,
+          pivot: `Scoped the applicant-facing explanation as an explicit phase two, and documented why building both at once would dilute both.`,
+        },
+        {
+          phase: 'Weeks 3–5 · Build',
+          headline: 'Static screens → live contrast',
+          assumption: `Figma screens could demonstrate explainability. v1 was static screens with annotations.`,
+          finding: `Static screens can only assert explainability. It becomes real only when the data changes and the logic visibly shifts with it.`,
+          pivot: `Built a coded, data-driven prototype. Switching from a healthy to a risky applicant makes the model's logic visible by contrast, not annotation.`,
+        },
+        {
+          phase: 'Weeks 3–5 · Design system',
+          headline: 'Audit at the end → tokens at the start',
+          assumption: `Accessibility could be a final audit pass before shipping.`,
+          finding: `Every competitor tool failed WCAG AA and signalled risk through colour alone, invisible to the 1-in-12 men with colour vision deficiency.`,
+          pivot: `Baked AA contrast and three-channel flags (shape + colour + text) into the design tokens before a single screen was built.`,
+        },
+      ],
+    },
     deskResearch: {
       summary: `Six structured interviews across two weeks: NBFC credit officers, a DSA, and two SME owners who had navigated loan applications. Desk research on RBI Digital Lending Guidelines, DPDP Act, and EU AI Act. Competitive analysis of Perfios, FinBox, ScoreMe, and Bureau. The gap: all four solve data ingestion. None provide a unified, explainable decision workflow.`,
       stats: [
@@ -1697,7 +1737,7 @@ export const projects: Project[] = [
           'Switching between four tools to get a full picture of one applicant',
           'No way to tell if a borderline score is genuinely risky or just data-thin',
         ],
-        goal: '"Give me the evidence, not just the verdict - I need to be able to explain my recommendation to my manager."',
+        goal: 'Give me the evidence, not just the verdict - I need to be able to explain my recommendation to my manager.',
       },
       {
         name: 'Priya Singh',
@@ -1715,7 +1755,7 @@ export const projects: Project[] = [
           'Charts that don\'t adapt when switching between applicants',
           'Approval workflows that require re-entering data she already reviewed',
         ],
-        goal: '"I shouldn\'t need three tabs and a spreadsheet to make a decision I\'ve made a hundred times before."',
+        goal: 'I shouldn\'t need three tabs and a spreadsheet to make a decision I\'ve made a hundred times before.',
       },
       {
         name: 'James Okafor',
@@ -1733,73 +1773,74 @@ export const projects: Project[] = [
           'No way to see how a challenger model would have performed on last month\'s applications',
           'Dashboards that show outcomes but not the decisions that led to them',
         ],
-        goal: '"I want to change the risk appetite for a segment and see immediately which active applications are affected - without a data team request."',
+        goal: 'I want to change the risk appetite for a segment and see immediately which active applications are affected - without a data team request.',
       },
     ],
+    processTitle: 'Process timeline',
     process: [
       {
-        phase: 'Research',
+        phase: 'Weeks 1–3 · Research & definition',
         step: 'User Interviews',
         detail: 'Six 45-minute interviews: 3 NBFC credit officers (junior, senior, branch manager), 1 DSA, and 2 SME loan applicants (one approved, one rejected). Sessions recorded and transcribed. Key protocol: "walk me through the last application you reviewed" generated far richer data than hypothetical questions.',
       },
       {
-        phase: 'Research',
+        phase: 'Weeks 1–3 · Research & definition',
         step: 'Synthesis & Insight Generation',
         detail: 'Thematic analysis in Dovetail: 74 observations collapsed into 4 primary insights. The one that shaped everything: the analyst and the applicant are both users of the same decision - but only the analyst is ever designed for.',
       },
       {
-        phase: 'Research',
+        phase: 'Weeks 1–3 · Research & definition',
         step: 'Regulatory Landscape',
         detail: 'RBI Digital Lending Guidelines (plain-language rejection reasons), DPDP Act (data minimisation), EU AI Act (human oversight mandate for high-risk credit decisions). These shaped the explainability layer and the override mechanism more than any user insight did.',
       },
       {
-        phase: 'Research',
+        phase: 'Weeks 1–3 · Research & definition',
         step: 'Competitive Analysis',
         detail: 'Perfios (statement parsing, no explainability), FinBox (developer API, no analyst UX), ScoreMe (GST scoring, opaque model), Bureau (identity/fraud, point solution). All four solve ingestion. None design for the analyst or the applicant downstream of the score.',
       },
       {
-        phase: 'Research',
+        phase: 'Weeks 1–3 · Research & definition',
         step: 'Constraints Definition',
-        detail: 'Explicit design scope written before any screen was sketched. In scope: the credit officer\'s internal workflow, applicant profiles already submitted, explainability of automated scoring. Out of scope: applicant-facing portal (a separate project), mobile (desktop-first for analyst tooling), real data integration (prototype only), live API calls. This section prevented scope creep and made the resulting prototype more focused - not trying to be everything.',
+        detail: 'Explicit scope written before any screen was sketched. In: the officer\'s internal workflow and the explainability of automated scoring. Out: the applicant-facing portal, mobile, and live data integration. Writing this down early is what kept the prototype focused.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Workflow Mapping',
         detail: 'Mapped the 9-stage analyst journey end-to-end from the research: Queue → New Intake → Transactions → Cashflow → Collateral → Scorecard → Red Flags → Rules Editor → Experiments. Each stage owns a distinct analyst decision - eliminating the context-switching identified as the primary workflow pain in the interviews.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Design System',
         detail: 'CSS-first design system. Semantic tokens (paper/ink, lime accent, good/warn/bad) all pass WCAG AA. Flags in three channels: shape + colour + text, never colour alone. Two densities (comfortable/compact) for junior and senior analysts.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Data Architecture',
         detail: 'Modelled three complete applicant profiles directly from the interview archetypes: Acme Trading (healthy, 7yr FMCG, score 81, property-secured - the straightforward approval), Sundar Textiles (borderline, 4yr textile, score 64, hybrid collateral - the judgement call), Zenith Hardware (risky, 2yr retail, score 38, unsecured + gambling flags - the clear decline). Every KPI, chart, and table is derived from these profiles at render time.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Collateral Module',
         detail: 'No tool in the competitive set had a structured collateral view. Built one: LTV panel with tonal coloring, document tray with status states (verified/pending/rejected/missing), PG guarantor card. Each applicant profile tells a different collateral story.',
         image: '/uploads/ledgerline/collateral.png',
         imageCaption: 'Collateral screen - LTV panel with tonal risk coloring, document tray with per-file status badges (verified / pending / rejected / missing), and PG guarantor card. Sundar Textiles shown: hybrid collateral with two outstanding document requests.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Hand-rolled SVG Charts',
         detail: 'Built four custom charts with no charting library: cashflow line + area chart, balance strip (net cashflow bar chart), donut (expense breakdown), sparkline. Each chart reads directly from applicant data and adapts to theme changes.',
         image: '/uploads/ledgerline/cashflow.png',
         imageCaption: 'Cashflow screen - 12-month trend line with area fill (lime = net positive, amber = warning zone), monthly balance strip, and expense donut. All drawn with hand-rolled SVG - no charting library.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Explainability Layer',
         detail: 'Expanded the scorecard to 8 transparent features with raw evidence strings ("CV 0.14 over 12mo"), per-feature scores, and a tonal bar (good/warn/bad). Score changes completely when switching profiles - making the model logic visible by contrast, not explanation.',
         image: '/uploads/ledgerline/scorecard.png',
         imageCaption: 'Scorecard screen - Band B hero at 96px, score demoted to footer. Eight transparent features each with raw evidence string, per-feature score, and good/warn/bad tonal bar. Sundar Textiles (score 64) shown.',
       },
       {
-        phase: 'Design',
+        phase: 'Weeks 3–6 · Design & build',
         step: 'Rules Editor + Experiments',
         detail: 'Built a toggle-based rules editor where analysts can enable/disable scoring rules and see their penalty weights and expressions. Companion Experiments screen shows three models (base vs challenger vs strict GB) with AUC, approval rate, and default rate.'
       },
@@ -1830,28 +1871,6 @@ export const projects: Project[] = [
       industry: 'Fintech / NBFC Credit (India)',
       status: 'Research complete. Prototype validated with 3 NBFC lending professionals. Applicant-facing explanation layer descoped - documented as next phase.',
     },
-    designDecisions: [
-      {
-        decision: 'Accessibility baked in at the token level - not a retrospective audit',
-        rationale: 'Every competitor tool failed WCAG AA contrast on scorecard visualisations. Every one communicated risk through colour alone - invisible to the 1-in-12 men with colour vision deficiency. Ledgerline uses shape + colour + text for every flag, and contrast ratios were validated at the design token level before any screen was built.',
-      },
-      {
-        decision: 'Human override mechanism on every automated signal',
-        rationale: 'RBI guidelines and EU AI Act both require human oversight of automated credit decisions. The Rules Editor lets analysts see which rules fired and at what weight, and toggle them to see the score impact. In testing, the senior analyst asked for this before I showed it - validating it as a real need, not a speculative feature.',
-      },
-      {
-        decision: 'Dark theme as default, light theme as alternative',
-        rationale: 'Interview finding: credit officers reviewing applications for 5-7 hours a day in office environments strongly prefer dark themes for extended sessions. Dark also makes the WCAG-compliant lime accent pop as a clear action signal. Light theme is available for environments where dark backgrounds are prohibited by institutional IT policy.',
-      },
-      {
-        decision: 'Collateral as a first-class screen, not a metadata field',
-        rationale: 'Interviews showed 30-40% of review time spent chasing collateral documents - yet no existing tool surfaces this as a workflow. This is the feature most likely to be descoped without the research to back it. With the research, it\'s non-negotiable.',
-      },
-      {
-        decision: 'Applicant-facing explanation scoped out - deliberately',
-        rationale: 'RBI requires plain-language rejection reasons; applicants almost universally said they received nothing useful. This was scoped out not because it\'s unimportant, but because designing for two very different users in parallel would have diluted both. It\'s the first item on the next-phase roadmap.',
-      },
-    ],
     testing: {
       description: 'Prototype walkthroughs conducted with two NBFC lending analysts and one product manager from a credit risk SaaS. Sessions used a task-based format: navigate from Queue to a Scorecard decision on the Zenith Hardware (risky) profile, then switch to Acme Trading and explain the difference.',
       participants: '3 (2 credit analysts, 1 credit risk PM)',

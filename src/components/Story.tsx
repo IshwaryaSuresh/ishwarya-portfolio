@@ -21,11 +21,11 @@ const ARTWORK = [
   },
 ]
 
-const BELIEFS = [
-  'Tech is for all, not just tech-savvy folks.',
-  'Equality, inclusivity and WCAG are the floor, not features.',
-  'Design is not hard if you enjoy the process. But it is never-ending.',
-  'Setbacks are important.',
+const BELIEFS: { before: string; teal: string; after: string; speed: string }[] = [
+  { before: 'Tech is for ', teal: 'all', after: ', not just tech-savvy folks.', speed: '0.04' },
+  { before: 'Equality, inclusivity and WCAG are ', teal: 'the floor', after: ', not features.', speed: '0.06' },
+  { before: 'Design is not hard if you ', teal: 'enjoy the process', after: '. But it is never-ending.', speed: '0.03' },
+  { before: '', teal: 'Setbacks', after: ' are important.', speed: '0.05' },
 ]
 
 export default function Story() {
@@ -78,12 +78,18 @@ export default function Story() {
           </div>
         </div>
 
-        <ul className="story__beliefs">
-          {BELIEFS.map((b, i) => (
-            <li key={b} data-reveal="up" data-delay={i * 80}>{b}</li>
-          ))}
-        </ul>
       </div>
+
+      {/* Manifesto: full-bleed dark plate, statements at display scale */}
+      <ul className="manifesto">
+        {BELIEFS.map((b, i) => (
+          <li key={b.teal} data-reveal="up" data-delay={i * 90}>
+            <span className="manifesto__line" data-parallax={b.speed}>
+              {b.before}<span className="manifesto__teal">{b.teal}</span>{b.after}
+            </span>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }

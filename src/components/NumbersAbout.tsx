@@ -27,6 +27,7 @@ export default function NumbersAbout() {
           <div className="about__left">
             <h2 data-reveal="left" data-delay="100">A product designer <span className="accent-teal">made for humans.</span></h2>
             <p data-reveal="left" data-delay="200">I'm a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, I now work with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
+            <p className="about__outside" data-reveal="left" data-delay="300">Outside work I'm a specialty coffee enthusiast, always chasing a better brew and seeking out local roasters. I'm into skincare and fashion styling, which keep my eye for detail and aesthetics sharp beyond the screen. I spend plenty of time with my dogs. Having trained as an architect, I still can't walk through a city without stopping to study its buildings.</p>
           </div>
           <div className="about__right">
             <div className="about__portrait" data-reveal="right">
@@ -72,7 +73,7 @@ export default function NumbersAbout() {
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="160">
-              <span className="about__cv-year">Sep 2023 to Apr 2025</span>
+              <span className="about__cv-year">Apr 2023 to Apr 2025</span>
               <div>
                 <p className="about__cv-role">UX Consultant, Freelance</p>
                 <p className="about__cv-meta">Embedded with founder and product teams across healthcare, education, and tech. Healthcare mobile app, engagement +15%. Remote-learning platform, course completion +20%. WCAG 2.1 AA embedded from first wireframe.</p>

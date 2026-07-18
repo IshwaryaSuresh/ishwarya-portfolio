@@ -28,7 +28,7 @@ const experience = [
   {
     role: 'Freelance UX Consultant',
     company: 'Self-employed',
-    period: 'Sep 2023 to Jul 2024',
+    period: 'Apr 2023 to Apr 2025',
     location: 'UK, Remote',
     points: [
       'Led end-to-end product design for a healthcare mobile app; mapped IA and simplified navigation in Figma, resulting in ↑15% engagement.',

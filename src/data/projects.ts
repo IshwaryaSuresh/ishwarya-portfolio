@@ -1,3 +1,16 @@
+export type ServiceBlueprint = {
+  title: string
+  subtitle?: string
+  tone: 'as-is' | 'refined'
+  columns: string[]
+  rows: {
+    label: string
+    kind: 'time' | 'evidence' | 'customer' | 'frontstage' | 'technology' | 'backstage' | 'support'
+    cells: (string | null)[]
+  }[]
+  dividers: { afterRowIndex: number; label: string; style: 'dashed' | 'solid' }[]
+}
+
 export type Persona = {
   type: string
   name: string
@@ -21,7 +34,7 @@ export type Project = {
   comingSoon?: boolean
   client: string
   role: string
-  duration: string
+  duration?: string
   tools: string[]
   prototype?: string
   problem: string
@@ -46,6 +59,11 @@ export type Project = {
   userJourney?: {
     intro?: string
     stages: { stage: string; action: string; feeling: string; opportunity: string }[]
+  }
+  serviceMap?: {
+    intro?: string
+    asIs: ServiceBlueprint
+    refined: ServiceBlueprint
   }
   competitiveAnalysis?: {
     intro: string
@@ -126,7 +144,6 @@ export const projects: Project[] = [
     featured: true,
     client: 'Ministry of Housing, Communities & Local Government (MHCLG)',
     role: 'Sole User Researcher on workstream',
-    duration: '2023 to 2025',
     tools: ['Semi-structured interviews', 'Usability testing', 'Affinity mapping', 'Dovetail', 'GDS Service Standard mapping'],
     overview: {
       team: 'Product manager, delivery manager, 2 service designers, interaction designer, content designer, 2 developers, I was the sole researcher on the workstream',
@@ -134,6 +151,69 @@ export const projects: Project[] = [
     },
     problem: `Grant officers across more than 200 UK Local Authorities use public-sector services that have to pass the GDS Service Standard. The challenge isn't shipping a feature. It's evidencing, to an assessor's standard, that the service meets Point 1 (Understand users and their needs) and Point 5 (Make sure everyone can use the service), with a research trail an assessor can audit and a service that actually works for assistive-technology users.\n\nHow do we make research strong enough to evidence the Service Standard, accessible enough to land WCAG 2.1 AA, and embedded enough that findings shape design in sprint rather than sit in a report nobody reads?`,
     insight: `GDS isn't a checklist. It's a way of evidencing your thinking. Once you internalise that, the work gets cleaner, research stops being a separate phase and becomes the through-line of how the team makes every decision.`,
+    assumptions: {
+      intro: `We came in with a stack of reasonable-sounding assumptions about how grant officers used the service and where the friction lived. Field research broke most of them. These are the three pivots that shaped the design.`,
+      items: [
+        {
+          assumption: `Grant officers wanted a single unified dashboard across every grant scheme they administered.`,
+          finding: `Officers worked scheme-by-scheme. Each scheme had its own eligibility rules, evidence requirements, and reporting cadence. A "one big dashboard" flattened the differences and hid the rules that mattered. Officers were context-switching between schemes, not synthesising across them.`,
+          pivot: `Redesigned around a scheme-aware workspace. Shared components for the mechanics that were common (evidence upload, applicant messaging, award calculation), scheme-specific rules and language in the parts that weren't. Officers stopped fighting the interface to remember which rules applied.`,
+        },
+        {
+          assumption: `Accessibility for this service was largely about screen-reader compatibility on the applicant-facing pages.`,
+          finding: `Screen-reader coverage was a fraction of the story. The bigger accessibility barrier for both officers and applicants was cognitive load, dense forms, unclear error handling, and jargon that assumed prior knowledge of the grants system. Assistive-tech users flagged the same issues, only more sharply.`,
+          pivot: `Reframed accessibility as a full-journey concern. Chunked long forms into step-by-step flows, rewrote errors to describe the fix in plain English, and stripped jargon in collaboration with content design. WCAG 2.1 AA was the floor, cognitive accessibility was the ceiling.`,
+        },
+        {
+          assumption: `Applicants were the bottleneck, they needed more guidance on the front end to reduce back-and-forth.`,
+          finding: `Officers were the bottleneck, not applicants. Most officer time was spent chasing missing or incorrect evidence from applicants after submission, rework the applicant-side journey had quietly created. The friction started upstream.`,
+          pivot: `Redesigned the applicant upload journey with inline validation and evidence checklists tied to each scheme. Reduced the "return-for-more-info" loop before it reached the officer, freeing officer time for the judgement work only they could do.`,
+        },
+      ],
+    },
+    serviceMap: {
+      intro: `A service blueprint of the grants journey, applicant above the line of interaction, officer frontstage, systems and support processes below. The as-is blueprint surfaced where context dropped between lanes. The refined blueprint shows where the seams were closed.`,
+      asIs: {
+        title: 'As-is service blueprint',
+        subtitle: 'The grants journey before redesign, friction visible at every line of handoff.',
+        tone: 'as-is',
+        columns: ['Discover', 'Apply', 'Triage', 'Return for info', 'Decide & award', 'Report'],
+        rows: [
+          { label: 'Time', kind: 'time', cells: ['2–5 days', '10–20 min', '1–2 days', '5–14 days', '3–7 days', 'Monthly'] },
+          { label: 'Evidence', kind: 'evidence', cells: ['GOV.UK, LA websites', 'PDF or web form', 'Case system UI', 'Email thread', 'Award letter', 'MHCLG return template'] },
+          { label: 'Customer journey', kind: 'customer', cells: ['Searches for scheme, unsure of eligibility', 'Submits long single-page form', '(waits, no visibility)', 'Sends missing evidence, sometimes wrong', 'Receives award decision', null] },
+          { label: 'Frontstage actions', kind: 'frontstage', cells: [null, null, 'Officer triages, checks scheme rules from memory', 'Officer emails applicant for missing evidence', 'Officer notifies applicant of award', null] },
+          { label: 'Technology', kind: 'technology', cells: ['GOV.UK, LA sites', 'Web form or PDF', 'Case system + parallel spreadsheet', 'Email', 'Case system + letter template', 'Excel export'] },
+          { label: 'Backstage actions', kind: 'backstage', cells: [null, null, 'Officer maintains parallel spreadsheet', null, 'Officer calculates award offline in Excel', 'Officer reformats data for return'] },
+          { label: 'Support processes', kind: 'support', cells: ['Scheme rules on team wiki', null, 'Team wiki, senior officer escalation', null, 'Approval hierarchy, manager sign-off', 'MHCLG return template, manual reconciliation'] },
+        ],
+        dividers: [
+          { afterRowIndex: 2, label: 'Line of interaction', style: 'dashed' },
+          { afterRowIndex: 3, label: 'Line of visibility', style: 'solid' },
+          { afterRowIndex: 5, label: 'Line of internal interaction', style: 'dashed' },
+        ],
+      },
+      refined: {
+        title: 'Refined service blueprint',
+        subtitle: 'After the pivots, context and evidence carry across the lines instead of dropping between them.',
+        tone: 'refined',
+        columns: ['Discover', 'Apply', 'Triage', 'Request info', 'Decide & award', 'Report'],
+        rows: [
+          { label: 'Time', kind: 'time', cells: ['5–10 min', '15–30 min', 'Same day', '1–3 days', '1–2 days', 'On demand'] },
+          { label: 'Evidence', kind: 'evidence', cells: ['Eligibility checker result', 'Scheme-specific checklist', 'Case thread', 'Targeted evidence request', 'Evidence-linked decision', 'Auto-generated return'] },
+          { label: 'Customer journey', kind: 'customer', cells: ['Answers plain-English eligibility questions', 'Completes chunked flow with inline validation', '(sees case status in real time)', 'Uploads targeted evidence in one round', 'Receives decision with reasoning', null] },
+          { label: 'Frontstage actions', kind: 'frontstage', cells: [null, null, 'Officer triages in scheme-aware workspace', 'Officer sends structured evidence request', 'Officer confirms decision, reasoning captured', null] },
+          { label: 'Technology', kind: 'technology', cells: ['Eligibility checker on GOV.UK', 'Chunked form, per-scheme validation', 'Scheme-aware case workspace', 'Structured evidence upload', 'In-service award calculator', 'Reporting engine (data pipeline)'] },
+          { label: 'Backstage actions', kind: 'backstage', cells: [null, null, 'Scheme rules encoded in workspace, no parallel spreadsheet', null, 'Decision and evidence linked in case record', 'Returns generated from live case data'] },
+          { label: 'Support processes', kind: 'support', cells: ['Scheme rules maintained in one source', null, 'In-context guidance for scheme rules', null, 'Approval workflow inside the service, audit-ready', 'MHCLG return automated, reconciliation reduced to review'] },
+        ],
+        dividers: [
+          { afterRowIndex: 2, label: 'Line of interaction', style: 'dashed' },
+          { afterRowIndex: 3, label: 'Line of visibility', style: 'solid' },
+          { afterRowIndex: 5, label: 'Line of internal interaction', style: 'dashed' },
+        ],
+      },
+    },
     process: [
       {
         step: 'Service Standard mapping (before kickoff)',
@@ -179,10 +259,6 @@ export const projects: Project[] = [
       {
         decision: 'Owned: the research function on this workstream',
         reasoning: `As the sole researcher on this delivery team, everything from research planning, recruitment, fieldwork, analysis, synthesis and playbacks was mine. Where I collaborated was on study design (bringing service designers and the PM in to shape questions) and on synthesis (affinity mapping with the team rather than alone, because shared sense-making builds shared ownership of the insight).`,
-      },
-      {
-        decision: 'Didn\'t own: wider departmental ResearchOps',
-        reasoning: `There was a senior researcher community across the department maintaining broader insight repository governance and recruitment infrastructure. I contributed to it rather than ran it. Being honest about that boundary matters, it\'s the difference between "I owned research" and "I owned the wider research function." On this workstream, the research function was mine.`,
       },
       {
         decision: 'Said no: research-as-a-stack-of-findings',
@@ -489,10 +565,10 @@ export const projects: Project[] = [
       { phase: 'Apr 2023 · Iterate', step: 'Digital Iteration', detail: 'Refined the strongest concept into a digital prototype in Figma, incorporating feedback on navigation simplicity and visual hierarchy.' },
     ],
     metrics: [
+      { label: 'Participants across focus groups, ethnography, co-design & testing', value: '50+' },
       { label: 'Research methods used', value: '5 (focus groups, ethnography, co-design, prototype testing)' },
       { label: 'Prototype test rounds', value: '2 with PwD and caregivers' },
       { label: 'Design principles established', value: '5 evidence-based principles adopted by Nebula Labs' },
-      { label: 'Product lifecycle', value: 'Full Discovery to Alpha' },
     ],
     solution: `A digital companion app with daily creative prompts (sensory-rich activities designed for present-moment engagement), a shared memory space between PwD and a designated caregiver, a caregiver dashboard showing recent activity without surveillance framing, and full accessibility throughout (large text, high contrast, voice input).`,
     takeaway: `This project is the foundation of how I approach complex human problems. Dementia care taught me that design assumptions are dangerous - the "obvious" solution (reminiscence) was the wrong one. Deep research, co-design, and willingness to challenge the brief led to a validated alpha that Teesside Council have earmarked for continued development.`,

@@ -97,6 +97,53 @@ function ProcessStep({ step, index }: { step: { step: string; detail: string; im
   )
 }
 
+function FragmentRow({
+  row,
+  columns,
+  cellBg,
+  laneLabel,
+  divider,
+}: {
+  row: { label: string; kind: 'time' | 'evidence' | 'customer' | 'frontstage' | 'technology' | 'backstage' | 'support'; cells: (string | null)[] }
+  columns: number
+  cellBg: string
+  laneLabel: string
+  divider?: { label: string; style: 'dashed' | 'solid' }
+}) {
+  const isMeta = row.kind === 'time' || row.kind === 'evidence'
+  return (
+    <>
+      <div className={`px-2 py-2 text-[10px] font-semibold uppercase tracking-widest self-center ${laneLabel}`}>
+        {row.label}
+      </div>
+      {row.cells.map((cell, ci) => (
+        <div key={ci} className="px-1 py-1">
+          {cell ? (
+            isMeta ? (
+              <div className="text-[11px] text-muted text-center leading-snug px-2 py-1.5">{cell}</div>
+            ) : (
+              <div className={`text-[11px] text-center leading-snug rounded-md border px-2 py-2 ${cellBg}`}>
+                {cell}
+              </div>
+            )
+          ) : null}
+        </div>
+      ))}
+      {divider && (
+        <>
+          <div className="col-span-1 pr-2 py-2 text-[9px] font-semibold uppercase tracking-widest text-ink/60 text-right self-center">
+            {divider.label}
+          </div>
+          <div
+            className={`col-span-${columns} self-center border-t ${divider.style === 'dashed' ? 'border-dashed border-ink/40' : 'border-solid border-ink/70'}`}
+            style={{ gridColumn: `span ${columns} / span ${columns}` }}
+          />
+        </>
+      )}
+    </>
+  )
+}
+
 const typeColors: Record<string, string> = {
   'Fintech B2B': 'bg-blue-50 text-blue-700 border-blue-200',
   'Fintech Consumer': 'bg-indigo-50 text-indigo-700 border-indigo-200',
@@ -157,7 +204,7 @@ export default function CaseStudy() {
           {[
             { label: 'Client', value: project.client },
             { label: 'Role', value: project.role },
-            { label: 'Timeline', value: project.duration },
+            ...(project.duration ? [{ label: 'Timeline', value: project.duration }] : []),
             { label: 'Tools', value: project.tools.join(', ') },
             ...(project.overview ? [
               { label: 'Collaborators', value: project.overview.team },
@@ -402,6 +449,59 @@ export default function CaseStudy() {
                   </div>
                 </div>
               ))}
+            </div>
+          </section>
+        )}
+
+        {/* Service blueprint, as-is vs refined. Only if present. */}
+        {project.serviceMap && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Service blueprint</p>
+            {project.serviceMap.intro && (
+              <p className="text-muted leading-relaxed mb-8 max-w-3xl">{project.serviceMap.intro}</p>
+            )}
+            <div className="space-y-10">
+              {[project.serviceMap.asIs, project.serviceMap.refined].map((bp) => {
+                const isAsIs = bp.tone === 'as-is'
+                const accentBorder = isAsIs ? 'border-rose-300' : 'border-accent/40'
+                const accentBg = isAsIs ? 'bg-rose-50/30' : 'bg-accent-light/30'
+                const cellBg = isAsIs ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-accent-light border-blue-200 text-ink'
+                const laneLabel = isAsIs ? 'text-rose-600' : 'text-accent'
+                return (
+                  <div key={bp.tone} className={`border rounded-2xl p-5 md:p-6 ${accentBorder} ${accentBg}`}>
+                    <div className="mb-5">
+                      <p className={`text-[11px] font-semibold uppercase tracking-widest mb-1 ${laneLabel}`}>
+                        {isAsIs ? 'Before' : 'After'}
+                      </p>
+                      <p className="font-display text-xl text-ink leading-tight">{bp.title}</p>
+                      {bp.subtitle && <p className="text-sm text-muted mt-1 leading-relaxed max-w-3xl">{bp.subtitle}</p>}
+                    </div>
+
+                    <div className="overflow-x-auto -mx-5 md:-mx-6 px-5 md:px-6">
+                      <div
+                        className="min-w-[860px] grid gap-y-2"
+                        style={{ gridTemplateColumns: `140px repeat(${bp.columns.length}, minmax(120px, 1fr))` }}
+                      >
+                        {/* Column headers */}
+                        <div />
+                        {bp.columns.map((col, ci) => (
+                          <div key={ci} className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-widest text-ink text-center">
+                            {col}
+                          </div>
+                        ))}
+
+                        {/* Rows with dividers */}
+                        {bp.rows.map((row, ri) => {
+                          const divider = bp.dividers.find(d => d.afterRowIndex === ri)
+                          return (
+                            <FragmentRow key={ri} row={row} columns={bp.columns.length} cellBg={cellBg} laneLabel={laneLabel} divider={divider} />
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </section>
         )}

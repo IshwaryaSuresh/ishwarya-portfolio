@@ -425,31 +425,60 @@ export default function CaseStudy() {
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
         </section>
 
-        {/* Assumptions, findings & pivots, only if present */}
+        {/* Assumptions → findings → pivots, rendered as a chronological timeline. Only if present. */}
         {project.assumptions && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Assumptions, findings &amp; pivots</p>
-            {project.assumptions.intro && <p className="text-muted leading-relaxed mb-8">{project.assumptions.intro}</p>}
-            <div className="space-y-4">
-              {project.assumptions.items.map((it, i) => (
-                <div key={i} className="border border-border rounded-2xl overflow-hidden">
-                  <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
-                    <div className="p-5 bg-paper">
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-2">I assumed</p>
-                      <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Design process · assumption → finding → pivot</p>
+            {project.assumptions.intro && <p className="text-muted leading-relaxed mb-8 max-w-3xl">{project.assumptions.intro}</p>}
+            <ol className="relative">
+              {project.assumptions.items.map((it, i) => {
+                const isLast = i === project.assumptions!.items.length - 1
+                return (
+                  <li key={i} className={`relative pl-12 ${isLast ? '' : 'pb-8'}`}>
+                    {/* connecting spine to the next node */}
+                    {!isLast && (
+                      <span aria-hidden className="absolute left-4 top-9 h-full w-px -translate-x-1/2 bg-border" />
+                    )}
+                    {/* numbered node marker */}
+                    <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-accent text-paper grid place-items-center text-sm font-semibold shadow-sm">
+                      {i + 1}
+                    </span>
+
+                    {/* phase label + skimmable headline */}
+                    {it.phase && (
+                      <p className="text-[11px] font-mono uppercase tracking-widest text-muted mb-1">{it.phase}</p>
+                    )}
+                    {it.headline && (
+                      <h3 className="text-base md:text-lg font-bold text-ink mb-3 leading-snug">{it.headline}</h3>
+                    )}
+
+                    {/* compact assumed → found → pivoted */}
+                    <div className="border border-border rounded-2xl overflow-hidden">
+                      <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+                        <div className="p-4 bg-paper">
+                          <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-1.5 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Assumed
+                          </p>
+                          <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
+                        </div>
+                        <div className="p-4">
+                          <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-1.5 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
+                          </p>
+                          <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
+                        </div>
+                        <div className="p-4 bg-accent-light/40">
+                          <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1.5 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
+                          </p>
+                          <p className="text-sm text-ink leading-relaxed font-medium">{it.pivot}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-2">I found</p>
-                      <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
-                    </div>
-                    <div className="p-5 bg-accent-light/40">
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2">So I pivoted</p>
-                      <p className="text-sm text-ink leading-relaxed">{it.pivot}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  </li>
+                )
+              })}
+            </ol>
           </section>
         )}
 

@@ -1,6 +1,3 @@
-import { useInView } from '../hooks/useInView'
-import { useCountUp } from '../hooks/useCountUp'
-
 const PILLARS = [
   { n: '01', t: 'The Practice', d: 'An independent UX consultancy working with startups, studios, and government. Embedded, senior, in-sprint - from kickoff to developer handover.' },
   { n: '02', t: 'The Posture', d: 'Research-led, metric-driven. I find the real problem before drawing a pixel - through interviews, usability testing, synthesis in Dovetail, and opportunity mapping.' },
@@ -8,21 +5,19 @@ const PILLARS = [
   { n: '04', t: 'The Range', d: 'Public sector (GDS), healthcare, edtech, fintech, architecture, and startups. MSc HCI, B.Arch - I bring systems thinking and research rigour across every domain.' },
 ]
 
-function Stat({ target, suffix = '', label, start }: { target: number; suffix?: string; label: string; start: boolean }) {
-  const value = useCountUp(target, 1600, start)
+function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="stat">
-      <div className="stat__num">{value}{suffix}</div>
+      <div className="stat__num">{value}</div>
       <div className="stat__lbl">{label}</div>
     </div>
   )
 }
 
 export default function NumbersAbout() {
-  const [ref, inView] = useInView()
   return (
     <section className="section section--tight" id="about">
-      <div ref={ref as React.RefObject<HTMLDivElement>} className="about" data-parallax="0.04">
+      <div className="about" data-parallax="0.04">
         <div className="about__top">
           <div className="about__left">
             <h2 data-reveal="left" data-delay="100">A product designer <span className="accent-teal">made for humans.</span></h2>
@@ -37,9 +32,9 @@ export default function NumbersAbout() {
         </div>
 
         <div className="stats">
-          <div data-reveal="up" data-delay="0"><Stat target={5} suffix="+" label="Years practising" start={inView} /></div>
-          <div data-reveal="up" data-delay="100"><Stat target={200} suffix="+" label="Local Authorities served (WCAG AA)" start={inView} /></div>
-          <div data-reveal="up" data-delay="200"><Stat target={20} suffix="%" label="Course completion lift" start={inView} /></div>
+          <div data-reveal="up" data-delay="0"><Stat value="5+" label="Years practising" /></div>
+          <div data-reveal="up" data-delay="100"><Stat value="200+" label="Local Authorities served (WCAG AA)" /></div>
+          <div data-reveal="up" data-delay="200"><Stat value="20%" label="Course completion lift" /></div>
         </div>
 
         <div className="about__pillars">

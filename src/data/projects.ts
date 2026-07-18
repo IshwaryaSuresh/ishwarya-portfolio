@@ -54,7 +54,7 @@ export type Project = {
   personaRoles?: { role: string; who: string; definition: string }[]
   assumptions?: {
     intro?: string
-    items: { assumption: string; finding: string; pivot: string }[]
+    items: { phase?: string; headline?: string; assumption: string; finding: string; pivot: string }[]
   }
   userJourney?: {
     intro?: string
@@ -313,6 +313,39 @@ export const projects: Project[] = [
     },
     problem: `Freya, 27. Junior product designer. Three apps open: YNAB for budget tracking, a Wealthsimple ISA she opened eighteen months ago and hasn't touched since, and a Notes doc where she tracks her Tokyo trip goal. None of them talk to each other. She knows she should be investing more. She doesn't know how much she can afford. She's not going to open a fourth app to find out.\n\nHow might we design a personal finance OS that treats money as a long-term practice, not a daily anxiety, and gives users budget, goals, and auto-investing in one quiet, confident interface?`,
     insight: `After mapping onboarding and primary flows across four leading tools, the pattern was consistent: each one optimises for a single job. YNAB is the best budgeting tool in the world, and completely blind to investing. Wealthsimple handles portfolios beautifully, with no visibility into your rent. The gap isn't a missing feature. It's that no product connects the three financial practices into one coherent ledger. Users who want all three either use three apps, or give up on one of them.`,
+    assumptions: {
+      intro: `Four assumptions I started with. Each one broke against research, and each break moved the design. This is the chronological spine of the project.`,
+      items: [
+        {
+          phase: 'Weeks 1–2 · Competitive audit',
+          headline: 'Missing feature → missing category',
+          assumption: `The gap in consumer fintech was a missing feature: smarter goals, better auto-invest.`,
+          finding: `Auditing YNAB, Wealthsimple, Betterment and Monzo, every tool nailed its one job. 0 of 4 connected budget, goals and investing.`,
+          pivot: `Reframed the brief from "build a better feature" to "design the connective layer none of them have."`,
+        },
+        {
+          phase: 'Week 3 · Personas',
+          headline: 'Anxious beginner → capable but fragmented',
+          assumption: `The user is a finance-anxious beginner who needs education and hand-holding.`,
+          finding: `Tested against real reference users, the blocker was fragmentation and paralysis, not knowledge. Aisha earns £95k and still won't move her savings.`,
+          pivot: `Cut the educational onboarding direction. Designed for competent adults who want one clear picture, not a course.`,
+        },
+        {
+          phase: 'Weeks 4–5 · Onboarding',
+          headline: 'Account-first → goal-first',
+          assumption: `Onboarding should open by connecting a bank account, like every competitor does.`,
+          finding: `Account-first is exactly where audited users dropped off: "I don't know my risk tolerance, I just want to save for a house."`,
+          pivot: `Goal-first onboarding. Opens with "What are you saving for?", a question every persona can answer before committing.`,
+        },
+        {
+          phase: 'Weeks 6–7 · Visual direction',
+          headline: 'One direction → three, pressure-tested',
+          assumption: `One strong visual direction, refined early, would be enough.`,
+          finding: `Freya, Marcus and Aisha have different aesthetic thresholds. Committing early would win one and lose the others.`,
+          pivot: `Built three complete, switchable design languages as live themes, then narrowed to Quiet Premium.`,
+        },
+      ],
+    },
     deskResearch: {
       summary: `Competitive audit of four leading consumer fintech products: Wealthsimple, Betterment, YNAB, and Monzo Investments. Mapped onboarding flows, primary navigation, data architecture, and visual identity for each. Identified the shared failure pattern driving the project brief.`,
       stats: [

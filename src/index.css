@@ -2250,3 +2250,91 @@ body.hero-light .marquee {
   .manifesto li { padding: 28px 0; }
   .manifesto__line { max-width: none; }
 }
+
+/* ===== EDITORIAL PASS: About + Brief lose the rounded-card look ===== */
+
+/* About: full-bleed dark band */
+.about {
+  border-radius: 0;
+  margin-inline: 0;
+  max-width: none;
+  padding: 104px calc(max((100% - var(--maxw)) / 2, 0px) + var(--gutter));
+}
+
+/* Stats: static, printed huge, ruled */
+.stat__num {
+  font-size: clamp(64px, 7vw, 112px);
+  letter-spacing: -0.03em;
+}
+
+/* Pillars: 2x2 bordered grid becomes a ruled index */
+.about__pillars {
+  display: block;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin-top: 48px;
+}
+.pillar {
+  display: grid;
+  grid-template-columns: 64px 280px 1fr;
+  gap: 40px;
+  align-items: baseline;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-right: none;
+}
+.pillar:nth-child(odd) { border-right: none; padding-right: 0; }
+.pillar:nth-child(even) { padding-left: 0; padding-right: 0; }
+.pillar__d {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 15.5px;
+}
+
+/* Brief: full-bleed teal band, subscription-page form */
+.brief {
+  border-radius: 0;
+  max-width: none;
+  padding: 104px calc(max((100% - var(--maxw)) / 2, 0px) + var(--gutter));
+}
+.brief__form, .brief__form--stacked {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+.brief__form input, .brief__form textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.45);
+  border-radius: 0;
+  padding: 14px 0;
+  font-size: 16px;
+}
+.brief__form input:focus, .brief__form textarea:focus {
+  border-bottom-color: var(--white);
+}
+.brief__form input::placeholder, .brief__form textarea::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+.brief__form button {
+  border-radius: 0;
+  padding: 16px 28px;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .about { border-radius: 0; padding-top: 64px; padding-bottom: 64px; }
+  .pillar { grid-template-columns: 48px 1fr; gap: 20px; }
+  .pillar__d { grid-column: 2; }
+  .brief { border-radius: 0; padding-top: 64px; padding-bottom: 64px; }
+  .stat__num { font-size: clamp(48px, 9vw, 80px); }
+}
+@media (max-width: 580px) {
+  .about { border-radius: 0; }
+  .pillar { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+  .pillar__d { grid-column: 1; }
+}
+
+/* ===== BUTTON GRAMMAR ===== */
+/* Buttons are pills sitewide, matching nav + hero */
+.brief__form button { border-radius: 100px; }

@@ -1083,6 +1083,31 @@ export const projects: Project[] = [
       { label: 'Stakeholder iteration rounds', value: '2' },
       { label: 'Delivery timeline', value: '2 months' },
     ],
+    businessOutcomes: [
+      { metric: '7 / 7 friction points resolved', translation: 'A care leaver can now complete the photocard application independently, without a support worker and without hitting a dead end. For TfL and Novacroft that means fewer abandoned applications, fewer support calls, and more eligible young people actually receiving the 50% discount the scheme exists to deliver.' },
+      { metric: 'WCAG 2.1 AA across the flow', translation: 'The service moved from partial to full AA conformance on the audited criteria, reducing legal exposure under the 2018 public-sector accessibility regulations and, more importantly, making the journey usable on the mobile devices this cohort actually applies on.' },
+      { metric: 'Alternative verification pathway', translation: 'Approved by TfL\'s compliance team, this route lets care leavers in temporary or unstable housing complete an application that the original flow silently blocked. It converts a group the service was quietly excluding into a group it can now serve.' },
+    ],
+    assumptions: {
+      intro: `The brief was framed as a form redesign. The audit reframed it as an exclusion problem. These are the three assumptions I walked in with that the research overturned, and the pivots each one forced.`,
+      items: [
+        {
+          assumption: `The formal, official tone of the existing copy was the safe, appropriate default for a government service.`,
+          finding: `For a cohort with often-difficult relationships with official institutions, third-person bureaucratic language ("the applicant must provide") read as cold and distancing, exactly the wrong signal for young people the state has a duty of care toward.`,
+          pivot: `Rewrote every screen in plain, warm, first-person language. Tone stopped being decoration and became the primary trust mechanism of the service.`,
+        },
+        {
+          assumption: `Document requirements could sit mid-flow, where the original journey placed them, and users would work through them in order.`,
+          finding: `Requirements landing mid-form arrived at the exact point where many users had already abandoned. People discovered they lacked a document only after investing effort, and dropped out at the moment of highest intent.`,
+          pivot: `Surfaced the full document checklist at the very start, so users could prepare before committing. The requirement moved earlier, not later.`,
+        },
+        {
+          assumption: `Address verification was a routine step every applicant could clear, so the flow could assume a fixed address.`,
+          finding: `Care leavers in temporary or unstable housing had no viable path through address verification. The step wasn't difficult for them, it was impossible, an invisible exclusion built into the happy path.`,
+          pivot: `Designed and shipped an alternative "Contact your borough" verification pathway, approved by TfL's compliance team, giving the most vulnerable users a route the original service had denied them entirely.`,
+        },
+      ],
+    },
     solution: `A redesigned Care Leaver Oyster Card application experience: document checklist surfaced upfront so users can prepare, plain-language copy in warm first-person tone throughout, redesigned error states with specific recovery guidance, mobile-first design with 44px+ touch targets and keyboard-optimised form fields, and an alternative address verification pathway for care leavers in unstable housing.`,
     takeaway: `The voice of a service is part of its design. Changing "the applicant must provide" to "you'll need to upload" is not copyediting. It is deciding who the service is talking to, and whether that person feels they belong in it. Government services are often the last to be designed this way, and the people who pay the price for that are the ones who can least afford to.`,
     tags: ['Government', 'Inclusive Design', 'Content Design', 'Service Design', 'TfL'],

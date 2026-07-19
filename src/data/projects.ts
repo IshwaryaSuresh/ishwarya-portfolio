@@ -54,6 +54,7 @@ export type Project = {
   personaRoles?: { role: string; who: string; definition: string }[]
   assumptions?: {
     intro?: string
+    flat?: boolean
     items: { phase?: string; headline?: string; assumption: string; finding: string; pivot: string }[]
   }
   userJourney?: {
@@ -282,28 +283,11 @@ export const projects: Project[] = [
     tools: ['Figma', 'FigJam', 'CSS design tokens', 'Claude (research drafting)', 'Cursor (prototype build)'],
     prototype: '/kaizen/Kaizen.html',
     wip: 'Mobile app version in progress',
+    processTitle: 'Process timeline',
     businessOutcomes: [
       { metric: '3 visual systems · onboarding → dashboard', translation: 'Reduced concept-to-pressure-test cycle from weeks to days, three full visual directions, each carried through onboarding to the dashboard, before committing to one design language. The work most fintech teams ship as a Figma mockup, shipped as a working browser product.' },
       { metric: '0 / 4 competitors connect budget, goals, and investing', translation: 'The competitive audit defines the product opportunity in one number: a clear adjacent-category gap, not a feature gap. Validated as a real white-space, not just a designer\'s hunch.' },
     ],
-    aiProcess: {
-      summary: `I treated AI as a research multiplier, not a designer. It accelerated the parts of the work where speed beats craft (synthesis, scaffolding, first drafts) so I could spend more hours on the parts where craft beats speed (visual system, interaction states, the actual product decisions).`,
-      used: [
-        'Drafting the competitive audit matrix, Claude generated the initial feature comparison structure across YNAB, Wealthsimple, Betterment and Monzo; I rewrote the verdicts after auditing each tool myself.',
-        'Persona scaffolding, three persona drafts in 20 minutes, then validated against four reference users I already knew. Two personas survived intact; one was rewritten end-to-end.',
-        'Transaction categorisation labels, generated 200 candidate labels for the auto-categorisation feature, kept 47.',
-        'First-draft microcopy for the marketing site, then rewritten in my voice.',
-      ],
-      kept: [
-        'Every visual decision, the Quiet Premium colour system, type pairing, three visual directions tested.',
-        'All actual user flows, screen layouts, and interaction states.',
-        'The product hypothesis, that consumer fintech is fragmented and a unified ledger is the gap.',
-      ],
-      rejected: [
-        'AI\'s first attempt at the goal-tracking copy read like a motivational poster. Rewrote everything.',
-        'A suggested "AI advisor chat" surface, would have undermined the "quiet, confident" product principle. Cut.',
-      ],
-    },
     heroImage: '/uploads/kaizen/hero.png',
     background: {
       understandingNeedsTitle: 'Why consumer fintech is fragmented, and who it fails',
@@ -477,47 +461,47 @@ export const projects: Project[] = [
     ],
     process: [
       {
-        phase: 'Research & Direction',
+        phase: 'Weeks 1–3 · Research & direction',
         step: 'Competitive audit',
         detail: 'Mapped onboarding and primary flows across Wealthsimple, Betterment, YNAB, and Monzo Investments. Documented data architecture, visual language, and primary navigation for each. Identified the shared failure pattern: every tool optimises one job and is blind to the other two.',
       },
       {
-        phase: 'Research & Direction',
+        phase: 'Weeks 1–3 · Research & direction',
         step: 'Persona development',
         detail: 'Built three composite archetypes from the audit findings and target demographic research: Freya (passive investor, 27), Marcus (data-hungry saver, 31), and Aisha (paralysed high-earner, 34). Each represents a distinct failure mode in existing products, and a distinct design requirement.',
       },
       {
-        phase: 'Research & Direction',
+        phase: 'Weeks 1–3 · Research & direction',
         step: 'Visual direction exploration',
         detail: 'Explored three visual directions, Editorial (warm bone + ember red), Quiet Premium (onyx + periwinkle, surgical sans-serif), and Confident Warm (terracotta + sage). Built all three as live, toggleable CSS themes sharing one token contract, so the comparison is interactive rather than static.',
       },
       {
-        phase: 'Design system',
+        phase: 'Weeks 4–6 · Design & build',
         step: 'Design language & token system',
         detail: 'Defined a three-theme design language covering type scale, spacing, radii, motion, and full surface palettes. Each theme shares the same structural decisions, swapping only the surface palette. One design system, three distinct visual personalities.',
       },
       {
-        phase: 'Design system',
+        phase: 'Weeks 4–6 · Design & build',
         step: 'Component library',
         detail: 'Designed a full component set in Figma: wordmark (3 variants), money display, sparkline, donut chart, bar chart, area chart, progress bar, avatar, and a 20-icon set. Every component is theme-agnostic, consuming design tokens rather than hardcoded values.',
       },
       {
-        phase: 'Product screens',
+        phase: 'Weeks 4–6 · Design & build',
         step: 'Marketing site',
         detail: 'Designed a full marketing page addressing Aisha\'s trust requirement: editorial hero with product data artefact, feature grid, pricing panel, security section, testimonials, and FAQ. Every layout decision prioritises visual credibility before financial commitment.',
       },
       {
-        phase: 'Product screens',
+        phase: 'Weeks 6–8 · Product & iteration',
         step: 'Core product, 6 screens',
         detail: 'Designed Dashboard (net worth hero, area chart, spending cards, AI insight, for Marcus\'s "tell me my number" need), Budget (donut + category bars, trend chart, for Freya\'s picture-in-one-place need), Goals, Invest, Transactions, and Settings. Every screen traces to a specific persona need from the audit phase.',
       },
       {
-        phase: 'Product screens',
+        phase: 'Weeks 6–8 · Product & iteration',
         step: '5-step onboarding flow',
         detail: 'Goal-first onboarding: Welcome → Connect bank → Pick goals → Portfolio selection → Review. Starts with "What are you saving for?", a question everyone can answer before any commitment is required. Directly counters the audit finding that competitors start with account creation or risk profile questionnaires, which users cited as the moment they abandoned onboarding.',
       },
       {
-        phase: 'Iteration',
+        phase: 'Weeks 6–8 · Product & iteration',
         step: 'Design review and iteration',
         detail: 'Ran a full design review across all screens, applying 15+ revisions: hero layout, type hierarchy (removed italic headings throughout), spacing consistency, nav sizing, and card height matching. Each change was evaluated against the three persona needs before being applied.',
       },

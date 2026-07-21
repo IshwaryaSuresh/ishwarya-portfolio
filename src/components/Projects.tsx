@@ -107,15 +107,11 @@ function FeatureSpread({ p, index }: { p: Project; index: number }) {
             ? <img src={p.image} alt={p.title} data-parallax={PARALLAX_SPEEDS[index % 3]} loading="lazy" />
             : <div className="placeholder">{p.placeholder}</div>}
         </div>
-        <figcaption className="spread__caption">{p.client} · {p.year}</figcaption>
       </figure>
 
       <div className="spread__body" data-reveal={flip ? 'left' : 'right'}>
-        <div className="spread__kicker">Feature № {p.num} · {p.tags[0]}</div>
         <h3 className="spread__title">{p.title}</h3>
         <p className="spread__standfirst">{p.desc}</p>
-        <div className="spread__metric">{p.metric}</div>
-        <span className="spread__cta">Read the story <em>p.{p.num}</em></span>
       </div>
     </Link>
   )

@@ -957,11 +957,7 @@ export default function CaseStudy() {
                     style={{ maxHeight: '400px' }}
                   />
                   <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">
-                    <span className={`inline-block mr-2 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide ${
-                      item.type === 'prototype' ? 'bg-accent-light text-accent' :
-                      item.type === 'storyboard' ? 'bg-emerald-50 text-emerald-700' :
-                      'bg-amber-50 text-amber-700'
-                    }`}>{item.type}</span>
+                    <span className="inline-block mr-2 text-[10px] font-semibold uppercase tracking-wide text-muted">{item.type}</span>
                     {item.caption}
                   </figcaption>
                 </figure>

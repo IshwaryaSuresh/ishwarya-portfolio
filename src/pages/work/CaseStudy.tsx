@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { getProject, type Persona, type Project } from '../../data/projects'
 
@@ -68,7 +69,17 @@ function CompetitiveMatrix({ tools }: { tools: CompetitiveTool[] }) {
   )
 }
 
-function ProcessStep({ step, index }: { step: { step: string; detail: string; image?: string; imageCaption?: string; phase?: string }; index: number }) {
+function ProcessStep({ step, index, compact }: { step: { step: string; detail: string; image?: string; imageCaption?: string; phase?: string }; index: number; compact?: boolean }) {
+  if (compact) {
+    return (
+      <div className="flex gap-5 items-center">
+        <div className="flex-shrink-0 w-8 h-8 bg-paper border border-border rounded-full flex items-center justify-center text-xs font-semibold text-muted">
+          {index + 1}
+        </div>
+        <h3 className="font-semibold text-ink">{step.step}</h3>
+      </div>
+    )
+  }
   return (
     <div className="flex gap-5">
       <div className="flex-shrink-0 w-8 h-8 bg-paper border border-border rounded-full flex items-center justify-center text-xs font-semibold text-muted">
@@ -212,11 +223,129 @@ const typeColors: Record<string, string> = {
 export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>()
   const project = getProject(slug ?? '')
+  const [view, setView] = useState<'detailed' | 'tldr'>('detailed')
 
   if (!project) return <Navigate to="/work" replace />
   if (project.comingSoon) return <Navigate to="/work" replace />
 
   const colorClass = typeColors[project.type] ?? 'bg-gray-50 text-gray-600 border-gray-200'
+
+  const assumptionsSection = project.assumptions ? (
+    <section>
+      <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">
+        {project.assumptions.flat ? 'Assumptions → findings → pivots' : 'Design process · assumption → finding → pivot'}
+      </p>
+      {project.assumptions.intro && <p className="text-muted leading-relaxed mb-8 max-w-3xl">{project.assumptions.intro}</p>}
+      {project.assumptions.flat ? (
+        <div className="space-y-4">
+          {project.assumptions.items.map((it, i) => (
+            <div key={i} className="border border-border rounded-2xl overflow-hidden">
+              <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+                <div className="p-5 bg-paper">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Assumed
+                  </p>
+                  <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
+                </div>
+                <div className="p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
+                  </p>
+                  <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
+                </div>
+                <div className="p-5 bg-accent-light/40">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
+                  </p>
+                  <p className="text-sm text-ink leading-relaxed font-medium">{it.pivot}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ol className="relative">
+          {project.assumptions.items.map((it, i) => {
+            const isLast = i === project.assumptions!.items.length - 1
+            return (
+              <li key={i} className={`relative pl-12 ${isLast ? '' : 'pb-8'}`}>
+                {!isLast && (
+                  <span aria-hidden className="absolute left-4 top-9 h-full w-px -translate-x-1/2 bg-border" />
+                )}
+                <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-accent text-paper grid place-items-center text-sm font-semibold shadow-sm">
+                  {i + 1}
+                </span>
+                <div className="border border-border rounded-2xl overflow-hidden">
+                  <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+                    <div className="p-4 bg-paper">
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Assumed
+                      </p>
+                      <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
+                      </p>
+                      <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
+                    </div>
+                    <div className="p-4 bg-accent-light/40">
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
+                      </p>
+                      <p className="text-sm text-ink leading-relaxed font-medium">{it.pivot}</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            )
+          })}
+        </ol>
+      )}
+    </section>
+  ) : null
+
+  const processSection = (
+    <section>
+      <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.processTitle ?? 'Design process'}</p>
+      {(() => {
+        const hasPhases = project.process.some(s => s.phase)
+        if (!hasPhases) {
+          return (
+            <div className="space-y-6">
+              {project.process.map((step, i) => (
+                <ProcessStep key={step.step} step={step} index={i} compact={project.processCompact} />
+              ))}
+            </div>
+          )
+        }
+        // Group by phase, preserving order of first appearance
+        const phases: string[] = []
+        const grouped: Record<string, typeof project.process> = {}
+        project.process.forEach(step => {
+          const p = step.phase ?? 'Other'
+          if (!grouped[p]) { grouped[p] = []; phases.push(p) }
+          grouped[p].push(step)
+        })
+        let globalIndex = 0
+        return (
+          <div className="space-y-10">
+            {phases.map(phase => (
+              <div key={phase}>
+                <p className={`text-xs font-semibold uppercase tracking-widest text-accent pb-2 border-b border-border ${project.processCompact ? 'mb-3' : 'mb-5'}`}>{phase}</p>
+                <div className={project.processCompact ? 'space-y-3' : 'space-y-6'}>
+                  {grouped[phase].map(step => {
+                    const idx = globalIndex++
+                    return <ProcessStep key={step.step} step={step} index={idx} compact={project.processCompact} />
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      })()}
+    </section>
+  )
 
   return (
     <article className="case-study pt-28 pb-20">
@@ -307,8 +436,243 @@ export default function CaseStudy() {
         )}
       </div>
 
+      {/* Detailed / TL;DR toggle */}
+      {project.tldr && (
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex bg-paper border border-border rounded-full p-1">
+            {([['detailed', 'Detailed'], ['tldr', 'TL;DR']] as const).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setView(key)}
+                aria-pressed={view === key}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                  view === key ? 'bg-ink text-paper' : 'text-muted hover:text-ink'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* TL;DR view, visual summary */}
+      {project.tldr && view === 'tldr' && (
+        <div className="max-w-4xl mx-auto px-6 space-y-14">
+
+          {/* Headline + one-line problem */}
+          <section className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-ink leading-tight mb-4">{project.tldr.headline}</h2>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.tldr.role}</p>
+            <p className="text-lg text-muted leading-relaxed max-w-2xl mx-auto">{project.tldr.problemLine}</p>
+          </section>
+
+          {/* Context scale */}
+          <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {project.tldr.contextStats.map(s => (
+              <div key={s.label} className="bg-paper border border-border rounded-2xl p-5 text-center">
+                <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
+                <p className="text-xs text-muted leading-snug">{s.label}</p>
+              </div>
+            ))}
+          </section>
+
+          {/* Timeline */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">3 months, Discovery to Alpha</p>
+            <div className="relative">
+              <div aria-hidden className="hidden md:block absolute left-0 right-0 top-1.5 h-px bg-border" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-x-3 gap-y-6">
+                {project.tldr.timeline.map(t => (
+                  <div key={t.what} className="relative">
+                    <span aria-hidden className="hidden md:block w-3 h-3 rounded-full bg-accent border-2 border-paper mb-3" />
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{t.when}</p>
+                    <p className="text-xs text-ink leading-snug">{t.what}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Ethnography, the heart of the research */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Ethnographic study</p>
+            <p className="text-muted leading-relaxed mb-6 max-w-2xl">{project.tldr.ethnography.line}</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {project.tldr.ethnography.items.map(e => (
+                <figure key={e.label} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-40 overflow-hidden bg-paper">
+                    <img src={e.src} alt={e.label} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-ink font-medium border-t border-border">{e.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+
+          {/* The reframe */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">The reframe</p>
+            <div className="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
+              <div className="border border-border rounded-2xl p-6 bg-paper">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-3">Category default</p>
+                <p className="text-xl font-bold text-ink line-through decoration-rose-400 decoration-2 mb-3">{project.tldr.pivot.from}</p>
+                <p className="text-sm text-muted leading-relaxed">"{project.tldr.pivot.fromHmw}"</p>
+              </div>
+              <div className="text-accent text-2xl flex items-center justify-center md:px-2" aria-hidden>→</div>
+              <div className="border border-accent/40 rounded-2xl p-6 bg-accent-light">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-3">Where research led</p>
+                <p className="text-xl font-bold text-ink mb-3">{project.tldr.pivot.to}</p>
+                <p className="text-sm text-ink/80 leading-relaxed">"{project.tldr.pivot.toHmw}"</p>
+              </div>
+            </div>
+            <p className="text-sm text-muted mt-4 text-center">{project.tldr.pivot.because}</p>
+          </section>
+
+          {/* Competitive gap */}
+          <section className="bg-ink rounded-2xl p-8">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-3">The white space</p>
+            <p className="text-paper text-lg leading-relaxed">{project.tldr.gap}</p>
+          </section>
+
+          {/* Origin of the zine */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">How the 8-fold zine arrived</p>
+            <p className="text-muted leading-relaxed mb-6 max-w-2xl">{project.tldr.origin.line}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {project.tldr.origin.items.map((o, i) => (
+                <figure key={o.label} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-44 overflow-hidden bg-paper">
+                    <img src={o.src} alt={o.label} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2.5 bg-paper text-[11px] text-ink font-medium border-t border-border">
+                    <span className="text-muted mr-1">{i + 1}</span>{o.label}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+
+          {/* Roles */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">Designed for three roles</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {project.tldr.roles.map(r => (
+                <div key={r.role} className="border border-border rounded-xl p-4 bg-paper">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{r.who}</p>
+                  <p className="text-ink font-medium">{r.role}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* How the product works */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">How it works</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {project.tldr.output.map((o, i) => (
+                <figure key={o.label} className="rounded-2xl overflow-hidden border border-border">
+                  <div className="bg-paper p-4 h-72 flex items-center justify-center">
+                    <img src={o.src} alt={o.label} className="max-h-full max-w-[180px] object-contain" />
+                  </div>
+                  <figcaption className="px-4 py-3 bg-paper text-sm text-ink font-medium border-t border-border">
+                    <span className="text-muted mr-1.5">{i + 1}</span>{o.label}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+
+          {/* Final screens */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">The app</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {project.tldr.screens.map(s => (
+                <figure key={s.label} className="rounded-2xl overflow-hidden border border-border">
+                  <div className="bg-paper p-4 h-72 flex items-center justify-center">
+                    <img src={s.src} alt={s.label} className="max-h-full max-w-[180px] object-contain" />
+                  </div>
+                  <figcaption className="px-4 py-3 bg-paper text-sm text-ink font-medium border-t border-border">{s.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+
+          {/* Impact */}
+          <section className="bg-ink rounded-2xl py-8 px-8">
+            <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {project.tldr.impact.map(s => (
+                <div key={s.label}>
+                  <p className="text-3xl font-bold text-paper mb-1">{s.value}</p>
+                  <p className="text-xs text-paper/50 leading-snug">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Closer */}
+          {project.tldr.closer && (
+            <section className="text-center">
+              <p className="text-2xl md:text-3xl font-bold text-ink leading-snug">{project.tldr.closer}</p>
+            </section>
+          )}
+
+          <div className="pt-4 border-t border-border text-center">
+            <button
+              onClick={() => setView('detailed')}
+              className="text-sm font-medium text-accent hover:underline"
+            >
+              Read the full case study →
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Body */}
-      <div className="max-w-3xl mx-auto px-6 space-y-16">
+      <div className={`max-w-3xl mx-auto px-6 space-y-16 ${project.tldr && view === 'tldr' ? 'hidden' : ''}`}>
+
+        {/* Context, only if present */}
+        {project.context && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">Context · living with dementia</p>
+            <p className="text-muted leading-relaxed mb-8">{project.context.intro}</p>
+            {project.context.image && (
+              <figure className="rounded-2xl overflow-hidden border border-border mb-8">
+                <img
+                  src={project.context.image}
+                  alt={project.context.imageCaption ?? 'Context'}
+                  className="w-full object-cover"
+                  style={{ maxHeight: '440px' }}
+                />
+                {project.context.imageCaption && (
+                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{project.context.imageCaption}</figcaption>
+                )}
+              </figure>
+            )}
+            {project.context.stats && project.context.stats.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {project.context.stats.map(s => (
+                  <div key={s.label} className="bg-paper border border-border rounded-2xl p-4 text-center">
+                    <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
+                    <p className="text-xs text-muted leading-snug">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">What PwD are up against</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+              {project.context.challenges.map(c => (
+                <div key={c} className="border border-border rounded-xl p-4 bg-paper text-sm text-muted leading-relaxed">{c}</div>
+              ))}
+            </div>
+            {project.context.quote && (
+              <blockquote className="border-l-4 border-accent pl-6 py-2">
+                <p className="text-ink text-lg font-medium leading-relaxed italic">"{project.context.quote}"</p>
+              </blockquote>
+            )}
+          </section>
+        )}
 
         {/* Background, only if extended data present */}
         {project.background && (
@@ -333,6 +697,71 @@ export default function CaseStudy() {
         )}
 
 
+        {/* Problem */}
+        <section>
+          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The problem</p>
+          <div className="space-y-4">
+            {project.problem.split('\n\n').map((para, i) => (
+              <p key={i} className={`leading-relaxed ${i === project.problem.split('\n\n').length - 1 ? 'text-accent font-medium italic' : 'text-muted'}`}>
+                {para}
+              </p>
+            ))}
+          </div>
+        </section>
+
+        {/* Framing the opportunity, only if present */}
+        {project.opportunityFraming && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Framing the opportunity</p>
+            <div className="space-y-4">
+              <div className="border border-border rounded-2xl p-6 bg-paper">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-2">Where I started</p>
+                <p className="text-sm text-muted leading-relaxed mb-3">{project.opportunityFraming.initialAssumption}</p>
+                <p className="text-ink font-medium leading-relaxed">"{project.opportunityFraming.initialHmw}"</p>
+              </div>
+              <div className="flex items-start gap-3 px-2">
+                <span className="text-accent text-xl leading-none mt-0.5">↓</span>
+                <p className="text-sm text-muted leading-relaxed">{project.opportunityFraming.shift}</p>
+              </div>
+              <div className="border border-accent/40 rounded-2xl p-6 bg-accent-light">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2">Where the research took me</p>
+                <p className="text-ink text-lg font-medium leading-relaxed">"{project.opportunityFraming.reframedHmw}"</p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Metrics bar, placed after problem so the numbers have context */}
+        <div className="bg-ink rounded-2xl py-8 px-8 -mx-0">
+          <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact &amp; outcomes</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {project.metrics.map(m => (
+              <div key={m.label}>
+                <p className="text-xl md:text-2xl font-bold text-paper mb-1">{m.value}</p>
+                <p className="text-xs text-paper/50 leading-snug">{m.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Business outcome translation, only if present */}
+        {project.businessOutcomes && (
+          <section className="border border-accent/30 rounded-2xl p-8 bg-accent-light/50">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent mb-5">What those numbers mean for the business</p>
+            <div className="space-y-5">
+              {project.businessOutcomes.map(o => (
+                <div key={o.metric} className="grid md:grid-cols-[180px_1fr] gap-4 md:gap-6">
+                  <p className="font-mono text-xs uppercase tracking-wider text-accent font-semibold pt-1">{o.metric}</p>
+                  <p className="text-ink leading-relaxed">{o.translation}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Process timeline, early slot */}
+        {project.processEarly && processSection}
+
         {/* Desk Research, only if present */}
         {project.deskResearch && (
           <section>
@@ -340,14 +769,16 @@ export default function CaseStudy() {
             <p className="text-muted leading-relaxed mb-8">{project.deskResearch.summary}</p>
 
             {/* Stat callouts */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              {project.deskResearch.stats.map(s => (
-                <div key={s.label} className="bg-paper border border-border rounded-2xl p-4 text-center">
-                  <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
-                  <p className="text-xs text-muted leading-snug">{s.label}</p>
-                </div>
-              ))}
-            </div>
+            {project.deskResearch.stats.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {project.deskResearch.stats.map(s => (
+                  <div key={s.label} className="bg-paper border border-border rounded-2xl p-4 text-center">
+                    <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
+                    <p className="text-xs text-muted leading-snug">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Competitive audit matrix (if present) or plain findings list */}
             {project.deskResearch.competitiveAudit
@@ -434,41 +865,89 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Problem */}
-        <section>
-          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The problem</p>
-          <div className="space-y-4">
-            {project.problem.split('\n\n').map((para, i) => (
-              <p key={i} className={`leading-relaxed ${i === project.problem.split('\n\n').length - 1 ? 'text-accent font-medium italic' : 'text-muted'}`}>
-                {para}
-              </p>
-            ))}
-          </div>
-        </section>
+        {/* Storyboards, only if present */}
+        {project.storyboards && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Storyboards · the shared language</p>
+            <p className="text-muted leading-relaxed mb-8">{project.storyboards.intro}</p>
+            <div className="space-y-6 mb-8">
+              {project.storyboards.items.map((sb, i) => (
+                <figure key={i} className="rounded-2xl overflow-hidden border border-border">
+                  <img
+                    src={sb.src}
+                    alt={sb.caption}
+                    className="w-full object-contain bg-paper"
+                    style={{ maxHeight: '760px' }}
+                  />
+                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{sb.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+            <div className="bg-accent-light border border-accent/30 rounded-2xl p-6">
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-2">What the storyboards unlocked</p>
+              <p className="text-ink text-sm leading-relaxed">{project.storyboards.payoff}</p>
+            </div>
+          </section>
+        )}
 
-        {/* Metrics bar, placed after problem so the numbers have context */}
-        <div className="bg-ink rounded-2xl py-8 px-8 -mx-0">
-          <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact &amp; outcomes</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {project.metrics.map(m => (
-              <div key={m.label}>
-                <p className="text-xl md:text-2xl font-bold text-paper mb-1">{m.value}</p>
-                <p className="text-xs text-paper/50 leading-snug">{m.label}</p>
+        {/* Expert focus group, only if present */}
+        {project.focusGroup && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Expert focus group</p>
+            {project.focusGroup.intro && <p className="text-muted leading-relaxed mb-6">{project.focusGroup.intro}</p>}
+            <figure className="rounded-2xl overflow-hidden border border-border">
+              <img
+                src={project.focusGroup.image}
+                alt={project.focusGroup.caption}
+                className="w-full object-cover"
+                style={{ maxHeight: '520px' }}
+              />
+              <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{project.focusGroup.caption}</figcaption>
+            </figure>
+          </section>
+        )}
+
+        {/* 8-fold zine - output artifact, only if present */}
+        {project.zineInspiration && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Physical output - the 8-fold zine</p>
+            <p className="text-muted leading-relaxed mb-8">
+              Born from that focus group conversation. The app runs a TimeSlips-format session - an image prompt on
+              screen, the resident improvising a story around it - and records the scene: the audio cues alongside the
+              image being shown. It then composes the recording into a story laid out in 8-fold zine format, ready to print.
+            </p>
+
+            {project.zineInspiration.flow && (
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+                {project.zineInspiration.flow.map((f, i) => (
+                  <div key={f.step} className="border border-border rounded-xl p-4 bg-paper">
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1.5">{i + 1} · {f.step}</p>
+                    <p className="text-xs text-muted leading-relaxed">{f.detail}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            )}
 
-        {/* Business outcome translation, only if present */}
-        {project.businessOutcomes && (
-          <section className="border border-accent/30 rounded-2xl p-8 bg-accent-light/50">
-            <p className="text-xs font-medium uppercase tracking-widest text-accent mb-5">What those numbers mean for the business</p>
-            <div className="space-y-5">
-              {project.businessOutcomes.map(o => (
-                <div key={o.metric} className="grid md:grid-cols-[180px_1fr] gap-4 md:gap-6">
-                  <p className="font-mono text-xs uppercase tracking-wider text-accent font-semibold pt-1">{o.metric}</p>
-                  <p className="text-ink leading-relaxed">{o.translation}</p>
-                </div>
+            <div className="grid grid-cols-3 gap-3 mb-8">
+              {project.zineInspiration.references.map((ref, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-40 overflow-hidden bg-paper">
+                    <img src={ref.src} alt={ref.caption} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{ref.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">Session output templates</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {project.zineInspiration.mockups.map((m, i) => (
+                <figure key={i} className="rounded-xl overflow-hidden border border-border">
+                  <div className="h-36 overflow-hidden bg-paper">
+                    <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
+                  </div>
+                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{m.caption}</figcaption>
+                </figure>
               ))}
             </div>
           </section>
@@ -480,81 +959,8 @@ export default function CaseStudy() {
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
         </section>
 
-        {/* Assumptions → findings → pivots. Numbered timeline by default; flat cards when assumptions.flat is set. */}
-        {project.assumptions && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">
-              {project.assumptions.flat ? 'Assumptions → findings → pivots' : 'Design process · assumption → finding → pivot'}
-            </p>
-            {project.assumptions.intro && <p className="text-muted leading-relaxed mb-8 max-w-3xl">{project.assumptions.intro}</p>}
-            {project.assumptions.flat ? (
-              <div className="space-y-4">
-                {project.assumptions.items.map((it, i) => (
-                  <div key={i} className="border border-border rounded-2xl overflow-hidden">
-                    <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
-                      <div className="p-5 bg-paper">
-                        <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-2 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Assumed
-                        </p>
-                        <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
-                      </div>
-                      <div className="p-5">
-                        <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-2 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
-                        </p>
-                        <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
-                      </div>
-                      <div className="p-5 bg-accent-light/40">
-                        <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
-                        </p>
-                        <p className="text-sm text-ink leading-relaxed font-medium">{it.pivot}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <ol className="relative">
-                {project.assumptions.items.map((it, i) => {
-                  const isLast = i === project.assumptions!.items.length - 1
-                  return (
-                    <li key={i} className={`relative pl-12 ${isLast ? '' : 'pb-8'}`}>
-                      {!isLast && (
-                        <span aria-hidden className="absolute left-4 top-9 h-full w-px -translate-x-1/2 bg-border" />
-                      )}
-                      <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-accent text-paper grid place-items-center text-sm font-semibold shadow-sm">
-                        {i + 1}
-                      </span>
-                      <div className="border border-border rounded-2xl overflow-hidden">
-                        <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
-                          <div className="p-4 bg-paper">
-                            <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-1.5 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Assumed
-                            </p>
-                            <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
-                          </div>
-                          <div className="p-4">
-                            <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-1.5 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
-                            </p>
-                            <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
-                          </div>
-                          <div className="p-4 bg-accent-light/40">
-                            <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1.5 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
-                            </p>
-                            <p className="text-sm text-ink leading-relaxed font-medium">{it.pivot}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ol>
-            )}
-          </section>
-        )}
+        {/* Assumptions → findings → pivots, early slot (default) */}
+        {!project.assumptionsLate && assumptionsSection}
 
         {/* Service blueprint, as-is vs refined. Only if present. */}
         {project.serviceMap && (
@@ -614,7 +1020,7 @@ export default function CaseStudy() {
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.personaRoles ? 'Roles & personas' : 'User personas'}</p>
             {project.personaRoles && (
-              <p className="text-muted leading-relaxed mb-8">Three distinct roles shaped the design, each represented by a persona grounded in the co-design and ethnographic work.</p>
+              <p className="text-muted leading-relaxed mb-8">{project.personasIntro ?? 'Three roles shaped the design, each grounded in the co-design and ethnographic work.'}</p>
             )}
             {project.personaRoles ? (
               (() => {
@@ -659,69 +1065,8 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* User journey, only if present */}
-        {project.userJourney && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">User journey</p>
-            {project.userJourney.intro && <p className="text-muted leading-relaxed mb-8">{project.userJourney.intro}</p>}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {project.userJourney.stages.map((s, i) => (
-                <div key={s.stage} className="border border-border rounded-2xl p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-6 h-6 rounded-full bg-ink text-paper text-xs font-bold flex items-center justify-center flex-shrink-0">{i + 1}</span>
-                    <h3 className="font-bold text-ink text-sm">{s.stage}</h3>
-                  </div>
-                  <p className="text-sm text-muted leading-relaxed mb-3">{s.action}</p>
-                  <div className="space-y-1.5 pt-3 border-t border-border">
-                    <p className="text-xs text-muted"><span className="font-semibold text-ink">Feeling:</span> {s.feeling}</p>
-                    <p className="text-xs text-muted"><span className="font-semibold text-ink">Design response:</span> {s.opportunity}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Process */}
-        <section>
-          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.processTitle ?? 'Design process'}</p>
-          {(() => {
-            const hasPhases = project.process.some(s => s.phase)
-            if (!hasPhases) {
-              return (
-                <div className="space-y-6">
-                  {project.process.map((step, i) => (
-                    <ProcessStep key={step.step} step={step} index={i} />
-                  ))}
-                </div>
-              )
-            }
-            // Group by phase, preserving order of first appearance
-            const phases: string[] = []
-            const grouped: Record<string, typeof project.process> = {}
-            project.process.forEach(step => {
-              const p = step.phase ?? 'Other'
-              if (!grouped[p]) { grouped[p] = []; phases.push(p) }
-              grouped[p].push(step)
-            })
-            let globalIndex = 0
-            return (
-              <div className="space-y-10">
-                {phases.map(phase => (
-                  <div key={phase}>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-5 pb-2 border-b border-border">{phase}</p>
-                    <div className="space-y-6">
-                      {grouped[phase].map(step => {
-                        const idx = globalIndex++
-                        return <ProcessStep key={step.step} step={step} index={idx} />
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )
-          })()}
-        </section>
+        {/* Process, late slot (default) */}
+        {!project.processEarly && processSection}
 
         {/* Process artifacts, user flows, audits, component studies */}
         {project.processArtifacts && (
@@ -845,6 +1190,29 @@ export default function CaseStudy() {
           <p className="text-ink leading-relaxed">{project.solution}</p>
         </section>
 
+        {/* User journey, only if present */}
+        {project.userJourney && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">User journey</p>
+            {project.userJourney.intro && <p className="text-muted leading-relaxed mb-8">{project.userJourney.intro}</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {project.userJourney.stages.map((s, i) => (
+                <div key={s.stage} className="border border-border rounded-2xl p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-6 h-6 rounded-full bg-ink text-paper text-xs font-bold flex items-center justify-center flex-shrink-0">{i + 1}</span>
+                    <h3 className="font-bold text-ink text-sm">{s.stage}</h3>
+                  </div>
+                  <p className="text-sm text-muted leading-relaxed mb-3">{s.action}</p>
+                  <div className="space-y-1.5 pt-3 border-t border-border">
+                    <p className="text-xs text-muted"><span className="font-semibold text-ink">Feeling:</span> {s.feeling}</p>
+                    <p className="text-xs text-muted"><span className="font-semibold text-ink">Design response:</span> {s.opportunity}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Trade-offs, what I cut and why. Only if present. */}
         {project.tradeoffs && (
           <section>
@@ -907,42 +1275,6 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* 8-fold zine - output artifact, only if present */}
-        {project.zineInspiration && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Physical output - the 8-fold zine</p>
-            <p className="text-muted leading-relaxed mb-8">
-              Once a session is complete, the app generates a printed template summarising the PwD's recorded story.
-              The carer prints this and turns it into an activity in itself - folding a single A4 sheet into 8 panels
-              to create a small, personal zine. The result is a tangible keepsake the PwD can take with them:
-              their own creative story, made by their own hands, to be cherished.
-            </p>
-
-            <div className="grid grid-cols-3 gap-3 mb-8">
-              {project.zineInspiration.references.map((ref, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-40 overflow-hidden bg-paper">
-                    <img src={ref.src} alt={ref.caption} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{ref.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">Session output templates</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {project.zineInspiration.mockups.map((m, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-36 overflow-hidden bg-paper">
-                    <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{m.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-        )}
-
         {/* Gallery, prototype & research images */}
         {project.gallery && (
           <section>
@@ -965,6 +1297,44 @@ export default function CaseStudy() {
             </div>
           </section>
         )}
+
+        {/* Final prototype screens, only if present */}
+        {project.screens && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Final prototype · screen by screen</p>
+            {project.screens.intro && <p className="text-muted leading-relaxed mb-8">{project.screens.intro}</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              {project.screens.items.map(s => (
+                <figure key={s.title} className="border border-border rounded-2xl overflow-hidden flex flex-col">
+                  <div className="bg-paper p-4 flex justify-center">
+                    <img
+                      src={s.src}
+                      alt={s.title}
+                      className="w-full max-w-[240px]"
+                    />
+                  </div>
+                  <figcaption className="px-4 py-3 bg-paper border-t border-border flex-1">
+                    <p className="font-semibold text-ink text-sm mb-1">{s.title}</p>
+                    <p className="text-xs text-muted leading-relaxed">{s.description}</p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            {project.screens.brand && (
+              <figure className="rounded-2xl overflow-hidden border border-border">
+                <img
+                  src={project.screens.brand.src}
+                  alt={project.screens.brand.caption}
+                  className="w-full object-contain bg-white"
+                />
+                <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{project.screens.brand.caption}</figcaption>
+              </figure>
+            )}
+          </section>
+        )}
+
+        {/* Assumptions → findings → pivots, late slot */}
+        {project.assumptionsLate && assumptionsSection}
 
         {/* Outcomes, only if present */}
         {project.outcomes && (

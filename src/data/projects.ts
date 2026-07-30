@@ -47,11 +47,57 @@ export type Project = {
   tags: string[]
   // Extended fields (optional - populated per-project)
   heroImage?: string
+  context?: {
+    intro: string
+    stats?: { value: string; label: string }[]
+    challenges: string[]
+    quote?: string
+    image?: string
+    imageCaption?: string
+  }
+  opportunityFraming?: {
+    initialAssumption: string
+    initialHmw: string
+    shift: string
+    reframedHmw: string
+  }
+  storyboards?: {
+    intro: string
+    items: { src: string; caption: string }[]
+    payoff: string
+  }
+  personasIntro?: string
+  processEarly?: boolean
+  processCompact?: boolean
+  focusGroup?: { intro?: string; image: string; caption: string }
+  solutionTeaser?: string
+  screens?: {
+    intro?: string
+    items: { src: string; title: string; description: string }[]
+    brand?: { src: string; caption: string }
+  }
+  tldr?: {
+    headline: string
+    role: string
+    problemLine: string
+    contextStats: { value: string; label: string }[]
+    timeline: { when: string; what: string }[]
+    ethnography: { line: string; items: { src: string; label: string }[] }
+    pivot: { from: string; fromHmw: string; to: string; toHmw: string; because: string }
+    gap: string
+    origin: { items: { src: string; label: string }[]; line: string }
+    roles: { role: string; who: string }[]
+    output: { src: string; label: string }[]
+    screens: { src: string; label: string }[]
+    impact: { value: string; label: string }[]
+    closer?: string
+  }
   overview?: { team: string; industry: string; status?: string; recognition?: string }
   designDecisions?: { decision: string; rationale: string }[]
   background?: { understandingNeedsTitle?: string; understandingNeeds: string; personalDrive: string; innovativeMethods: string }
   personas?: Persona[]
   personaRoles?: { role: string; who: string; definition: string }[]
+  assumptionsLate?: boolean
   assumptions?: {
     intro?: string
     flat?: boolean
@@ -109,6 +155,7 @@ export type Project = {
   }
   wip?: string
   zineInspiration?: {
+    flow?: { step: string; detail: string }[]
     references: { src: string; caption: string }[]
     mockups: { src: string; caption: string }[]
   }
@@ -570,24 +617,95 @@ export const projects: Project[] = [
     role: 'Product Design Intern',
     duration: 'Feb · Apr 2023',
     tools: ['Paper prototypes', 'Miro', 'Figma'],
-    problem: `Digital tools for people with dementia (PwD) are almost universally built around reminiscence - helping users remember the past. This neglects a critical insight: PwD retain more agency and quality of life when supported to engage with the present and future.\n\nHow might we design a digital tool that enhances quality of life for people with dementia - by focusing on present engagement and meaningful connection, rather than memory recall alone?`,
+    problem: `Digital tools for people with dementia (PwD) are almost universally built around reminiscence - helping users remember the past - while clinical evidence points the other way: present and forward orientation reduces disorientation and anxiety.\n\nPeople living with dementia have no digital tool that supports present-moment creation and connection. Everything asks them to remember.`,
     insight: `The most meaningful moments for PwD were not recall-based - they were present-tense: creating something, sharing it with someone, and seeing a reaction. The app needed to facilitate making and connecting, not just remembering.`,
+    solutionTeaser: `Where it landed: a TimeSlips-format companion app - an image prompt on screen, the resident improvises a story, and the app records the session and composes it into a printable 8-fold zine. The rest of this page is how the research got there.`,
+    tldr: {
+      headline: 'Beyond reminiscence',
+      role: 'Sole researcher & designer · Feb to Apr 2023',
+      problemLine: 'Every digital tool for dementia asks people to remember the past. The clinical evidence points the other way.',
+      contextStats: [
+        { value: '900K+', label: 'People with dementia in the UK' },
+        { value: '1.6M', label: 'Projected by 2040' },
+        { value: '67%', label: 'Low engagement between activities' },
+        { value: '~0', label: 'Tools for present & future thinking' },
+      ],
+      timeline: [
+        { when: 'Feb', what: 'Desk research & competitive audit' },
+        { when: 'Feb', what: 'Ethnographic observation' },
+        { when: 'Feb', what: 'Scenario storyboards' },
+        { when: 'Mar', what: 'Expert focus group' },
+        { when: 'Mar', what: 'Co-design workshops' },
+        { when: 'Mar–Apr', what: 'Prototype testing, 2 rounds' },
+        { when: 'Apr', what: 'Digital iteration' },
+      ],
+      ethnography: {
+        line: 'I shadowed sensory theatre sessions in a Newcastle care home. Every joyful moment I recorded was present-tense: making something, sharing it, seeing a reaction.',
+        items: [
+          { src: '/uploads/me-and-you/workshop-accordion-v2.png', label: 'Music' },
+          { src: '/uploads/me-and-you/workshop-tea-v2.png', label: 'Shared tea' },
+          { src: '/uploads/me-and-you/workshop-sensory-v2.png', label: 'Tactile materials' },
+          { src: '/uploads/me-and-you/workshop-artwork-v2.png', label: 'Making artwork' },
+        ],
+      },
+      pivot: {
+        from: 'Reminiscence',
+        fromHmw: 'How might we help people with dementia recall and share their memories?',
+        to: 'Present & future',
+        toHmw: 'How might we enhance quality of life through present engagement and connection, rather than memory recall alone?',
+        because: 'The ethnography and expert focus group overturned the category default.',
+      },
+      gap: 'No product combined present-moment creativity, family connection, and accessibility in something a resident could keep and use daily.',
+      origin: {
+        items: [
+          { src: '/uploads/me-and-you/storyboard.png', label: 'Storyboarded the scenarios' },
+          { src: '/uploads/me-and-you/research-session.jpg', label: 'Took them to the academics' },
+          { src: '/uploads/me-and-you/zine-template.png', label: 'The 8-fold zine emerged' },
+        ],
+        line: 'Storyboards became the shared language. Shown to the expert focus group, they exposed the gap between sessions - nothing tangible carried the creative work forward.',
+      },
+      roles: [
+        { role: 'Person with Dementia', who: 'Primary' },
+        { role: 'Carer', who: 'Secondary' },
+        { role: 'Community Facilitator', who: 'Tertiary' },
+      ],
+      output: [
+        { src: '/uploads/me-and-you/app-session-player.png', label: 'Record the session' },
+        { src: '/uploads/me-and-you/app-summary-zine.png', label: 'Compose the story' },
+        { src: '/uploads/me-and-you/zine-mockup-who-am-i.png', label: 'Print the zine' },
+      ],
+      screens: [
+        { src: '/uploads/me-and-you/app-home.png', label: 'Shared archives' },
+        { src: '/uploads/me-and-you/app-archive.png', label: 'Pictures & prompts' },
+        { src: '/uploads/me-and-you/app-bookshelf.png', label: 'Book shelf' },
+      ],
+      impact: [
+        { value: '50+', label: 'Participants' },
+        { value: '5', label: 'Research methods' },
+        { value: '2', label: 'Test rounds' },
+        { value: '5', label: 'Principles adopted by Nebula Labs' },
+      ],
+      closer: 'The obvious solution was the wrong one.',
+    },
     processTitle: 'Process timeline',
+    processEarly: true,
+    processCompact: true,
     process: [
-      { phase: 'Feb 2023 · Discover', step: 'Expert Focus Group', detail: 'Convened HCI and dementia care specialists from Northumbria and Newcastle Universities to establish the evidence base and identify gaps in existing digital tools.' },
-      { phase: 'Feb 2023 · Discover', step: 'Ethnographic Observation', detail: 'Shadowed "Milk, Two Sugars" - a sensory theatre intervention by Woven Nest at a Newcastle care home - observing how PwD responded to sensory, creative, and social stimuli.' },
-      { phase: 'Feb to Mar 2023 · Research', step: 'Competitive Analysis', detail: 'Reviewed TimeSlips and similar co-creative tools alongside existing dementia apps to understand which engagement mechanisms transferred well to digital formats, and which gaps none of them filled.' },
-      { phase: 'Mar 2023 · Co-design', step: 'Co-design Workshops', detail: 'Ran participatory design sessions with PwD, caregivers, and care home staff using artefacts, storytelling prompts, and storyboard-based scenarios.' },
-      { phase: 'Mar to Apr 2023 · Test', step: 'Prototype Testing', detail: 'Developed and tested paper prototypes with PwD and caregivers, measuring engagement duration, emotional response, and caregiver usability across 2 rounds.' },
-      { phase: 'Apr 2023 · Iterate', step: 'Digital Iteration', detail: 'Refined the strongest concept into a digital prototype in Figma, incorporating feedback on navigation simplicity and visual hierarchy.' },
+      { phase: 'Feb 2023 · Discover', step: 'Desk Research & Competitive Analysis', detail: 'Clinical literature review plus an audit of TimeSlips, Tovertafel, and Reminisce - surfacing the reminiscence default and what was missing.' },
+      { phase: 'Feb 2023 · Discover', step: 'Ethnographic Observation', detail: 'Shadowed "Milk, Two Sugars" by Woven Nest at a Newcastle care home.' },
+      { phase: 'Feb 2023 · Discover', step: 'Scenario Storyboards', detail: 'Drew two storyboards from the observations to communicate the emerging scenarios to stakeholders.' },
+      { phase: 'Mar 2023 · Research', step: 'Expert Focus Group', detail: 'HCI and dementia specialists from Northumbria and Newcastle Universities reviewed the findings and storyboards - the 8-fold zine method emerged here.' },
+      { phase: 'Mar 2023 · Co-design', step: 'Co-design Workshops', detail: 'Ran through the paper prototypes with PwD - observing and shadowing how they responded and thought, ahead of formal prototype testing.' },
+      { phase: 'Mar to Apr 2023 · Test', step: 'Prototype Testing', detail: '2 rounds of paper prototype testing with 5 PwD and 5 care staff.' },
+      { phase: 'Apr 2023 · Iterate', step: 'Digital Iteration', detail: 'Refined the strongest concept into a Figma prototype.' },
     ],
     metrics: [
       { label: 'Participants across focus groups, ethnography, co-design & testing', value: '50+' },
-      { label: 'Research methods used', value: '5 (focus groups, ethnography, co-design, prototype testing)' },
-      { label: 'Prototype test rounds', value: '2 with PwD and caregivers' },
-      { label: 'Design principles established', value: '5 evidence-based principles adopted by Nebula Labs' },
+      { label: 'Research methods, focus groups to prototype testing', value: '5' },
+      { label: 'Test rounds with PwD and caregivers', value: '2' },
+      { label: 'Design principles adopted by Nebula Labs', value: '5' },
     ],
-    solution: `A digital companion app with daily creative prompts (sensory-rich activities designed for present-moment engagement), a shared memory space between PwD and a designated caregiver, a caregiver dashboard showing recent activity without surveillance framing, and full accessibility throughout (large text, high contrast, voice input).`,
+    solution: `A digital companion app built around TimeSlips-format sessions: an image prompt on screen, the resident improvises a story, and the app records the audio cues alongside the image - then composes each session into a printable 8-fold zine. Around it: a shared archive connecting PwD, family, and carers, a caregiver view without surveillance framing, and accessibility throughout - large text, high contrast, voice input.`,
     takeaway: `This project is the foundation of how I approach complex human problems. Dementia care taught me that design assumptions are dangerous - the "obvious" solution (reminiscence) was the wrong one. Deep research, co-design, and willingness to challenge the brief led to a validated alpha that Teesside Council have earmarked for continued development.`,
     tags: ['Healthcare', 'Social Impact', 'Co-design', 'Accessibility', 'Research'],
     overview: {
@@ -595,25 +713,71 @@ export const projects: Project[] = [
       industry: 'Healthcare / Social Care',
       status: 'Discovery to Alpha complete. Development paused pending council funding.',
     },
-    background: {
-      understandingNeeds: `Dementia affects over 900,000 people in the UK, with numbers expected to reach 1.6 million by 2040. People living with dementia (PwD) experience progressive cognitive decline that affects memory, communication, and daily orientation. Existing digital tools in this space overwhelmingly focus on reminiscence - prompting memory of the past - but research suggests that forward-orientation (thinking about what comes next) can meaningfully reduce disorientation and anxiety. There was a clear gap: almost no tools were designed to support future thinking for PwD.`,
-      personalDrive: `My interest in this space grew from exploring how creative and sensory interventions - such as immersive theatre and group storytelling - were already being used in care homes to positive effect. I shadowed workshops by Woven Nest Theatre at a local care home and conducted a focus group with HCI and dementia specialists at Northumbria and Newcastle Universities. A recurring theme emerged: practitioners wanted a tool that could extend creative engagement beyond in-person sessions and into everyday routines - something lightweight, non-clinical, and genuinely enjoyable to use.`,
-      innovativeMethods: `Rather than defaulting to screen-heavy interfaces, I looked at how tactile and creative formats could translate digitally. The 8-fold zine - a physical storytelling format - became a central inspiration. Its non-linear, low-pressure structure aligned well with the cognitive patterns of PwD: open-ended prompts rather than correctness, sensory engagement rather than instruction-following. I used this format to inform the app's interaction model.`,
-    },
-    deskResearch: {
-      summary: `Before any design work, I reviewed clinical literature, existing dementia technology, and participatory design research to understand what was known - and critically, what was missing. The evidence strongly challenged the industry default of reminiscence-based tools.`,
+    context: {
+      intro: `Dementia is a progressive condition affecting memory, communication, and daily orientation. It is a spectrum, not a single state - from early-stage lapses to advanced-stage loss of speech and mobility - and most people in residential care live somewhere along it.`,
       stats: [
         { value: '900K+', label: 'People living with dementia in the UK today' },
         { value: '1.6M', label: 'Projected UK cases by 2040' },
-        { value: '~0', label: 'Existing tools designed for forward-orientation (present/future thinking)' },
         { value: '67%', label: 'Of care home residents report low engagement between structured activities' },
+        { value: '~0', label: 'Digital tools designed for present and future thinking' },
       ],
+      challenges: [
+        'Disorientation and anxiety as routines and surroundings become harder to hold on to',
+        'Communication difficulties that make self-expression and connection harder',
+        'Long, unstimulated gaps between structured care activities',
+        'Technology that excludes them - small targets, complex flows, clinical language',
+      ],
+      quote: `Practitioners wanted a tool that could extend creative engagement beyond in-person sessions and into everyday routines - something lightweight, non-clinical, and genuinely enjoyable to use.`,
+      image: '/uploads/me-and-you/workshop-artwork-v2.png',
+      imageCaption: 'A resident proudly displays watercolour artwork made during a creative workshop - the present-moment engagement existing digital tools overlook.',
+    },
+    opportunityFraming: {
+      initialAssumption: 'Like almost every product in this category, I started from reminiscence: the job, I assumed, was to help people with dementia revisit their past.',
+      initialHmw: 'How might we help people with dementia recall and share their memories?',
+      shift: 'The ethnographic sessions and expert focus group overturned this. The most engaged, joyful moments were present-tense - making something, sharing it, seeing a reaction.',
+      reframedHmw: 'How might we design a digital tool that enhances quality of life for PwD through present engagement and meaningful connection, rather than memory recall alone?',
+    },
+    storyboards: {
+      intro: `Storyboards became the project's shared language. I drew two scenarios to walk care staff and stakeholders through how the app would live inside a care home - collaborative, intuitive to capture, and far easier to react to than a spec.`,
+      items: [
+        { src: '/uploads/me-and-you/storyboard.png', caption: 'Scenario storyboard A - facilitator-led session in a care home: introducing the app, prompting residents, and sharing outputs with family' },
+        { src: '/uploads/me-and-you/storyboard-2.png', caption: 'Scenario storyboard B - family member initiated use: family member browsing the archive, engaging with PwD and connecting with each other in person' },
+      ],
+      payoff: `When I brought the same storyboards to the expert focus group - held after the ethnographic study - the academics connected the dots between what I had observed in the care home and the digital app, and exposed the gap between sessions: nothing tangible carried the creative work forward. The 8-fold zine method emerged from that conversation.`,
+    },
+    focusGroup: {
+      intro: 'Held after the ethnographic study: academics, care staff, and practitioners mapping features and reviewing the storyboards together.',
+      image: '/uploads/me-and-you/research-session.jpg',
+      caption: 'Co-design and ideation session - feature mapping with care staff and HCI researchers using post-it affinity clustering. Participants included carers, a theatre facilitator, and two academic dementia specialists.',
+    },
+    screens: {
+      intro: 'The final Figma prototype, screen by screen - from opening the app to a printed story.',
+      items: [
+        { src: '/uploads/me-and-you/app-splash.png', title: 'Splash', description: '"Solely for an I-Thou mode" - Kitwood\'s person-centred ideal.' },
+        { src: '/uploads/me-and-you/app-home.png', title: 'Home Page', description: 'Archives of facilitators, carers, and family members.' },
+        { src: '/uploads/me-and-you/app-menu.png', title: 'Menu', description: 'Settings, FAQ, Demo Session, About the App, Themes.' },
+        { src: '/uploads/me-and-you/app-how-it-works.png', title: 'How this works?', description: 'Video and FAQ explaining the TimeSlips method.' },
+        { src: '/uploads/me-and-you/app-archive.png', title: 'Liv\'s Archive', description: 'Pictures and prompts. Play starts a session; + adds more pictures.' },
+        { src: '/uploads/me-and-you/app-story-detail.png', title: 'Story - Into the woods', description: 'The images inside one story.' },
+        { src: '/uploads/me-and-you/app-session-player.png', title: 'Session player', description: 'A session in progress - audio cues recorded with the image shown.' },
+        { src: '/uploads/me-and-you/app-summary-zine.png', title: 'Summary', description: 'The composed story with layout templates - ready for the 8-fold zine print.' },
+        { src: '/uploads/me-and-you/app-bookshelf.png', title: 'Book Shelf', description: 'Finished stories, archived as books.' },
+      ],
+      brand: {
+        src: '/uploads/me-and-you/logo-derivation.png',
+        caption: 'Logo derivation - from Kitwood\'s 12 positive interactions, three shaped the app: Play, Facilitation, and Giving. The mark itself is two figures (carer and PwD) joined by the app as the circle between them.',
+      },
+    },
+    personasIntro: `Three roles, synthesised from the raw research data: field notes from the ethnographic sessions, the expert focus group transcript, co-design workshop outputs, and conversations with carers and the Woven Nest facilitators.`,
+    deskResearch: {
+      summary: `Before any design work, I reviewed clinical literature, existing dementia technology, and participatory design research. The evidence strongly challenged the industry default of reminiscence-based tools.`,
+      stats: [],
       findings: [
-        'Existing digital tools (Tovertafel, TimeSlips, Reminisce) are almost universally built around memory recall - prompting users to remember the past.',
-        'Clinical evidence suggests forward-orientation (engaging with the present and near future) can reduce disorientation and anxiety in PwD - but no commercial product addressed this.',
-        'Creative and sensory engagement - particularly through participatory arts - showed strong evidence for improving quality of life and communication in PwD.',
-        'Accessibility research flagged consistent failures in existing tools: small touch targets, complex navigation, clinical visual language, and absence of caregiver co-use modes.',
-        'The 8-fold zine - a physical, non-linear storytelling format used in art therapy - offered a structural model directly applicable to digital interaction design: open-ended prompts, no correct answers, low cognitive load, and a format PwD could engage with at their own pace.',
+        'Existing tools (Tovertafel, TimeSlips, Reminisce) are almost universally built around memory recall.',
+        'Clinical evidence links forward-orientation to reduced disorientation and anxiety - yet no commercial product addressed it.',
+        'Participatory arts showed strong evidence for improving quality of life and communication in PwD.',
+        'Existing tools consistently failed on accessibility: small touch targets, complex navigation, clinical visual language, no caregiver co-use.',
+        'The 8-fold zine offered a direct structural model: open-ended prompts, no correct answers, low cognitive load.',
       ],
       gap: `No product existed that combined present-moment creative engagement, shared family connection, and accessibility-first design for people living with dementia. That was the design opportunity.`,
       books: [
@@ -638,6 +802,12 @@ export const projects: Project[] = [
       ],
     },
     zineInspiration: {
+      flow: [
+        { step: 'Prompt', detail: 'A TimeSlips-format session begins: an open-ended image on screen, no right answers.' },
+        { step: 'Record', detail: 'The app records the scene - audio cues captured alongside the image being shown.' },
+        { step: 'Compose', detail: 'The recorded session is built into a story, laid out in 8-fold zine format.' },
+        { step: 'Print & fold', detail: 'Ready to print - the carer folds it into a small book the resident keeps.' },
+      ],
       references: [
         {
           src: '/uploads/me-and-you/zine-template.png',
@@ -672,7 +842,7 @@ export const projects: Project[] = [
       ],
     },
     competitiveAnalysis: {
-      intro: 'I audited the tools care homes already use, alongside the co-creative methods the sector trusts. The pattern was consistent: strong on remembering the past or bound to in-person sessions, but silent on present-moment creation, family connection, and portable accessibility all at once.',
+      intro: 'I audited the tools care homes already use. The pattern: strong on remembering the past, or bound to in-person sessions - silent on present-moment creation, family connection, and portable accessibility.',
       tools: [
         {
           name: 'TimeSlips',
@@ -685,7 +855,7 @@ export const projects: Project[] = [
             { label: 'Everyday / portable use', score: 'none' },
             { label: 'Creative expression', score: 'full' },
           ],
-          gap: 'A proven group storytelling method that inspired the approach, but it is facilitator-led and in-person, not a standalone tool residents can pick up day to day.',
+          gap: 'A proven storytelling method, but facilitator-led and in-person - not something residents can pick up day to day.',
         },
         {
           name: 'Tovertafel',
@@ -698,7 +868,7 @@ export const projects: Project[] = [
             { label: 'Everyday / portable use', score: 'none' },
             { label: 'Creative expression', score: 'partial' },
           ],
-          gap: 'Excellent present-moment sensory engagement, but tied to expensive fixed hardware in one room. Nothing personal, portable, or connected to family.',
+          gap: 'Excellent sensory engagement, but tied to expensive fixed hardware - nothing personal, portable, or family-connected.',
         },
         {
           name: 'Reminisce',
@@ -711,7 +881,7 @@ export const projects: Project[] = [
             { label: 'Everyday / portable use', score: 'full' },
             { label: 'Creative expression', score: 'none' },
           ],
-          gap: 'Digital and accessible, but built entirely around recalling the past, the exact model the research challenged. No creation, no connection.',
+          gap: 'Digital and portable, but built entirely around recalling the past - no creation, no connection.',
         },
         {
           name: 'Me & You',
@@ -724,50 +894,51 @@ export const projects: Project[] = [
             { label: 'Everyday / portable use', score: 'full' },
             { label: 'Creative expression', score: 'full' },
           ],
-          gap: 'Combines present-moment creative engagement, family connection, and accessibility-first design in one portable tool, the space no existing product occupied.',
+          gap: 'Present-moment creativity, family connection, and accessibility-first design in one portable tool.',
         },
       ],
-      takeaway: 'Every tool did one thing well. None combined present-moment creativity, family connection, and accessibility in something a resident could actually keep and use day to day. That white space became the brief.',
+      takeaway: 'Every tool did one thing well. None combined creativity, connection, and accessibility in something a resident could keep and use daily. That white space became the brief.',
     },
+    assumptionsLate: true,
     assumptions: {
-      intro: 'I came in with assumptions inherited from the category. Research and testing overturned most of them, and that is where the real design thinking happened.',
+      intro: 'I came in with assumptions inherited from the category. Testing overturned most of them - that is where the design thinking happened.',
       items: [
         {
-          assumption: 'A dementia tool should help people remember the past. Reminiscence is the established, "safe" model.',
-          finding: 'The most meaningful moments in the care home were present-tense: making something and sharing it. Recall-based prompts often created pressure and disengagement.',
-          pivot: 'Reframed the entire brief around present-moment creation and connection, not memory recall.',
+          assumption: 'A dementia tool should help people remember the past - reminiscence is the established model.',
+          finding: 'The most meaningful moments were present-tense: making and sharing. Recall prompts created pressure.',
+          pivot: 'Reframed the brief around present-moment creation and connection.',
         },
         {
-          assumption: 'Prompts phrased as questions ("What does this remind you of?") would feel natural and conversational.',
-          finding: 'Questions read as tests. Participants felt they had to produce a correct answer, which raised anxiety.',
-          pivot: 'Rewrote every prompt as an open invitation ("Tell me about...") with no right answer.',
+          assumption: 'Prompts phrased as questions would feel natural and conversational.',
+          finding: 'Questions read as tests - participants felt they had to produce a correct answer.',
+          pivot: 'Rewrote every prompt as an open invitation ("Tell me about...").',
         },
         {
-          assumption: 'People with dementia would use the app independently, one screen at a time.',
-          finding: 'Independent navigation worked for some but excluded others, especially at more advanced stages, and a carer was usually present anyway.',
-          pivot: 'Introduced a dual-mode model: independent use and a guided carer mode.',
+          assumption: 'People with dementia would use the app independently.',
+          finding: 'Independent use excluded residents at later stages - and a carer was usually present anyway.',
+          pivot: 'Dual-mode model: independent use plus a guided carer mode.',
         },
         {
-          assumption: 'Standard mobile touch targets and a linear, step-by-step flow would be fine.',
-          finding: 'Targets were too small for arthritic and reduced-motor-control hands, and step-by-step flows created a fear of getting it wrong.',
-          pivot: 'Set a 48px minimum target and adopted the non-linear, zine-inspired layout so there is no wrong order.',
+          assumption: 'Standard touch targets and a linear, step-by-step flow would be fine.',
+          finding: 'Targets were too small for arthritic hands; linear flows created fear of getting it wrong.',
+          pivot: '48px minimum targets and a non-linear, zine-inspired layout.',
         },
         {
           assumption: 'Text-based prompts would communicate the activities clearly.',
-          finding: 'Open-ended image prompts were understood instantly and needed no explanation; text added cognitive load.',
-          pivot: 'Made the interaction image-first, with text as support rather than the primary instruction.',
+          finding: 'Image prompts were understood instantly; text added cognitive load.',
+          pivot: 'Image-first interaction, with text as support.',
         },
       ],
     },
     userJourney: {
-      intro: 'The target experience runs from a carer introducing the app to a printed keepsake the resident keeps. Every stage was designed to lower pressure and end in a shared reaction.',
+      intro: 'From a carer opening the app to a printed keepsake: every stage lowers pressure and ends in a shared reaction.',
       stages: [
         { stage: 'Introduce', action: 'A carer or family member opens the app with the resident and starts a session in one tap.', feeling: 'Curious, low pressure', opportunity: 'No setup, no training, no login friction.' },
-        { stage: 'Prompt', action: 'The app offers an open-ended, sensory image prompt from the zine-inspired set.', feeling: 'Invited, not tested', opportunity: 'Invitation wording and imagery replace question-and-answer.' },
-        { stage: 'Create', action: 'The resident responds in their own way, by talking, choosing an image, or recording a short story.', feeling: 'Absorbed, expressive', opportunity: 'Image-first, voice-friendly, 48px targets, no wrong answer.' },
+        { stage: 'Prompt', action: 'The app opens a TimeSlips-format session: an open-ended image prompt on screen.', feeling: 'Invited, not tested', opportunity: 'Invitation wording and imagery replace question-and-answer.' },
+        { stage: 'Create', action: 'The resident improvises a story around the image; the app records the audio cues as the scene unfolds.', feeling: 'Absorbed, expressive', opportunity: 'Image-first, voice-friendly, 48px targets, no wrong answer.' },
         { stage: 'Share', action: 'The response is saved to a shared archive visible to family and the care team.', feeling: 'Connected', opportunity: 'Connection without a surveillance framing.' },
         { stage: 'React', action: 'Family members see the new entry and respond, in person or remotely.', feeling: 'Seen, valued', opportunity: 'Closes the loop the insight identified: create, share, see a reaction.' },
-        { stage: 'Keep', action: 'The carer prints the session summary and folds it into an 8-fold zine the resident keeps.', feeling: 'Proud', opportunity: 'A tangible keepsake: their own creative story, made by hand.' },
+        { stage: 'Keep', action: 'The app composes the recorded session into an 8-fold zine, ready to print - the carer folds it into a book the resident keeps.', feeling: 'Proud', opportunity: 'A tangible keepsake: their own creative story, made by hand.' },
       ],
     },
     personaRoles: [
@@ -853,14 +1024,14 @@ export const projects: Project[] = [
     researchOps: {
       intro: 'Working with people living with dementia meant research operations came first. How I recruited, gained consent, and ran sessions mattered as much as what I asked.',
       items: [
-        { label: 'Consent as ongoing', detail: 'Consent was treated as continuous, not a one-off form. Gained through the care home as gatekeeper and supported by carers, with participants free to stop at any point and any non-verbal sign of discomfort treated as a cue to pause.' },
-        { label: 'Recruitment & access', detail: 'Participants were reached through the care home and Woven Nest Theatre using purposive sampling. Carers acted as trusted facilitators and stayed present throughout each session.' },
-        { label: 'Safeguarding & session design', detail: 'Sessions ran in familiar settings, kept to 20 to 30 minutes, with no time pressure and no right answers, to protect against fatigue and anxiety.' },
-        { label: 'Data handling', detail: 'Participant images were anonymised and faces blurred before any external use, and all materials were stored securely.' },
+        { label: 'Consent as ongoing', detail: 'Continuous, not a one-off form - gained via the care home as gatekeeper, with any sign of discomfort treated as a cue to pause.' },
+        { label: 'Recruitment & access', detail: 'Reached through the care home and Woven Nest Theatre; carers stayed present throughout every session.' },
+        { label: 'Safeguarding & session design', detail: 'Familiar settings, 20-30 minute sessions, no time pressure, no right answers.' },
+        { label: 'Data handling', detail: 'Images anonymised and faces blurred before any external use; materials stored securely.' },
       ],
     },
     testing: {
-      description: 'We tested two paper prototype variants with 10 participants, including 5 people with dementia (supported by carers) and 5 care staff. Sessions lasted approximately 20-30 minutes each.',
+      description: 'Two paper prototype variants, tested across 2 rounds with 5 people with dementia (supported by carers) and 5 care staff.',
       participants: '5 people with dementia + 5 care staff',
       questions: [
         'Could users understand the prompts without verbal explanation?',
@@ -890,21 +1061,6 @@ export const projects: Project[] = [
       learned: `Designing for cognitive accessibility demands a fundamentally different approach to interaction. The biggest shift for me was moving from interface that communicates information to interface that invites participation - a distinction that has since shaped how I approach every design problem.`,
     },
     gallery: [
-      {
-        src: '/uploads/me-and-you/research-session.jpg',
-        caption: 'Co-design and ideation session - feature mapping with care staff and HCI researchers using post-it affinity clustering. Participants included carers, a theatre facilitator, and two academic dementia specialists.',
-        type: 'research',
-      },
-      {
-        src: '/uploads/me-and-you/storyboard.png',
-        caption: 'Scenario storyboard A - facilitator-led session in a care home: introducing the app, prompting residents, and sharing outputs with family',
-        type: 'storyboard',
-      },
-      {
-        src: '/uploads/me-and-you/storyboard-2.png',
-        caption: 'Scenario storyboard B - family member initiated use: family member browsing the archive, engaging with PwD and connecting with each other in person',
-        type: 'storyboard',
-      },
       {
         src: '/uploads/me-and-you/paper-prototype-2.jpg',
         caption: 'Paper prototype v1 - first lo-fi iteration tested with 5 PwD and 5 care staff at the care home',

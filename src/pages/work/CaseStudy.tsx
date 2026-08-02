@@ -1133,7 +1133,7 @@ export default function CaseStudy() {
         {project.personas && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.personaRoles ? 'Roles & personas' : 'User personas'}</p>
-            {project.personaRoles && (
+            {(project.personasIntro || project.personaRoles) && (
               <p className="text-muted leading-relaxed mb-8">{project.personasIntro ?? 'Three roles shaped the design, each grounded in the co-design and ethnographic work.'}</p>
             )}
             {project.personaRoles ? (

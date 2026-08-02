@@ -460,22 +460,44 @@ export default function CaseStudy() {
       {project.tldr && view === 'tldr' && (
         <div className="max-w-4xl mx-auto px-6 space-y-14">
 
-          {/* Headline + one-line problem */}
-          <section className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-ink leading-tight mb-4">{project.tldr.headline}</h2>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.tldr.role}</p>
-            <p className="text-lg text-muted leading-relaxed max-w-2xl mx-auto">{project.tldr.problemLine}</p>
+          {/* Headline + summary */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-medium text-ink leading-snug mb-5">{project.tldr.headline}</h2>
+            <p className="text-lg text-muted leading-relaxed">{project.tldr.summary}</p>
           </section>
 
-          {/* Context scale */}
-          <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {project.tldr.contextStats.map(s => (
-              <div key={s.label} className="bg-paper border border-border rounded-2xl p-5 text-center">
-                <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
-                <p className="text-xs text-muted leading-snug">{s.label}</p>
-              </div>
-            ))}
+          {/* My role */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">My role</p>
+            <p className="text-ink">{project.tldr.role}</p>
           </section>
+
+          {/* Impact */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">Impact</p>
+            <ul className="space-y-3">
+              {project.tldr.impact.map(im => (
+                <li key={im.text} className="flex items-start gap-3 text-ink leading-relaxed">
+                  <span className="w-5 h-5 rounded-full bg-accent-light border border-accent/30 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-accent text-xs">✓</span>
+                  </span>
+                  {im.text}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* The scale, reuses detailed context stats */}
+          {project.context?.stats && (
+            <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {project.context.stats.map(s => (
+                <div key={s.label} className="bg-paper border border-border rounded-2xl p-5 text-center">
+                  <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
+                  <p className="text-xs text-muted leading-snug">{s.label}</p>
+                </div>
+              ))}
+            </section>
+          )}
 
           {/* Timeline */}
           <section>
@@ -491,6 +513,29 @@ export default function CaseStudy() {
                   </div>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* Discovery */}
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Discovery</p>
+            <p className="text-muted leading-relaxed mb-6">{project.tldr.discovery.line}</p>
+            {project.deskResearch?.books && (
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                {project.deskResearch.books.map(b => (
+                  <div key={b.title} className="flex gap-3 items-center border border-border rounded-xl p-3 bg-paper">
+                    <img src={b.src} alt={b.title} className="w-10 h-14 object-cover rounded shadow-sm flex-shrink-0" />
+                    <div>
+                      <p className="text-[11px] font-semibold text-ink leading-snug">{b.title}</p>
+                      <p className="text-[10px] text-muted mt-0.5">{b.author}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">The gap</p>
+              <p className="text-amber-900 text-sm leading-relaxed">{project.tldr.discovery.gap}</p>
             </div>
           </section>
 
@@ -529,16 +574,10 @@ export default function CaseStudy() {
             <p className="text-sm text-muted mt-4 text-center">{project.tldr.pivot.because}</p>
           </section>
 
-          {/* Competitive gap */}
-          <section className="bg-ink rounded-2xl p-8">
-            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-3">The white space</p>
-            <p className="text-paper text-lg leading-relaxed">{project.tldr.gap}</p>
-          </section>
-
-          {/* Origin of the zine */}
+          {/* Storyboards to the zine */}
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">How the 8-fold zine arrived</p>
-            <p className="text-muted leading-relaxed mb-6 max-w-2xl">{project.tldr.origin.line}</p>
+            <p className="text-muted leading-relaxed mb-6">{project.tldr.origin.line}</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {project.tldr.origin.items.map((o, i) => (
                 <figure key={o.label} className="rounded-xl overflow-hidden border border-border">
@@ -553,17 +592,51 @@ export default function CaseStudy() {
             </div>
           </section>
 
-          {/* Roles */}
+          {/* Who it is for, reuses detailed personas */}
+          {project.personas && (
+            <section>
+              <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Who it is for</p>
+              <p className="text-muted leading-relaxed mb-6">{project.tldr.people}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {project.personaRoles?.map(r => {
+                  const names = project.personas!
+                    .filter(p => (p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type) === r.role)
+                    .map(p => p.name)
+                  return (
+                    <div key={r.role} className="border border-border rounded-xl p-4 bg-paper">
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{r.who}</p>
+                      <p className="text-ink font-medium leading-snug">{r.role}</p>
+                      {names.length > 0 && <p className="text-xs text-muted mt-1">{names.join(', ')}</p>}
+                    </div>
+                  )
+                })}
+              </div>
+            </section>
+          )}
+
+          {/* What testing changed, reuses detailed assumptions */}
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">Designed for three roles</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {project.tldr.roles.map(r => (
-                <div key={r.role} className="border border-border rounded-xl p-4 bg-paper">
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{r.who}</p>
-                  <p className="text-ink font-medium">{r.role}</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">What testing changed</p>
+            <p className="text-muted leading-relaxed mb-6">{project.tldr.testing.line}</p>
+            <div className="space-y-2 mb-6">
+              {project.tldr.testing.changes.map(c => (
+                <div key={c} className="flex items-start gap-3 border border-border rounded-xl px-4 py-3 bg-paper">
+                  <span className="text-accent mt-0.5 flex-shrink-0" aria-hidden>→</span>
+                  <p className="text-sm text-ink leading-relaxed">{c}</p>
                 </div>
               ))}
             </div>
+            {project.assumptions && (
+              <p className="text-sm text-muted">
+                <span className="text-ink font-medium">{project.assumptions.items.length} assumptions</span> were overturned between the first brief and the final prototype.
+              </p>
+            )}
+          </section>
+
+          {/* Research ops */}
+          <section className="border-l-4 border-accent pl-6">
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Research ops</p>
+            <p className="text-muted leading-relaxed">{project.tldr.ethics}</p>
           </section>
 
           {/* How the product works */}
@@ -598,25 +671,11 @@ export default function CaseStudy() {
             </div>
           </section>
 
-          {/* Impact */}
-          <section className="bg-ink rounded-2xl py-8 px-8">
-            <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {project.tldr.impact.map(s => (
-                <div key={s.label}>
-                  <p className="text-3xl font-bold text-paper mb-1">{s.value}</p>
-                  <p className="text-xs text-paper/50 leading-snug">{s.label}</p>
-                </div>
-              ))}
-            </div>
+          {/* Outcome */}
+          <section className="bg-ink rounded-2xl p-8">
+            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-3">Where it landed</p>
+            <p className="text-paper leading-relaxed">{project.tldr.outcome}</p>
           </section>
-
-          {/* Closer */}
-          {project.tldr.closer && (
-            <section className="text-center">
-              <p className="text-2xl md:text-3xl font-bold text-ink leading-snug">{project.tldr.closer}</p>
-            </section>
-          )}
 
           <div className="pt-4 border-t border-border text-center">
             <button

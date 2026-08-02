@@ -78,19 +78,20 @@ export type Project = {
   }
   tldr?: {
     headline: string
+    summary: string
     role: string
-    problemLine: string
-    contextStats: { value: string; label: string }[]
+    impact: { text: string }[]
     timeline: { when: string; what: string }[]
+    discovery: { line: string; gap: string }
     ethnography: { line: string; items: { src: string; label: string }[] }
     pivot: { from: string; fromHmw: string; to: string; toHmw: string; because: string }
-    gap: string
-    origin: { items: { src: string; label: string }[]; line: string }
-    roles: { role: string; who: string }[]
+    origin: { line: string; items: { src: string; label: string }[] }
+    people: string
+    testing: { line: string; changes: string[] }
+    ethics: string
     output: { src: string; label: string }[]
     screens: { src: string; label: string }[]
-    impact: { value: string; label: string }[]
-    closer?: string
+    outcome: string
   }
   overview?: { team: string; industry: string; status?: string; recognition?: string }
   designDecisions?: { decision: string; rationale: string }[]
@@ -621,14 +622,15 @@ export const projects: Project[] = [
     insight: `The most meaningful moments for PwD were not recall-based - they were present-tense: creating something, sharing it with someone, and seeing a reaction. The app needed to facilitate making and connecting, not just remembering.`,
     solutionTeaser: `Where it landed: a TimeSlips-format companion app - an image prompt on screen, the resident improvises a story, and the app records the session and composes it into a printable 8-fold zine. The rest of this page is how the research got there.`,
     tldr: {
-      headline: 'Beyond reminiscence',
-      role: 'Sole researcher & designer · Feb to Apr 2023',
-      problemLine: 'Every digital tool for dementia asks people to remember the past. The clinical evidence points the other way.',
-      contextStats: [
-        { value: '900K+', label: 'People with dementia in the UK' },
-        { value: '1.6M', label: 'Projected by 2040' },
-        { value: '67%', label: 'Low engagement between activities' },
-        { value: '~0', label: 'Tools for present & future thinking' },
+      headline: 'Designing a dementia care app that moved beyond reminiscence',
+      summary: 'Every digital tool for dementia asks people to remember the past. I shadowed care home sessions, reframed the brief around present-moment creation, and designed an app that records a resident\'s story and prints it as a keepsake zine.',
+      role: 'Sole researcher & designer',
+      impact: [
+        { text: 'Overturned the category default: reminiscence to present-moment creation' },
+        { text: '50+ participants across ethnography, co-design and testing' },
+        { text: '5 evidence-based design principles adopted by Nebula Labs' },
+        { text: 'Every session prints as an 8-fold zine the resident keeps' },
+        { text: 'Discovery to Alpha, earmarked by Teesside Council' },
       ],
       timeline: [
         { when: 'Feb', what: 'Desk research & competitive audit' },
@@ -639,8 +641,12 @@ export const projects: Project[] = [
         { when: 'Mar–Apr', what: 'Prototype testing, 2 rounds' },
         { when: 'Apr', what: 'Digital iteration' },
       ],
+      discovery: {
+        line: 'Clinical literature, three foundational texts on person-centred care, and an audit of the tools care homes already use - TimeSlips, Tovertafel, Reminisce. Every one was built around recalling the past, or bound to a facilitator and fixed hardware.',
+        gap: 'No product combined present-moment creativity, family connection, and accessibility in something a resident could keep and use daily.',
+      },
       ethnography: {
-        line: 'I shadowed sensory theatre sessions in a Newcastle care home. Every joyful moment I recorded was present-tense: making something, sharing it, seeing a reaction.',
+        line: 'I shadowed "Milk, Two Sugars", a sensory theatre intervention by Woven Nest at a Newcastle care home. Every joyful moment I recorded was present-tense: making something, sharing it, seeing a reaction. Not one of them was a memory test.',
         items: [
           { src: '/uploads/me-and-you/workshop-accordion-v2.png', label: 'Music' },
           { src: '/uploads/me-and-you/workshop-tea-v2.png', label: 'Shared tea' },
@@ -655,20 +661,24 @@ export const projects: Project[] = [
         toHmw: 'How might we enhance quality of life through present engagement and connection, rather than memory recall alone?',
         because: 'The ethnography and expert focus group overturned the category default.',
       },
-      gap: 'No product combined present-moment creativity, family connection, and accessibility in something a resident could keep and use daily.',
       origin: {
+        line: 'Storyboards became the shared language - easier for care staff to react to than a spec. Shown to the academics in the focus group, they connected the ethnography to the digital app and exposed the gap between sessions: nothing tangible carried the creative work forward. The 8-fold zine method emerged from that conversation.',
         items: [
           { src: '/uploads/me-and-you/storyboard.png', label: 'Storyboarded the scenarios' },
           { src: '/uploads/me-and-you/research-session.jpg', label: 'Took them to the academics' },
           { src: '/uploads/me-and-you/zine-template.png', label: 'The 8-fold zine emerged' },
         ],
-        line: 'Storyboards became the shared language. Shown to the expert focus group, they exposed the gap between sessions - nothing tangible carried the creative work forward.',
       },
-      roles: [
-        { role: 'Person with Dementia', who: 'Primary' },
-        { role: 'Carer', who: 'Secondary' },
-        { role: 'Community Facilitator', who: 'Tertiary' },
-      ],
+      people: 'Three roles, synthesised from ethnographic field notes, the focus group transcript, and co-design outputs: the person with dementia, the carer who introduces the app, and the community facilitator running workshops between visits.',
+      testing: {
+        line: 'Two paper prototype variants, 2 rounds, with 5 people with dementia supported by carers and 5 care staff.',
+        changes: [
+          'Prompts rewritten from questions to invitations - questions read as memory tests',
+          'Touch targets raised to a 48px minimum for arthritic and reduced-motor-control hands',
+          'A guided carer mode added alongside independent use',
+        ],
+      },
+      ethics: 'Consent treated as continuous rather than a one-off form, gained through the care home as gatekeeper, with carers present throughout and any sign of discomfort treated as a cue to stop.',
       output: [
         { src: '/uploads/me-and-you/app-session-player.png', label: 'Record the session' },
         { src: '/uploads/me-and-you/app-summary-zine.png', label: 'Compose the story' },
@@ -679,13 +689,7 @@ export const projects: Project[] = [
         { src: '/uploads/me-and-you/app-archive.png', label: 'Pictures & prompts' },
         { src: '/uploads/me-and-you/app-bookshelf.png', label: 'Book shelf' },
       ],
-      impact: [
-        { value: '50+', label: 'Participants' },
-        { value: '5', label: 'Research methods' },
-        { value: '2', label: 'Test rounds' },
-        { value: '5', label: 'Principles adopted by Nebula Labs' },
-      ],
-      closer: 'The obvious solution was the wrong one.',
+      outcome: 'Discovery to Alpha complete, with a validated prototype and 5 design principles Nebula Labs adopted. Teesside Council have earmarked it for continued development. The biggest lesson: the "obvious" solution was the wrong one, and challenging the brief is what made the product work.',
     },
     processTitle: 'Process timeline',
     processEarly: true,

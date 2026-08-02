@@ -1553,7 +1553,7 @@ export const projects: Project[] = [
     featured: false,
     client: 'Newcastle University / Open Lab',
     role: 'UX Designer & Researcher (Master\'s Dissertation)',
-    duration: '4 months · MSc Dissertation',
+    duration: 'May · Nov 2022 · MSc Dissertation',
     tools: ['Figma', 'Miro', 'Paper Prototyping', 'Video Storyboards'],
     heroImage: '/uploads/Accord/Phone%20mockup_3@4x.png',
     overview: {
@@ -1585,13 +1585,14 @@ export const projects: Project[] = [
         { text: '50% reported increased awareness of the air around them' },
         { text: 'Notifications removed entirely, the app opens by choice' },
       ],
-      timelineLabel: '6 months, May to October 2022',
+      timelineLabel: '7 months, May to November 2022',
       timeline: [
         { when: 'May', what: 'Literature review' },
         { when: 'Jun', what: 'Contextual observation' },
         { when: 'Jul', what: 'Co-design workshops' },
         { when: 'Aug–Sep', what: 'Usability testing' },
         { when: 'Oct', what: 'Prototype iteration' },
+        { when: 'Nov', what: 'Dissertation write-up' },
       ],
       discovery: {
         line: '30+ papers across indoor air quality, ambient information displays, and behavioural nudge theory. The consistent finding: displays that integrate aesthetically into a space outperform alert-based systems for sustained behaviour change, and alert-based IAQ tools get switched off within days.',
@@ -1732,6 +1733,11 @@ export const projects: Project[] = [
         detail: 'Built and tested app companion prototypes across 2 rounds of iteration. Narrowed 12 initial concepts to 3 through dot-voting and desirability testing, then refined to 1 final direction based on the usability testing findings. A weekly summary view was added in response to direct participant feedback.',
         image: '/uploads/Accord/D4d99d38-ee26-40da-9462-ad6d685dbaa3@4x.png',
         imageCaption: 'Paper prototype cards - hand-drawn screens from the first iteration round, testing layout, navigation flow, and notification opt-in before moving to digital hi-fidelity.',
+      },
+      {
+        phase: 'Nov 2022 · Write-up',
+        step: 'Dissertation Submission',
+        detail: 'Wrote up the research, design rationale, and findings as the final MSc dissertation. The co-design work from the July sessions fed back into Lenia Margariti\'s ongoing ActuAir research and is acknowledged in the resulting CHI 2024 paper.',
       },
     ],
     competitiveAnalysis: {
@@ -1875,7 +1881,7 @@ export const projects: Project[] = [
     },
     focusGroup: {
       label: 'Study 02 · the co-creation workshop',
-      intro: 'Study 02 - the co-creation workshop I co-designed and co-facilitated, and the contribution acknowledged in the CHI paper. Five building occupants worked hands-on with the modular ActuAir prototype, arranging configurations and talking through what each inflation and colour state should mean to them.',
+      intro: 'ActuAir\'s three evaluation studies ran June to August 2022, inside the wider window of my dissertation. Study 02 - the co-creation workshop I co-designed and co-facilitated, and the contribution acknowledged in the CHI paper - sat in July. Five building occupants worked hands-on with the modular prototype, arranging configurations and talking through what each inflation and colour state should mean to them.',
       image: '/uploads/Accord/F0b98a8d-3b90-4629-820d-09873bec1433%20rw_1920@4x.png',
       caption: 'Participants handling the modular ActuAir prototype during Study 02, working out how inflation and arrangement should map to air quality. Letting people physically hold the device is what surfaced how differently each person read the same signal.',
     },

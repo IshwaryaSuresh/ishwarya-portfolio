@@ -1,8 +1,56 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+
+const TYPE_WORDS = ['products.', 'services.', 'for humans.']
+
+function useTypewriter(words: string[]) {
+  const [text, setText] = useState('')
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setText(words[0])
+      return
+    }
+    let w = 0
+    let i = 0
+    let deleting = false
+    let timer: ReturnType<typeof setTimeout>
+
+    const tick = () => {
+      const word = words[w]
+      if (!deleting) {
+        i++
+        setText(word.slice(0, i))
+        if (i === word.length) {
+          deleting = true
+          timer = setTimeout(tick, 2000)
+        } else {
+          timer = setTimeout(tick, 70 + Math.random() * 60)
+        }
+      } else {
+        i--
+        setText(word.slice(0, i))
+        if (i === 0) {
+          deleting = false
+          w = (w + 1) % words.length
+          timer = setTimeout(tick, 400)
+        } else {
+          timer = setTimeout(tick, 40)
+        }
+      }
+    }
+
+    // Wait for the entrance animation before typing begins
+    timer = setTimeout(tick, 1100)
+    return () => clearTimeout(timer)
+  }, [words])
+
+  return text
+}
 
 export default function Hero() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLElement>(null)
+  const typed = useTypewriter(TYPE_WORDS)
 
   // Scroll progress - drives headline fade/lift and scroll hint opacity
   useEffect(() => {
@@ -54,40 +102,30 @@ export default function Hero() {
       <div className="hero__grid" data-parallax="-0.08" />
       <div className="hero__cursor" ref={cursorRef} style={{ opacity: 0 }} />
 
-      <div className="hero__top">
-        <span>MadeForHumans · Est. 2025</span>
-        <span>Ishwarya Suresh · Founder &amp; UX Consultant</span>
-      </div>
-
       <div className="hero__main">
         <h1 className="hero__display">
-          <span className="hero__line"><span>I design products</span></span>
-          <span className="hero__line"><span>for fintech, edtech,</span></span>
-          <span className="hero__line"><span>healthcare &amp; <em className="hero__teal">beyond,</em></span></span>
-          <span className="hero__line"><span><em className="hero__teal">made for humans.</em></span></span>
+          <span className="hero__line"><span>Hello, I'm Ishwarya.</span></span>
+          <span className="hero__line">
+            <span>
+              I design <em className="hero__teal hero__typed">{typed}</em>
+              <span className="hero__caret" aria-hidden="true" />
+            </span>
+          </span>
         </h1>
       </div>
 
-      <div className="hero__meta">
-        <div className="cell" data-reveal="up" data-delay="800">
-          <div className="val">An independent UX consultancy delivering product design, service design, and accessibility for public sector, healthcare, edtech, and startups. Remote worldwide.</div>
-        </div>
-        <div className="cell" data-reveal="up" data-delay="950">
-          <div className="val">Taking briefs in product design, strategy &amp; discovery, service design, and WCAG 2.2 accessibility. Previously at MHCLG.</div>
-        </div>
-        <div className="cell" style={{ alignSelf: 'end' }} data-reveal="up" data-delay="1100">
-          <div className="hero__actions">
-            <a href="#work" className="btn-primary">See selected work →</a>
-            <a href="#brief" className="btn-ghost">Send a brief</a>
-            <a
-              href="/uploads/Ishwarya_Suresh_CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-link"
-            >
-              Download CV ↓
-            </a>
-          </div>
+      <div className="hero__meta hero__meta--bare">
+        <div className="hero__actions" data-reveal="up" data-delay="900">
+          <a href="#work" className="btn-primary">See selected work →</a>
+          <a href="#brief" className="btn-ghost">Send a brief</a>
+          <a
+            href="/uploads/Ishwarya_Suresh_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-link"
+          >
+            Download CV ↓
+          </a>
         </div>
       </div>
 

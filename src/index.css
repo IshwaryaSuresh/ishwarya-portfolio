@@ -2338,3 +2338,38 @@ body.hero-light .marquee {
 /* ===== BUTTON GRAMMAR ===== */
 /* Buttons are pills sitewide, matching nav + hero */
 .brief__form button { border-radius: 100px; }
+
+/* ===== HERO TYPEWRITER ===== */
+.hero__typed { font-style: normal; }
+.hero__caret {
+  display: inline-block;
+  width: 0.07em;
+  height: 0.78em;
+  background: var(--teal-300);
+  margin-left: 0.06em;
+  vertical-align: -0.04em;
+  animation: caretBlink 1.1s steps(1) infinite;
+}
+body.hero-light .hero__caret { background: var(--teal-500); }
+@keyframes caretBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__caret { animation: none; }
+}
+
+/* ===== HERO SIMPLIFIED ===== */
+/* Descender fix: the rise animation clips each line with overflow:hidden,
+   which was cutting the tail of "g". Pad the clip box downward and pull
+   the next line back up by the same amount. */
+.hero__display .hero__line {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+/* Meta row reduced to just the CTAs */
+.hero__meta--bare {
+  display: flex;
+  justify-content: flex-start;
+}

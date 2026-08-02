@@ -1583,14 +1583,9 @@ export const projects: Project[] = [
         imageCaption: 'Concept sketches exploring a lichen-inspired inflation metaphor - mapping four device states to air quality levels (good → medium → poor → bad)',
       },
       {
-        phase: 'May 2022 · Discover',
-        step: 'Expert Focus Group',
-        detail: 'Convened HCI and environmental health academics from Newcastle and Northumbria Universities to validate the research direction and identify gaps in existing ambient technology design research.',
-      },
-      {
         phase: 'Jun 2022 · Research',
         step: 'Contextual Observation',
-        detail: 'Observed office professionals across 3 workplaces, mapping moments when environmental feedback would be least and most disruptive. Key observation: existing IAQ solutions were almost universally ignored - either because they demanded active engagement or triggered alerts at the wrong moment.',
+        detail: 'Observed office professionals in the smart building where ActuAir would be deployed, mapping moments when environmental feedback would be least and most disruptive. Key observation: existing IAQ solutions were almost universally ignored - either because they demanded active engagement or triggered alerts at the wrong moment.',
       },
       {
         phase: 'Jul 2022 · Co-design',

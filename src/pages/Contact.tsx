@@ -15,8 +15,8 @@ export default function Contact() {
           <div className="space-y-6">
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Email</p>
-              <a href="mailto:ishwaryasuresh97@gmail.com" className="text-ink font-medium hover:text-accent transition-colors">
-                ishwaryasuresh97@gmail.com
+              <a href="mailto:ishwaryasuresh@madeforhumans.tech" className="text-ink font-medium hover:text-accent transition-colors">
+                ishwaryasuresh@madeforhumans.tech
               </a>
             </div>
             <div>
@@ -69,7 +69,7 @@ export default function Contact() {
         <div className="bg-white border border-border rounded-2xl p-8">
           <h2 className="text-lg font-semibold text-ink mb-6">Send a message</h2>
           <form
-            action="mailto:ishwaryasuresh97@gmail.com"
+            action="mailto:ishwaryasuresh@madeforhumans.tech"
             method="GET"
             encType="text/plain"
             className="space-y-5"
@@ -137,8 +137,8 @@ export default function Contact() {
           </form>
           <p className="text-xs text-muted text-center mt-4">
             Or email directly at{' '}
-            <a href="mailto:ishwaryasuresh97@gmail.com" className="text-accent hover:underline">
-              ishwaryasuresh97@gmail.com
+            <a href="mailto:ishwaryasuresh@madeforhumans.tech" className="text-accent hover:underline">
+              ishwaryasuresh@madeforhumans.tech
             </a>
           </p>
         </div>

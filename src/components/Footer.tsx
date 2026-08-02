@@ -28,7 +28,7 @@ export default function Footer() {
           <div>
             <h4>Studio</h4>
             <ul>
-              <li><a href="mailto:ishwaryasuresh97@gmail.com">ishwaryasuresh97@gmail.com</a></li>
+              <li><a href="mailto:ishwaryasuresh@madeforhumans.tech">ishwaryasuresh@madeforhumans.tech</a></li>
               <li>Remote worldwide</li>
               <li>© 2026 MadeForHumans</li>
             </ul>

@@ -93,7 +93,7 @@ export default function About() {
             </p>
             <div className="flex gap-4 pt-2">
               <a
-                href="mailto:ishwaryasuresh97@gmail.com"
+                href="mailto:ishwaryasuresh@madeforhumans.tech"
                 className="text-sm font-medium text-accent hover:underline"
               >
                 Get in touch →

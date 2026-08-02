@@ -1440,7 +1440,7 @@ export default function CaseStudy() {
             ← All projects
           </Link>
           <a
-            href="mailto:ishwaryasuresh97@gmail.com"
+            href="mailto:ishwaryasuresh@madeforhumans.tech"
             className="text-sm font-medium bg-ink text-paper px-5 py-2 rounded-full hover:bg-accent transition-colors"
           >
             Work together →

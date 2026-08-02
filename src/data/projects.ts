@@ -51,6 +51,7 @@ export type Project = {
   context?: {
     intro: string
     stats?: { value: string; label: string }[]
+    challengesTitle?: string
     challenges: string[]
     quote?: string
     image?: string
@@ -1279,12 +1280,33 @@ export const projects: Project[] = [
       ],
       outcome: 'A prototype approved for build, including a verification pathway that did not exist before. The principle outlives the project: a service the intended users cannot complete is not a form problem, it is an exclusion problem. Usability testing with care leavers is the first thing I would run given access.',
     },
-    background: {
-      understandingNeedsTitle: 'Why the application, not the discount, was the barrier',
-      understandingNeeds: `Around 80,000 young people leave the UK care system each year. At 18 the statutory support falls away, and a cohort that has often moved repeatedly between placements is expected to handle housing, work and benefits alone.\n\nTransport runs underneath all of it. A job interview, a college enrolment, a benefits appointment: each depends on affording the fare. TfL's Care Leaver Photocard exists for that reason, giving 50% off travel to care leavers aged 18 to 25.\n\nThe discount was already funded and approved. What stood between an eligible young person and it was the application itself.`,
-      personalDrive: `The brief came to me as a form redesign. The audit turned it into something else: one step was not difficult for care leavers in temporary housing, it was impossible, and nothing on screen told them so.`,
-      innovativeMethods: `With no route to primary research in a two-month engagement, I built the evidence base from three directions: advocacy research from Become and Action for Children for lived experience, stakeholder interviews for where applications were failing, and a WCAG 2.1 AA audit for everything else. Where I could not argue from users, I argued from criteria.`,
+    contextTitle: 'Context · leaving care at 18',
+    context: {
+      intro: `Care leavers are young people who have spent time in the care system and left it at 18, when statutory support falls away. Around 80,000 leave each year, often after repeated moves between placements, and are expected to handle housing, work and benefits alone. Transport runs underneath all of it, which is why TfL's Care Leaver Photocard gives them 50% off travel.`,
+      stats: [
+        { value: '80K+', label: 'Young people leaving care in the UK each year' },
+        { value: '50%', label: 'TfL travel discount the photocard unlocks' },
+        { value: '7', label: 'Friction points found in the existing journey' },
+        { value: '3', label: 'WCAG 2.1 criteria the journey was breaching' },
+      ],
+      challengesTitle: 'What care leavers are up against',
+      challenges: [
+        'Housing that is frequently temporary, so any step assuming a fixed address excludes rather than inconveniences',
+        'The smartphone as primary and often only device, making mobile accessibility a gating factor',
+        'Prior experience of official processes that is often adversarial, so institutional tone reads as suspicion',
+        'No family safety net to absorb a form that cannot be completed alone',
+      ],
+      quote: `The discount was never the hard part. The application standing in front of it was.`,
+      image: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20your%20borough.png',
+      imageCaption: 'The alternative verification route. The original journey had no equivalent: a care leaver without a fixed address could not proceed, and nothing on screen told them why.',
     },
+    opportunityFraming: {
+      initialAssumption: 'The brief arrived as a form redesign: the application was unclear, so the job was to make it clearer.',
+      initialHmw: 'How might we make the Care Leaver Photocard application clearer and easier to complete?',
+      shift: 'The WCAG audit and advocacy research overturned this. Friction was not evenly spread, and one step was not friction at all - care leavers without a fixed address had no route through address verification, and nothing on screen said so.',
+      reframedHmw: 'How might we design an application a care leaver can complete independently, on a phone, without their housing situation quietly disqualifying them?',
+    },
+    solutionTeaser: `Where it landed: requirements surfaced before you start, a voice that talks to you rather than about you, error states that say how to fix the problem, and a second route through address verification for the people the original flow turned away. The rest of this page is how the audit got there.`,
     problem: `Care leavers are among the most socioeconomically vulnerable young people in the UK. After leaving the care system at 18, many face significant barriers to employment, education, and independence. In cities where public transport is the only affordable way to get around, access to a travel discount is not a perk: it is a practical lifeline.\n\nTransport for London's Care Leaver Photocard offers 50% off all TfL travel for care leavers aged 18-25. But the existing application journey had a problem: it was unclear, inaccessible in places, and created unnecessary friction for a group that already faces multiple barriers in navigating official processes.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
     insight: `The barriers were systemic, not motivational. Language, document requirements, and mobile accessibility were the three failure points that needed redesigning.`,
     personasIntro: `Two roles shaped the design. These are research-grounded composites, not interviewed participants, built from the advocacy research and the case patterns stakeholders described.`,
@@ -1349,6 +1371,8 @@ export const projects: Project[] = [
       },
     ],
     processTitle: 'Process timeline',
+    processEarly: true,
+    processCompact: true,
     process: [
       {
         phase: 'Aug 2023 · Discover',
@@ -1407,6 +1431,7 @@ export const projects: Project[] = [
       { metric: 'WCAG 2.1 AA across the flow', translation: 'Full AA conformance on the audited criteria, reducing exposure under the 2018 public-sector accessibility regulations and making the journey usable on the devices this cohort actually applies on.' },
       { metric: 'Alternative verification pathway', translation: 'Approved by compliance, this route lets care leavers in temporary housing complete an application the original flow silently blocked. A group the service was excluding becomes a group it can serve.' },
     ],
+    assumptionsLate: true,
     assumptions: {
       intro: `The brief was framed as a form redesign. The audit reframed it as an exclusion problem. Three assumptions the research overturned.`,
       items: [
@@ -1575,6 +1600,22 @@ export const projects: Project[] = [
         'Full end-to-end prototype delivered and validated across 2 stakeholder iteration rounds within a 2-month timeline',
       ],
       learned: 'Designing within compliance constraints forced creative problem-solving rather than clean-slate thinking. The alternative address verification pathway was not in the original brief. It came out of the audit: once I mapped who the original flow was excluding, building a route out for them became the most important decision I made. Designing for the most constrained user improved the experience for everyone.',
+    },
+    screens: {
+      intro: 'The redesigned application, screen by screen - from choosing the card to the route out for anyone without a fixed address.',
+      items: [
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Apply.png', title: 'Choose your card', description: 'The Care Leaver option named plainly, not by scheme code.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Apply%20for.png', title: 'Who it is for', description: 'Establishes who the card is for before any personal details.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Create%20an%20account.png', title: 'Create an account', description: 'Date of birth, name, email. Registration kept deliberately light.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20Details.png', title: 'Contact & address', description: 'Borough residency and address - the step that used to end the journey.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Cardholder.png', title: 'Cardholder details', description: 'Plain-language labels and a visible "Wrong details?" route out.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Add%20photo.png', title: 'Add your photo', description: 'Requirements upfront, accept and reject examples, live preview.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Review.png', title: 'Review', description: 'Full summary before submitting, while an error is still cheap to fix.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Payament.png', title: 'Payment', description: 'Reference and amount shown before card details are entered.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Confirmation.png', title: 'Confirmation', description: '"What happens next" so nobody is left wondering.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20your%20borough.png', title: 'Contact your borough', description: 'The alternative verification route for applicants with no fixed address.' },
+        { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Overview%20mockup.png', title: 'Account overview', description: 'Reference, date, card type and status readable in one place.' },
+      ],
     },
     gallery: [
       {
@@ -1896,6 +1937,7 @@ export const projects: Project[] = [
         { value: '30+', label: 'Academic papers reviewed across IAQ, ambient displays and nudge theory' },
         { value: '5', label: 'Building occupants in the Study 02 co-creation workshop' },
       ],
+      challengesTitle: 'What office workers are up against',
       challenges: [
         'The data is invisible - no sensory cue tells you the air has degraded, so nothing prompts a response',
         'Alert-based tools interrupt at the worst possible moment and get switched off within days',

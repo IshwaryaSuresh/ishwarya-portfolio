@@ -771,7 +771,7 @@ export default function CaseStudy() {
                 ))}
               </div>
             )}
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">What PwD are up against</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">{project.context.challengesTitle ?? 'What PwD are up against'}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
               {project.context.challenges.map(c => (
                 <div key={c} className="border border-border rounded-xl p-4 bg-paper text-sm text-muted leading-relaxed">{c}</div>

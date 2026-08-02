@@ -96,7 +96,6 @@ export type Project = {
     outcome: string
   }
   overview?: { team: string; industry: string; status?: string; recognition?: string }
-  figmaFile?: { url: string; label?: string }
   publishedResearch?: {
     title: string
     authors: string
@@ -1560,10 +1559,6 @@ export const projects: Project[] = [
       team: 'Lenia Margariti (PhD Researcher, ActuAir technology)',
       industry: 'Workplace Wellbeing / HCI Research',
       recognition: 'Acknowledged in Margariti et al., ACM CHI 2024',
-    },
-    figmaFile: {
-      url: 'https://www.figma.com/design/o54XwZhe2J4yhXCyHk97bR/Accord?node-id=0-1&t=VpmaigS2rEoO8zZ2-1',
-      label: 'View Figma design file',
     },
     publishedResearch: {
       title: 'Evaluating ActuAir: Building Occupants\' Experiences of a Shape-Changing Air Quality Display',

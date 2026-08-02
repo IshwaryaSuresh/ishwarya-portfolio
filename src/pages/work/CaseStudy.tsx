@@ -411,7 +411,7 @@ export default function CaseStudy() {
           </div>
         )}
 
-        {(project.prototype || project.figmaFile || project.wip) && (
+        {(project.prototype || project.publishedResearch || project.wip) && (
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {project.prototype && (
               <a
@@ -426,9 +426,9 @@ export default function CaseStudy() {
                 View live prototype
               </a>
             )}
-            {project.figmaFile && (
+            {project.publishedResearch && (
               <a
-                href={project.figmaFile.url}
+                href={project.publishedResearch.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-ink text-paper px-5 py-2.5 rounded-full text-sm font-medium hover:bg-accent transition-colors"
@@ -436,7 +436,7 @@ export default function CaseStudy() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                {project.figmaFile.label ?? 'View Figma design file'}
+                Read the paper
               </a>
             )}
             {project.wip && (
@@ -463,10 +463,10 @@ export default function CaseStudy() {
                 href={project.publishedResearch.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-ink transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-mono text-muted hover:text-accent transition-colors"
               >
-                Read the paper on ACM
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                doi.org/{project.publishedResearch.doi}
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>

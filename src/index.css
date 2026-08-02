@@ -1035,19 +1035,20 @@ body.hero-light .marquee {
 }
 .about__cv-row {
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 176px 1fr;
   gap: 32px;
   padding: 22px 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .about__cv-row:last-child { border-bottom: none; }
 .about__cv-year {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--teal-300);
-  padding-top: 4px;
+  padding-top: 3px;
+  white-space: nowrap;
 }
 .about__cv-role {
   font-size: 17px;
@@ -2373,3 +2374,25 @@ body.hero-light .hero__caret { background: var(--teal-500); }
   display: flex;
   justify-content: flex-start;
 }
+
+/* ===== FAQ: dark band ===== */
+.faq-dark {
+  background: var(--ink);
+  color: var(--white);
+}
+.faq-dark .faq__label h2 { color: var(--white); }
+.faq-dark .faq__label h2 .accent { color: var(--teal-300); }
+.faq-dark .faq__label p { color: rgba(255,255,255,0.6); }
+.faq-dark .faq__list { border-top: 1px solid rgba(255,255,255,0.15); }
+.faq-dark .faq__item { border-bottom: 1px solid rgba(255,255,255,0.12); }
+.faq-dark .faq__q { color: var(--white); }
+.faq-dark .faq__q:hover { color: var(--teal-300); }
+.faq-dark .faq__q .icon {
+  border-color: rgba(255,255,255,0.25);
+  color: var(--teal-300);
+}
+.faq-dark .faq__item.is-open .faq__q .icon {
+  background: var(--teal-500);
+  color: var(--white);
+}
+.faq-dark .faq__a { color: rgba(255,255,255,0.6); }

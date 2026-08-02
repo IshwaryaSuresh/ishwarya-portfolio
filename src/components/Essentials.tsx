@@ -14,7 +14,7 @@ export default function Essentials() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section className="section">
+    <section className="section faq-dark">
       <div className="container">
         <div className="faq">
           <div className="faq__label">

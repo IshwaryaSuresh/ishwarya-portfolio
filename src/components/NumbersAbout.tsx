@@ -50,11 +50,11 @@ export default function NumbersAbout() {
         {/* Where I've worked, full timeline drawn from the live CV */}
         <div className="about__experience">
           <div className="about__experience-head" data-reveal="up">
-            <h3 className="about__experience-title">Public sector at scale, fintech in flight.</h3>
+            <h3 className="about__experience-title">Where I've <span className="accent-teal">worked.</span></h3>
           </div>
           <ol className="about__cv">
             <li className="about__cv-row" data-reveal="up" data-delay="0">
-              <span className="about__cv-year">May 2025, Now</span>
+              <span className="about__cv-year">Since May 2025</span>
               <div>
                 <p className="about__cv-role">Founder, Product Designer &amp; UX Researcher, MadeForHumans</p>
                 <p className="about__cv-meta">Independent consultancy. End-to-end product design, discovery &amp; strategy, and WCAG 2.2 accessibility for startups, studios, and SMEs. Selected work: Kaizen (consumer fintech), Ledgerline (explainable decisioning).</p>

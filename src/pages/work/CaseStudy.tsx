@@ -411,7 +411,7 @@ export default function CaseStudy() {
           </div>
         )}
 
-        {(project.prototype || project.wip) && (
+        {(project.prototype || project.figmaFile || project.wip) && (
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {project.prototype && (
               <a
@@ -426,11 +426,63 @@ export default function CaseStudy() {
                 View live prototype
               </a>
             )}
+            {project.figmaFile && (
+              <a
+                href={project.figmaFile.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-ink text-paper px-5 py-2.5 rounded-full text-sm font-medium hover:bg-accent transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                {project.figmaFile.label ?? 'View Figma design file'}
+              </a>
+            )}
             {project.wip && (
               <span className="inline-flex items-center gap-2 bg-violet-50 border border-violet-200 text-violet-700 px-4 py-2.5 rounded-full text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
                 {project.wip}
               </span>
+            )}
+          </div>
+        )}
+
+        {project.publishedResearch && (
+          <div className="mt-8 border border-border rounded-2xl overflow-hidden bg-paper">
+            <div className="p-6 md:p-7">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-3">Published research</p>
+              <h2 className="text-lg md:text-xl font-semibold text-ink leading-snug mb-2">{project.publishedResearch.title}</h2>
+              <p className="text-sm text-muted leading-relaxed mb-1">{project.publishedResearch.authors}</p>
+              <p className="text-xs text-muted mb-5">{project.publishedResearch.venue}</p>
+              <div className="border-l-2 border-accent pl-4 mb-5">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-muted mb-1.5">My contribution</p>
+                <p className="text-sm text-ink leading-relaxed">{project.publishedResearch.acknowledgement}</p>
+              </div>
+              <a
+                href={project.publishedResearch.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-ink transition-colors"
+              >
+                Read the paper on ACM
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+            {project.publishedResearch.acknowledgementImage && (
+              <figure className="border-t border-border bg-white">
+                <img
+                  src={project.publishedResearch.acknowledgementImage}
+                  alt="Acknowledgement paragraph from the published paper"
+                  className="w-full object-contain"
+                  style={{ maxHeight: '260px' }}
+                />
+                <figcaption className="px-6 py-3 text-[11px] text-muted italic border-t border-border">
+                  Acknowledgement paragraph from the published paper (page 17).
+                </figcaption>
+              </figure>
             )}
           </div>
         )}
@@ -501,7 +553,7 @@ export default function CaseStudy() {
 
           {/* Timeline */}
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">3 months, Discovery to Alpha</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.tldr.timelineLabel ?? '3 months, Discovery to Alpha'}</p>
             <div className="relative">
               <div aria-hidden className="hidden md:block absolute left-0 right-0 top-1.5 h-px bg-border" />
               <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-x-3 gap-y-6">
@@ -541,7 +593,7 @@ export default function CaseStudy() {
 
           {/* Ethnography, the heart of the research */}
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Ethnographic study</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">{project.tldr.ethnography.label ?? 'Ethnographic study'}</p>
             <p className="text-muted leading-relaxed mb-6 max-w-2xl">{project.tldr.ethnography.line}</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {project.tldr.ethnography.items.map(e => (
@@ -576,7 +628,7 @@ export default function CaseStudy() {
 
           {/* Storyboards to the zine */}
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">How the 8-fold zine arrived</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">{project.tldr.origin.label ?? 'How the 8-fold zine arrived'}</p>
             <p className="text-muted leading-relaxed mb-6">{project.tldr.origin.line}</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {project.tldr.origin.items.map((o, i) => (
@@ -694,7 +746,7 @@ export default function CaseStudy() {
         {/* Context, only if present */}
         {project.context && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">Context · living with dementia</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">{project.contextTitle ?? 'Context'}</p>
             <p className="text-muted leading-relaxed mb-8">{project.context.intro}</p>
             {project.context.image && (
               <figure className="rounded-2xl overflow-hidden border border-border mb-8">
@@ -952,7 +1004,7 @@ export default function CaseStudy() {
         {/* Expert focus group, only if present */}
         {project.focusGroup && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Expert focus group</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.focusGroup.label ?? 'Expert focus group'}</p>
             {project.focusGroup.intro && <p className="text-muted leading-relaxed mb-6">{project.focusGroup.intro}</p>}
             <figure className="rounded-2xl overflow-hidden border border-border">
               <img
@@ -1016,6 +1068,9 @@ export default function CaseStudy() {
         <section className="bg-accent-light border border-accent/30 rounded-2xl p-8">
           <p className="text-xs font-medium uppercase tracking-widest text-accent mb-3">Key insight</p>
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
+          {project.solutionTeaser && (
+            <p className="text-muted leading-relaxed mt-5 pt-5 border-t border-accent/20">{project.solutionTeaser}</p>
+          )}
         </section>
 
         {/* Assumptions → findings → pivots, early slot (default) */}

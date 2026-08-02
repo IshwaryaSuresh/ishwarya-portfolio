@@ -47,6 +47,7 @@ export type Project = {
   tags: string[]
   // Extended fields (optional - populated per-project)
   heroImage?: string
+  contextTitle?: string
   context?: {
     intro: string
     stats?: { value: string; label: string }[]
@@ -69,7 +70,7 @@ export type Project = {
   personasIntro?: string
   processEarly?: boolean
   processCompact?: boolean
-  focusGroup?: { intro?: string; image: string; caption: string }
+  focusGroup?: { label?: string; intro?: string; image: string; caption: string }
   solutionTeaser?: string
   screens?: {
     intro?: string
@@ -81,11 +82,12 @@ export type Project = {
     summary: string
     role: string
     impact: { text: string }[]
+    timelineLabel?: string
     timeline: { when: string; what: string }[]
     discovery: { line: string; gap: string }
-    ethnography: { line: string; items: { src: string; label: string }[] }
+    ethnography: { label?: string; line: string; items: { src: string; label: string }[] }
     pivot: { from: string; fromHmw: string; to: string; toHmw: string; because: string }
-    origin: { line: string; items: { src: string; label: string }[] }
+    origin: { label?: string; line: string; items: { src: string; label: string }[] }
     people: string
     testing: { line: string; changes: string[] }
     ethics: string
@@ -94,6 +96,16 @@ export type Project = {
     outcome: string
   }
   overview?: { team: string; industry: string; status?: string; recognition?: string }
+  figmaFile?: { url: string; label?: string }
+  publishedResearch?: {
+    title: string
+    authors: string
+    venue: string
+    doi: string
+    url: string
+    acknowledgement: string
+    acknowledgementImage?: string
+  }
   designDecisions?: { decision: string; rationale: string }[]
   background?: { understandingNeedsTitle?: string; understandingNeeds: string; personalDrive: string; innovativeMethods: string }
   personas?: Persona[]
@@ -717,6 +729,7 @@ export const projects: Project[] = [
       industry: 'Healthcare / Social Care',
       status: 'Discovery to Alpha complete. Development paused pending council funding.',
     },
+    contextTitle: 'Context · living with dementia',
     context: {
       intro: `Dementia is a progressive condition affecting memory, communication, and daily orientation. It is a spectrum, not a single state - from early-stage lapses to advanced-stage loss of speech and mobility - and most people in residential care live somewhere along it.`,
       stats: [
@@ -1546,16 +1559,120 @@ export const projects: Project[] = [
     overview: {
       team: 'Lenia Margariti (PhD Researcher, ActuAir technology)',
       industry: 'Workplace Wellbeing / HCI Research',
-      recognition: 'Findings accepted at ACM CHI 2024 - one of the world\'s leading HCI conferences',
+      recognition: 'Acknowledged in Margariti et al., ACM CHI 2024',
     },
-    background: {
-      understandingNeedsTitle: 'Understanding Indoor Air Quality Challenges',
-      understandingNeeds: `Indoor air quality (IAQ) is a largely invisible problem. Research shows that CO₂ levels in poorly ventilated offices regularly exceed 1000ppm - a threshold associated with reduced cognitive performance, fatigue, and difficulty concentrating. Despite this, most office workers have no awareness of the air quality around them, and buildings rarely provide any feedback beyond a blinking thermostat.\n\nThe challenge is not just technical - it is behavioural. Even when people are given access to air quality data, they tend not to act on it. Meaningful behaviour change requires feedback that is ambient, non-intrusive, and contextually appropriate.`,
-      personalDrive: `This project began with a question from my dissertation research: if ambient interactive technologies can communicate data without demanding attention, can they also change behaviour? I was particularly drawn to the work of Lenia Margariti and the ActuAir device - a shape-changing display that physically responds to CO₂ levels. The device offered a rare opportunity: a real-world ambient technology to design for and test with, rather than a hypothetical system. Prior research into digital nudging and ambient displays gave me confidence that subtle, contextual interventions could be more effective than dashboard-style alerts. The challenge was to design a companion digital layer that extended ActuAir's ambient feedback into actionable, personalised suggestions.`,
-      innovativeMethods: `I used co-design workshops as the primary method - not just to validate ideas, but to involve office professionals as genuine co-creators of the solution. Participants worked with storyboards and live device demonstrations to articulate their preferences, concerns, and interpretations of the technology. This participatory approach was essential: ambient technology is deeply personal in how it is perceived, and assumptions about what feels 'unobtrusive' vary significantly between individuals.`,
+    figmaFile: {
+      url: 'https://www.figma.com/design/o54XwZhe2J4yhXCyHk97bR/Accord?node-id=0-1&t=VpmaigS2rEoO8zZ2-1',
+      label: 'View Figma design file',
     },
-    problem: `Indoor air quality in office environments is frequently worse than outdoor air - contributing to fatigue, poor concentration, and long-term health risks. Yet it's invisible. Existing IAQ monitoring solutions either require users to actively check an app (ignored) or trigger disruptive alerts (also ignored).\n\nHow might we communicate indoor air quality data to office professionals in a way that prompts healthy behaviour without interrupting workflow?`,
+    publishedResearch: {
+      title: 'Evaluating ActuAir: Building Occupants\' Experiences of a Shape-Changing Air Quality Display',
+      authors: 'Eleni Margariti, Vasilis Vlachokyriakos, Abigail C Durrant, David Kirk',
+      venue: 'ACM CHI 2024 · Honolulu · Open Lab, Newcastle University',
+      doi: '10.1145/3613904.3642396',
+      url: 'https://doi.org/10.1145/3613904.3642396',
+      acknowledgement: 'Acknowledged for co-designing and co-facilitating Study 02 - the biomimetic feedback co-creation workshop with five building occupants that shaped the design direction reported in the paper.',
+      acknowledgementImage: '/uploads/Accord/paper/acknowledgement.png',
+    },
+    tldr: {
+      headline: 'Co-designing the digital layer for an ambient air quality display',
+      summary: 'Indoor CO₂ quietly degrades how well people think, and nobody can sense it. I co-designed workshops around a shape-changing display at Open Lab, found that every participant rejected being alerted, and designed a companion app built on the opposite principle: it waits to be opened.',
+      role: 'UX Designer & Researcher, MSc dissertation',
+      impact: [
+        { text: 'Overturned the category default: alerting to ambient signal plus on-demand context' },
+        { text: 'Co-designed and co-facilitated Study 02, acknowledged in the CHI 2024 paper' },
+        { text: '100% of test participants took an air quality action prompted by the device' },
+        { text: '50% reported increased awareness of the air around them' },
+        { text: 'Notifications removed entirely, the app opens by choice' },
+      ],
+      timelineLabel: '6 months, May to October 2022',
+      timeline: [
+        { when: 'May', what: 'Literature review' },
+        { when: 'Jun', what: 'Contextual observation' },
+        { when: 'Jul', what: 'Co-design workshops' },
+        { when: 'Aug–Sep', what: 'Usability testing' },
+        { when: 'Oct', what: 'Prototype iteration' },
+      ],
+      discovery: {
+        line: '30+ papers across indoor air quality, ambient information displays, and behavioural nudge theory. The consistent finding: displays that integrate aesthetically into a space outperform alert-based systems for sustained behaviour change, and alert-based IAQ tools get switched off within days.',
+        gap: 'No prior work had explored what the digital layer around a shape-changing ambient display should do - which is exactly where ActuAir needed design.',
+      },
+      ethnography: {
+        label: 'Co-design workshops',
+        line: 'Two sessions with office professionals, working hands-on with the ActuAir prototype and four office scenarios. Every participant preferred the device at eye level or in peripheral vision - "out of sight, out of mind" came up repeatedly - and every one of them read the inflation metaphor slightly differently.',
+        items: [
+          { src: '/uploads/Accord/69c1064c-b190-4c28-b6d7-e8ecea3f099e%20rw_1920@4x.png', label: 'Workshop in session' },
+          { src: '/uploads/Accord/187dea95-0d97-49c9-9c52-39873ee50318%20rw_3840@4x.png', label: 'Working the scenarios' },
+          { src: '/uploads/Accord/F0b98a8d-3b90-4629-820d-09873bec1433%20rw_1920@4x.png', label: 'Handling the prototype' },
+          { src: '/uploads/Accord/8c058c0e-705d-48a8-b016-6c3d5779f6a7%20rw_1920@4x.png', label: 'Arranging the modules' },
+        ],
+      },
+      pivot: {
+        from: 'Alerting',
+        fromHmw: 'How might we alert office workers when indoor air quality drops?',
+        to: 'Ambient + on-demand',
+        toHmw: 'How might we communicate air quality through an ambient signal paired with on-demand context, so people can act without being interrupted?',
+        because: 'Participants dismissed alerts outright - several had already disabled notifications on tools like this.',
+      },
+      origin: {
+        label: 'How the companion app arrived',
+        line: 'Scenario 4 put ActuAir in a shared common area and asked how you would want to know about air quality in a room you are not currently in. That question is a digital problem, not a physical one - the device cannot follow you. The companion app came out of that gap, and the "Your Spaces" screen is the direct answer to it.',
+        items: [
+          { src: '/uploads/Accord/E0829f52-5051-4805-85cf-836c7de3bd6e@4x.png', label: 'Scenario 4 raised the gap' },
+          { src: '/uploads/Accord/D4d99d38-ee26-40da-9462-ad6d685dbaa3@4x.png', label: 'Paper prototypes' },
+          { src: '/uploads/Accord/screens/spaces.png', label: '"Your Spaces" answered it' },
+        ],
+      },
+      people: 'Office professionals working in a shared smart building - people at a fixed desk for most of the day, and people moving between meeting rooms and shared spaces.',
+      testing: {
+        line: 'Task-based usability testing with 5 office professionals, combining evaluation of the app prototype with observation of how they responded to the device itself.',
+        changes: [
+          'A weekly summary view added, requested directly by participants and not in the original prototype',
+          'An onboarding moment added so each user sets their own reading of the ambient signal',
+          'Notifications removed as a default, opt-in per signal type instead',
+        ],
+      },
+      ethics: 'Ethical approval through Newcastle University / Open Lab before any workshop or deployment. Participants recruited from building occupants, briefed on the device before interaction, free to opt out at any point, and not incentivised.',
+      output: [
+        { src: '/uploads/Accord/Ab0cc8d7-15e5-4c20-91e7-9f692f345fdc@4x.png', label: 'The physical display' },
+        { src: '/uploads/Accord/5ef9eb13-b071-496a-b0ea-0d0e49ddf8b4@4x.png', label: 'Signalling good air' },
+        { src: '/uploads/Accord/screens/functions.png', label: 'The app explains it' },
+      ],
+      screens: [
+        { src: '/uploads/Accord/screens/spaces.png', label: 'Your Spaces' },
+        { src: '/uploads/Accord/screens/functions.png', label: 'Actu-Air functions' },
+        { src: '/uploads/Accord/screens/notifications.png', label: 'Notifications, off by default' },
+      ],
+      outcome: 'A validated companion app prototype, and a design principle that carries well beyond air quality: ambient technology works best when users author their own reading of the signal. The co-design work behind it is acknowledged in Margariti et al., ACM CHI 2024.',
+    },
+    contextTitle: 'Context · the air you cannot sense',
+    context: {
+      intro: `Indoor air quality is one of the few environmental factors that directly affects how well people think, and one of the only ones they cannot sense. CO₂ builds up quietly through a working day as rooms fill and windows stay shut. Past roughly 1000ppm it starts measurably degrading concentration and decision-making, and the people in the room have no idea it is happening.\n\nActuAir, developed at Open Lab, made that invisible data physical: a modular, biomimetic display that inflates and shifts colour in response to CO₂. My dissertation asked the next question - what does the digital layer around a device like this need to do?`,
+      stats: [
+        { value: '1000ppm', label: 'CO₂ threshold linked to reduced cognitive performance' },
+        { value: '90%', label: 'Of the average person\'s time is spent indoors' },
+        { value: '30+', label: 'Academic papers reviewed across IAQ, ambient displays and nudge theory' },
+        { value: '5', label: 'Building occupants in the Study 02 co-creation workshop' },
+      ],
+      challenges: [
+        'The data is invisible - no sensory cue tells you the air has degraded, so nothing prompts a response',
+        'Alert-based tools interrupt at the worst possible moment and get switched off within days',
+        'Numeric readouts assume people know what 850ppm means, and what to do about it',
+        'Building ventilation is managed by facilities, leaving occupants with awareness but no agency',
+      ],
+      quote: `Making the data visible was never the hard part. Making it actionable without adding to someone's cognitive load was.`,
+      image: '/uploads/Accord/Ab0cc8d7-15e5-4c20-91e7-9f692f345fdc@4x.png',
+      imageCaption: 'The ActuAir display - a modular, biomimetic room divider that inflates and changes colour in response to CO₂ levels. Built at Open Lab, Newcastle University.',
+    },
+    problem: `Indoor air quality in offices is frequently worse than the air outside - CO₂ regularly passes the 1000ppm threshold linked to fatigue, poor concentration, and reduced cognitive performance. Yet it is completely invisible.\n\nOffice workers can neither sense it nor act on it. The tools that exist either sit unopened on a phone, or interrupt at exactly the wrong moment - and get disabled.`,
     insight: `Workers didn't want more data - they wanted just-in-time cues that triggered a simple action (open a window, take a break) without requiring them to interpret numbers or context-switch from their work.`,
+    solutionTeaser: `Where it landed: a shape-changing display that shifts colour and inflation at the edge of your vision, paired with a companion app you open by choice rather than one that pings you. The rest of this page is how the research got there.`,
+    opportunityFraming: {
+      initialAssumption: 'Like almost every product in this category, I started from alerting. The job, I assumed, was to make the invisible visible and tell people the moment the air got bad.',
+      initialHmw: 'How might we alert office workers when indoor air quality drops?',
+      shift: 'The co-design workshops overturned this. Participants dismissed alerts outright - several had already disabled notifications on tools like this. What they wanted was a signal they could read at the edge of their attention, and a reason they could go looking for when they chose to.',
+      reframedHmw: 'How might we communicate air quality through an ambient signal paired with on-demand context, so people can act without being interrupted?',
+    },
     deskResearch: {
       summary: 'Research into indoor air quality, ambient information systems, and workplace behaviour change formed the foundation of this project. I reviewed 30+ academic papers spanning environmental health, HCI ambient display research, and behavioural nudge theory - establishing both the problem\'s scale and the gap in existing solutions.',
       stats: [
@@ -1574,6 +1691,9 @@ export const projects: Project[] = [
       gap: 'No prior research had explored the design of a companion digital layer for shape-changing ambient displays like ActuAir - a gap this project was uniquely positioned to address through co-design.',
     },
     processTitle: 'Process timeline',
+    processEarly: true,
+    processCompact: true,
+    assumptionsLate: true,
     process: [
       {
         phase: 'May 2022 · Discover',
@@ -1743,8 +1863,24 @@ export const projects: Project[] = [
       ],
       outcome: 'These findings contributed directly to the paper accepted at ACM CHI 2024 - one of the world\'s leading conferences on human-computer interaction, with an acceptance rate of approximately 25%.',
     },
+    storyboards: {
+      intro: `Storyboards became the project's shared language. Rather than asking people to imagine an ambient display in the abstract, I drew four office scenarios - a cold day with the windows shut, a filling conference room, an open-plan floor across a working day, and a common area versus a private cabin - and asked participants to talk me through what they would actually do.`,
+      items: [
+        { src: '/uploads/Accord/C143dd31-871a-4ec8-aff3-c7de47296496@4x.png', caption: 'Scenario 1 - a cold, windy day. The radiator is on, the windows stay shut, and ActuAir moves green to amber to red as CO₂ builds. What would you do?' },
+        { src: '/uploads/Accord/8927c115-126b-4ad1-a2d5-3de970194e4a@4x.png', caption: 'Scenario 2 - a conference room filling for a meeting. The wall installation shifts colour as occupancy rises through the session.' },
+        { src: '/uploads/Accord/E14a2029-d61e-4ffb-84c5-c5341ef85357@4x.png', caption: 'Scenario 3 - open-plan office across a working day. You arrive early to a green room; it degrades as colleagues arrive and you are stuck at your desk on a deadline.' },
+        { src: '/uploads/Accord/E0829f52-5051-4805-85cf-836c7de3bd6e@4x.png', caption: 'Scenario 4 - ActuAir in a shared common area versus a private cabin. How would you want to be told about air quality in a room you are not currently in?' },
+      ],
+      payoff: `Scenario 4 is what produced the companion app. Once the device sits in a common area, everyone not in that room is cut off from the signal - and that gap is a digital problem, not a physical one. It also produced the sharpest constraint of the project: asked how they would want to be notified, participants said, repeatedly, that they would not. They wanted somewhere to look, not something that interrupted them.`,
+    },
+    focusGroup: {
+      label: 'Study 02 · the co-creation workshop',
+      intro: 'Study 02 - the co-creation workshop I co-designed and co-facilitated, and the contribution acknowledged in the CHI paper. Five building occupants worked hands-on with the modular ActuAir prototype, arranging configurations and talking through what each inflation and colour state should mean to them.',
+      image: '/uploads/Accord/F0b98a8d-3b90-4629-820d-09873bec1433%20rw_1920@4x.png',
+      caption: 'Participants handling the modular ActuAir prototype during Study 02, working out how inflation and arrangement should map to air quality. Letting people physically hold the device is what surfaced how differently each person read the same signal.',
+    },
     workshopsTitle: 'Co-design workshops',
-    workshopsIntro: 'Two co-design sessions with office professionals, run alongside live demonstrations of the ActuAir device. Participants worked through storyboards, articulated how they\'d interpret the ambient signal, and shaped the direction of the companion app.',
+    workshopsIntro: 'Two co-design sessions with office professionals working alongside live demonstrations of the ActuAir device. Participants worked through storyboards, articulated how they would interpret the ambient signal, and shaped the direction of the companion app.',
     workshops: [
       { src: '/uploads/Accord/69c1064c-b190-4c28-b6d7-e8ecea3f099e%20rw_1920@4x.png', caption: 'Workshop 1 in session - participants reviewing ActuAir scenario scripts alongside the physical device' },
       { src: '/uploads/Accord/187dea95-0d97-49c9-9c52-39873ee50318%20rw_3840@4x.png', caption: 'Participants working through storyboard scenarios at the workshop table' },
@@ -1768,6 +1904,17 @@ export const projects: Project[] = [
         'Validated a transferable principle: ambient technology is most effective when users author their own interpretation of feedback signals',
       ],
       learned: 'Ambient UX is one of the most underexplored frontiers in product design. This project sits at the intersection of academic rigour and practical design - a combination I find genuinely energising. The hardest design challenge here wasn\'t making information visible; it was making it actionable without adding to cognitive load.',
+    },
+    screens: {
+      intro: 'The companion app, screen by screen. Every screen was checked against Nielsen\'s heuristics during iteration, and the whole thing is built on one rule the workshops set: the app waits to be opened.',
+      items: [
+        { src: '/uploads/Accord/screens/splash.png', title: 'Splash', description: '"Living well with Actu-Air technology." The app positions itself as a companion to the device, not a monitoring tool.' },
+        { src: '/uploads/Accord/screens/spaces.png', title: 'Your Spaces', description: 'The home screen. Every room you have synced, colour-coded by current IAQ, with a recovery estimate and one plain-language action per card.' },
+        { src: '/uploads/Accord/screens/functions.png', title: 'Actu-Air functions', description: 'The onboarding moment the workshops demanded - a guide to what each colour and inflation state means, so users can author their own reading of the signal.' },
+        { src: '/uploads/Accord/screens/notifications.png', title: 'Notification settings', description: 'Every notification off by default and opt-in per signal type. The direct product of participants telling me they did not want to be interrupted.' },
+        { src: '/uploads/Accord/screens/settings.png', title: 'Settings', description: 'Device functions, profile, notification control, and sign-out. Kept deliberately shallow - there is very little to configure by design.' },
+        { src: '/uploads/Accord/screens/offline.png', title: 'Offline state', description: 'When the device cannot be reached. Plain language and a clear recovery path rather than an error code.' },
+      ],
     },
     gallery: [
       { src: '/uploads/Accord/Phone%20mockup_3@4x.png', caption: 'App prototype - splash screen, \'Your Spaces\' dashboard with room-by-room IAQ status, and notification settings', type: 'prototype' },

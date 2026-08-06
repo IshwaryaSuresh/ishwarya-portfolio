@@ -24,6 +24,21 @@ export type Persona = {
   reflection?: string
 }
 
+export type StoryVisual =
+  | { kind: 'image'; src: string; caption?: string }
+  | { kind: 'imageGrid'; items: { src: string; label?: string }[] }
+  | { kind: 'matrix' }
+  | { kind: 'personas' }
+
+// One chapter of a story stage: statement headline + one short paragraph on the
+// left, visual on the right, optional key-finding callout under the visual.
+export type StoryMoment = {
+  title: string
+  body: string
+  visual: StoryVisual
+  finding?: string
+}
+
 export type Project = {
   slug: string
   title: string
@@ -193,6 +208,15 @@ export type Project = {
   tradeoffs?: { decision: string; reasoning: string }[]
   // Business outcome translations for metrics
   businessOutcomes?: { metric: string; translation: string }[]
+  // Visual story layout: numbered chronological stages of two-column chapters
+  // (statement headline + one paragraph left, visual right, key-finding callout).
+  // When present, this replaces the default detailed body. Header, tags, and
+  // footer nav are unchanged.
+  story?: {
+    challenge: { paragraphs: string[]; hmw: string }
+    stages: { label: string; kicker: string; moments: StoryMoment[] }[]
+    results: { kicker: string; stats: { value: string; label: string }[]; body: string; quote: string }
+  }
 }
 
 export const projects: Project[] = [
@@ -333,16 +357,16 @@ export const projects: Project[] = [
   {
     slug: 'kaizen',
     title: 'Kaizen: Personal Finance OS',
-    tagline: 'A research-informed personal finance OS connecting budget, goals, and auto-investing. Three visual directions, fully designed from marketing site to onboarding to dashboard.',
+    tagline: 'An unsolicited concept pitch to Monzo: one personal finance OS connecting budget, goals, and auto-investing, fully designed from marketing site to onboarding to dashboard across four sprints.',
     niche: ['Fintech Consumer', 'Product design', 'Visual design'],
     type: 'Fintech Consumer',
     featured: true,
-    client: 'Self-initiated concept',
+    client: 'Monzo · unsolicited concept pitch',
     role: 'UX Researcher, Product Designer & Prototype Engineer',
-    duration: '8 weeks · 2026',
+    duration: '4 design sprints · 2026',
     tools: ['Figma', 'FigJam', 'CSS design tokens', 'Claude (research drafting)', 'Cursor (prototype build)'],
     prototype: '/kaizen/Kaizen.html',
-    wip: 'Mobile app version in progress',
+    wip: 'Mobile version scoped for Sprint 5',
     processTitle: 'Process timeline',
     businessOutcomes: [
       { metric: '3 visual systems · onboarding → dashboard', translation: 'Reduced concept-to-pressure-test cycle from weeks to days, three full visual directions, each carried through onboarding to the dashboard, before committing to one design language. The work most fintech teams ship as a Figma mockup, shipped as a working browser product.' },
@@ -578,7 +602,7 @@ export const projects: Project[] = [
     overview: {
       team: 'Solo designer',
       industry: 'Consumer fintech',
-      status: 'Design complete across all screens. Usability testing with target cohort is the defined next step.',
+      status: 'Pitch paused at the end of Sprint 4. Usability testing with the target cohort is scoped as Sprint 5.',
     },
     designDecisions: [
       {
@@ -617,6 +641,89 @@ export const projects: Project[] = [
       { src: '/uploads/kaizen/transactions.png', caption: 'Transactions: day-grouped activity feed with summary bar (money in / out / net). Context for the dashboard, not the primary entry point.', type: 'prototype' },
       { src: '/uploads/kaizen/onboarding.png', caption: 'Onboarding: goal-first 5-step flow. Starts with "What are you saving for?" Counters the account-first pattern that every audited competitor uses and users consistently abandon.', type: 'prototype' },
     ],
+    story: {
+      challenge: {
+        paragraphs: [
+          `Freya, 27, budgets in YNAB, holds a Wealthsimple ISA she hasn't touched in 18 months, and tracks her Tokyo trip goal in a Notes doc. Three apps for one job: building wealth deliberately. She knows she should invest more. She doesn't know how much she can afford. And she's not opening a fourth app to find out.`,
+          `Kaizen is an unsolicited concept pitch to Monzo, built over four design sprints. Monzo already owns Freya's current account and her trust, and stops exactly where her wealth-building practice begins. This is the pitch for the layer that completes it. The work is paused at the end of Sprint 4.`,
+        ],
+        hmw: `How might Monzo own the whole practice: budget, goals, and auto-investing in one quiet, confident interface that treats money as a long-term habit, not a daily anxiety?`,
+      },
+      stages: [
+        {
+          label: 'Research',
+          kicker: 'Sprints 1–2',
+          moments: [
+            {
+              title: 'Four competitors, one blind spot',
+              body: `I mapped onboarding flows, primary navigation, and data architecture across YNAB, Wealthsimple, Betterment, and Monzo Investments. Twelve flows in total.`,
+              visual: { kind: 'matrix' },
+              finding: `0 of 4 products connect budget, goals, and investing. Every tool nails its one job and is blind to the other two. That reframed the brief: not a better feature, but the connective layer none of them have.`,
+            },
+            {
+              title: 'Three people, three failure modes',
+              body: `Composite archetypes built from the audit. Each one represents a distinct way existing products fail, and a distinct design requirement.`,
+              visual: { kind: 'personas' },
+              finding: `The blocker is fragmentation and paralysis, not knowledge. Aisha earns £95k and still won't move her savings. So the educational onboarding direction was cut: Kaizen is designed for competent adults who want one clear picture, not a course.`,
+            },
+          ],
+        },
+        {
+          label: 'Ideate',
+          kicker: 'Sprint 3',
+          moments: [
+            {
+              title: 'Onboarding that starts with the goal',
+              body: `Every audited competitor opens with account creation or a risk questionnaire, and that's exactly where target users drop off: "I don't know my risk tolerance, I just want to save for a house."`,
+              visual: { kind: 'image', src: '/uploads/kaizen/onboarding.png', caption: 'Five steps: Welcome, Connect bank, Pick goals, Portfolio, Review. Commitment comes last.' },
+              finding: `Kaizen opens with "What are you saving for?", a question Freya, Marcus, and Aisha can all answer before entering a single bank detail.`,
+            },
+            {
+              title: 'Three design languages, pressure-tested',
+              body: `The three personas have different aesthetic thresholds, and committing early would win one and lose the others. Editorial, Quiet Premium, and Confident Warm were each built as complete, switchable themes.`,
+              visual: { kind: 'image', src: '/uploads/kaizen/hero.png', caption: 'The marketing hero in Quiet Premium: built to earn visual trust before asking for financial trust.' },
+              finding: `Quiet Premium won: onyx and periwinkle, all-sans-serif, weight as the only hierarchy signal. Aisha's benchmark is Stripe and Linear, not a financial magazine.`,
+            },
+          ],
+        },
+        {
+          label: 'Design',
+          kicker: 'Sprint 4',
+          moments: [
+            {
+              title: 'The number is the hero',
+              body: `Marcus asked "tell me my number". The dashboard opens with net worth, then explains it: area chart, spending cards, and one AI insight.`,
+              visual: { kind: 'image', src: '/uploads/kaizen/dashboard.png', caption: 'Dashboard: net worth first, explanation second.' },
+              finding: `Dashboard-first, not transactions-first. Monzo and YNAB open to a feed, which answers "what did I spend?" Kaizen opens to net worth, which answers "am I on track?"`,
+            },
+            {
+              title: 'One ledger, six screens',
+              body: `Every screen answers a persona need surfaced in research: Freya's whole picture in Budget, her Notes-doc goals made real in Goals, and Aisha's decision-reducing Invest view.`,
+              visual: {
+                kind: 'imageGrid',
+                items: [
+                  { src: '/uploads/kaizen/budget.png', label: `Budget: the whole picture, without YNAB's homework` },
+                  { src: '/uploads/kaizen/goals.png', label: 'Goals: the missing link between a Notes doc and an ISA' },
+                  { src: '/uploads/kaizen/invest.png', label: 'Invest: a few clear positions, not 500 funds' },
+                  { src: '/uploads/kaizen/transactions.png', label: 'Transactions: context, deliberately not the front door' },
+                ],
+              },
+            },
+          ],
+        },
+      ],
+      results: {
+        kicker: 'Paused here',
+        stats: [
+          { value: '4', label: 'apps audited, 12 primary flows mapped' },
+          { value: '0/4', label: 'competitors connect budget, goals, and investing' },
+          { value: '3', label: 'complete design languages pressure-tested' },
+          { value: '8', label: 'screens shipped as a working browser prototype' },
+        ],
+        body: `The pitch is paused at the end of Sprint 4: design complete across the marketing site, onboarding, and six product screens, shipped as a working browser prototype rather than a static mockup. Sprint 5 is scoped and waiting: usability testing with the target cohort, and a mobile-native pass on the budget and goals views.`,
+        quote: `Monzo already owns the current account and the trust that comes with it. What nobody owns is the practice: budget, goals, and investing in one coherent language. Kaizen is the pitch for that layer.`,
+      },
+    },
   },
   {
     slug: 'me-and-you',

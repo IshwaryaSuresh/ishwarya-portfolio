@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { getProject, type Persona, type Project } from '../../data/projects'
+import { getProject, type Persona, type Project, type StoryMoment } from '../../data/projects'
+import Reveal from '../../components/Reveal'
 
 type CompetitiveTool = NonNullable<NonNullable<Project['deskResearch']>['competitiveAudit']>['tools'][number]
 
-function CompetitiveMatrix({ tools }: { tools: CompetitiveTool[] }) {
+function CompetitiveMatrix({ tools, compact }: { tools: CompetitiveTool[]; compact?: boolean }) {
   const features = tools[0]?.features.map(f => f.label) ?? []
 
   const scoreConfig = {
@@ -14,11 +15,11 @@ function CompetitiveMatrix({ tools }: { tools: CompetitiveTool[] }) {
   }
 
   return (
-    <div className="mb-8">
-      <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-5">Competitive audit</p>
+    <div className={compact ? '' : 'mb-8'}>
+      {!compact && <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-5">Competitive audit</p>}
 
       {/* Matrix table */}
-      <div className="overflow-x-auto rounded-2xl border border-border mb-5">
+      <div className={`overflow-x-auto rounded-2xl border border-border ${compact ? '' : 'mb-5'}`}>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="bg-paper border-b border-border">
@@ -54,16 +55,208 @@ function CompetitiveMatrix({ tools }: { tools: CompetitiveTool[] }) {
       </div>
 
       {/* Tool verdict cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {tools.map(t => (
-          <div key={t.name} className="bg-paper border border-border rounded-xl p-4">
-            <div className="flex items-baseline gap-2 mb-1.5">
-              <span className="font-bold text-ink text-sm">{t.name}</span>
-              <span className="text-xs text-accent font-medium">{t.verdict}</span>
+      {!compact && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {tools.map(t => (
+            <div key={t.name} className="bg-paper border border-border rounded-xl p-4">
+              <div className="flex items-baseline gap-2 mb-1.5">
+                <span className="font-bold text-ink text-sm">{t.name}</span>
+                <span className="text-xs text-accent font-medium">{t.verdict}</span>
+              </div>
+              <p className="text-xs text-muted leading-relaxed">{t.gap}</p>
             </div>
-            <p className="text-xs text-muted leading-relaxed">{t.gap}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function StoryPersonaCard({ persona }: { persona: Persona }) {
+  return (
+    <div className="border border-border rounded-2xl overflow-hidden bg-paper">
+      {persona.photo && (
+        <div className="h-36 overflow-hidden">
+          <img
+            src={persona.photo}
+            alt={persona.name}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: persona.photoPosition ?? '50% 20%' }}
+          />
+        </div>
+      )}
+      <div className="p-4">
+        <p className="font-bold text-ink text-sm">{persona.name}, {persona.age}</p>
+        <p className="text-[10px] font-medium uppercase tracking-widest text-accent mt-0.5 mb-2">{persona.type}</p>
+        <p className="text-xs text-muted leading-relaxed italic">{persona.goal}</p>
+      </div>
+    </div>
+  )
+}
+
+function StoryStageHeader({ index, label, kicker }: { index: number; label: string; kicker: string }) {
+  return (
+    <Reveal y={20}>
+      <div className="flex items-baseline gap-4 pb-4 mb-12 border-b border-border">
+        <span className="font-mono text-sm text-accent">{String(index).padStart(2, '0')}</span>
+        <h2 className="font-display text-3xl md:text-4xl text-ink tracking-tight">{label}</h2>
+        <span className="ml-auto font-mono text-[11px] uppercase tracking-widest text-muted">{kicker}</span>
+      </div>
+    </Reveal>
+  )
+}
+
+function StoryBody({ project }: { project: Project }) {
+  const story = project.story!
+
+  const renderVisual = (visual: StoryMoment['visual']) => {
+    switch (visual.kind) {
+      case 'image':
+        return (
+          <Reveal delay={120}>
+            <figure className="rounded-2xl overflow-hidden border border-border">
+              <img
+                src={visual.src}
+                alt={visual.caption ?? ''}
+                className="w-full object-contain bg-paper"
+                style={{ maxHeight: '560px' }}
+              />
+              {visual.caption && (
+                <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{visual.caption}</figcaption>
+              )}
+            </figure>
+          </Reveal>
+        )
+      case 'imageGrid':
+        return (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {visual.items.map((it, i) => (
+              <Reveal key={it.src} delay={120 + i * 90}>
+                <figure className="rounded-2xl overflow-hidden border border-border flex flex-col h-full">
+                  <img
+                    src={it.src}
+                    alt={it.label ?? ''}
+                    className="w-full object-contain bg-paper flex-1"
+                    style={{ maxHeight: '300px' }}
+                  />
+                  {it.label && (
+                    <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{it.label}</figcaption>
+                  )}
+                </figure>
+              </Reveal>
+            ))}
           </div>
+        )
+      case 'matrix':
+        return project.deskResearch?.competitiveAudit
+          ? (
+            <Reveal delay={120}>
+              <CompetitiveMatrix tools={project.deskResearch.competitiveAudit.tools} compact />
+            </Reveal>
+          )
+          : null
+      case 'personas':
+        return project.personas ? (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {project.personas.map((p, i) => (
+              <Reveal key={p.name} delay={120 + i * 90}>
+                <StoryPersonaCard persona={p} />
+              </Reveal>
+            ))}
+          </div>
+        ) : null
+    }
+  }
+
+  return (
+    <div className="max-w-5xl mx-auto px-6">
+
+      {/* The challenge */}
+      <section className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12 mb-24">
+        <Reveal y={16}>
+          <p className="text-xs font-medium uppercase tracking-widest text-muted md:pt-1.5">The challenge</p>
+        </Reveal>
+        <Reveal delay={100}>
+          <div>
+            {story.challenge.paragraphs.map((p, i) => (
+              <p key={i} className="text-muted leading-relaxed mb-4 last:mb-0">{p}</p>
+            ))}
+            <p className="text-accent font-medium italic leading-relaxed mt-5">{story.challenge.hmw}</p>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Stages */}
+      <div className="space-y-24">
+        {story.stages.map((stage, si) => (
+          <section key={stage.label}>
+            <StoryStageHeader index={si + 1} label={stage.label} kicker={stage.kicker} />
+            <div className="space-y-16">
+              {stage.moments.map(m => (
+                <div key={m.title} className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="md:sticky md:top-28 self-start">
+                    <h3 className="font-display text-2xl text-ink leading-tight mb-3">{m.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{m.body}</p>
+                  </Reveal>
+                  <div className="space-y-4 min-w-0">
+                    {renderVisual(m.visual)}
+                    {m.finding && (
+                      <Reveal>
+                        <div className="bg-accent-light border border-accent/30 rounded-2xl p-5">
+                          <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1.5">Key finding</p>
+                          <p className="text-ink leading-relaxed text-[15px]">{m.finding}</p>
+                        </div>
+                      </Reveal>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         ))}
+
+        {/* Results */}
+        <section>
+          <StoryStageHeader index={story.stages.length + 1} label="Results" kicker={story.results.kicker} />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 mb-12">
+            {story.results.stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 100}>
+                <p className="font-display text-4xl md:text-5xl text-ink mb-2">{s.value}</p>
+                <p className="text-xs text-muted leading-snug">{s.label}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <p className="text-muted leading-relaxed max-w-3xl mb-10">{story.results.body}</p>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="bg-ink rounded-2xl p-8 md:p-10">
+              <p className="text-paper text-lg md:text-xl font-medium leading-relaxed">"{story.results.quote}"</p>
+            </div>
+          </Reveal>
+        </section>
+      </div>
+
+      {/* Tags */}
+      <section className="flex flex-wrap gap-2 pt-4 mt-24 border-t border-border">
+        {project.tags.map(tag => (
+          <span key={tag} className="text-xs bg-white border border-border rounded-md px-3 py-1.5 text-muted">
+            {tag}
+          </span>
+        ))}
+      </section>
+
+      {/* Nav between case studies */}
+      <div className="flex justify-between pt-8 mt-8 border-t border-border">
+        <Link to="/work" className="text-sm font-medium text-accent hover:underline">
+          ← All projects
+        </Link>
+        <a
+          href="mailto:ishwaryasuresh@madeforhumans.tech"
+          className="text-sm font-medium bg-ink text-paper px-5 py-2 rounded-full hover:bg-accent transition-colors"
+        >
+          Work together →
+        </a>
       </div>
     </div>
   )
@@ -365,25 +558,32 @@ export default function CaseStudy() {
           ))}
         </div>
 
-        <h1 className="font-display font-normal text-ink mb-5 leading-[0.95] tracking-tight"
-            style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}>
-          {project.title}
-        </h1>
-        <p className="text-lg md:text-xl text-muted leading-relaxed mb-10 max-w-3xl">{project.tagline}</p>
+        <Reveal disabled={!project.story} y={24}>
+          <h1 className="font-display font-normal text-ink mb-5 leading-[0.95] tracking-tight"
+              style={{ fontSize: 'clamp(40px, 6vw, 80px)' }}>
+            {project.title}
+          </h1>
+        </Reveal>
+        <Reveal disabled={!project.story} delay={90}>
+          <p className="text-lg md:text-xl text-muted leading-relaxed mb-10 max-w-3xl">{project.tagline}</p>
+        </Reveal>
 
         {/* Hero image */}
         {project.heroImage && (
-          <div className="mb-8 rounded-2xl overflow-hidden border border-border bg-ink">
-            <img
-              src={project.heroImage}
-              alt={`${project.title}, prototype overview`}
-              className="w-full object-cover"
-              style={{ maxHeight: '520px' }}
-            />
-          </div>
+          <Reveal disabled={!project.story} delay={180}>
+            <div className="mb-8 rounded-2xl overflow-hidden border border-border bg-ink">
+              <img
+                src={project.heroImage}
+                alt={`${project.title}, prototype overview`}
+                className="w-full object-cover"
+                style={{ maxHeight: '520px' }}
+              />
+            </div>
+          </Reveal>
         )}
 
         {/* Meta grid */}
+        <Reveal disabled={!project.story} delay={260}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-t border-b border-border">
           {[
             { label: 'Client', value: project.client },
@@ -402,13 +602,16 @@ export default function CaseStudy() {
             </div>
           ))}
         </div>
+        </Reveal>
 
         {/* Status banner */}
         {project.overview?.status && (
-          <div className="mt-4 inline-flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800">
-            <span className="mt-0.5">⏸</span>
-            <span>{project.overview.status}</span>
-          </div>
+          <Reveal disabled={!project.story} delay={340}>
+            <div className="mt-4 inline-flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800">
+              <span className="mt-0.5">⏸</span>
+              <span>{project.overview.status}</span>
+            </div>
+          </Reveal>
         )}
 
         {(project.prototype || project.publishedResearch || project.wip) && (
@@ -740,7 +943,11 @@ export default function CaseStudy() {
         </div>
       )}
 
+      {/* Story body, visual narrative layout */}
+      {project.story && <StoryBody project={project} />}
+
       {/* Body */}
+      {!project.story && (
       <div className={`max-w-3xl mx-auto px-6 space-y-16 ${project.tldr && view === 'tldr' ? 'hidden' : ''}`}>
 
         {/* Context, only if present */}
@@ -1502,6 +1709,7 @@ export default function CaseStudy() {
           </a>
         </div>
       </div>
+      )}
     </article>
   )
 }

@@ -2276,8 +2276,8 @@ body.hero-light .marquee {
 }
 .pillar {
   display: grid;
-  grid-template-columns: 64px 280px 1fr;
-  gap: 40px;
+  grid-template-columns: 260px 1fr;
+  gap: 48px;
   align-items: baseline;
   padding: 30px 0;
   border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -2288,7 +2288,8 @@ body.hero-light .marquee {
 .pillar__d {
   margin-top: 0;
   padding-top: 0;
-  font-size: 15.5px;
+  font-size: 16px;
+  max-width: 72ch;
 }
 
 /* Brief: full-bleed teal band, subscription-page form */
@@ -2325,15 +2326,15 @@ body.hero-light .marquee {
 
 @media (max-width: 900px) {
   .about { border-radius: 0; padding-top: 64px; padding-bottom: 64px; }
-  .pillar { grid-template-columns: 48px 1fr; gap: 20px; }
-  .pillar__d { grid-column: 2; }
+  .pillar { grid-template-columns: 170px 1fr; gap: 24px; }
+  .pillar__d { grid-column: auto; }
   .brief { border-radius: 0; padding-top: 64px; padding-bottom: 64px; }
   .stat__num { font-size: clamp(48px, 9vw, 80px); }
 }
 @media (max-width: 580px) {
   .about { border-radius: 0; }
   .pillar { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
-  .pillar__d { grid-column: 1; }
+  .pillar__d { grid-column: auto; }
 }
 
 /* ===== BUTTON GRAMMAR ===== */
@@ -2396,3 +2397,7 @@ body.hero-light .hero__caret { background: var(--teal-500); }
   color: var(--white);
 }
 .faq-dark .faq__a { color: rgba(255,255,255,0.6); }
+
+/* ===== SERIAL NUMBERS REMOVED: collapse the number columns ===== */
+.svc__item { grid-template-columns: 1fr auto; }
+.jnl__row { grid-template-columns: 1fr auto; }

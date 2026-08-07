@@ -40,7 +40,6 @@ export default function NumbersAbout() {
         <div className="about__pillars">
           {PILLARS.map((p, i) => (
             <div key={p.n} className="pillar" data-reveal="up" data-delay={i * 80}>
-              <div className="pillar__n">{p.n}</div>
               <div className="pillar__t">{p.t}</div>
               <div className="pillar__d">{p.d}</div>
             </div>

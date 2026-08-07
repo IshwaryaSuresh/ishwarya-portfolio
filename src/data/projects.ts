@@ -30,13 +30,22 @@ export type StoryVisual =
   | { kind: 'matrix' }
   | { kind: 'personas' }
 
+// One step of a pinned scrollytelling block: the narration scrolls on the left
+// while the screen stays pinned on the right and swaps to `src` per step.
+export type ScreenScrollStep = { src: string; title: string; body: string }
+
 // One chapter of a story stage: statement headline + one short paragraph on the
 // left, visual on the right, optional key-finding callout under the visual.
+// When `screenScroll` is set, the chapter renders as a pinned scrollytelling
+// sequence instead and title/body/visual are ignored.
 export type StoryMoment = {
-  title: string
-  body: string
-  visual: StoryVisual
+  title?: string
+  body?: string
+  visual?: StoryVisual
   finding?: string
+  screenScroll?: ScreenScrollStep[]
+  // Renders the project's assumptions as flat assumed/found/pivoted cards.
+  afp?: boolean
 }
 
 export type Project = {
@@ -214,6 +223,11 @@ export type Project = {
   // footer nav are unchanged.
   story?: {
     challenge: { paragraphs: string[]; hmw: string }
+    // Outcome-first summary shown right after the challenge: solution statement
+    // plus the results KPI cards.
+    summary?: { solution: string }
+    // Compact sprint timeline (Me & You style dots).
+    timeline?: { label: string; items: { when: string; what: string; scoped?: boolean }[] }
     stages: { label: string; kicker: string; moments: StoryMoment[] }[]
     results: { kicker: string; stats: { value: string; label: string }[]; body: string; quote: string }
   }
@@ -649,6 +663,19 @@ export const projects: Project[] = [
         ],
         hmw: `How might Monzo own the whole practice: budget, goals, and auto-investing in one quiet, confident interface that treats money as a long-term habit, not a daily anxiety?`,
       },
+      summary: {
+        solution: `Kaizen is that layer, designed end to end: a marketing site built to earn visual trust, a goal-first five-step onboarding, and six product screens in one design language, shipped as a working browser prototype rather than a static mockup.`,
+      },
+      timeline: {
+        label: 'Four sprints, then paused',
+        items: [
+          { when: 'Sprint 1', what: 'Competitive audit: 4 apps, 12 flows' },
+          { when: 'Sprint 2', what: 'Personas and the category reframe' },
+          { when: 'Sprint 3', what: 'Design language and marketing site' },
+          { when: 'Sprint 4', what: 'Onboarding and 6 product screens' },
+          { when: 'Sprint 5 · scoped', what: 'Usability testing and mobile pass', scoped: true },
+        ],
+      },
       stages: [
         {
           label: 'Research',
@@ -669,46 +696,56 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: 'Ideate',
-          kicker: 'Sprint 3',
+          label: 'Design',
+          kicker: 'Sprints 3–4',
           moments: [
             {
-              title: 'Onboarding that starts with the goal',
-              body: `Every audited competitor opens with account creation or a risk questionnaire, and that's exactly where target users drop off: "I don't know my risk tolerance, I just want to save for a house."`,
-              visual: { kind: 'image', src: '/uploads/kaizen/onboarding.png', caption: 'Five steps: Welcome, Connect bank, Pick goals, Portfolio, Review. Commitment comes last.' },
-              finding: `Kaizen opens with "What are you saving for?", a question Freya, Marcus, and Aisha can all answer before entering a single bank detail.`,
-            },
-            {
-              title: 'Three design languages, pressure-tested',
-              body: `The three personas have different aesthetic thresholds, and committing early would win one and lose the others. Editorial, Quiet Premium, and Confident Warm were each built as complete, switchable themes.`,
-              visual: { kind: 'image', src: '/uploads/kaizen/hero.png', caption: 'The marketing hero in Quiet Premium: built to earn visual trust before asking for financial trust.' },
-              finding: `Quiet Premium won: onyx and periwinkle, all-sans-serif, weight as the only hierarchy signal. Aisha's benchmark is Stripe and Linear, not a financial magazine.`,
+              screenScroll: [
+                {
+                  src: '/uploads/kaizen/hero.png',
+                  title: 'Trust before transactions',
+                  body: `The marketing hero in Quiet Premium: onyx and periwinkle, all-sans-serif, weight as the only hierarchy signal. Three design languages were pressure-tested; this one earns Aisha's visual trust before asking for her bank details.`,
+                },
+                {
+                  src: '/uploads/kaizen/onboarding.png',
+                  title: 'Onboarding that starts with the goal',
+                  body: `Every audited competitor opens with account creation or a risk questionnaire, exactly where users drop off. Kaizen opens with "What are you saving for?", a question every persona can answer. Commitment comes last.`,
+                },
+                {
+                  src: '/uploads/kaizen/dashboard.png',
+                  title: 'The number is the hero',
+                  body: `Marcus asked "tell me my number", so net worth opens the product: a dual-series area chart, spending cards, and one AI insight. The number first, the explanation second.`,
+                },
+                {
+                  src: '/uploads/kaizen/budget.png',
+                  title: 'The whole picture, without the homework',
+                  body: `Freya's budget in one glance: donut summary, six category bars, and a six-month trend. The power of YNAB without the homework that made her quit it in three weeks.`,
+                },
+                {
+                  src: '/uploads/kaizen/goals.png',
+                  title: 'From Notes doc to funded plan',
+                  body: `Six goals, each with progress and a weekly auto-allocation. The missing link between Freya's Tokyo note and the ISA she hasn't touched in 18 months.`,
+                },
+                {
+                  src: '/uploads/kaizen/invest.png',
+                  title: 'A few clear positions, not 500 funds',
+                  body: `Aisha's decision-reducing view: holdings, an 80/20 allocation donut, and tax-loss harvesting handled quietly in the background. Choice without overwhelm.`,
+                },
+                {
+                  src: '/uploads/kaizen/transactions.png',
+                  title: 'Context, not the front door',
+                  body: `A day-grouped feed with money in, money out, and net. Deliberately secondary: the feed explains the number, it never becomes the product.`,
+                },
+              ],
+              finding: `Dashboard-first, not transactions-first. Monzo and YNAB open to a feed, which answers "what did I spend?" Kaizen opens to net worth, which answers "am I on track?"`,
             },
           ],
         },
         {
-          label: 'Design',
-          kicker: 'Sprint 4',
+          label: 'Pivots',
+          kicker: 'Sprints 1–4',
           moments: [
-            {
-              title: 'The number is the hero',
-              body: `Marcus asked "tell me my number". The dashboard opens with net worth, then explains it: area chart, spending cards, and one AI insight.`,
-              visual: { kind: 'image', src: '/uploads/kaizen/dashboard.png', caption: 'Dashboard: net worth first, explanation second.' },
-              finding: `Dashboard-first, not transactions-first. Monzo and YNAB open to a feed, which answers "what did I spend?" Kaizen opens to net worth, which answers "am I on track?"`,
-            },
-            {
-              title: 'One ledger, six screens',
-              body: `Every screen answers a persona need surfaced in research: Freya's whole picture in Budget, her Notes-doc goals made real in Goals, and Aisha's decision-reducing Invest view.`,
-              visual: {
-                kind: 'imageGrid',
-                items: [
-                  { src: '/uploads/kaizen/budget.png', label: `Budget: the whole picture, without YNAB's homework` },
-                  { src: '/uploads/kaizen/goals.png', label: 'Goals: the missing link between a Notes doc and an ISA' },
-                  { src: '/uploads/kaizen/invest.png', label: 'Invest: a few clear positions, not 500 funds' },
-                  { src: '/uploads/kaizen/transactions.png', label: 'Transactions: context, deliberately not the front door' },
-                ],
-              },
-            },
+            { afp: true },
           ],
         },
       ],

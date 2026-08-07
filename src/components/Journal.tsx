@@ -112,7 +112,6 @@ export default function Journal() {
               {rest.map((a, i) => (
                 <li key={a.title}>
                   <a href={a.url} target="_blank" rel="noopener noreferrer" className="jnl__row">
-                    <span className="jnl__row-num">{String(i + 1).padStart(2, '0')}</span>
                     <span className="jnl__row-title">{a.title}</span>
                     <span className="jnl__row-date">{a.date}</span>
                   </a>

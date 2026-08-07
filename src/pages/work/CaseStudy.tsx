@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { getProject, type Persona, type Project, type StoryMoment } from '../../data/projects'
 import Reveal from '../../components/Reveal'
+import ScreenScroll from '../../components/ScreenScroll'
 
 type CompetitiveTool = NonNullable<NonNullable<Project['deskResearch']>['competitiveAudit']>['tools'][number]
 
@@ -94,11 +95,10 @@ function StoryPersonaCard({ persona }: { persona: Persona }) {
   )
 }
 
-function StoryStageHeader({ index, label, kicker }: { index: number; label: string; kicker: string }) {
+function StoryStageHeader({ label, kicker }: { label: string; kicker: string }) {
   return (
     <Reveal y={20}>
       <div className="flex items-baseline gap-4 pb-4 mb-12 border-b border-border">
-        <span className="font-mono text-sm text-accent">{String(index).padStart(2, '0')}</span>
         <h2 className="font-display text-3xl md:text-4xl text-ink tracking-tight">{label}</h2>
         <span className="ml-auto font-mono text-[11px] uppercase tracking-widest text-muted">{kicker}</span>
       </div>
@@ -106,10 +106,50 @@ function StoryStageHeader({ index, label, kicker }: { index: number; label: stri
   )
 }
 
+function StoryAfp({ assumptions }: { assumptions: NonNullable<Project['assumptions']> }) {
+  return (
+    <div>
+      {assumptions.intro && (
+        <Reveal>
+          <p className="text-muted leading-relaxed mb-8 max-w-3xl">{assumptions.intro}</p>
+        </Reveal>
+      )}
+      <div className="space-y-4">
+        {assumptions.items.map((it, i) => (
+          <Reveal key={i} delay={i * 80}>
+            <div className="border border-border rounded-2xl overflow-hidden">
+              <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border">
+                <div className="p-5 bg-paper">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400" /> Assumed
+                  </p>
+                  <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
+                </div>
+                <div className="p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
+                  </p>
+                  <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
+                </div>
+                <div className="p-5 bg-accent-light/40">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
+                  </p>
+                  <p className="text-sm text-ink leading-relaxed font-medium">{it.pivot}</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function StoryBody({ project }: { project: Project }) {
   const story = project.story!
 
-  const renderVisual = (visual: StoryMoment['visual']) => {
+  const renderVisual = (visual: NonNullable<StoryMoment['visual']>) => {
     switch (visual.kind) {
       case 'image':
         return (
@@ -186,20 +226,74 @@ function StoryBody({ project }: { project: Project }) {
         </Reveal>
       </section>
 
+      {/* Outcome first: solution + result KPIs */}
+      {story.summary && (
+        <section className="mb-24">
+          <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12 mb-10">
+            <Reveal y={16}>
+              <p className="text-xs font-medium uppercase tracking-widest text-muted md:pt-2">The solution</p>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="text-ink text-lg leading-relaxed">{story.summary.solution}</p>
+            </Reveal>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {story.results.stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 100} className="h-full">
+                <div className="bg-paper border border-border rounded-2xl p-5 h-full">
+                  <p className="font-display text-3xl md:text-4xl text-ink mb-2">{s.value}</p>
+                  <p className="text-xs text-muted leading-snug">{s.label}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Sprint timeline */}
+      {story.timeline && (
+        <section className="mb-24">
+          <Reveal y={16}>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{story.timeline.label}</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="relative">
+              <div aria-hidden className="hidden md:block absolute left-0 right-0 top-1.5 h-px bg-border" />
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-3 gap-y-6">
+                {story.timeline.items.map(t => (
+                  <div key={t.what} className="relative">
+                    <span
+                      aria-hidden
+                      className={`hidden md:block w-3 h-3 rounded-full mb-3 ${t.scoped ? 'bg-paper border-2 border-amber-400' : 'bg-accent border-2 border-paper'}`}
+                    />
+                    <p className={`text-[11px] font-semibold uppercase tracking-widest mb-1 ${t.scoped ? 'text-amber-600' : 'text-accent'}`}>{t.when}</p>
+                    <p className={`text-xs leading-snug ${t.scoped ? 'text-muted' : 'text-ink'}`}>{t.what}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      )}
+
       {/* Stages */}
       <div className="space-y-24">
         {story.stages.map((stage, si) => (
           <section key={stage.label}>
-            <StoryStageHeader index={si + 1} label={stage.label} kicker={stage.kicker} />
+            <StoryStageHeader label={stage.label} kicker={stage.kicker} />
             <div className="space-y-16">
-              {stage.moments.map(m => (
-                <div key={m.title} className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
-                  <Reveal className="md:sticky md:top-28 self-start">
-                    <h3 className="font-display text-2xl text-ink leading-tight mb-3">{m.title}</h3>
-                    <p className="text-sm text-muted leading-relaxed">{m.body}</p>
+              {stage.moments.map((m, mi) => m.afp && project.assumptions ? (
+                <StoryAfp key={mi} assumptions={project.assumptions} />
+              ) : m.screenScroll ? (
+                <ScreenScroll key={mi} steps={m.screenScroll} finding={m.finding} />
+              ) : (
+                <div key={m.title ?? mi} className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="self-start">
+                    {m.title && <h3 className="font-display text-2xl text-ink leading-tight mb-3">{m.title}</h3>}
+                    {m.body && <p className="text-sm text-muted leading-relaxed">{m.body}</p>}
                   </Reveal>
                   <div className="space-y-4 min-w-0">
-                    {renderVisual(m.visual)}
+                    {m.visual && renderVisual(m.visual)}
                     {m.finding && (
                       <Reveal>
                         <div className="bg-accent-light border border-accent/30 rounded-2xl p-5">
@@ -217,15 +311,7 @@ function StoryBody({ project }: { project: Project }) {
 
         {/* Results */}
         <section>
-          <StoryStageHeader index={story.stages.length + 1} label="Results" kicker={story.results.kicker} />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 mb-12">
-            {story.results.stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 100}>
-                <p className="font-display text-4xl md:text-5xl text-ink mb-2">{s.value}</p>
-                <p className="text-xs text-muted leading-snug">{s.label}</p>
-              </Reveal>
-            ))}
-          </div>
+          <StoryStageHeader label="Results" kicker={story.results.kicker} />
           <Reveal>
             <p className="text-muted leading-relaxed max-w-3xl mb-10">{story.results.body}</p>
           </Reveal>

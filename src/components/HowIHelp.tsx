@@ -59,7 +59,6 @@ export default function HowIHelp() {
                   onClick={() => setActive(i)}
                   aria-expanded={i === active}
                 >
-                  <span className="svc__num">{String(i + 1).padStart(2, '0')}</span>
                   <span className="svc__name">{h.title}</span>
                   <span className="svc__arrow" aria-hidden="true">→</span>
                 </button>
@@ -68,8 +67,6 @@ export default function HowIHelp() {
           </ol>
 
           <div className="svc__panel" key={current.idx}>
-            <span className="svc__ghost" aria-hidden="true">{String(active + 1).padStart(2, '0')}</span>
-            <div className="svc__panel-idx">{current.idx}</div>
             <p className="svc__panel-desc">{current.desc}</p>
             <ul className="svc__panel-list">
               {current.list.map(item => <li key={item}>{item}</li>)}

@@ -48,7 +48,6 @@ export default function ScreenScroll({ steps, finding, dark }: { steps: ScreenSc
 
   const titleColor = dark ? 'text-paper' : 'text-ink'
   const bodyColor = dark ? 'text-white/60' : 'text-muted'
-  const panelClass = dark ? 'border-white/15 bg-white/5' : 'border-border bg-paper'
 
   return (
     <div>
@@ -71,14 +70,14 @@ export default function ScreenScroll({ steps, finding, dark }: { steps: ScreenSc
               ))}
             </div>
 
-            {/* Screen panel, crossfading in place */}
-            <div className={`relative h-full rounded-3xl border overflow-hidden min-w-0 ${panelClass}`}>
+            {/* Screens, crossfading in place, no panel chrome */}
+            <div className="relative h-full overflow-hidden min-w-0">
               {steps.map((s, i) => (
                 <img
                   key={s.src}
                   src={s.src}
                   alt={s.title}
-                  className="absolute inset-0 w-full h-full object-contain p-4 lg:p-6"
+                  className="absolute inset-0 w-full h-full object-contain"
                   style={fade(i)}
                 />
               ))}
@@ -106,8 +105,8 @@ export default function ScreenScroll({ steps, finding, dark }: { steps: ScreenSc
           <Reveal key={s.src}>
             <h3 className={`font-display text-2xl leading-tight mb-3 ${titleColor}`}>{s.title}</h3>
             <p className={`text-sm leading-relaxed mb-5 ${bodyColor}`}>{s.body}</p>
-            <figure className={`rounded-2xl overflow-hidden border ${dark ? 'border-white/15' : 'border-border'}`}>
-              <img src={s.src} alt={s.title} className={`w-full object-contain ${dark ? '' : 'bg-paper'}`} />
+            <figure className="rounded-2xl overflow-hidden">
+              <img src={s.src} alt={s.title} className="w-full object-contain" />
             </figure>
           </Reveal>
         ))}

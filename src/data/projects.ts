@@ -681,6 +681,7 @@ export const projects: Project[] = [
         {
           label: 'Research',
           kicker: 'Sprints 1–2',
+          dark: true,
           moments: [
             {
               title: 'Four competitors, one blind spot',
@@ -689,7 +690,7 @@ export const projects: Project[] = [
               finding: `0 of 4 products connect budget, goals, and investing. Every tool nails its one job and is blind to the other two. That reframed the brief: not a better feature, but the connective layer none of them have.`,
             },
             {
-              title: 'Three people, three failure modes',
+              title: 'Three people, three challenges',
               body: `Composite archetypes built from the audit. Each one represents a distinct way existing products fail, and a distinct design requirement.`,
               visual: { kind: 'personas' },
               finding: `The blocker is fragmentation and paralysis, not knowledge. Aisha earns £95k and still won't move her savings. So the educational onboarding direction was cut: Kaizen is designed for competent adults who want one clear picture, not a course.`,
@@ -699,7 +700,6 @@ export const projects: Project[] = [
         {
           label: 'Design',
           kicker: 'Sprints 3–4',
-          dark: true,
           moments: [
             {
               screenScroll: [
@@ -746,6 +746,7 @@ export const projects: Project[] = [
         {
           label: 'Pivots',
           kicker: 'Sprints 1–4',
+          dark: true,
           moments: [
             { afp: true },
           ],
@@ -753,7 +754,6 @@ export const projects: Project[] = [
       ],
       results: {
         kicker: 'Paused here',
-        dark: true,
         stats: [
           { value: '4', label: 'apps audited, 12 primary flows mapped' },
           { value: '0/4', label: 'competitors connect budget, goals, and investing' },

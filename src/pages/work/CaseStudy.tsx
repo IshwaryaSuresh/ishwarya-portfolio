@@ -20,7 +20,7 @@ function CompetitiveMatrix({ tools, compact }: { tools: CompetitiveTool[]; compa
       {!compact && <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-5">Competitive audit</p>}
 
       {/* Matrix table */}
-      <div className={`overflow-x-auto rounded-2xl border border-border ${compact ? '' : 'mb-5'}`}>
+      <div className={`overflow-x-auto rounded-2xl border border-border bg-white ${compact ? '' : 'mb-5'}`}>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="bg-paper border-b border-border">
@@ -75,9 +75,9 @@ function CompetitiveMatrix({ tools, compact }: { tools: CompetitiveTool[]; compa
 
 function StoryPersonaCard({ persona }: { persona: Persona }) {
   return (
-    <div className="border border-border rounded-2xl overflow-hidden bg-paper">
+    <div className="border border-border rounded-2xl overflow-hidden bg-paper h-full flex flex-col">
       {persona.photo && (
-        <div className="h-36 overflow-hidden">
+        <div className="h-36 overflow-hidden flex-shrink-0">
           <img
             src={persona.photo}
             alt={persona.name}
@@ -86,7 +86,7 @@ function StoryPersonaCard({ persona }: { persona: Persona }) {
           />
         </div>
       )}
-      <div className="p-4">
+      <div className="p-4 flex-1">
         <p className="font-bold text-ink text-sm">{persona.name}, {persona.age}</p>
         <p className="text-[10px] font-medium uppercase tracking-widest text-accent mt-0.5 mb-2">{persona.type}</p>
         <p className="text-xs text-muted leading-relaxed italic">{persona.goal}</p>
@@ -111,12 +111,12 @@ function StoryContainer({ children }: { children: ReactNode }) {
   return <div className="max-w-5xl mx-auto px-6">{children}</div>
 }
 
-function StoryAfp({ assumptions }: { assumptions: NonNullable<Project['assumptions']> }) {
+function StoryAfp({ assumptions, dark }: { assumptions: NonNullable<Project['assumptions']>; dark?: boolean }) {
   return (
     <div>
       {assumptions.intro && (
         <Reveal>
-          <p className="text-muted leading-relaxed mb-8 max-w-3xl">{assumptions.intro}</p>
+          <p className={`leading-relaxed mb-8 max-w-3xl ${dark ? 'text-white/60' : 'text-muted'}`}>{assumptions.intro}</p>
         </Reveal>
       )}
       <div className="space-y-4">
@@ -130,13 +130,13 @@ function StoryAfp({ assumptions }: { assumptions: NonNullable<Project['assumptio
                   </p>
                   <p className="text-sm text-ink leading-relaxed">{it.assumption}</p>
                 </div>
-                <div className="p-5">
+                <div className="p-5 bg-white">
                   <p className="text-[11px] font-semibold uppercase tracking-widest text-amber-600 mb-2 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400" /> Found
                   </p>
                   <p className="text-sm text-muted leading-relaxed">{it.finding}</p>
                 </div>
-                <div className="p-5 bg-accent-light/40">
+                <div className={`p-5 ${dark ? 'bg-accent-light' : 'bg-accent-light/40'}`}>
                   <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2 flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pivoted
                   </p>
@@ -204,7 +204,7 @@ function StoryBody({ project }: { project: Project }) {
         return project.personas ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {project.personas.map((p, i) => (
-              <Reveal key={p.name} delay={120 + i * 90}>
+              <Reveal key={p.name} delay={120 + i * 90} className="h-full">
                 <StoryPersonaCard persona={p} />
               </Reveal>
             ))}
@@ -246,9 +246,9 @@ function StoryBody({ project }: { project: Project }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {story.results.stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 100} className="h-full">
-                <div className="bg-paper border border-border rounded-2xl p-5 h-full">
-                  <p className="font-display text-3xl md:text-4xl text-ink mb-2">{s.value}</p>
-                  <p className="text-xs text-muted leading-snug">{s.label}</p>
+                <div className="bg-ink rounded-2xl p-5 h-full">
+                  <p className="font-display text-3xl md:text-4xl text-paper mb-2">{s.value}</p>
+                  <p className="text-xs text-white/50 leading-snug">{s.label}</p>
                 </div>
               </Reveal>
             ))}
@@ -292,14 +292,14 @@ function StoryBody({ project }: { project: Project }) {
             <StoryStageHeader label={stage.label} kicker={stage.kicker} dark={stage.dark} />
             <div className="space-y-16">
               {stage.moments.map((m, mi) => m.afp && project.assumptions ? (
-                <StoryAfp key={mi} assumptions={project.assumptions} />
+                <StoryAfp key={mi} assumptions={project.assumptions} dark={stage.dark} />
               ) : m.screenScroll ? (
                 <ScreenScroll key={mi} steps={m.screenScroll} finding={m.finding} dark={stage.dark} />
               ) : (
                 <div key={m.title ?? mi} className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
                   <Reveal className="self-start">
-                    {m.title && <h3 className="font-display text-2xl text-ink leading-tight mb-3">{m.title}</h3>}
-                    {m.body && <p className="text-sm text-muted leading-relaxed">{m.body}</p>}
+                    {m.title && <h3 className={`font-display text-2xl leading-tight mb-3 ${stage.dark ? 'text-paper' : 'text-ink'}`}>{m.title}</h3>}
+                    {m.body && <p className={`text-sm leading-relaxed ${stage.dark ? 'text-white/60' : 'text-muted'}`}>{m.body}</p>}
                   </Reveal>
                   <div className="space-y-4 min-w-0">
                     {m.visual && renderVisual(m.visual)}

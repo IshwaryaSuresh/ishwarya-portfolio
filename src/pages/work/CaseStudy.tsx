@@ -55,20 +55,6 @@ function CompetitiveMatrix({ tools, compact }: { tools: CompetitiveTool[]; compa
         </table>
       </div>
 
-      {/* Tool verdict cards */}
-      {!compact && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {tools.map(t => (
-            <div key={t.name} className="bg-paper border border-border rounded-xl p-4">
-              <div className="flex items-baseline gap-2 mb-1.5">
-                <span className="font-bold text-ink text-sm">{t.name}</span>
-                <span className="text-xs text-accent font-medium">{t.verdict}</span>
-              </div>
-              <p className="text-xs text-muted leading-relaxed">{t.gap}</p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }
@@ -1103,13 +1089,28 @@ export default function CaseStudy() {
 
       {/* Body */}
       {!project.story && (
-      <div className={`max-w-3xl mx-auto px-6 space-y-16 ${project.tldr && view === 'tldr' ? 'hidden' : ''}`}>
+      <div className={`max-w-3xl mx-auto px-6 space-y-12 md:space-y-14 ${project.tldr && view === 'tldr' ? 'hidden' : ''}`}>
 
         {/* Context, only if present */}
         {project.context && (
           <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">{project.contextTitle ?? 'Context'}</p>
-            <p className="text-muted leading-relaxed mb-8">{project.context.intro}</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.contextTitle ?? 'Context'}</p>
+
+            {/* Intro text and the scale stats side by side */}
+            <div className="grid md:grid-cols-[1fr_260px] gap-8 md:gap-10 mb-8">
+              <p className="text-muted leading-relaxed">{project.context.intro}</p>
+              {project.context.stats && project.context.stats.length > 0 && (
+                <div className="grid grid-cols-2 gap-3 self-start">
+                  {project.context.stats.map(s => (
+                    <div key={s.label} className="bg-paper border border-border rounded-xl p-3">
+                      <p className="font-display text-2xl text-ink mb-0.5">{s.value}</p>
+                      <p className="text-[11px] text-muted leading-snug">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {project.context.image && (
               <figure className="rounded-2xl overflow-hidden border border-border mb-8">
                 <img
@@ -1122,16 +1123,6 @@ export default function CaseStudy() {
                   <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{project.context.imageCaption}</figcaption>
                 )}
               </figure>
-            )}
-            {project.context.stats && project.context.stats.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {project.context.stats.map(s => (
-                  <div key={s.label} className="bg-paper border border-border rounded-2xl p-4 text-center">
-                    <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
-                    <p className="text-xs text-muted leading-snug">{s.label}</p>
-                  </div>
-                ))}
-              </div>
             )}
             <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">{project.context.challengesTitle ?? 'What PwD are up against'}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
@@ -1182,23 +1173,44 @@ export default function CaseStudy() {
           </div>
         </section>
 
-        {/* Framing the opportunity, only if present */}
+        {/* Framing the opportunity, the pivot the whole project turns on */}
         {project.opportunityFraming && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Framing the opportunity</p>
-            <div className="space-y-4">
-              <div className="border border-border rounded-2xl p-6 bg-paper">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-2">Where I started</p>
-                <p className="text-sm text-muted leading-relaxed mb-3">{project.opportunityFraming.initialAssumption}</p>
-                <p className="text-ink font-medium leading-relaxed">"{project.opportunityFraming.initialHmw}"</p>
+
+            {/* The evidence that forced the pivot */}
+            {project.deskResearch && project.deskResearch.findings.length > 0 && (
+              <div className="border border-border rounded-2xl overflow-hidden mb-8">
+                <table className="w-full text-sm border-collapse">
+                  <tbody>
+                    {project.deskResearch.findings.map((f, i) => (
+                      <tr key={i} className="border-b border-border last:border-0 even:bg-paper/50">
+                        <td className="px-4 py-3.5 align-top w-10">
+                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-paper border border-border text-xs font-semibold text-ink">{i + 1}</span>
+                        </td>
+                        <td className="pr-5 py-3.5 text-muted leading-relaxed">{f}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <div className="flex items-start gap-3 px-2">
-                <span className="text-accent text-xl leading-none mt-0.5">↓</span>
-                <p className="text-sm text-muted leading-relaxed">{project.opportunityFraming.shift}</p>
-              </div>
-              <div className="border border-accent/40 rounded-2xl p-6 bg-accent-light">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2">Where the research took me</p>
-                <p className="text-ink text-lg font-medium leading-relaxed">"{project.opportunityFraming.reframedHmw}"</p>
+            )}
+
+            {/* The pivot itself */}
+            <div className="border border-border rounded-2xl overflow-hidden">
+              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
+                <div className="p-6 md:p-8 bg-paper">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-3">Where I started</p>
+                  <p className="font-display text-2xl text-ink/50 line-through decoration-rose-400 decoration-2 leading-snug mb-4">Reminiscence</p>
+                  <p className="text-sm text-muted leading-relaxed mb-4">{project.opportunityFraming.initialAssumption}</p>
+                  <p className="text-sm text-ink font-medium leading-relaxed">"{project.opportunityFraming.initialHmw}"</p>
+                </div>
+                <div className="p-6 md:p-8 bg-accent-light">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-3">Where the research took me</p>
+                  <p className="font-display text-2xl text-ink leading-snug mb-4">Present &amp; future</p>
+                  <p className="text-sm text-muted leading-relaxed mb-4">{project.opportunityFraming.shift}</p>
+                  <p className="text-ink font-medium leading-relaxed">"{project.opportunityFraming.reframedHmw}"</p>
+                </div>
               </div>
             </div>
           </section>
@@ -1253,26 +1265,10 @@ export default function CaseStudy() {
               </div>
             )}
 
-            {/* Competitive audit matrix (if present) or plain findings list */}
-            {project.deskResearch.competitiveAudit
-              ? <CompetitiveMatrix tools={project.deskResearch.competitiveAudit.tools} />
-              : (
-                <ul className="space-y-3 mb-6">
-                  {project.deskResearch.findings.map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-muted">
-                      <span className="w-5 h-5 rounded-full bg-paper border border-border flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-semibold text-ink">{i + 1}</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              )
-            }
-
-            {/* Gap callout */}
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-8">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">Research gap identified</p>
-              <p className="text-amber-900 text-sm leading-relaxed">{project.deskResearch.gap}</p>
-            </div>
+            {/* Competitive audit matrix, only when a dedicated one is present */}
+            {project.deskResearch.competitiveAudit && (
+              <CompetitiveMatrix tools={project.deskResearch.competitiveAudit.tools} />
+            )}
 
             {/* Key reading */}
             {project.deskResearch.books && (
@@ -1338,6 +1334,56 @@ export default function CaseStudy() {
           </InkPlate>
         )}
 
+        {/* Roles & personas, only if present */}
+        {project.personas && (
+          <section>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.personaRoles ? 'Roles & personas' : 'User personas'}</p>
+            {(project.personasIntro || project.personaRoles) && (
+              <p className="text-muted leading-relaxed mb-8">{project.personasIntro ?? 'Three roles shaped the design, each grounded in the co-design and ethnographic work.'}</p>
+            )}
+            {project.personaRoles ? (
+              (() => {
+                const roleOrder: string[] = []
+                const byRole: Record<string, Persona[]> = {}
+                project.personas.forEach(p => {
+                  const role = p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type
+                  if (!byRole[role]) { byRole[role] = []; roleOrder.push(role) }
+                  byRole[role].push(p)
+                })
+                return (
+                  <div className="space-y-10">
+                    {roleOrder.map(role => {
+                      const meta = project.personaRoles?.find(r => r.role === role)
+                      return (
+                        <div key={role}>
+                          <div className="mb-4 pb-3 border-b border-border">
+                            <div className="flex items-baseline gap-3 flex-wrap">
+                              <h3 className="font-bold text-ink text-lg">{role}</h3>
+                              {meta && <span className="text-xs font-medium uppercase tracking-widest text-accent">{meta.who}</span>}
+                            </div>
+                            {meta && <p className="text-sm text-muted mt-1 leading-relaxed">{meta.definition}</p>}
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {byRole[role].map(persona => (
+                              <PersonaCard key={persona.name} persona={persona} />
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              })()
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                {project.personas.map(persona => (
+                  <PersonaCard key={persona.name} persona={persona} />
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
         {/* Storyboards, only if present */}
         {project.storyboards && (
           <section>
@@ -1376,48 +1422,23 @@ export default function CaseStudy() {
 
         {/* 8-fold zine - output artifact, only if present */}
         {project.zineInspiration && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Physical output - the 8-fold zine</p>
-            <p className="text-muted leading-relaxed mb-8">
+          <InkPlate>
+            <p className="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Physical output - the 8-fold zine</p>
+            <p className="text-white/60 leading-relaxed mb-10">
               Born from that focus group conversation. The app runs a TimeSlips-format session - an image prompt on
               screen, the resident improvising a story around it - and records the scene: the audio cues alongside the
               image being shown. It then composes the recording into a story laid out in 8-fold zine format, ready to print.
             </p>
 
-            {project.zineInspiration.flow && (
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
-                {project.zineInspiration.flow.map((f, i) => (
-                  <div key={f.step} className="border border-border rounded-xl p-4 bg-paper">
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1.5">{i + 1} · {f.step}</p>
-                    <p className="text-xs text-muted leading-relaxed">{f.detail}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <div className="grid grid-cols-3 gap-3 mb-8">
-              {project.zineInspiration.references.map((ref, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-40 overflow-hidden bg-paper">
-                    <img src={ref.src} alt={ref.caption} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{ref.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-4">Session output templates</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {project.zineInspiration.mockups.map((m, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-36 overflow-hidden bg-paper">
-                    <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-muted leading-snug">{m.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
+            {/* The zine, pinned so each output template gets its own beat */}
+            <ScreenScroll
+              dark
+              steps={[
+                ...project.zineInspiration.references.map(r => ({ src: r.src, title: 'Reference', body: r.caption })),
+                ...project.zineInspiration.mockups.map(m => ({ src: m.src, title: 'Session output', body: m.caption })),
+              ]}
+            />
+          </InkPlate>
         )}
 
         {/* Key insight */}
@@ -1485,56 +1506,6 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Roles & personas, only if present */}
-        {project.personas && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.personaRoles ? 'Roles & personas' : 'User personas'}</p>
-            {(project.personasIntro || project.personaRoles) && (
-              <p className="text-muted leading-relaxed mb-8">{project.personasIntro ?? 'Three roles shaped the design, each grounded in the co-design and ethnographic work.'}</p>
-            )}
-            {project.personaRoles ? (
-              (() => {
-                const roleOrder: string[] = []
-                const byRole: Record<string, Persona[]> = {}
-                project.personas.forEach(p => {
-                  const role = p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type
-                  if (!byRole[role]) { byRole[role] = []; roleOrder.push(role) }
-                  byRole[role].push(p)
-                })
-                return (
-                  <div className="space-y-10">
-                    {roleOrder.map(role => {
-                      const meta = project.personaRoles?.find(r => r.role === role)
-                      return (
-                        <div key={role}>
-                          <div className="mb-4 pb-3 border-b border-border">
-                            <div className="flex items-baseline gap-3 flex-wrap">
-                              <h3 className="font-bold text-ink text-lg">{role}</h3>
-                              {meta && <span className="text-xs font-medium uppercase tracking-widest text-accent">{meta.who}</span>}
-                            </div>
-                            {meta && <p className="text-sm text-muted mt-1 leading-relaxed">{meta.definition}</p>}
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {byRole[role].map(persona => (
-                              <PersonaCard key={persona.name} persona={persona} />
-                            ))}
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                )
-              })()
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                {project.personas.map(persona => (
-                  <PersonaCard key={persona.name} persona={persona} />
-                ))}
-              </div>
-            )}
-          </section>
-        )}
-
         {/* Process, late slot (default) */}
         {!project.processEarly && processSection}
 
@@ -1587,12 +1558,14 @@ export default function CaseStudy() {
 
         {/* Research ops, only if present */}
         {project.researchOps && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Research ops</p>
-            <p className="text-muted leading-relaxed mb-6">{project.researchOps.intro}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <section className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+            <div className="self-start">
+              <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Research ops</p>
+              <p className="text-sm text-muted leading-relaxed">{project.researchOps.intro}</p>
+            </div>
+            <div className="space-y-3 min-w-0">
               {project.researchOps.items.map(item => (
-                <div key={item.label} className="border border-border rounded-2xl p-5">
+                <div key={item.label} className="border border-border rounded-xl p-5 bg-paper">
                   <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-2">{item.label}</p>
                   <p className="text-sm text-muted leading-relaxed">{item.detail}</p>
                 </div>
@@ -1601,58 +1574,7 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Prototype testing, only if present */}
-        {project.testing && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Prototype testing</p>
-            <div className="space-y-6">
-              <div className="border border-border rounded-2xl p-6">
-                <h3 className="font-semibold text-ink mb-2">What we tested</h3>
-                <p className="text-muted text-sm mb-4">{project.testing.description}</p>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xs font-medium uppercase tracking-widest text-muted">Participants</span>
-                  <span className="text-xs bg-paper border border-border rounded-full px-3 py-1 text-ink">{project.testing.participants}</span>
-                </div>
-                <p className="text-xs font-semibold text-ink mb-2">Key questions</p>
-                <ul className="space-y-1.5">
-                  {project.testing.questions.map(q => (
-                    <li key={q} className="text-sm text-muted flex items-start gap-2">
-                      <span className="text-muted mt-0.5 flex-shrink-0">→</span>{q}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className={project.assumptions ? '' : 'grid grid-cols-1 md:grid-cols-2 gap-4'}>
-                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
-                  <p className="text-xs font-semibold text-emerald-800 uppercase tracking-widest mb-3">What worked well</p>
-                  <ul className="space-y-2">
-                    {project.testing.worked.map(w => (
-                      <li key={w} className="text-sm text-emerald-900 flex items-start gap-2">
-                        <span className="mt-0.5 flex-shrink-0">✓</span>{w}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {!project.assumptions && (
-                  <div className="bg-rose-50 border border-rose-200 rounded-2xl p-6">
-                    <p className="text-xs font-semibold text-rose-800 uppercase tracking-widest mb-3">What needed to change</p>
-                    <ul className="space-y-2">
-                      {project.testing.changed.map(c => (
-                        <li key={c} className="text-sm text-rose-900 flex items-start gap-2">
-                          <span className="mt-0.5 flex-shrink-0">→</span>{c}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-              {project.assumptions && (
-                <p className="text-sm text-muted">The changes testing surfaced are unpacked in the <span className="text-ink font-medium">assumption → finding → pivot</span> section above.</p>
-              )}
-              <p className="text-muted text-sm italic">{project.testing.outcome}</p>
-            </div>
-          </section>
-        )}
+        {/* Prototype testing, parked for now */}
 
         {/* Solution */}
         <section>
@@ -1662,18 +1584,21 @@ export default function CaseStudy() {
 
         {/* User journey, only if present */}
         {project.userJourney && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">User journey</p>
-            {project.userJourney.intro && <p className="text-muted leading-relaxed mb-8">{project.userJourney.intro}</p>}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <section className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+            <div className="self-start">
+              <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">User journey</p>
+              {project.userJourney.intro && <p className="text-sm text-muted leading-relaxed">{project.userJourney.intro}</p>}
+            </div>
+            <div className="min-w-0">
               {project.userJourney.stages.map((s, i) => (
-                <div key={s.stage} className="border border-border rounded-2xl p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-6 h-6 rounded-full bg-ink text-paper text-xs font-bold flex items-center justify-center flex-shrink-0">{i + 1}</span>
-                    <h3 className="font-bold text-ink text-sm">{s.stage}</h3>
-                  </div>
-                  <p className="text-sm text-muted leading-relaxed mb-3">{s.action}</p>
-                  <div className="space-y-1.5 pt-3 border-t border-border">
+                <div key={s.stage} className="relative pl-10 pb-6 last:pb-0">
+                  {i < project.userJourney!.stages.length - 1 && (
+                    <span aria-hidden className="absolute left-3 top-7 bottom-0 w-px bg-border" />
+                  )}
+                  <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-ink text-paper text-xs font-bold flex items-center justify-center">{i + 1}</span>
+                  <h3 className="font-semibold text-ink text-sm mb-1.5">{s.stage}</h3>
+                  <p className="text-sm text-muted leading-relaxed mb-2">{s.action}</p>
+                  <div className="flex flex-wrap gap-x-6 gap-y-1">
                     <p className="text-xs text-muted"><span className="font-semibold text-ink">Feeling:</span> {s.feeling}</p>
                     <p className="text-xs text-muted"><span className="font-semibold text-ink">Design response:</span> {s.opportunity}</p>
                   </div>

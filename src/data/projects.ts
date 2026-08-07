@@ -228,8 +228,9 @@ export type Project = {
     summary?: { solution: string }
     // Compact sprint timeline (Me & You style dots).
     timeline?: { label: string; items: { when: string; what: string; scoped?: boolean }[] }
-    stages: { label: string; kicker: string; moments: StoryMoment[] }[]
-    results: { kicker: string; stats: { value: string; label: string }[]; body: string; quote: string }
+    // dark renders the stage as a full-bleed ink plate, home-page style.
+    stages: { label: string; kicker: string; dark?: boolean; moments: StoryMoment[] }[]
+    results: { kicker: string; dark?: boolean; stats: { value: string; label: string }[]; body: string; quote: string }
   }
 }
 
@@ -698,6 +699,7 @@ export const projects: Project[] = [
         {
           label: 'Design',
           kicker: 'Sprints 3–4',
+          dark: true,
           moments: [
             {
               screenScroll: [
@@ -751,6 +753,7 @@ export const projects: Project[] = [
       ],
       results: {
         kicker: 'Paused here',
+        dark: true,
         stats: [
           { value: '4', label: 'apps audited, 12 primary flows mapped' },
           { value: '0/4', label: 'competitors connect budget, goals, and investing' },

@@ -7,8 +7,9 @@ const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 // Pinned scrollytelling, full-viewport takeover: the stage sticks to the screen
 // while scroll drives which step is shown. Narration and screen crossfade in
 // place, so earlier steps are never visible alongside the current one. On
-// mobile the stage is replaced by a simple stacked list.
-export default function ScreenScroll({ steps, finding }: { steps: ScreenScrollStep[]; finding?: string }) {
+// mobile the stage is replaced by a simple stacked list. `dark` restyles the
+// block for a full-bleed ink plate.
+export default function ScreenScroll({ steps, finding, dark }: { steps: ScreenScrollStep[]; finding?: string; dark?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const [reduceMotion, setReduceMotion] = useState(false)
@@ -45,6 +46,10 @@ export default function ScreenScroll({ steps, finding }: { steps: ScreenScrollSt
     pointerEvents: active === i ? 'auto' : 'none',
   })
 
+  const titleColor = dark ? 'text-paper' : 'text-ink'
+  const bodyColor = dark ? 'text-white/60' : 'text-muted'
+  const panelClass = dark ? 'border-white/15 bg-white/5' : 'border-border bg-paper'
+
   return (
     <div>
       {/* Desktop: scroll track with a sticky full-viewport stage */}
@@ -60,14 +65,14 @@ export default function ScreenScroll({ steps, finding }: { steps: ScreenScrollSt
             <div className="relative h-full">
               {steps.map((s, i) => (
                 <div key={s.src} className="absolute inset-0 flex flex-col justify-center" style={fade(i)}>
-                  <h3 className="font-display text-2xl lg:text-3xl text-ink leading-tight mb-4">{s.title}</h3>
-                  <p className="text-[15px] text-muted leading-relaxed">{s.body}</p>
+                  <h3 className={`font-display text-2xl lg:text-3xl leading-tight mb-4 ${titleColor}`}>{s.title}</h3>
+                  <p className={`text-[15px] leading-relaxed ${bodyColor}`}>{s.body}</p>
                 </div>
               ))}
             </div>
 
             {/* Screen panel, crossfading in place */}
-            <div className="relative h-full rounded-3xl border border-border bg-paper overflow-hidden min-w-0">
+            <div className={`relative h-full rounded-3xl border overflow-hidden min-w-0 ${panelClass}`}>
               {steps.map((s, i) => (
                 <img
                   key={s.src}
@@ -83,7 +88,9 @@ export default function ScreenScroll({ steps, finding }: { steps: ScreenScrollSt
                   <span
                     key={i}
                     className={`w-1.5 rounded-full transition-all duration-300 ${
-                      active === i ? 'h-5 bg-ink' : 'h-1.5 bg-ink/25'
+                      active === i
+                        ? `h-5 ${dark ? 'bg-paper' : 'bg-ink'}`
+                        : `h-1.5 ${dark ? 'bg-white/25' : 'bg-ink/25'}`
                     }`}
                   />
                 ))}
@@ -97,10 +104,10 @@ export default function ScreenScroll({ steps, finding }: { steps: ScreenScrollSt
       <div className="md:hidden space-y-12">
         {steps.map(s => (
           <Reveal key={s.src}>
-            <h3 className="font-display text-2xl text-ink leading-tight mb-3">{s.title}</h3>
-            <p className="text-sm text-muted leading-relaxed mb-5">{s.body}</p>
-            <figure className="rounded-2xl overflow-hidden border border-border">
-              <img src={s.src} alt={s.title} className="w-full object-contain bg-paper" />
+            <h3 className={`font-display text-2xl leading-tight mb-3 ${titleColor}`}>{s.title}</h3>
+            <p className={`text-sm leading-relaxed mb-5 ${bodyColor}`}>{s.body}</p>
+            <figure className={`rounded-2xl overflow-hidden border ${dark ? 'border-white/15' : 'border-border'}`}>
+              <img src={s.src} alt={s.title} className={`w-full object-contain ${dark ? '' : 'bg-paper'}`} />
             </figure>
           </Reveal>
         ))}

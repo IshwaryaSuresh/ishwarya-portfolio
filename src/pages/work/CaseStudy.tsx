@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { getProject, type Persona, type Project, type StoryMoment } from '../../data/projects'
 import Reveal from '../../components/Reveal'
@@ -95,15 +95,20 @@ function StoryPersonaCard({ persona }: { persona: Persona }) {
   )
 }
 
-function StoryStageHeader({ label, kicker }: { label: string; kicker: string }) {
+function StoryStageHeader({ label, kicker, dark }: { label: string; kicker: string; dark?: boolean }) {
   return (
     <Reveal y={20}>
-      <div className="flex items-baseline gap-4 pb-4 mb-12 border-b border-border">
-        <h2 className="font-display text-3xl md:text-4xl text-ink tracking-tight">{label}</h2>
-        <span className="ml-auto font-mono text-[11px] uppercase tracking-widest text-muted">{kicker}</span>
+      <div className={`flex items-baseline gap-4 pb-4 mb-12 border-b ${dark ? 'border-white/15' : 'border-border'}`}>
+        <h2 className={`font-display text-3xl md:text-4xl tracking-tight ${dark ? 'text-paper' : 'text-ink'}`}>{label}</h2>
+        <span className={`ml-auto font-mono text-[11px] uppercase tracking-widest ${dark ? 'text-white/50' : 'text-muted'}`}>{kicker}</span>
       </div>
     </Reveal>
   )
+}
+
+// Inner container for full-width story sections, matching the page grid.
+function StoryContainer({ children }: { children: ReactNode }) {
+  return <div className="max-w-5xl mx-auto px-6">{children}</div>
 }
 
 function StoryAfp({ assumptions }: { assumptions: NonNullable<Project['assumptions']> }) {
@@ -209,7 +214,8 @@ function StoryBody({ project }: { project: Project }) {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-6">
+    <div>
+      <StoryContainer>
 
       {/* The challenge */}
       <section className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12 mb-24">
@@ -276,16 +282,19 @@ function StoryBody({ project }: { project: Project }) {
         </section>
       )}
 
+      </StoryContainer>
+
       {/* Stages */}
-      <div className="space-y-24">
-        {story.stages.map((stage, si) => (
-          <section key={stage.label}>
-            <StoryStageHeader label={stage.label} kicker={stage.kicker} />
+      <div>
+        {story.stages.map(stage => (
+          <section key={stage.label} className={stage.dark ? 'bg-ink py-20 md:py-24 mb-24' : 'mb-24'}>
+            <StoryContainer>
+            <StoryStageHeader label={stage.label} kicker={stage.kicker} dark={stage.dark} />
             <div className="space-y-16">
               {stage.moments.map((m, mi) => m.afp && project.assumptions ? (
                 <StoryAfp key={mi} assumptions={project.assumptions} />
               ) : m.screenScroll ? (
-                <ScreenScroll key={mi} steps={m.screenScroll} finding={m.finding} />
+                <ScreenScroll key={mi} steps={m.screenScroll} finding={m.finding} dark={stage.dark} />
               ) : (
                 <div key={m.title ?? mi} className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
                   <Reveal className="self-start">
@@ -306,25 +315,29 @@ function StoryBody({ project }: { project: Project }) {
                 </div>
               ))}
             </div>
+            </StoryContainer>
           </section>
         ))}
 
         {/* Results */}
-        <section>
-          <StoryStageHeader label="Results" kicker={story.results.kicker} />
-          <Reveal>
-            <p className="text-muted leading-relaxed max-w-3xl mb-10">{story.results.body}</p>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="bg-ink rounded-2xl p-8 md:p-10">
-              <p className="text-paper text-lg md:text-xl font-medium leading-relaxed">"{story.results.quote}"</p>
-            </div>
-          </Reveal>
+        <section className={story.results.dark ? 'bg-ink py-20 md:py-24' : ''}>
+          <StoryContainer>
+            <StoryStageHeader label="Results" kicker={story.results.kicker} dark={story.results.dark} />
+            <Reveal>
+              <p className={`leading-relaxed max-w-3xl mb-10 ${story.results.dark ? 'text-white/70' : 'text-muted'}`}>{story.results.body}</p>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className={`rounded-2xl p-8 md:p-10 ${story.results.dark ? 'border border-white/15 bg-white/5' : 'bg-ink'}`}>
+                <p className="text-paper text-lg md:text-xl font-medium leading-relaxed">"{story.results.quote}"</p>
+              </div>
+            </Reveal>
+          </StoryContainer>
         </section>
       </div>
 
+      <StoryContainer>
       {/* Tags */}
-      <section className="flex flex-wrap gap-2 pt-4 mt-24 border-t border-border">
+      <section className="flex flex-wrap gap-2 pt-4 border-t border-border">
         {project.tags.map(tag => (
           <span key={tag} className="text-xs bg-white border border-border rounded-md px-3 py-1.5 text-muted">
             {tag}
@@ -344,6 +357,7 @@ function StoryBody({ project }: { project: Project }) {
           Work together →
         </a>
       </div>
+      </StoryContainer>
     </div>
   )
 }

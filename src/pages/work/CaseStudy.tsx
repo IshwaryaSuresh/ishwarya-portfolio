@@ -671,7 +671,7 @@ export default function CaseStudy() {
   )
 
   return (
-    <article className="case-study pt-28 pb-20">
+    <article className="case-study pt-28 pb-20 overflow-x-clip">
       {/* Header */}
       <div className="max-w-6xl mx-auto px-6 mb-12">
         <a href="/#work" className="font-mono text-xs uppercase tracking-widest text-muted hover:text-accent transition-colors inline-flex items-center gap-2 mb-10">
@@ -841,235 +841,260 @@ export default function CaseStudy() {
         </div>
       )}
 
-      {/* TL;DR view, visual summary */}
+      {/* TL;DR view, Kaizen story language */}
       {project.tldr && view === 'tldr' && (
-        <div className="max-w-4xl mx-auto px-6 space-y-14">
+        <div>
+          <StoryContainer>
 
-          {/* Headline + summary */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-medium text-ink leading-snug mb-5">{project.tldr.headline}</h2>
-            <p className="text-lg text-muted leading-relaxed">{project.tldr.summary}</p>
-          </section>
-
-          {/* My role */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">My role</p>
-            <p className="text-ink">{project.tldr.role}</p>
-          </section>
-
-          {/* Impact */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">Impact</p>
-            <ul className="space-y-3">
-              {project.tldr.impact.map(im => (
-                <li key={im.text} className="flex items-start gap-3 text-ink leading-relaxed">
-                  <span className="w-5 h-5 rounded-full bg-accent-light border border-accent/30 flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-accent text-xs">✓</span>
-                  </span>
-                  {im.text}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* The scale, reuses detailed context stats */}
-          {project.context?.stats && (
-            <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {project.context.stats.map(s => (
-                <div key={s.label} className="bg-paper border border-border rounded-2xl p-5 text-center">
-                  <p className="text-2xl font-bold text-ink mb-1">{s.value}</p>
-                  <p className="text-xs text-muted leading-snug">{s.label}</p>
+            {/* The challenge */}
+            <section className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12 mb-24">
+              <Reveal y={16}>
+                <p className="text-xs font-medium uppercase tracking-widest text-muted md:pt-1.5">The challenge</p>
+              </Reveal>
+              <Reveal delay={100}>
+                <div>
+                  <h2 className="font-display text-2xl md:text-3xl text-ink leading-snug mb-5">{project.tldr.headline}</h2>
+                  <p className="text-muted leading-relaxed">{project.tldr.summary}</p>
+                  <p className="text-accent font-medium italic leading-relaxed mt-5">{project.tldr.pivot.toHmw}</p>
                 </div>
-              ))}
+              </Reveal>
+            </section>
+
+            {/* Outcome first: solution + KPI cards */}
+            <section className="mb-24">
+              <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12 mb-10">
+                <Reveal y={16}>
+                  <p className="text-xs font-medium uppercase tracking-widest text-muted md:pt-2">The solution</p>
+                </Reveal>
+                <Reveal delay={100}>
+                  <p className="text-ink text-lg leading-relaxed">{project.solution}</p>
+                </Reveal>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {project.metrics.map((m, i) => (
+                  <Reveal key={m.label} delay={i * 100} className="h-full">
+                    <div className="bg-ink rounded-2xl p-5 h-full">
+                      <p className="font-display text-3xl md:text-4xl text-paper mb-2">{m.value}</p>
+                      <p className="text-xs text-white/50 leading-snug">{m.label}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+
+            {/* Timeline */}
+            <section className="mb-24">
+              <Reveal y={16}>
+                <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">3 months, Discovery to Alpha</p>
+              </Reveal>
+              <Reveal delay={80}>
+                <div className="relative">
+                  <div aria-hidden className="hidden md:block absolute left-0 right-0 top-1.5 h-px bg-border" />
+                  <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-x-3 gap-y-6">
+                    {project.tldr.timeline.map(t => (
+                      <div key={t.what} className="relative">
+                        <span aria-hidden className="hidden md:block w-3 h-3 rounded-full mb-3 bg-accent border-2 border-paper" />
+                        <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{t.when}</p>
+                        <p className="text-xs text-ink leading-snug">{t.what}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            </section>
+          </StoryContainer>
+
+          {/* Stage: Research, ink plate */}
+          <section className="bg-ink py-20 md:py-24 mb-24">
+            <StoryContainer>
+              <StoryStageHeader label="Research" kicker="Feb – Mar 2023" dark />
+              <div className="space-y-16">
+
+                {/* Ethnography */}
+                <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="self-start">
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">Watching, before designing</h3>
+                    <p className="text-sm leading-relaxed text-white/60">{project.tldr.ethnography.line}</p>
+                  </Reveal>
+                  <div className="grid grid-cols-2 gap-3 min-w-0">
+                    {project.tldr.ethnography.items.map((e, i) => (
+                      <Reveal key={e.label} delay={120 + i * 90}>
+                        <figure className="rounded-xl overflow-hidden border border-white/10">
+                          <div className="h-40 overflow-hidden bg-white/5">
+                            <img src={e.src} alt={e.label} className="w-full h-full object-cover" />
+                          </div>
+                          <figcaption className="px-3 py-2 bg-white/5 text-[11px] text-white/70 border-t border-white/10">{e.label}</figcaption>
+                        </figure>
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Discovery gap */}
+                <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="self-start">
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">Everything looked backwards</h3>
+                    <p className="text-sm leading-relaxed text-white/60">{project.tldr.discovery.line}</p>
+                  </Reveal>
+                  <Reveal delay={120}>
+                    <div className="bg-white/5 border border-white/15 rounded-2xl p-6">
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-accent-soft mb-2">The gap</p>
+                      <p className="text-paper leading-relaxed text-[15px]">{project.tldr.discovery.gap}</p>
+                    </div>
+                  </Reveal>
+                </div>
+
+                {/* The reframe */}
+                <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="self-start">
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">The reframe</h3>
+                    <p className="text-sm leading-relaxed text-white/60">{project.tldr.pivot.because}</p>
+                  </Reveal>
+                  <Reveal delay={120}>
+                    <div className="grid sm:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
+                      <div className="border border-white/15 rounded-2xl p-5 bg-white/5">
+                        <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-300 mb-3">Category default</p>
+                        <p className="text-lg font-medium text-white/70 line-through decoration-rose-400 decoration-2 mb-3">{project.tldr.pivot.from}</p>
+                        <p className="text-xs text-white/50 leading-relaxed">"{project.tldr.pivot.fromHmw}"</p>
+                      </div>
+                      <div className="text-accent-soft text-2xl flex items-center justify-center" aria-hidden>→</div>
+                      <div className="border border-accent/40 rounded-2xl p-5 bg-accent/15">
+                        <p className="text-[11px] font-semibold uppercase tracking-widest text-accent-soft mb-3">Where research led</p>
+                        <p className="text-lg font-medium text-paper mb-3">{project.tldr.pivot.to}</p>
+                        <p className="text-xs text-white/70 leading-relaxed">"{project.tldr.pivot.toHmw}"</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                </div>
+              </div>
+            </StoryContainer>
+          </section>
+
+          {/* Stage: Design */}
+          <section className="mb-24">
+            <StoryContainer>
+              <StoryStageHeader label="Design" kicker="Mar – Apr 2023" />
+              <div className="space-y-16">
+
+                {/* Storyboards to zine */}
+                <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="self-start">
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-ink">How the zine arrived</h3>
+                    <p className="text-sm leading-relaxed text-muted">{project.tldr.origin.line}</p>
+                  </Reveal>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-0">
+                    {project.tldr.origin.items.map((o, i) => (
+                      <Reveal key={o.label} delay={120 + i * 90}>
+                        <figure className="rounded-xl overflow-hidden border border-border h-full">
+                          <div className="h-40 overflow-hidden bg-paper">
+                            <img src={o.src} alt={o.label} className="w-full h-full object-cover" />
+                          </div>
+                          <figcaption className="px-3 py-2 bg-paper text-[11px] text-ink font-medium border-t border-border">
+                            <span className="text-muted mr-1">{i + 1}</span>{o.label}
+                          </figcaption>
+                        </figure>
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Who it is for */}
+                {project.personas && project.personaRoles && (
+                  <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                    <Reveal className="self-start">
+                      <h3 className="font-display text-2xl leading-tight mb-3 text-ink">Three roles</h3>
+                      <p className="text-sm leading-relaxed text-muted">{project.tldr.people}</p>
+                    </Reveal>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-0">
+                      {project.personaRoles.map((r, i) => {
+                        const names = project.personas!
+                          .filter(p => (p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type) === r.role)
+                          .map(p => p.name)
+                        return (
+                          <Reveal key={r.role} delay={120 + i * 90} className="h-full">
+                            <div className="border border-border rounded-xl p-4 bg-paper h-full">
+                              <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{r.who}</p>
+                              <p className="text-ink font-medium leading-snug">{r.role}</p>
+                              {names.length > 0 && <p className="text-xs text-muted mt-1">{names.join(', ')}</p>}
+                            </div>
+                          </Reveal>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* What testing changed */}
+                <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                  <Reveal className="self-start">
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-ink">What testing changed</h3>
+                    <p className="text-sm leading-relaxed text-muted">{project.tldr.testing.line}</p>
+                  </Reveal>
+                  <div className="space-y-2 min-w-0">
+                    {project.tldr.testing.changes.map((c, i) => (
+                      <Reveal key={c} delay={120 + i * 80}>
+                        <div className="flex items-start gap-3 border border-border rounded-xl px-4 py-3 bg-paper">
+                          <span className="text-accent mt-0.5 flex-shrink-0" aria-hidden>→</span>
+                          <p className="text-sm text-ink leading-relaxed">{c}</p>
+                        </div>
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </StoryContainer>
+          </section>
+
+          {/* Stage: The product, all screens pinned on an ink plate */}
+          {project.screens && (
+            <section className="bg-ink py-20 md:py-24 mb-24">
+              <StoryContainer>
+                <StoryStageHeader label="The product" kicker={`${project.screens.items.length} screens`} dark />
+                <ScreenScroll
+                  dark
+                  steps={project.screens.items.map(s => ({ src: s.src, title: s.title, body: s.description }))}
+                />
+              </StoryContainer>
             </section>
           )}
 
-          {/* Timeline */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.tldr.timelineLabel ?? '3 months, Discovery to Alpha'}</p>
-            <div className="relative">
-              <div aria-hidden className="hidden md:block absolute left-0 right-0 top-1.5 h-px bg-border" />
-              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-x-3 gap-y-6">
-                {project.tldr.timeline.map(t => (
-                  <div key={t.what} className="relative">
-                    <span aria-hidden className="hidden md:block w-3 h-3 rounded-full bg-accent border-2 border-paper mb-3" />
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{t.when}</p>
-                    <p className="text-xs text-ink leading-snug">{t.what}</p>
-                  </div>
+          {/* Results */}
+          <section className="bg-ink py-20 md:py-24">
+            <StoryContainer>
+              <StoryStageHeader label="Results" kicker="Discovery to Alpha" dark />
+              <Reveal>
+                <p className="leading-relaxed max-w-3xl mb-10 text-white/70">{project.tldr.outcome}</p>
+              </Reveal>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+                {project.tldr.impact.map((im, i) => (
+                  <Reveal key={im.text} delay={i * 80}>
+                    <div className="flex items-start gap-3 border border-white/15 rounded-xl px-4 py-3 bg-white/5 h-full">
+                      <span className="w-5 h-5 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-accent-soft text-xs">✓</span>
+                      </span>
+                      <p className="text-sm text-paper leading-relaxed">{im.text}</p>
+                    </div>
+                  </Reveal>
                 ))}
               </div>
-            </div>
-          </section>
-
-          {/* Discovery */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Discovery</p>
-            <p className="text-muted leading-relaxed mb-6">{project.tldr.discovery.line}</p>
-            {project.deskResearch?.books && (
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {project.deskResearch.books.map(b => (
-                  <div key={b.title} className="flex gap-3 items-center border border-border rounded-xl p-3 bg-paper">
-                    <img src={b.src} alt={b.title} className="w-10 h-14 object-cover rounded shadow-sm flex-shrink-0" />
-                    <div>
-                      <p className="text-[11px] font-semibold text-ink leading-snug">{b.title}</p>
-                      <p className="text-[10px] text-muted mt-0.5">{b.author}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">The gap</p>
-              <p className="text-amber-900 text-sm leading-relaxed">{project.tldr.discovery.gap}</p>
-            </div>
-          </section>
-
-          {/* Ethnography, the heart of the research */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">{project.tldr.ethnography.label ?? 'Ethnographic study'}</p>
-            <p className="text-muted leading-relaxed mb-6 max-w-2xl">{project.tldr.ethnography.line}</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {project.tldr.ethnography.items.map(e => (
-                <figure key={e.label} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-40 overflow-hidden bg-paper">
-                    <img src={e.src} alt={e.label} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2 bg-paper text-[11px] text-ink font-medium border-t border-border">{e.label}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-
-          {/* The reframe */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">The reframe</p>
-            <div className="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
-              <div className="border border-border rounded-2xl p-6 bg-paper">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-3">Category default</p>
-                <p className="text-xl font-bold text-ink line-through decoration-rose-400 decoration-2 mb-3">{project.tldr.pivot.from}</p>
-                <p className="text-sm text-muted leading-relaxed">"{project.tldr.pivot.fromHmw}"</p>
-              </div>
-              <div className="text-accent text-2xl flex items-center justify-center md:px-2" aria-hidden>→</div>
-              <div className="border border-accent/40 rounded-2xl p-6 bg-accent-light">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-3">Where research led</p>
-                <p className="text-xl font-bold text-ink mb-3">{project.tldr.pivot.to}</p>
-                <p className="text-sm text-ink/80 leading-relaxed">"{project.tldr.pivot.toHmw}"</p>
-              </div>
-            </div>
-            <p className="text-sm text-muted mt-4 text-center">{project.tldr.pivot.because}</p>
-          </section>
-
-          {/* Storyboards to the zine */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">{project.tldr.origin.label ?? 'How the 8-fold zine arrived'}</p>
-            <p className="text-muted leading-relaxed mb-6">{project.tldr.origin.line}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {project.tldr.origin.items.map((o, i) => (
-                <figure key={o.label} className="rounded-xl overflow-hidden border border-border">
-                  <div className="h-44 overflow-hidden bg-paper">
-                    <img src={o.src} alt={o.label} className="w-full h-full object-cover" />
-                  </div>
-                  <figcaption className="px-3 py-2.5 bg-paper text-[11px] text-ink font-medium border-t border-border">
-                    <span className="text-muted mr-1">{i + 1}</span>{o.label}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-
-          {/* Who it is for, reuses detailed personas */}
-          {project.personas && (
-            <section>
-              <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Who it is for</p>
-              <p className="text-muted leading-relaxed mb-6">{project.tldr.people}</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {project.personaRoles?.map(r => {
-                  const names = project.personas!
-                    .filter(p => (p.type.includes(' - ') ? p.type.split(' - ')[1] : p.type) === r.role)
-                    .map(p => p.name)
-                  return (
-                    <div key={r.role} className="border border-border rounded-xl p-4 bg-paper">
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">{r.who}</p>
-                      <p className="text-ink font-medium leading-snug">{r.role}</p>
-                      {names.length > 0 && <p className="text-xs text-muted mt-1">{names.join(', ')}</p>}
-                    </div>
-                  )
-                })}
-              </div>
-            </section>
-          )}
-
-          {/* What testing changed, reuses detailed assumptions */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">What testing changed</p>
-            <p className="text-muted leading-relaxed mb-6">{project.tldr.testing.line}</p>
-            <div className="space-y-2 mb-6">
-              {project.tldr.testing.changes.map(c => (
-                <div key={c} className="flex items-start gap-3 border border-border rounded-xl px-4 py-3 bg-paper">
-                  <span className="text-accent mt-0.5 flex-shrink-0" aria-hidden>→</span>
-                  <p className="text-sm text-ink leading-relaxed">{c}</p>
+              <Reveal delay={100}>
+                <div className="rounded-2xl p-8 md:p-10 border border-white/15 bg-white/5">
+                  <p className="text-paper text-lg md:text-xl font-medium leading-relaxed">"{project.takeaway}"</p>
                 </div>
-              ))}
-            </div>
-            {project.assumptions && (
-              <p className="text-sm text-muted">
-                <span className="text-ink font-medium">{project.assumptions.items.length} assumptions</span> were overturned between the first brief and the final prototype.
-              </p>
-            )}
+              </Reveal>
+              <Reveal delay={160}>
+                <div className="mt-10 text-center">
+                  <button
+                    onClick={() => setView('detailed')}
+                    className="text-sm font-medium text-accent-soft hover:underline"
+                  >
+                    Read the full case study →
+                  </button>
+                </div>
+              </Reveal>
+            </StoryContainer>
           </section>
-
-          {/* Research ops */}
-          <section className="border-l-4 border-accent pl-6">
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Research ops</p>
-            <p className="text-muted leading-relaxed">{project.tldr.ethics}</p>
-          </section>
-
-          {/* How the product works */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">How it works</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {project.tldr.output.map((o, i) => (
-                <figure key={o.label} className="rounded-2xl overflow-hidden border border-border">
-                  <div className="bg-paper p-4 h-72 flex items-center justify-center">
-                    <img src={o.src} alt={o.label} className="max-h-full max-w-[180px] object-contain" />
-                  </div>
-                  <figcaption className="px-4 py-3 bg-paper text-sm text-ink font-medium border-t border-border">
-                    <span className="text-muted mr-1.5">{i + 1}</span>{o.label}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-
-          {/* Final screens */}
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-5">The app</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {project.tldr.screens.map(s => (
-                <figure key={s.label} className="rounded-2xl overflow-hidden border border-border">
-                  <div className="bg-paper p-4 h-72 flex items-center justify-center">
-                    <img src={s.src} alt={s.label} className="max-h-full max-w-[180px] object-contain" />
-                  </div>
-                  <figcaption className="px-4 py-3 bg-paper text-sm text-ink font-medium border-t border-border">{s.label}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-
-          {/* Outcome */}
-          <section className="bg-ink rounded-2xl p-8">
-            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-3">Where it landed</p>
-            <p className="text-paper leading-relaxed">{project.tldr.outcome}</p>
-          </section>
-
-          <div className="pt-4 border-t border-border text-center">
-            <button
-              onClick={() => setView('detailed')}
-              className="text-sm font-medium text-accent hover:underline"
-            >
-              Read the full case study →
-            </button>
-          </div>
         </div>
       )}
 

@@ -2370,11 +2370,11 @@ export const projects: Project[] = [
   {
     slug: 'ledgerline',
     title: 'Ledgerline',
-    tagline: 'An 8-week research-to-prototype study in explainable credit infrastructure - grounded in 6 interviews with NBFC credit officers and SME owners, desk research on RBI digital lending guidelines, and a fully interactive tool built to prove how transparency changes lending decisions.',
+    tagline: 'An unsolicited concept pitch to India\'s RBI-regulated lenders: an underwriting desk that shows its working, built over eight weeks from 6 credit-officer interviews into a working browser prototype.',
     niche: ['Fintech B2B', 'Credit Risk', 'Service Design'],
     type: 'Fintech B2B',
     featured: true,
-    client: 'Self-initiated (CreditCraft v2)',
+    client: 'Indian NBFCs and banks under RBI digital lending rules · unsolicited concept pitch',
     role: 'UX Researcher, Product Designer & Prototype Engineer',
     duration: '8 weeks · Jan / Feb 2026',
     tools: ['Dovetail', 'Figma', 'React', 'SVG Charts', 'Affinity Mapping', 'Claude (research synthesis)', 'Cursor (prototype build)'],
@@ -2466,6 +2466,62 @@ export const projects: Project[] = [
         'Every competitor tool fails WCAG AA contrast on scorecard visualisations. Red flags are communicated through colour alone - invisible to colour-blind analysts.',
       ],
       gap: 'All existing tools solve data ingestion. None provide a unified, explainable decision workflow where the reasoning behind a score is as visible as the score itself.',
+      competitiveAudit: {
+        tools: [
+          {
+            name: 'Perfios',
+            category: 'Statement analysis',
+            verdict: 'Great extraction, no reasoning',
+            features: [
+              { label: 'Data ingestion', score: 'full' },
+              { label: 'Explainable score', score: 'none' },
+              { label: 'Collateral workflow', score: 'none' },
+              { label: 'Human override', score: 'none' },
+              { label: 'WCAG AA', score: 'none' },
+            ],
+            gap: 'Best-in-class bank statement parsing. It hands the officer a clean dataset and stops there, so the "why" behind any number is still the officer\'s problem.',
+          },
+          {
+            name: 'FinBox',
+            category: 'Lending infrastructure',
+            verdict: 'Developer API, no analyst UX',
+            features: [
+              { label: 'Data ingestion', score: 'full' },
+              { label: 'Explainable score', score: 'partial' },
+              { label: 'Collateral workflow', score: 'none' },
+              { label: 'Human override', score: 'partial' },
+              { label: 'WCAG AA', score: 'none' },
+            ],
+            gap: 'Built for engineers integrating credit rails, not for the officer making the call. Scores arrive as API responses with no interface to interrogate them.',
+          },
+          {
+            name: 'ScoreMe',
+            category: 'GST-based scoring',
+            verdict: 'Opaque model',
+            features: [
+              { label: 'Data ingestion', score: 'full' },
+              { label: 'Explainable score', score: 'none' },
+              { label: 'Collateral workflow', score: 'none' },
+              { label: 'Human override', score: 'none' },
+              { label: 'WCAG AA', score: 'none' },
+            ],
+            gap: 'Works well for GST-registered businesses, but the model is a black box. An officer cannot reconstruct the reasoning to defend a rejection under RBI\'s plain-language requirement.',
+          },
+          {
+            name: 'Bureau',
+            category: 'Identity and fraud',
+            verdict: 'Point solution, not a workflow',
+            features: [
+              { label: 'Data ingestion', score: 'partial' },
+              { label: 'Explainable score', score: 'none' },
+              { label: 'Collateral workflow', score: 'none' },
+              { label: 'Human override', score: 'none' },
+              { label: 'WCAG AA', score: 'partial' },
+            ],
+            gap: 'Solves identity and fraud checks precisely. It is one stop in a journey nobody has designed end to end, which is why officers still stitch four tools together per file.',
+          },
+        ],
+      },
     },
     personas: [
       {
@@ -2651,6 +2707,114 @@ export const projects: Project[] = [
         'Prototype validated by 3 NBFC lending professionals; one asked if it was connected to live data',
       ],
       learned: 'The core lesson: constraints are the design. The RBI rejection-reason requirement, the DPDP purpose limitation, the EU AI Act human oversight mandate - these aren\'t obstacles to good design, they\'re the brief. Designers who understand the regulatory environment produce better-reasoned products, not just more-compliant ones.',
+    },
+    story: {
+      challenge: {
+        paragraphs: [
+          `A credit officer at a small NBFC in Tamil Nadu. Tuesday afternoon, a ₹15 lakh application from a textile supplier. Her tool returns a score of 64 and a band of B, and nothing else. Approve, reject, or escalate: she has to decide, and then defend it. So she spends the next 45 minutes rebuilding the reasoning by hand in her own spreadsheet.`,
+          `Ledgerline is an unsolicited concept pitch to India's RBI-regulated lenders, built over eight weeks. Since 2022, the RBI's Digital Lending Guidelines have required lenders to give rejected borrowers a reason in plain language. Every tool on the market delivers a score and stops. This is the pitch for the layer that has to exist between the two.`,
+        ],
+        hmw: `How might an RBI-regulated lender give credit officers an underwriting desk that shows its working, so every decision is faster to make, defensible to a manager, and explainable to the borrower?`,
+      },
+      summary: {
+        solution: `Ledgerline is that layer, designed end to end: a nine-screen underwriting desk where every point of the score is traceable to a feature, a rule, and a ledger line, shipped as a working browser prototype rather than a static mockup.`,
+      },
+      timeline: {
+        label: 'Eight weeks, research first',
+        items: [
+          { when: 'Weeks 1–2', what: '6 interviews: officers, a DSA, two applicants' },
+          { when: 'Week 2', what: 'Synthesis: 74 observations, 4 insights' },
+          { when: 'Week 3', what: 'RBI, DPDP and EU AI Act constraints' },
+          { when: 'Weeks 3–6', what: 'Design system and 9 screens built' },
+          { when: 'Weeks 7–8', what: 'Walkthroughs with 3 lending professionals' },
+        ],
+      },
+      stages: [
+        {
+          label: 'Research',
+          kicker: 'Weeks 1–3',
+          dark: true,
+          moments: [
+            {
+              title: 'Four tools, one missing layer',
+              body: `I mapped what an officer actually touches to clear a single file: Perfios for statements, FinBox for rails, ScoreMe for GST scoring, Bureau for identity and fraud.`,
+              visual: { kind: 'matrix' },
+              finding: `Every tool solves ingestion. None of them explain a decision, and none of them pass WCAG AA on the scorecard. That reframed the brief: not a better score, but the explanation layer the whole market skips.`,
+            },
+            {
+              title: 'Three people, one decision',
+              body: `Composite archetypes from the interviews. Each represents a different relationship to the same lending decision, and a different design requirement.`,
+              visual: { kind: 'personas' },
+              finding: `Officers do not distrust the score's accuracy. They distrust a score they cannot defend upward to a manager or outward to a borrower. "Why is this a B?" had no answer in any tool they had used.`,
+            },
+          ],
+        },
+        {
+          label: 'Design',
+          kicker: 'Weeks 3–6',
+          moments: [
+            {
+              screenScroll: [
+                {
+                  src: '/uploads/ledgerline/hero.png',
+                  title: 'The queue is the desk',
+                  body: `Nine files, each with a score, a band, and a flag count visible before anything is opened. Dark-first because officers sit with this for five to seven hours a day, and every risk signal carries shape and text alongside colour, never colour alone.`,
+                },
+                {
+                  src: '/uploads/ledgerline/scorecard.png',
+                  title: 'Every point, traceable',
+                  body: `The band leads at 96px and the raw score is demoted to a footnote, because the band is what an officer argues about. Eight features, each carrying its own evidence string: "CV 0.28 over 12mo" is defensible in a review meeting, a 64 is not.`,
+                },
+                {
+                  src: '/uploads/ledgerline/scorecard-risky.png',
+                  title: 'Explainability by contrast',
+                  body: `The same layout on a score of 38. Nothing is annotated and nothing is explained in prose; switching applicants makes the model's logic visible because the evidence itself changes. This is the argument the whole prototype exists to make.`,
+                },
+                {
+                  src: '/uploads/ledgerline/collateral.png',
+                  title: 'The 40% nobody designs for',
+                  body: `Interviews showed 30 to 45 minutes per file lost to chasing collateral documents across email threads. No tool in the audit surfaced it at all, so it became a first-class screen: LTV, a document tray with real status states, and the guarantor in one place.`,
+                },
+                {
+                  src: '/uploads/ledgerline/cashflow.png',
+                  title: 'Twelve months at a glance',
+                  body: `Trend line, monthly balance strip, and expense donut, all hand-rolled SVG so every chart redraws from the applicant's own data. Volatility is the thing officers read first, so volatility is what the chart is shaped to show.`,
+                },
+                {
+                  src: '/uploads/ledgerline/redflags.png',
+                  title: 'Flags that carry their evidence',
+                  body: `Gambling transactions, irregular payroll, high-volatility periods. Each flag arrives with the ledger line that triggered it, so the officer judges the evidence rather than trusting a label.`,
+                },
+                {
+                  src: '/uploads/ledgerline/rules.png',
+                  title: 'The human stays in the loop',
+                  body: `RBI and the EU AI Act both require that a person can understand and contest an automated credit decision. The rules editor shows which rules fired at what weight, and lets an officer toggle them to see the score move. The senior analyst asked for this before I showed it to her.`,
+                },
+              ],
+              finding: `Explanation-first, not score-first. Every competitor hands over a number and leaves the reasoning to the officer. Ledgerline treats the reasoning as the product.`,
+            },
+          ],
+        },
+        {
+          label: 'Pivots',
+          kicker: 'Weeks 1–8',
+          dark: true,
+          moments: [
+            { afp: true },
+          ],
+        },
+      ],
+      results: {
+        kicker: 'Where it stands',
+        stats: [
+          { value: '6', label: 'interviews: credit officers, a DSA, two applicants' },
+          { value: '0/4', label: 'competitor tools that explain a decision or pass WCAG AA' },
+          { value: '3', label: 'regulatory frameworks designed against: RBI, DPDP, EU AI Act' },
+          { value: '9', label: 'screens shipped as a working browser prototype' },
+        ],
+        body: `Validated in walkthroughs with two NBFC credit analysts and one credit-risk product manager. All three said they would use or recommend it, and one asked whether the prototype was wired to a live data source. Next is the applicant-facing explanation layer, the half of the RBI requirement this version deliberately does not touch, plus screen reader testing on the transaction table and a session run under real time pressure.`,
+        quote: `Credit officers do not distrust algorithms. They distrust algorithms that cannot explain themselves. In a market where the RBI already requires a reason in plain language, the explanation is not a feature on the roadmap. It is the product.`,
+      },
     },
   },
 ]

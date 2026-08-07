@@ -2274,10 +2274,12 @@ body.hero-light .marquee {
   border-top: 1px solid rgba(255,255,255,0.12);
   margin-top: 48px;
 }
+/* Pillars share the CV timeline's exact column geometry so the two
+   ruled lists in the About band read as one system */
 .pillar {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 48px;
+  grid-template-columns: 176px 1fr;
+  gap: 32px;
   align-items: baseline;
   padding: 30px 0;
   border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -2289,7 +2291,7 @@ body.hero-light .marquee {
   margin-top: 0;
   padding-top: 0;
   font-size: 16px;
-  max-width: 72ch;
+  max-width: none;
 }
 
 /* Brief: full-bleed teal band, subscription-page form */
@@ -2326,7 +2328,7 @@ body.hero-light .marquee {
 
 @media (max-width: 900px) {
   .about { border-radius: 0; padding-top: 64px; padding-bottom: 64px; }
-  .pillar { grid-template-columns: 170px 1fr; gap: 24px; }
+  .pillar { grid-template-columns: 176px 1fr; gap: 32px; }
   .pillar__d { grid-column: auto; }
   .brief { border-radius: 0; padding-top: 64px; padding-bottom: 64px; }
   .stat__num { font-size: clamp(48px, 9vw, 80px); }

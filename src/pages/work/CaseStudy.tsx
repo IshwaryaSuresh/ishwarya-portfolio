@@ -503,6 +503,16 @@ function FragmentRow({
   )
 }
 
+// Full-bleed ink plate that breaks out of the centred body column, matching the
+// alternating dark/light rhythm of the home page and the story stages.
+function InkPlate({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative left-1/2 -translate-x-1/2 w-screen bg-ink py-20 md:py-24">
+      <div className="max-w-3xl mx-auto px-6">{children}</div>
+    </div>
+  )
+}
+
 const typeColors: Record<string, string> = {
   'Fintech B2B': 'bg-paper text-ink border-border',
   'Fintech Consumer': 'bg-indigo-50 text-indigo-700 border-indigo-200',
@@ -602,6 +612,26 @@ export default function CaseStudy() {
     <section>
       <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.processTitle ?? 'Design process'}</p>
       {(() => {
+        // Compact mode renders the Kaizen dot timeline: a rule with accent dots,
+        // the phase as the mono marker and the step name beneath.
+        if (project.processCompact) {
+          return (
+            <div className="relative">
+              <div aria-hidden className="hidden md:block absolute left-0 right-0 top-1.5 h-px bg-border" />
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-x-3 gap-y-6">
+                {project.process.map(step => (
+                  <div key={step.step} className="relative">
+                    <span aria-hidden className="hidden md:block w-3 h-3 rounded-full mb-3 bg-accent border-2 border-paper" />
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-1">
+                      {(step.phase ?? '').split(' · ')[0]}
+                    </p>
+                    <p className="text-xs text-ink leading-snug">{step.step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        }
         const hasPhases = project.process.some(s => s.phase)
         if (!hasPhases) {
           return (
@@ -1149,18 +1179,18 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Metrics bar, placed after problem so the numbers have context */}
-        <div className="bg-ink rounded-2xl py-8 px-8 -mx-0">
-          <p className="text-xs font-medium uppercase tracking-widest text-paper/40 mb-6">Impact &amp; outcomes</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* KPI cards, Kaizen style: separate ink cards with display numerals */}
+        <section>
+          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">Impact &amp; outcomes</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {project.metrics.map(m => (
-              <div key={m.label}>
-                <p className="text-xl md:text-2xl font-bold text-paper mb-1">{m.value}</p>
-                <p className="text-xs text-paper/50 leading-snug">{m.label}</p>
+              <div key={m.label} className="bg-ink rounded-2xl p-5 h-full">
+                <p className="font-display text-3xl md:text-4xl text-paper mb-2">{m.value}</p>
+                <p className="text-xs text-white/50 leading-snug">{m.label}</p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Business outcome translation, only if present */}
         {project.businessOutcomes && (
@@ -1257,51 +1287,45 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Ethnographic study, only if present */}
+        {/* Ethnographic study, on an ink plate */}
         {project.workshops && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">{project.workshopsTitle ?? 'Ethnographic study'}</p>
+          <InkPlate>
+            <p className="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">{project.workshopsTitle ?? 'Ethnographic study'}</p>
             {project.workshopsIntro && (
-              <p className="text-muted leading-relaxed mb-6">{project.workshopsIntro}</p>
+              <p className="text-white/60 leading-relaxed mb-6">{project.workshopsIntro}</p>
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {project.workshops.map((item, i) => (
-                <figure key={i} className="rounded-xl overflow-hidden border border-border group">
-                  <div className="h-72 overflow-hidden bg-paper">
+                <figure key={i} className="rounded-xl overflow-hidden border border-white/10 group">
+                  <div className="h-72 overflow-hidden bg-white/5">
                     <img
                       src={item.src}
                       alt={item.caption}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-snug border-t border-border">
+                  <figcaption className="px-4 py-3 bg-white/5 text-xs text-white/60 leading-snug border-t border-white/10">
                     {item.caption}
                   </figcaption>
                 </figure>
               ))}
             </div>
-          </section>
+          </InkPlate>
         )}
 
         {/* Storyboards, only if present */}
         {project.storyboards && (
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Storyboards · the shared language</p>
-            <p className="text-muted leading-relaxed mb-8">{project.storyboards.intro}</p>
-            <div className="space-y-6 mb-8">
-              {project.storyboards.items.map((sb, i) => (
-                <figure key={i} className="rounded-2xl overflow-hidden border border-border">
-                  <img
-                    src={sb.src}
-                    alt={sb.caption}
-                    className="w-full object-contain bg-paper"
-                    style={{ maxHeight: '760px' }}
-                  />
-                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{sb.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-            <div className="bg-accent-light border border-accent/30 rounded-2xl p-6">
+            <p className="text-muted leading-relaxed mb-10">{project.storyboards.intro}</p>
+            <ScreenScroll
+              steps={project.storyboards.items.map((sb, i) => ({
+                src: sb.src,
+                title: sb.title ?? `Scenario ${i + 1}`,
+                body: sb.caption,
+              }))}
+            />
+            <div className="mt-10 bg-accent-light border border-accent/30 rounded-2xl p-6">
               <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-2">What the storyboards unlocked</p>
               <p className="text-ink text-sm leading-relaxed">{project.storyboards.payoff}</p>
             </div>
@@ -1719,39 +1743,26 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Final prototype screens, only if present */}
+        {/* Final prototype screens, pinned scrollytelling on an ink plate */}
         {project.screens && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Final prototype · screen by screen</p>
-            {project.screens.intro && <p className="text-muted leading-relaxed mb-8">{project.screens.intro}</p>}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-              {project.screens.items.map(s => (
-                <figure key={s.title} className="border border-border rounded-2xl overflow-hidden flex flex-col">
-                  <div className="bg-paper p-4 flex justify-center">
-                    <img
-                      src={s.src}
-                      alt={s.title}
-                      className="w-full max-w-[240px]"
-                    />
-                  </div>
-                  <figcaption className="px-4 py-3 bg-paper border-t border-border flex-1">
-                    <p className="font-semibold text-ink text-sm mb-1">{s.title}</p>
-                    <p className="text-xs text-muted leading-relaxed">{s.description}</p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
+          <InkPlate>
+            <p className="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Final prototype · screen by screen</p>
+            {project.screens.intro && <p className="text-white/60 leading-relaxed mb-10">{project.screens.intro}</p>}
+            <ScreenScroll
+              dark
+              steps={project.screens.items.map(s => ({ src: s.src, title: s.title, body: s.description }))}
+            />
             {project.screens.brand && (
-              <figure className="rounded-2xl overflow-hidden border border-border">
+              <figure className="mt-12 rounded-2xl overflow-hidden border border-white/10">
                 <img
                   src={project.screens.brand.src}
                   alt={project.screens.brand.caption}
                   className="w-full object-contain bg-white"
                 />
-                <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{project.screens.brand.caption}</figcaption>
+                <figcaption className="px-4 py-3 bg-white/5 text-xs text-white/60 leading-relaxed border-t border-white/10">{project.screens.brand.caption}</figcaption>
               </figure>
             )}
-          </section>
+          </InkPlate>
         )}
 
         {/* Assumptions → findings → pivots, late slot */}

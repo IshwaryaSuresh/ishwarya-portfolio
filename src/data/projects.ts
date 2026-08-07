@@ -89,7 +89,7 @@ export type Project = {
   }
   storyboards?: {
     intro: string
-    items: { src: string; caption: string }[]
+    items: { src: string; title?: string; caption: string }[]
     payoff: string
   }
   personasIntro?: string
@@ -904,8 +904,8 @@ export const projects: Project[] = [
     storyboards: {
       intro: `Storyboards became the project's shared language. I drew two scenarios to walk care staff and stakeholders through how the app would live inside a care home - collaborative, intuitive to capture, and far easier to react to than a spec.`,
       items: [
-        { src: '/uploads/me-and-you/storyboard.png', caption: 'Scenario storyboard A - facilitator-led session in a care home: introducing the app, prompting residents, and sharing outputs with family' },
-        { src: '/uploads/me-and-you/storyboard-2.png', caption: 'Scenario storyboard B - family member initiated use: family member browsing the archive, engaging with PwD and connecting with each other in person' },
+        { src: '/uploads/me-and-you/storyboard.png', title: 'Scenario A · facilitator-led', caption: 'A facilitator-led session in a care home: introducing the app, prompting residents, and sharing the outputs with family.' },
+        { src: '/uploads/me-and-you/storyboard-2.png', title: 'Scenario B · family-initiated', caption: 'Family member initiated use: browsing the archive, engaging with the resident, and connecting with each other in person.' },
       ],
       payoff: `When I brought the same storyboards to the expert focus group - held after the ethnographic study - the academics connected the dots between what I had observed in the care home and the digital app, and exposed the gap between sessions: nothing tangible carried the creative work forward. The 8-fold zine method emerged from that conversation.`,
     },

@@ -1100,20 +1100,18 @@ export default function CaseStudy() {
           <section>
             <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.contextTitle ?? 'Context'}</p>
 
-            {/* Intro text and the scale stats side by side */}
-            <div className="grid md:grid-cols-[1fr_260px] gap-8 md:gap-10 mb-8">
-              <p className="text-muted leading-relaxed">{project.context.intro}</p>
-              {project.context.stats && project.context.stats.length > 0 && (
-                <div className="grid grid-cols-2 gap-3 self-start">
-                  {project.context.stats.map(s => (
-                    <div key={s.label} className="bg-paper border border-border rounded-xl p-3">
-                      <p className="font-display text-2xl text-ink mb-0.5">{s.value}</p>
-                      <p className="text-[11px] text-muted leading-snug">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Intro runs full width, with the scale stats spread beneath it */}
+            <p className="text-muted leading-relaxed mb-8">{project.context.intro}</p>
+            {project.context.stats && project.context.stats.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {project.context.stats.map(s => (
+                  <div key={s.label} className="bg-paper border border-border rounded-xl p-5">
+                    <p className="font-display text-3xl text-ink mb-1.5">{s.value}</p>
+                    <p className="text-xs text-muted leading-snug">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {project.context.image && (
               <figure className="rounded-2xl overflow-hidden border border-border mb-8">

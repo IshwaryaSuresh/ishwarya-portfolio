@@ -1,8 +1,8 @@
 const PILLARS = [
-  { n: '01', t: 'The Practice', d: 'Embedded in product teams, senior and in-sprint, from kickoff to developer handover. I work end-to-end: discovery, flows, high-fidelity UI, and coded prototypes.' },
+  { n: '01', t: 'The Practice', d: 'An independent UX consultancy working with startups, studios, and government. Embedded, senior, in-sprint - from kickoff to developer handover.' },
   { n: '02', t: 'The Posture', d: 'Research-led, metric-driven. I find the real problem before drawing a pixel - through interviews, usability testing, synthesis in Dovetail, and opportunity mapping.' },
   { n: '03', t: 'The Craft', d: 'WCAG 2.2 is built in from the first wireframe, not bolted on at QA. Colour, keyboard, screen-reader, cognitive load - all tested against real constraints.' },
-  { n: '04', t: 'The Range', d: 'Public sector (GDS), healthcare, edtech, and fintech. MSc HCI - I bring systems thinking and research rigour across every domain I work in.' },
+  { n: '04', t: 'The Range', d: 'Public sector (GDS), healthcare, edtech, fintech, architecture, and startups. MSc HCI, B.Arch - I bring systems thinking and research rigour across every domain.' },
 ]
 
 function Stat({ value, label }: { value: string; label: string }) {
@@ -21,8 +21,8 @@ export default function NumbersAbout() {
         <div className="about__top">
           <div className="about__left">
             <h2 data-reveal="left" data-delay="100">A product designer <span className="accent-teal">made for humans.</span></h2>
-            <p data-reveal="left" data-delay="200">I'm a product designer and UX researcher working end-to-end across web and mobile: research and discovery, user flows, wireframes, high-fidelity UI, design systems, and coded prototypes. Most recently User Researcher at the Ministry of Housing, Communities and Local Government, where I delivered WCAG 2.1 AA compliance across 200+ Local Authorities. MSc HCI, Newcastle University.</p>
-            <p className="about__outside" data-reveal="left" data-delay="300">Outside work I'm a specialty coffee enthusiast, always chasing a better brew and seeking out local roasters. I'm into skincare and fashion styling, which keep my eye for detail and aesthetics sharp beyond the screen. I spend plenty of time with my dogs.</p>
+            <p data-reveal="left" data-delay="200">I'm a UX Consultant and Founder of MadeForHumans. Previously User Researcher at the Ministry of Housing, Communities and Local Government, I now work with startups, studios, and SMEs on end-to-end product design, service design, and WCAG-compliant accessibility. MSc HCI, Newcastle University.</p>
+            <p className="about__outside" data-reveal="left" data-delay="300">Outside work I'm a specialty coffee enthusiast, always chasing a better brew and seeking out local roasters. I'm into skincare and fashion styling, which keep my eye for detail and aesthetics sharp beyond the screen. I spend plenty of time with my dogs. Having trained as an architect, I still can't walk through a city without stopping to study its buildings.</p>
           </div>
           <div className="about__right">
             <div className="about__portrait" data-reveal="right">
@@ -55,8 +55,8 @@ export default function NumbersAbout() {
             <li className="about__cv-row" data-reveal="up" data-delay="0">
               <span className="about__cv-year">Since May 2025</span>
               <div>
-                <p className="about__cv-role">Product Designer &amp; UX Researcher, Independent</p>
-                <p className="about__cv-meta">End-to-end product design, discovery &amp; strategy, and WCAG 2.2 accessibility. Selected work: Kaizen (consumer fintech) and Ledgerline (explainable decisioning), both taken from research through to working coded prototypes.</p>
+                <p className="about__cv-role">Founder, Product Designer &amp; UX Researcher, MadeForHumans</p>
+                <p className="about__cv-meta">Independent consultancy. End-to-end product design, discovery &amp; strategy, and WCAG 2.2 accessibility for startups, studios, and SMEs. Selected work: Kaizen (consumer fintech), Ledgerline (explainable decisioning).</p>
               </div>
             </li>
             <li className="about__cv-row" data-reveal="up" data-delay="80">
@@ -106,6 +106,13 @@ export default function NumbersAbout() {
               <div>
                 <p className="about__cv-role">UX/UI Design Intern, AnywhereWorks / FULL Creative</p>
                 <p className="about__cv-meta">Redesigned AnywhereWorks platform UI and built a design system and style guide. Simplified onboarding workflows for the Switchboard app, increasing activation.</p>
+              </div>
+            </li>
+            <li className="about__cv-row" data-reveal="up" data-delay="640">
+              <span className="about__cv-year">2015 to 2020</span>
+              <div>
+                <p className="about__cv-role">Bachelor of Architecture (B.Arch), Anna University</p>
+                <p className="about__cv-meta">Design thinking, sustainable design, and systems-level problem-solving. The foundation I still draw on for service design and information architecture.</p>
               </div>
             </li>
           </ol>

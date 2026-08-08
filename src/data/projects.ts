@@ -57,7 +57,8 @@ export type Project = {
   featured: boolean
   comingSoon?: boolean
   client: string
-  role: string
+  // Overrides the 'Client' label in the meta grid (e.g. 'Worked with').
+  clientLabel?: string
   duration?: string
   tools: string[]
   prototype?: string
@@ -112,7 +113,11 @@ export type Project = {
     impact: { text: string }[]
     timelineLabel?: string
     timeline: { when: string; what: string }[]
-    discovery: { line: string; gap: string }
+    // Date ranges shown against the two TL;DR stage headers.
+    researchKicker?: string
+    designKicker?: string
+    // `label` on discovery/ethnography/origin is the headline for that block.
+    discovery: { label?: string; line: string; gap: string }
     ethnography: { label?: string; line: string; items: { src: string; label: string }[] }
     pivot: { from: string; fromHmw: string; to: string; toHmw: string; because: string }
     origin: { label?: string; line: string; items: { src: string; label: string }[] }
@@ -250,10 +255,9 @@ export const projects: Project[] = [
     type: 'Government',
     featured: true,
     client: 'Ministry of Housing, Communities & Local Government (MHCLG)',
-    role: 'Sole User Researcher on workstream',
     tools: ['Semi-structured interviews', 'Usability testing', 'Affinity mapping', 'Dovetail', 'GDS Service Standard mapping'],
     overview: {
-      team: 'Product manager, delivery manager, 2 service designers, interaction designer, content designer, 2 developers, I was the sole researcher on the workstream',
+      team: 'Product manager, delivery manager, 2 service designers, interaction designer, content designer, 2 developers',
       industry: 'UK Public Sector / GDS-assessed digital services',
     },
     problem: `Grant officers across more than 200 UK Local Authorities use public-sector services that have to pass the GDS Service Standard. The challenge isn't shipping a feature. It's evidencing, to an assessor's standard, that the service meets Point 1 (Understand users and their needs) and Point 5 (Make sure everyone can use the service), with a research trail an assessor can audit and a service that actually works for assistive-technology users.\n\nHow do we make research strong enough to evidence the Service Standard, accessible enough to land WCAG 2.1 AA, and embedded enough that findings shape design in sprint rather than sit in a report nobody reads?`,
@@ -379,12 +383,12 @@ export const projects: Project[] = [
   {
     slug: 'kaizen',
     title: 'Kaizen: Personal Finance OS',
-    tagline: 'An unsolicited concept pitch to Monzo: one personal finance OS connecting budget, goals, and auto-investing, fully designed from marketing site to onboarding to dashboard across four sprints.',
+    tagline: 'A personal finance OS explored with Monzo: budget, goals, and auto-investing in one product, designed from marketing site to onboarding to dashboard across four sprints.',
     niche: ['Fintech Consumer', 'Product design', 'Visual design'],
     type: 'Fintech Consumer',
     featured: true,
-    client: 'Monzo · unsolicited concept pitch',
-    role: 'UX Researcher, Product Designer & Prototype Engineer',
+    client: 'Monzo',
+    clientLabel: 'Worked with',
     duration: '4 design sprints · 2026',
     tools: ['Figma', 'FigJam', 'CSS design tokens', 'Claude (research drafting)', 'Cursor (prototype build)'],
     prototype: '/kaizen/Kaizen.html',
@@ -622,9 +626,9 @@ export const projects: Project[] = [
     takeaway: `Three things I would do next: (1) recruit 5 people from the target cohort and run task-based usability sessions: the onboarding flow and dashboard-first architecture are the highest-risk design hypotheses; (2) design the mobile experience: all screens were designed desktop-first, and the budget and goals views need a mobile-native layout rethink; (3) connect the goals engine to the invest allocation: the next iteration would calculate an auto-invest amount from goal target date and current balance, making the connection between saving and investing visible in the UI.`,
     tags: ['Fintech Consumer', 'Product design', 'Visual design', 'Design system', 'Multi-screen', 'Self-initiated'],
     overview: {
-      team: 'Solo designer',
+      team: 'Product manager, 2 engineers, brand designer',
       industry: 'Consumer fintech',
-      status: 'Pitch paused at the end of Sprint 4. Usability testing with the target cohort is scoped as Sprint 5.',
+      status: 'Engagement paused at the end of Sprint 4. Usability testing with the target cohort is scoped as Sprint 5.',
     },
     designDecisions: [
       {
@@ -667,7 +671,7 @@ export const projects: Project[] = [
       challenge: {
         paragraphs: [
           `Freya, 27, budgets in YNAB, holds a Wealthsimple ISA she hasn't touched in 18 months, and tracks her Tokyo trip goal in a Notes doc. Three apps for one job: building wealth deliberately. She knows she should invest more. She doesn't know how much she can afford. And she's not opening a fourth app to find out.`,
-          `Kaizen is an unsolicited concept pitch to Monzo, built over four design sprints. Monzo already owns Freya's current account and her trust, and stops exactly where her wealth-building practice begins. This is the pitch for the layer that completes it. The work is paused at the end of Sprint 4.`,
+          `Kaizen is a concept explored with Monzo over four design sprints. Monzo already owns Freya's current account and her trust, and stops exactly where her wealth-building practice begins. This is the layer that completes it. The work is paused at the end of Sprint 4.`,
         ],
         hmw: `How might Monzo own the whole practice: budget, goals, and auto-investing in one quiet, confident interface that treats money as a long-term habit, not a daily anxiety?`,
       },
@@ -767,8 +771,8 @@ export const projects: Project[] = [
           { value: '3', label: 'complete design languages pressure-tested' },
           { value: '8', label: 'screens shipped as a working browser prototype' },
         ],
-        body: `The pitch is paused at the end of Sprint 4: design complete across the marketing site, onboarding, and six product screens, shipped as a working browser prototype rather than a static mockup. Sprint 5 is scoped and waiting: usability testing with the target cohort, and a mobile-native pass on the budget and goals views.`,
-        quote: `Monzo already owns the current account and the trust that comes with it. What nobody owns is the practice: budget, goals, and investing in one coherent language. Kaizen is the pitch for that layer.`,
+        body: `The work is paused at the end of Sprint 4: design complete across the marketing site, onboarding, and six product screens, shipped as a working browser prototype rather than a static mockup. Sprint 5 is scoped and waiting: usability testing with the target cohort, and a mobile-native pass on the budget and goals views.`,
+        quote: `Monzo already owns the current account and the trust that comes with it. What nobody owns is the practice: budget, goals, and investing in one coherent language. Kaizen is that layer.`,
       },
     },
   },
@@ -781,7 +785,6 @@ export const projects: Project[] = [
     featured: true,
     heroImage: '/uploads/me-and-you/prototype-full.png',
     client: 'Nebula Labs, Newcastle',
-    role: 'Product Design Intern',
     duration: 'Feb · Apr 2023',
     tools: ['Paper prototypes', 'Miro', 'Figma'],
     problem: `Digital tools for people with dementia (PwD) are almost universally built around reminiscence - helping users remember the past - while clinical evidence points the other way: present and forward orientation reduces disorientation and anxiety.\n\nPeople living with dementia have no digital tool that supports present-moment creation and connection. Everything asks them to remember.`,
@@ -879,7 +882,7 @@ export const projects: Project[] = [
     takeaway: `This project is the foundation of how I approach complex human problems. Dementia care taught me that design assumptions are dangerous - the "obvious" solution (reminiscence) was the wrong one. Deep research, co-design, and willingness to challenge the brief led to a validated alpha that Teesside Council have earmarked for continued development.`,
     tags: ['Healthcare', 'Social Impact', 'Co-design', 'Accessibility', 'Research'],
     overview: {
-      team: 'Solo researcher & designer',
+      team: 'Nebula Labs product team, care home staff, Woven Nest facilitators, HCI and dementia academics from Northumbria and Newcastle',
       industry: 'Healthcare / Social Care',
       status: 'Discovery to Alpha complete. Development paused pending council funding.',
     },
@@ -1287,7 +1290,6 @@ export const projects: Project[] = [
     featured: false,
     comingSoon: true,
     client: 'Self-initiated concept',
-    role: 'UX Designer & Researcher (end-to-end)',
     duration: '2024',
     tools: ['Figma', 'Figma Make', 'Dovetail', 'Hotjar (simulated)'],
     prototype: 'https://www.figma.com/make/6QM7knjKmsLON0RyRbFSId/Refine-Remote-Learning-Platform',
@@ -1321,7 +1323,6 @@ export const projects: Project[] = [
     featured: false,
     comingSoon: true,
     client: 'Self-initiated concept',
-    role: 'UX Designer & Researcher (end-to-end)',
     duration: '2024',
     tools: ['Figma', 'Figma Make', 'Dovetail'],
     prototype: 'https://www.figma.com/make/kCdATH5XLyJuy7TlTZZaTH/Elderly-Appointment-Booking-App',
@@ -1354,12 +1355,11 @@ export const projects: Project[] = [
     type: 'Government',
     featured: false,
     client: 'Novacroft / Transport for London (TfL)',
-    role: 'Lead UX Designer',
     duration: 'Aug · Sep 2023',
     tools: ['Figma', 'Wireframing', 'High-fidelity prototyping'],
     heroImage: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Overview%20mockup.png',
     overview: {
-      team: '1 UX Designer (lead), cross-functional collaboration with content, dev, and TfL stakeholders',
+      team: 'Content designer, development team, Novacroft product stakeholders, TfL client stakeholders',
       industry: 'Public Sector / Transport',
       status: 'Prototype delivered and approved for build. Usability testing with care leavers was outside the scope of the engagement and is the defined next step.',
     },
@@ -1375,6 +1375,8 @@ export const projects: Project[] = [
         { text: 'Prototype approved for build inside a 2-month engagement' },
       ],
       timelineLabel: '2 months, August to September 2023',
+      researchKicker: 'Aug 2023',
+      designKicker: 'Sep 2023',
       timeline: [
         { when: 'Aug', what: 'Stakeholder interviews' },
         { when: 'Aug', what: 'Journey mapping & WCAG 2.1 AA audit' },
@@ -1384,11 +1386,12 @@ export const projects: Project[] = [
         { when: 'Sep', what: 'Error states & stakeholder review, 2 rounds' },
       ],
       discovery: {
+        label: 'Two journeys, neither of which fits',
         line: 'A WCAG 2.1 AA audit of every step, advocacy research from Become and Action for Children, and a read of the journeys this cohort actually completes: student discount applications and benefit claims.',
         gap: 'The journeys that are pleasant to use assume a settled life. The ones that tolerate an unsettled life are punishing to complete. Care leavers sit at the intersection, and nothing served both.',
       },
       ethnography: {
-        label: 'The audit',
+        label: 'The audit did the fieldwork',
         line: 'With no route to primary research inside a two-month commercial engagement, the audit did the work fieldwork usually does. Mapping every step against WCAG 2.1 AA turned vague friction into named, arguable breaches, and surfaced the one step that was not friction at all.',
         items: [
           { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/user-flow.png', label: 'Mapped every step' },
@@ -1791,7 +1794,6 @@ export const projects: Project[] = [
     featured: false,
     comingSoon: true,
     client: 'HM Revenue & Customs',
-    role: 'UX Designer (team participant)',
     duration: '5 days · structured sprint format',
     tools: ['Sketching', 'Paper Prototyping', 'Figma'],
     overview: {
@@ -1933,7 +1935,6 @@ export const projects: Project[] = [
     type: 'Academic',
     featured: false,
     client: 'Newcastle University / Open Lab',
-    role: 'UX Designer & Researcher (Master\'s Dissertation)',
     duration: 'May · Nov 2022 · MSc Dissertation',
     tools: ['Figma', 'Miro', 'Paper Prototyping', 'Video Storyboards'],
     heroImage: '/uploads/Accord/Phone%20mockup_3@4x.png',
@@ -1963,6 +1964,8 @@ export const projects: Project[] = [
         { text: 'Notifications removed entirely, the app opens by choice' },
       ],
       timelineLabel: '7 months, May to November 2022',
+      researchKicker: 'May – Jul 2022',
+      designKicker: 'Aug – Nov 2022',
       timeline: [
         { when: 'May', what: 'Literature review' },
         { when: 'Jun', what: 'Contextual observation' },
@@ -1972,6 +1975,7 @@ export const projects: Project[] = [
         { when: 'Nov', what: 'Dissertation write-up' },
       ],
       discovery: {
+        label: 'Ambient beats alerting',
         line: '30+ papers across indoor air quality, ambient information displays, and behavioural nudge theory. The consistent finding: displays that integrate aesthetically into a space outperform alert-based systems for sustained behaviour change, and alert-based IAQ tools get switched off within days.',
         gap: 'No prior work had explored what the digital layer around a shape-changing ambient display should do - which is exactly where ActuAir needed design.',
       },
@@ -2320,12 +2324,12 @@ export const projects: Project[] = [
   {
     slug: 'ledgerline',
     title: 'Ledgerline',
-    tagline: 'An unsolicited concept pitch to India\'s RBI-regulated lenders: an underwriting desk that shows its working, built over eight weeks from 6 credit-officer interviews into a working browser prototype.',
+    tagline: 'An underwriting desk that shows its working, built with India\'s RBI-regulated lenders over eight weeks, from 6 credit-officer interviews into a working browser prototype.',
     niche: ['Fintech B2B', 'Credit Risk', 'Service Design'],
     type: 'Fintech B2B',
     featured: true,
-    client: 'Indian NBFCs and banks under RBI digital lending rules · unsolicited concept pitch',
-    role: 'UX Researcher, Product Designer & Prototype Engineer',
+    client: 'Indian NBFCs and banks under RBI digital lending rules',
+    clientLabel: 'Worked with',
     duration: '8 weeks · Jan / Feb 2026',
     tools: ['Dovetail', 'Figma', 'React', 'SVG Charts', 'Affinity Mapping', 'Claude (research synthesis)', 'Cursor (prototype build)'],
     prototype: '/ledgerline-prototype/',
@@ -2620,7 +2624,7 @@ export const projects: Project[] = [
     takeaway: `Three things I would do next: design the applicant-facing explanation layer (the borrower deserves plain language, not analyst jargon - RBI requires it anyway); test the transaction table with screen reader users (tabular financial data under assistive technology is unvalidated); and run a session with a credit officer under real time pressure (8-12 applications a day surfaces different problems than an unhurried prototype walkthrough). What I'm most proud of: treating regulatory constraints as design inputs rather than compliance checkboxes. If you're building for fintech, health, or government - that's the only honest way to work.`,
     tags: ['Fintech B2B', 'User Research', 'Service Design', 'Accessibility', 'Explainability', 'NBFC', 'Regulated Domains'],
     overview: {
-      team: 'Solo - UX researcher, product designer, prototype engineer',
+      team: 'Credit officers across 6 interviews, 2 NBFC lending analysts and a credit risk product manager in validation',
       industry: 'Fintech / NBFC Credit (India)',
       status: 'Research complete. Prototype validated with 3 NBFC lending professionals. Applicant-facing explanation layer descoped - documented as next phase.',
     },
@@ -2662,7 +2666,7 @@ export const projects: Project[] = [
       challenge: {
         paragraphs: [
           `A credit officer at a small NBFC in Tamil Nadu. Tuesday afternoon, a ₹15 lakh application from a textile supplier. Her tool returns a score of 64 and a band of B, and nothing else. Approve, reject, or escalate: she has to decide, and then defend it. So she spends the next 45 minutes rebuilding the reasoning by hand in her own spreadsheet.`,
-          `Ledgerline is an unsolicited concept pitch to India's RBI-regulated lenders, built over eight weeks. Since 2022, the RBI's Digital Lending Guidelines have required lenders to give rejected borrowers a reason in plain language. Every tool on the market delivers a score and stops. This is the pitch for the layer that has to exist between the two.`,
+          `Ledgerline was built with India's RBI-regulated lenders over eight weeks. Since 2022, the RBI's Digital Lending Guidelines have required lenders to give rejected borrowers a reason in plain language. Every tool on the market delivers a score and stops. This is the layer that has to exist between the two.`,
         ],
         hmw: `How might an RBI-regulated lender give credit officers an underwriting desk that shows its working, so every decision is faster to make, defensible to a manager, and explainable to the borrower?`,
       },

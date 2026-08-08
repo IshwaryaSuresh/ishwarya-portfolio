@@ -706,8 +706,7 @@ export default function CaseStudy() {
         <Reveal disabled={!project.story} delay={260}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-t border-b border-border">
           {[
-            { label: 'Client', value: project.client },
-            { label: 'Role', value: project.role },
+            { label: project.clientLabel ?? 'Client', value: project.client },
             ...(project.duration ? [{ label: 'Timeline', value: project.duration }] : []),
             { label: 'Tools', value: project.tools.join(', ') },
             ...(project.overview ? [
@@ -875,7 +874,7 @@ export default function CaseStudy() {
             {/* Timeline */}
             <section className="mb-24">
               <Reveal y={16}>
-                <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">3 months, Discovery to Alpha</p>
+                <p className="text-xs font-medium uppercase tracking-widest text-muted mb-6">{project.tldr.timelineLabel ?? '3 months, Discovery to Alpha'}</p>
               </Reveal>
               <Reveal delay={80}>
                 <div className="relative">
@@ -897,13 +896,13 @@ export default function CaseStudy() {
           {/* Stage: Research, ink plate */}
           <section className="bg-ink py-20 md:py-24 mb-24">
             <StoryContainer>
-              <StoryStageHeader label="Research" kicker="Feb – Mar 2023" dark />
+              <StoryStageHeader label="Research" kicker={project.tldr.researchKicker ?? 'Feb – Mar 2023'} dark />
               <div className="space-y-16">
 
                 {/* Ethnography */}
                 <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
                   <Reveal className="self-start">
-                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">Watching, before designing</h3>
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">{project.tldr.ethnography.label ?? 'Watching, before designing'}</h3>
                     <p className="text-sm leading-relaxed text-white/60">{project.tldr.ethnography.line}</p>
                   </Reveal>
                   <div className="grid grid-cols-2 gap-3 min-w-0">
@@ -923,7 +922,7 @@ export default function CaseStudy() {
                 {/* Discovery gap */}
                 <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
                   <Reveal className="self-start">
-                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">Everything looked backwards</h3>
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-paper">{project.tldr.discovery.label ?? 'Everything looked backwards'}</h3>
                     <p className="text-sm leading-relaxed text-white/60">{project.tldr.discovery.line}</p>
                   </Reveal>
                   <Reveal delay={120}>
@@ -955,6 +954,21 @@ export default function CaseStudy() {
                       </div>
                     </div>
                   </Reveal>
+                  {project.focusGroup && (
+                    <Reveal delay={180} className="md:col-start-2">
+                      <figure className="rounded-2xl overflow-hidden border border-white/10">
+                        <img
+                          src={project.focusGroup.image}
+                          alt={project.focusGroup.caption}
+                          className="w-full object-cover"
+                          style={{ maxHeight: '340px' }}
+                        />
+                        <figcaption className="px-4 py-3 bg-white/5 text-[11px] text-white/60 leading-relaxed border-t border-white/10">
+                          {project.focusGroup.intro ?? project.focusGroup.caption}
+                        </figcaption>
+                      </figure>
+                    </Reveal>
+                  )}
                 </div>
               </div>
             </StoryContainer>
@@ -963,13 +977,13 @@ export default function CaseStudy() {
           {/* Stage: Design */}
           <section className="mb-24">
             <StoryContainer>
-              <StoryStageHeader label="Design" kicker="Mar – Apr 2023" />
+              <StoryStageHeader label="Design" kicker={project.tldr.designKicker ?? 'Mar – Apr 2023'} />
               <div className="space-y-16">
 
                 {/* Storyboards to zine */}
                 <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
                   <Reveal className="self-start">
-                    <h3 className="font-display text-2xl leading-tight mb-3 text-ink">How the zine arrived</h3>
+                    <h3 className="font-display text-2xl leading-tight mb-3 text-ink">{project.tldr.origin.label ?? 'How the zine arrived'}</h3>
                     <p className="text-sm leading-relaxed text-muted">{project.tldr.origin.line}</p>
                   </Reveal>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-0">
@@ -987,6 +1001,55 @@ export default function CaseStudy() {
                     ))}
                   </div>
                 </div>
+
+                {/* How a session becomes a keepsake */}
+                {project.tldr.output && project.tldr.output.length > 0 && (
+                  <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                    <Reveal className="self-start">
+                      <h3 className="font-display text-2xl leading-tight mb-3 text-ink">How it works</h3>
+                      <p className="text-sm leading-relaxed text-muted">
+                        Three moves, start to finish: the app records the session, composes the story, and lays it out ready to print and fold.
+                      </p>
+                    </Reveal>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-0">
+                      {project.tldr.output.map((o, i) => (
+                        <Reveal key={o.label} delay={120 + i * 90} className="h-full">
+                          <figure className="rounded-xl overflow-hidden border border-border h-full flex flex-col">
+                            <div className="bg-paper p-3 flex-1 flex items-center justify-center">
+                              <img src={o.src} alt={o.label} className="max-h-56 w-auto object-contain" />
+                            </div>
+                            <figcaption className="px-3 py-2 bg-paper text-[11px] text-ink font-medium border-t border-border">
+                              <span className="text-muted mr-1">{i + 1}</span>{o.label}
+                            </figcaption>
+                          </figure>
+                        </Reveal>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* The printed artifact */}
+                {project.zineInspiration?.mockups && (
+                  <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+                    <Reveal className="self-start">
+                      <h3 className="font-display text-2xl leading-tight mb-3 text-ink">The prompt cards</h3>
+                      <p className="text-sm leading-relaxed text-muted">
+                        Open-ended themes, designed so there is never a wrong answer: the session templates a resident and carer work through together.
+                      </p>
+                    </Reveal>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 min-w-0">
+                      {project.zineInspiration.mockups.map((m, i) => (
+                        <Reveal key={m.src} delay={120 + i * 70}>
+                          <figure className="rounded-xl overflow-hidden border border-border">
+                            <div className="h-36 overflow-hidden bg-paper">
+                              <img src={m.src} alt={m.caption} className="w-full h-full object-cover" />
+                            </div>
+                          </figure>
+                        </Reveal>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Who it is for */}
                 {project.personas && project.personaRoles && (

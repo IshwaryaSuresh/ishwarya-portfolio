@@ -17,6 +17,10 @@
   --gray-700: #333333;
   --gray-900: #121212;
   --ink: #0D0D0D;
+  /* Surface for the full-bleed dark plates. A true near-black, a shade deeper
+     than --ink, with only a couple of points of teal bias so it reads as a
+     chosen surface without lifting toward grey. */
+  --plate: #0A0D0E;
 
   --bg: var(--off);
   --bg-alt: var(--gray-100);
@@ -113,6 +117,39 @@ body.hero-light .nav__inner {
 }
 .case-study h1 { font-weight: 500; }
 .case-study .uppercase { font-family: var(--font-mono); }
+
+/* Full-bleed dark plate. These run long (the pinned screen walkthrough is tens
+   of thousands of pixels), so the surface is softened and given a faint accent
+   wash at the entry edge and a fade at the exit, rather than hard-cutting to a
+   flat void against the paper background. */
+.ink-plate {
+  position: relative;
+  background-color: var(--plate);
+  isolation: isolate;
+}
+.ink-plate::before,
+.ink-plate::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.ink-plate::before {
+  top: 0;
+  height: 240px;
+  background: radial-gradient(110% 100% at 50% 0%, rgba(0, 128, 128, 0.08), transparent 72%);
+}
+.ink-plate::after {
+  bottom: 0;
+  height: 180px;
+  background: linear-gradient(to top, rgba(250, 250, 250, 0.03), transparent);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .ink-plate::before,
+  .ink-plate::after { display: none; }
+}
 
 .sec-head {
   display: grid;

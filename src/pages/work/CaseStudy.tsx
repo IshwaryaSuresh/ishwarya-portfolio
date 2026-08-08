@@ -493,7 +493,7 @@ function FragmentRow({
 // alternating dark/light rhythm of the home page and the story stages.
 function InkPlate({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative left-1/2 -translate-x-1/2 w-screen bg-ink py-20 md:py-24">
+    <div className="ink-plate relative left-1/2 -translate-x-1/2 w-screen py-20 md:py-24">
       <div className="max-w-3xl mx-auto px-6">{children}</div>
     </div>
   )
@@ -518,6 +518,10 @@ export default function CaseStudy() {
   if (project.comingSoon) return <Navigate to="/work" replace />
 
   const colorClass = typeColors[project.type] ?? 'bg-gray-50 text-gray-600 border-gray-200'
+
+  // Opt-in per project: render these sections as full-bleed ink plates.
+  const onPlate = (key: NonNullable<Project['darkPlates']>[number]) =>
+    project.darkPlates?.includes(key) ?? false
 
   const assumptionsSection = project.assumptions ? (
     <section>
@@ -1162,16 +1166,30 @@ export default function CaseStudy() {
 
 
         {/* Problem */}
-        <section>
-          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-4">The problem</p>
-          <div className="space-y-4">
-            {project.problem.split('\n\n').map((para, i) => (
-              <p key={i} className={`leading-relaxed ${i === project.problem.split('\n\n').length - 1 ? 'text-accent font-medium italic' : 'text-muted'}`}>
-                {para}
-              </p>
-            ))}
-          </div>
-        </section>
+        {(() => {
+          const d = onPlate('problem')
+          const paras = project.problem.split('\n\n')
+          const body = (
+            <>
+              <p className={`text-xs font-medium uppercase tracking-widest mb-4 ${d ? 'text-accent-soft' : 'text-muted'}`}>The problem</p>
+              <div className="space-y-4">
+                {paras.map((para, i) => (
+                  <p
+                    key={i}
+                    className={`leading-relaxed ${
+                      i === paras.length - 1
+                        ? `font-medium italic ${d ? 'text-accent-soft' : 'text-accent'}`
+                        : d ? 'text-white/70' : 'text-muted'
+                    }`}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </>
+          )
+          return d ? <InkPlate>{body}</InkPlate> : <section>{body}</section>
+        })()}
 
         {/* Framing the opportunity, the pivot the whole project turns on */}
         {project.opportunityFraming && (
@@ -1201,13 +1219,13 @@ export default function CaseStudy() {
               <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
                 <div className="p-6 md:p-8 bg-paper">
                   <p className="text-[11px] font-semibold uppercase tracking-widest text-rose-600 mb-3">Where I started</p>
-                  <p className="font-display text-2xl text-ink/50 line-through decoration-rose-400 decoration-2 leading-snug mb-4">Reminiscence</p>
+                  <p className="font-display text-2xl text-ink/50 line-through decoration-rose-400 decoration-2 leading-snug mb-4">{project.opportunityFraming.from ?? 'Reminiscence'}</p>
                   <p className="text-sm text-muted leading-relaxed mb-4">{project.opportunityFraming.initialAssumption}</p>
                   <p className="text-sm text-ink font-medium leading-relaxed">"{project.opportunityFraming.initialHmw}"</p>
                 </div>
                 <div className="p-6 md:p-8 bg-accent-light">
                   <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-3">Where the research took me</p>
-                  <p className="font-display text-2xl text-ink leading-snug mb-4">Present &amp; future</p>
+                  <p className="font-display text-2xl text-ink leading-snug mb-4">{project.opportunityFraming.to ?? 'Present & future'}</p>
                   <p className="text-sm text-muted leading-relaxed mb-4">{project.opportunityFraming.shift}</p>
                   <p className="text-ink font-medium leading-relaxed">"{project.opportunityFraming.reframedHmw}"</p>
                 </div>
@@ -1442,6 +1460,15 @@ export default function CaseStudy() {
         )}
 
         {/* Key insight */}
+        {onPlate('insight') ? (
+          <InkPlate>
+            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-3">Key insight</p>
+            <p className="text-paper text-2xl md:text-3xl font-display leading-snug">"{project.insight}"</p>
+            {project.solutionTeaser && (
+              <p className="text-white/60 leading-relaxed mt-6 pt-6 border-t border-white/15">{project.solutionTeaser}</p>
+            )}
+          </InkPlate>
+        ) : (
         <section className="bg-accent-light border border-accent/30 rounded-2xl p-8">
           <p className="text-xs font-medium uppercase tracking-widest text-accent mb-3">Key insight</p>
           <p className="text-ink text-lg font-medium leading-relaxed">"{project.insight}"</p>
@@ -1449,6 +1476,7 @@ export default function CaseStudy() {
             <p className="text-muted leading-relaxed mt-5 pt-5 border-t border-accent/20">{project.solutionTeaser}</p>
           )}
         </section>
+        )}
 
         {/* Assumptions → findings → pivots, early slot (default) */}
         {!project.assumptionsLate && assumptionsSection}
@@ -1510,30 +1538,34 @@ export default function CaseStudy() {
         {!project.processEarly && processSection}
 
         {/* Process artifacts, user flows, audits, component studies */}
-        {project.processArtifacts && (
-          <section>
-            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-2">Discovery, process artifacts</p>
-            <p className="text-sm text-muted mb-6">Visual outputs from the audit and mapping work, user flows, component studies, and redesign proposals.</p>
-            <div className="space-y-4">
-              {project.processArtifacts.map((item, i) => (
-                <figure key={i} className="rounded-2xl overflow-hidden border border-border">
-                  <div className="px-4 pt-3 pb-1 bg-paper flex items-center gap-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-widest bg-ink text-paper rounded px-2 py-0.5">{item.label}</span>
-                  </div>
-                  <img
-                    src={item.src}
-                    alt={item.caption}
-                    className="w-full object-contain bg-paper"
-                    style={{ maxHeight: '640px' }}
-                  />
-                  <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">
-                    {item.caption}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-        )}
+        {project.processArtifacts && (() => {
+          const d = onPlate('artifacts')
+          const body = (
+            <>
+              <p className={`text-xs font-medium uppercase tracking-widest mb-2 ${d ? 'text-accent-soft' : 'text-muted'}`}>Discovery, process artifacts</p>
+              <p className={`text-sm mb-6 ${d ? 'text-white/60' : 'text-muted'}`}>Visual outputs from the audit and mapping work, user flows, component studies, and redesign proposals.</p>
+              <div className="space-y-4">
+                {project.processArtifacts!.map((item, i) => (
+                  <figure key={i} className={`rounded-2xl overflow-hidden border ${d ? 'border-white/15' : 'border-border'}`}>
+                    <div className={`px-4 pt-3 pb-1 flex items-center gap-2 ${d ? 'bg-white/5' : 'bg-paper'}`}>
+                      <span className={`text-[10px] font-semibold uppercase tracking-widest rounded px-2 py-0.5 ${d ? 'bg-accent text-paper' : 'bg-ink text-paper'}`}>{item.label}</span>
+                    </div>
+                    <img
+                      src={item.src}
+                      alt={item.caption}
+                      className={`w-full object-contain ${d ? 'bg-white/5' : 'bg-paper'}`}
+                      style={{ maxHeight: '640px' }}
+                    />
+                    <figcaption className={`px-4 py-3 text-xs leading-relaxed border-t ${d ? 'bg-white/5 text-white/60 border-white/15' : 'bg-paper text-muted border-border'}`}>
+                      {item.caption}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </>
+          )
+          return d ? <InkPlate>{body}</InkPlate> : <section>{body}</section>
+        })()}
 
         {/* Design decisions, only if present */}
         {project.designDecisions && (
@@ -1583,30 +1615,36 @@ export default function CaseStudy() {
         </section>
 
         {/* User journey, only if present */}
-        {project.userJourney && (
-          <section className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
-            <div className="self-start">
-              <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">User journey</p>
-              {project.userJourney.intro && <p className="text-sm text-muted leading-relaxed">{project.userJourney.intro}</p>}
-            </div>
-            <div className="min-w-0">
-              {project.userJourney.stages.map((s, i) => (
-                <div key={s.stage} className="relative pl-10 pb-6 last:pb-0">
-                  {i < project.userJourney!.stages.length - 1 && (
-                    <span aria-hidden className="absolute left-3 top-7 bottom-0 w-px bg-border" />
-                  )}
-                  <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-ink text-paper text-xs font-bold flex items-center justify-center">{i + 1}</span>
-                  <h3 className="font-semibold text-ink text-sm mb-1.5">{s.stage}</h3>
-                  <p className="text-sm text-muted leading-relaxed mb-2">{s.action}</p>
-                  <div className="flex flex-wrap gap-x-6 gap-y-1">
-                    <p className="text-xs text-muted"><span className="font-semibold text-ink">Feeling:</span> {s.feeling}</p>
-                    <p className="text-xs text-muted"><span className="font-semibold text-ink">Design response:</span> {s.opportunity}</p>
+        {project.userJourney && (() => {
+          const d = onPlate('journey')
+          const body = (
+            <div className="grid md:grid-cols-[280px_1fr] gap-6 md:gap-12">
+              <div className="self-start">
+                <p className={`text-xs font-medium uppercase tracking-widest mb-3 ${d ? 'text-accent-soft' : 'text-muted'}`}>User journey</p>
+                {project.userJourney!.intro && (
+                  <p className={`text-sm leading-relaxed ${d ? 'text-white/60' : 'text-muted'}`}>{project.userJourney!.intro}</p>
+                )}
+              </div>
+              <div className="min-w-0">
+                {project.userJourney!.stages.map((s, i) => (
+                  <div key={s.stage} className="relative pl-10 pb-6 last:pb-0">
+                    {i < project.userJourney!.stages.length - 1 && (
+                      <span aria-hidden className={`absolute left-3 top-7 bottom-0 w-px ${d ? 'bg-white/15' : 'bg-border'}`} />
+                    )}
+                    <span className={`absolute left-0 top-0 w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${d ? 'bg-accent text-paper' : 'bg-ink text-paper'}`}>{i + 1}</span>
+                    <h3 className={`font-semibold text-sm mb-1.5 ${d ? 'text-paper' : 'text-ink'}`}>{s.stage}</h3>
+                    <p className={`text-sm leading-relaxed mb-2 ${d ? 'text-white/60' : 'text-muted'}`}>{s.action}</p>
+                    <div className="flex flex-wrap gap-x-6 gap-y-1">
+                      <p className={`text-xs ${d ? 'text-white/50' : 'text-muted'}`}><span className={`font-semibold ${d ? 'text-white/80' : 'text-ink'}`}>Feeling:</span> {s.feeling}</p>
+                      <p className={`text-xs ${d ? 'text-white/50' : 'text-muted'}`}><span className={`font-semibold ${d ? 'text-white/80' : 'text-ink'}`}>Design response:</span> {s.opportunity}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </section>
-        )}
+          )
+          return d ? <InkPlate>{body}</InkPlate> : <section>{body}</section>
+        })()}
 
         {/* Trade-offs, what I cut and why. Only if present. */}
         {project.tradeoffs && (
@@ -1741,12 +1779,21 @@ export default function CaseStudy() {
         )}
 
         {/* Takeaway */}
-        <section className="border-l-4 border-accent pl-6">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Key takeaway</p>
-          <blockquote className="text-ink text-lg leading-relaxed font-medium">
-            "{project.takeaway}"
-          </blockquote>
-        </section>
+        {onPlate('takeaway') ? (
+          <InkPlate>
+            <p className="text-xs font-medium uppercase tracking-widest text-accent-soft mb-4">Key takeaway</p>
+            <blockquote className="text-paper text-2xl md:text-3xl font-display leading-snug">
+              "{project.takeaway}"
+            </blockquote>
+          </InkPlate>
+        ) : (
+          <section className="border-l-4 border-accent pl-6">
+            <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">Key takeaway</p>
+            <blockquote className="text-ink text-lg leading-relaxed font-medium">
+              "{project.takeaway}"
+            </blockquote>
+          </section>
+        )}
 
         {/* Tags */}
         <section className="flex flex-wrap gap-2 pt-4 border-t border-border">

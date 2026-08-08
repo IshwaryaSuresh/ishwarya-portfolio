@@ -82,6 +82,9 @@ export type Project = {
     imageCaption?: string
   }
   opportunityFraming?: {
+    // Short labels for the two sides of the pivot. Default to Me & You's.
+    from?: string
+    to?: string
     initialAssumption: string
     initialHmw: string
     shift: string
@@ -113,7 +116,8 @@ export type Project = {
     ethnography: { label?: string; line: string; items: { src: string; label: string }[] }
     pivot: { from: string; fromHmw: string; to: string; toHmw: string; because: string }
     origin: { label?: string; line: string; items: { src: string; label: string }[] }
-    people: string
+    // Only rendered alongside personas/personaRoles; omit when a project has none.
+    people?: string
     testing: { line: string; changes: string[] }
     ethics: string
     output: { src: string; label: string }[]
@@ -217,6 +221,9 @@ export type Project = {
   tradeoffs?: { decision: string; reasoning: string }[]
   // Business outcome translations for metrics
   businessOutcomes?: { metric: string; translation: string }[]
+  // Sections to render as full-bleed ink plates instead of light cards, for
+  // projects that would otherwise run as one long light scroll.
+  darkPlates?: ('problem' | 'insight' | 'journey' | 'takeaway' | 'artifacts')[]
   // Visual story layout: numbered chronological stages of two-column chapters
   // (statement headline + one paragraph left, visual right, key-finding callout).
   // When present, this replaces the default detailed body. Header, tags, and
@@ -1405,7 +1412,6 @@ export const projects: Project[] = [
           { src: '/uploads/TFL%20Care%20leaver%20oyester%20card%20campaign/Contact%20your%20borough.png', label: 'The route out' },
         ],
       },
-      people: 'Two roles, built as research-grounded composites from advocacy research and the case patterns stakeholders described: the care leaver applying on a phone, and the statutory personal adviser who currently finishes the applications they cannot.',
       testing: {
         line: 'Two structured review rounds with TfL and Novacroft stakeholders, against policy, compliance and accessibility criteria. Not usability testing with care leavers, which sat outside the scope of the engagement.',
         changes: [
@@ -1427,6 +1433,7 @@ export const projects: Project[] = [
       ],
       outcome: 'A prototype approved for build, including a verification pathway that did not exist before. The principle outlives the project: a service the intended users cannot complete is not a form problem, it is an exclusion problem. Usability testing with care leavers is the first thing I would run given access.',
     },
+    darkPlates: ['problem', 'journey', 'artifacts'],
     contextTitle: 'Context · leaving care at 18',
     context: {
       intro: `Care leavers are young people who have spent time in the care system and left it at 18, when statutory support falls away. Around 80,000 leave each year, often after repeated moves between placements, and are expected to handle housing, work and benefits alone. Transport runs underneath all of it, which is why TfL's Care Leaver Photocard gives them 50% off travel.`,
@@ -1448,6 +1455,8 @@ export const projects: Project[] = [
       imageCaption: 'The alternative verification route. The original journey had no equivalent: a care leaver without a fixed address could not proceed, and nothing on screen told them why.',
     },
     opportunityFraming: {
+      from: 'Form redesign',
+      to: 'Exclusion problem',
       initialAssumption: 'The brief arrived as a form redesign: the application was unclear, so the job was to make it clearer.',
       initialHmw: 'How might we make the Care Leaver Photocard application clearer and easier to complete?',
       shift: 'The WCAG audit and advocacy research overturned this. Friction was not evenly spread, and one step was not friction at all - care leavers without a fixed address had no route through address verification, and nothing on screen said so.',
@@ -1456,67 +1465,6 @@ export const projects: Project[] = [
     solutionTeaser: `Where it landed: requirements surfaced before you start, a voice that talks to you rather than about you, error states that say how to fix the problem, and a second route through address verification for the people the original flow turned away. The rest of this page is how the audit got there.`,
     problem: `Care leavers are among the most socioeconomically vulnerable young people in the UK. After leaving the care system at 18, many face significant barriers to employment, education, and independence. In cities where public transport is the only affordable way to get around, access to a travel discount is not a perk: it is a practical lifeline.\n\nTransport for London's Care Leaver Photocard offers 50% off all TfL travel for care leavers aged 18-25. But the existing application journey had a problem: it was unclear, inaccessible in places, and created unnecessary friction for a group that already faces multiple barriers in navigating official processes.\n\nHow might we design an application experience that a care leaver can navigate independently, without a support worker, and without feeling stigmatised?`,
     insight: `The barriers were systemic, not motivational. Language, document requirements, and mobile accessibility were the three failure points that needed redesigning.`,
-    personasIntro: `Two roles shaped the design. These are research-grounded composites, not interviewed participants, built from the advocacy research and the case patterns stakeholders described.`,
-    personaRoles: [
-      { role: 'Care Leaver', who: 'Primary user', definition: '18 to 25, eligible for the photocard, applying on a phone without anyone beside them. The two below differ in one variable that decided everything: whether they have a fixed address.' },
-      { role: 'Personal Adviser', who: 'Secondary user', definition: 'Statutory advisers supporting a caseload up to 25. They absorb the cost of every application a young person cannot finish alone.' },
-    ],
-    personas: [
-      {
-        type: 'Primary - Care Leaver',
-        name: 'Danielle',
-        age: 19,
-        description: 'Left her foster placement at 18, now in a council studio flat. Starting a Level 3 college course, working supermarket shifts to cover the gap. Applies for everything on her phone, late at night after work.',
-        needs: [
-          'To know what documents she needs before she starts, not twenty minutes in',
-          'To finish on a phone without pinching to zoom or fighting the wrong keyboard',
-          'To be told what went wrong and what will fix it',
-        ],
-        frustrations: [
-          'Official forms that assume she has a printer, a scanner, or a free weekday morning',
-          'Error messages that say "invalid entry" and nothing else',
-          'Being addressed as "the applicant" by services that already hold her entire file',
-        ],
-        goal: 'Get the card sorted tonight, on her phone, without asking anyone for help.',
-        reflection: 'Danielle is why the checklist moved to the start and why fields were tagged to the right mobile keyboard. She is not blocked by the journey, she is worn down by it. Every friction is a chance to close the tab and not come back.',
-      },
-      {
-        type: 'Primary - Care Leaver',
-        name: 'Kieran',
-        age: 22,
-        description: 'Four moves in eighteen months: supported lodgings, a friend\'s sofa, council temporary accommodation. No tenancy in his name, no utility bill with his address. Needs the discount more than almost anyone applying, and the original journey served him least.',
-        needs: [
-          'A way to prove eligibility that does not depend on a fixed address',
-          'To be told what the next step is, rather than hitting one that accepts nothing he has',
-          'To not explain his housing situation to a call handler to get a travel discount',
-        ],
-        frustrations: [
-          'Verification built on the assumption that everyone has a stable address',
-          'Being pushed to a phone line as the workaround for a gap in the service',
-          'Processes where the only signal he does not fit is that nothing works',
-        ],
-        goal: 'Prove he is eligible using what he actually has, and get the card without a dead end.',
-        reflection: 'Kieran is why the alternative verification pathway exists, and why it went through compliance rather than staying a support-desk workaround. Designing around him rather than Danielle turned a form redesign into a service change.',
-      },
-      {
-        type: 'Secondary - Personal Adviser',
-        name: 'Ruth',
-        age: 41,
-        description: 'Statutory personal adviser at a London borough with a caseload of care leavers up to 25. Spends much of her week finishing applications for young people who got stuck part-way through.',
-        needs: [
-          'Applications her caseload can complete without her sitting alongside them',
-          'To know which step someone is stuck on when they call her',
-          'A documented route for young people in temporary accommodation, not an informal favour',
-        ],
-        frustrations: [
-          'Being the workaround for services that have not designed for the people she supports',
-          'Chasing the same rejected document issue across multiple young people',
-          'No visibility into where an application has failed',
-        ],
-        goal: 'Spend her time on the support only she can give, not on filling in forms.',
-        reflection: 'Ruth was the counterweight to the brief. Success was not whether she could complete the application, but whether Danielle and Kieran could complete it without her.',
-      },
-    ],
     processTitle: 'Process timeline',
     processEarly: true,
     processCompact: true,
@@ -2099,6 +2047,8 @@ export const projects: Project[] = [
     insight: `An ambient signal gets attention but carries no instruction. People saw the display change colour and still could not say what it meant or what they were supposed to do - so the design problem was never awareness, it was translation.`,
     solutionTeaser: `Where it landed: the display tells you something has changed, and the app tells you what that means and what to do about it - opened by choice, once you have noticed the colour. The rest of this page is how the research got there.`,
     opportunityFraming: {
+      from: 'Alerting',
+      to: 'Ambient + on-demand',
       initialAssumption: 'Like almost every product in this category, I started from alerting. The job, I assumed, was to make the invisible visible and tell people the moment the air got bad.',
       initialHmw: 'How might we alert office workers when indoor air quality drops?',
       shift: 'The co-design workshops overturned this twice over. Participants dismissed alerts outright - several had already disabled notifications on tools like this. And the display was already telling them something; they just could not read it. Awareness was not the missing piece, interpretation was.',

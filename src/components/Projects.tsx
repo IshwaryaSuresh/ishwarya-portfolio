@@ -125,7 +125,7 @@ export default function Projects() {
           <div>
             <h2 className="h2" data-reveal="up" data-delay="80">Selected <span className="accent">work.</span></h2>
           </div>
-          <div className="sec-head__right" data-reveal="up" data-delay="160">Six briefs across fintech, edtech, healthcare and public sector. Full case studies on request.</div>
+          <div className="sec-head__right" data-reveal="up" data-delay="160">Six projects across healthcare, public sector, fintech and edtech.</div>
         </div>
 
         <div className="spreads">

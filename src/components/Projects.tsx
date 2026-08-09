@@ -89,7 +89,7 @@ const PROJECTS: Project[] = [
     desc: 'A two-person evening ritual where partners share how the day felt as light, not words. Built for neurodivergent and long-distance couples, and shipped to the iOS App Store in nine weeks.',
     metric: 'Live on the App Store · 7 states · 0 streaks',
     tags: ['Inclusive design', 'Consumer app', 'Shipped'],
-    image: '/uploads/afterglow/hero.png',
+    image: '/uploads/afterglow/spread.png',
     placeholder: 'Inclusive design, two-person ritual app',
     slug: 'afterglow',
   },
@@ -138,7 +138,7 @@ export default function Projects() {
           <div>
             <h2 className="h2" data-reveal="up" data-delay="80">Selected <span className="accent">work.</span></h2>
           </div>
-          <div className="sec-head__right" data-reveal="up" data-delay="160">Six projects across healthcare, public sector, fintech and edtech.</div>
+          <div className="sec-head__right" data-reveal="up" data-delay="160">Seven projects across healthcare, public sector, fintech and edtech.</div>
         </div>
 
         <div className="spreads">

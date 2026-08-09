@@ -706,7 +706,7 @@ export default function CaseStudy() {
         <Reveal disabled={!project.story} delay={260}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-t border-b border-border">
           {[
-            { label: project.clientLabel ?? 'Client', value: project.client },
+            { label: project.clientLabel ?? 'Organisation', value: project.client },
             ...(project.duration ? [{ label: 'Timeline', value: project.duration }] : []),
             { label: 'Tools', value: project.tools.join(', ') },
             ...(project.overview ? [
@@ -745,7 +745,7 @@ export default function CaseStudy() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                View live prototype
+                {project.prototypeLabel ?? 'View live prototype'}
               </a>
             )}
             {project.publishedResearch && (

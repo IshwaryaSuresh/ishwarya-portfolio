@@ -108,6 +108,13 @@ export default function NumbersAbout() {
                 <p className="about__cv-meta">Redesigned AnywhereWorks platform UI and built a design system and style guide. Simplified onboarding workflows for the Switchboard app, increasing activation.</p>
               </div>
             </li>
+            <li className="about__cv-row" data-reveal="up" data-delay="640">
+              <span className="about__cv-year">2015 to 2020</span>
+              <div>
+                <p className="about__cv-role">Bachelor of Architecture (B.Arch), Anna University</p>
+                <p className="about__cv-meta">Five-year professional degree. Design thinking, sustainable design, and systems-level problem-solving.</p>
+              </div>
+            </li>
           </ol>
         </div>
       </div>

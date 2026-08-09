@@ -152,6 +152,14 @@ export default function About() {
               Specialising in Interaction Design, UX Research Methods, and Prototyping. Dissertation on ambient air quality sensing for workplace wellbeing, acknowledged at <strong className="text-ink">ACM CHI 2024</strong>.
             </p>
           </div>
+          <div className="border border-border rounded-2xl p-6">
+            <p className="text-sm font-semibold text-ink">B.Arch (Bachelor of Architecture)</p>
+            <p className="text-sm text-accent mb-1">Anna University / IST Chennai</p>
+            <p className="text-xs text-muted mb-3">2015 to 2020 · Chennai, India</p>
+            <p className="text-sm text-muted leading-relaxed">
+              Five-year professional degree building a foundation in design thinking, sustainable design, and systems-level problem-solving.
+            </p>
+          </div>
         </div>
       </div>
 

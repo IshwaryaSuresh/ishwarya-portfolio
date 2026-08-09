@@ -38,7 +38,7 @@ export default function HowIHelp() {
   const current = HELP[active]
 
   return (
-    <section className="section" id="services">
+    <section className="section section--dark" id="services">
       <div className="container">
         <div className="sec-head">
           <div>

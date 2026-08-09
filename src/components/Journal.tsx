@@ -82,7 +82,7 @@ export default function Journal() {
   const [lead, ...rest] = ARTICLES
 
   return (
-    <section className="section" id="journal">
+    <section className="section section--dark" id="journal">
       <div className="container">
         <div className="sec-head">
           <div>

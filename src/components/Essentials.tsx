@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const FAQ = [
   { q: 'What services do you offer?', a: 'Product and interaction design, service design, strategy and discovery, and WCAG 2.2 accessibility. Most engagements combine discovery with delivery. I also take on focused accessibility audits and GDS-standard service design independently.' },
-  { q: 'What sectors do you work in?', a: 'Public sector (government, GDS standards), healthcare, edtech, fintech, architecture, and startups. I have direct experience at MHCLG delivering WCAG 2.1 AA compliance for 200+ Local Authorities, and have led design for healthcare, remote learning, and dementia care products.' },
+  { q: 'What sectors do you work in?', a: 'Public sector (government, GDS standards), healthcare, edtech, and fintech. I have direct experience at MHCLG delivering WCAG 2.1 AA compliance for 200+ Local Authorities, and have led design for healthcare, remote learning, and dementia care products.' },
   { q: 'How does your process work?', a: 'Four phases: Listen (stakeholder and user interviews), Frame (synthesis, opportunity maps, success metrics), Shape (concepts, flows, usability-tested prototypes), and Ship (production UI, handover, QA with engineering). Each phase ends with a written update.' },
   { q: 'How long does a project take?', a: 'Most end-to-end briefs run 6 to 10 weeks. A focused discovery or accessibility audit runs 1 to 2 weeks. Retainers are month-to-month.' },
   { q: 'What do I need to provide before we start?', a: 'A one-page brief, access to 3 to 5 internal stakeholders, and, if you have them, existing research, analytics, and design files. No brief is too rough to start from.' },
@@ -14,7 +14,7 @@ export default function Essentials() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section className="section faq-dark">
+    <section className="section">
       <div className="container">
         <div className="faq">
           <div className="faq__label">

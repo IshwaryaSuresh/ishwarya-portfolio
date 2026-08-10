@@ -2622,3 +2622,37 @@ body.hero-light .hero__caret { background: var(--teal-500); }
 .section--dark .jnl__row-title { color: var(--white); }
 .section--dark .jnl__row:hover .jnl__row-title { color: var(--teal-300); }
 .section--dark .jnl__row-date { color: rgba(255,255,255,0.4); }
+
+/* ===== ROUNDED CARDS: one radius across every card-like block ===== */
+:root { --radius-card: 16px; }
+
+.spread__img-mask,
+.story__piece-mask,
+.mag-index__thumb,
+.hire-sheet__mask,
+.proj-row__thumb,
+.proj-preview,
+.proj-card,
+.proj-card__media,
+.work-card,
+.about__portrait,
+.journal-card--link,
+.help-card {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+/* Case-study media and figures */
+.case-study figure,
+.case-study figure img,
+.screenscroll__frame,
+.svc__panel img {
+  border-radius: var(--radius-card);
+}
+
+/* Cards that sit inside a rounded parent keep square inner media */
+.proj-card__media { border-radius: var(--radius-card) var(--radius-card) 0 0; }
+
+@media (max-width: 580px) {
+  :root { --radius-card: 12px; }
+}

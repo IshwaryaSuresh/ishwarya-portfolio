@@ -17,6 +17,19 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     num: '01',
+    title: 'Afterglow, A Ritual for Two',
+    client: 'Self-initiated · Made for Humans',
+    year: '2026',
+    role: 'Research, design, native build & release',
+    desc: 'A two-person evening ritual where partners share how the day felt as light, not words. Built for neurodivergent and long-distance couples, and shipped to the iOS App Store in nine weeks.',
+    metric: 'Live on the App Store · 7 states · 0 streaks',
+    tags: ['Inclusive design', 'Consumer app', 'Shipped'],
+    image: '/uploads/afterglow/spread.png',
+    placeholder: 'Inclusive design, two-person ritual app',
+    slug: 'afterglow',
+  },
+  {
+    num: '02',
     title: 'Kaizen: Personal Finance OS',
     client: 'Self-initiated concept',
     year: '2026',
@@ -29,7 +42,7 @@ const PROJECTS: Project[] = [
     slug: 'kaizen',
   },
   {
-    num: '02',
+    num: '03',
     title: 'Ledgerline, B2B Fintech',
     client: 'Self-initiated',
     year: '2026',
@@ -40,19 +53,6 @@ const PROJECTS: Project[] = [
     image: '/uploads/ledgerline/home-hero.png',
     placeholder: 'Fintech B2B, SME underwriting',
     slug: 'ledgerline',
-  },
-  {
-    num: '03',
-    title: 'Afterglow, A Ritual for Two',
-    client: 'Self-initiated · Made for Humans',
-    year: '2026',
-    role: 'Research, design, native build & release',
-    desc: 'A two-person evening ritual where partners share how the day felt as light, not words. Built for neurodivergent and long-distance couples, and shipped to the iOS App Store in nine weeks.',
-    metric: 'Live on the App Store · 7 states · 0 streaks',
-    tags: ['Inclusive design', 'Consumer app', 'Shipped'],
-    image: '/uploads/afterglow/spread.png',
-    placeholder: 'Inclusive design, two-person ritual app',
-    slug: 'afterglow',
   },
   {
     num: '04',

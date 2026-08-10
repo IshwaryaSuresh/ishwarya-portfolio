@@ -250,6 +250,332 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: 'afterglow',
+    title: 'Afterglow: A Ritual for Two',
+    tagline: 'A two-person evening ritual where partners share how the day felt as light, not words. Designed for neurodivergent and long-distance couples, and shipped to the App Store in nine weeks.',
+    niche: ['Social Impact', 'Inclusive design', 'Consumer app'],
+    type: 'Social Impact',
+    featured: true,
+    client: 'Self-initiated · Made for Humans',
+    clientLabel: 'Built by',
+    duration: 'May – Jul 2026 · shipped',
+    tools: ['Google Stitch', 'Figma', 'Capacitor (iOS + Android)', 'Supabase', 'RevenueCat', 'Claude Code'],
+    prototype: 'https://apps.apple.com/in/app/afterglow-a-ritual-for-two/id6782056153',
+    prototypeLabel: 'View on the App Store',
+    wip: 'Live on the App Store · Android in closed testing',
+    heroImage: '/uploads/afterglow/hero.png',
+    overview: {
+      team: 'Solo, end to end: research, design, native build, backend, and store release',
+      industry: 'Consumer wellbeing / inclusive design',
+    },
+    processTitle: 'Process timeline',
+    problem: `Sam is 31, autistic, and in a long-distance relationship. By 8pm the spoons are gone and the daily "how was your day?" text reads like a job interview. Maya is 29, has ADHD and an anxious-leaning attachment style; when Sam's reply is short or late she spends the evening guessing.\n\nMost connection products charge words as the price of admission: text prompts, daily quizzes, long-form journalling, plus streaks and read receipts to make sure you pay. For the people who find naming a feeling hardest, that is exactly the fee they cannot pay on a hard day. The wordless alternative on the shelf costs nothing to send and says nothing on arrival.\n\nHow might two people share how a day actually felt without either of them having to find the words, and without the app turning care into a scoreboard?`,
+    insight: `The exhausting part of a check-in was never the wording of the prompt. It was that language itself was the entry fee. But removing words entirely lands on the opposite problem, which the wearable end of the market demonstrates: an unlabelled buzz is a cheap thing to send and an awful thing to receive. The product only works if the check-in is wordless to make and unambiguous to read.`,
+    process: [
+      { phase: 'Week 1 · Frame', step: 'Inclusion principles written first', detail: 'Eight non-negotiable principles set before a single screen: three ways to express, meaning never on colour alone, co-regulate never amplify, no streaks or badges, WCAG 2.2 AA throughout. Every later decision was checked against them.' },
+      { phase: 'Week 1 · Frame', step: 'Competitive scan', detail: 'Mapped the check-in loop across four connection apps: what each one asks you to produce, and what happens when you do not produce it.' },
+      { phase: 'Weeks 2–3 · Design', step: 'Seven states, one design language', detail: 'Built Reflect as the anchor screen with named Glow and Chip components, then generated every other state as "duplicate Reflect, change these three things" so the visual language could not drift.' },
+      { phase: 'Weeks 2–3 · Design', step: 'Calendar rebuilt as a list', detail: 'The conventional month grid failed the inclusion tests written in week one. Redesigned as a day-by-day list with a month strip for wayfinding.' },
+      { phase: 'Weeks 4–7 · Build', step: 'Native app and backend', detail: 'Capacitor build for iOS and Android over a Supabase backend: partner pairing, per-day check-in cadence, encrypted emotional data, and in-app account deletion.' },
+      { phase: 'Weeks 6–7 · Build', step: 'Subscriptions and the ethical paywall', detail: 'RevenueCat across both stores, with the line held that the daily ritual stays free forever and only depth and memory sit behind the trial.' },
+      { phase: 'Weeks 8–9 · Ship', step: 'App Store review', detail: 'Two rejections, both mine: metadata that never named the subscription requirement, then a Sign in with Apple button that was not visually equal to the Google one. Approved on the third submission.' },
+    ],
+    metrics: [
+      { label: 'Status', value: 'Live on the App Store' },
+      { label: 'States of one ritual, one design language', value: '7' },
+      { label: 'Weeks from written brief to approved app', value: '9' },
+      { label: 'Streaks, badges, or read receipts in the product', value: '0' },
+    ],
+    businessOutcomes: [
+      { metric: 'Shipped, not prototyped', translation: 'A native app in a real store with real subscriptions, which means the design had to survive backend constraints, two store review processes, and paying users, not just a Figma frame.' },
+      { metric: 'Accessibility as the product, not a pass', translation: 'The inclusion principles set the feature set: three input modes, word labels on every glow, and a designed reduced-motion variant. WCAG 2.2 AA was the floor rather than the goal.' },
+    ],
+    solution: `Afterglow is one loop plus two ways to look back. You set a glow, name it in one word, add an optional private note, and send it once a day. Your partner receives the glow with the word already attached, and can hold to send warmth back without typing anything. When you have both checked in, the two glows merge into the day's shared colour. The Calendar is the literal archive; Our Story is the poetic one.`,
+    takeaway: `A dead end is an accessibility failure, not just a bug. The sharpest lesson came after launch, when signed-in users without a subscription hit a paywall that had no exit if the store products failed to load: no retry, no sign out, and force-quitting did not help because the session persisted. I had written eight inclusion principles and still shipped a screen you could get trapped on. The fix took an afternoon; the habit of checking every screen for its exit is the thing I kept.`,
+    tags: ['Consumer app', 'Inclusive design', 'Neurodivergent', 'Accessibility', 'WCAG 2.2 AA', 'iOS', 'Shipped', 'Self-initiated'],
+    deskResearch: {
+      summary: `A scan of four two-person connection products, mapping the check-in loop in each: what it asks you to produce, how the other person receives it, and what the interface does when you produce nothing.`,
+      stats: [
+        { value: '4', label: 'Connection products scanned across the check-in loop' },
+        { value: '0/4', label: 'Where a wordless check-in still arrives with a word attached' },
+        { value: '~50%', label: 'Of autistic adults live with alexithymia, difficulty naming one\'s own feelings' },
+        { value: '~40%', label: 'Of people with ADHD live with alexithymia' },
+      ],
+      findings: [
+        'The market splits two ways and both sides fail the same evening. Three of the four make text the unit of a check-in, as a daily question, a journal entry, or a message in a shared timeline.',
+        'Two of them add a visible cost to silence: unlock mechanics or read receipts that make a missed evening legible to your partner.',
+        'The fourth has already removed language, and lands on the opposite problem. A tap carries no vocabulary, so it says "I am here" and nothing about how the day actually went, which leaves an anxious partner exactly where they started.',
+        'None of the four treat naming a feeling as the hard part. The word-based ones assume the words are available and the energy to type them is there; the wordless one assumes a word was never needed.',
+      ],
+      gap: 'The gap is not a gentler prompt, and it is not a quieter gesture. It is a check-in that costs no language to make and still arrives unambiguous.',
+      competitiveAudit: {
+        tools: [
+          {
+            name: 'Paired',
+            category: 'Couples app',
+            verdict: 'A daily question you both perform',
+            features: [
+              { label: 'Wordless check-in', score: 'none' },
+              { label: 'Named in words', score: 'none' },
+              { label: 'No streaks', score: 'none' },
+              { label: 'Clear to receive', score: 'partial' },
+              { label: 'Low-energy path', score: 'none' },
+            ],
+            gap: 'A daily question you both answer in text, then unlock each other. It works beautifully on a good day. On a draining one, the unlock mechanic turns a missed evening into something your partner can see you failed to do.',
+          },
+          {
+            name: 'Lasting',
+            category: 'Coaching',
+            verdict: 'Closer to homework than a check-in',
+            features: [
+              { label: 'Wordless check-in', score: 'none' },
+              { label: 'Named in words', score: 'partial' },
+              { label: 'No streaks', score: 'partial' },
+              { label: 'Clear to receive', score: 'partial' },
+              { label: 'Low-energy path', score: 'none' },
+            ],
+            gap: 'Structured sessions and exercises built on the assumption that both partners can articulate what they feel and have the energy to work on it. Valuable, and the wrong shape entirely for 8pm on a spoon-low evening.',
+          },
+          {
+            name: 'Between',
+            category: 'Couple space',
+            verdict: 'A better inbox, still an inbox',
+            features: [
+              { label: 'Wordless check-in', score: 'none' },
+              { label: 'Named in words', score: 'none' },
+              { label: 'No streaks', score: 'partial' },
+              { label: 'Clear to receive', score: 'none' },
+              { label: 'Low-energy path', score: 'none' },
+            ],
+            gap: 'A shared timeline of messages, photos, and dates. Everything still arrives as content you have to compose, and read receipts make silence legible as silence.',
+          },
+          {
+            name: 'Bond Touch',
+            category: 'Wearable',
+            verdict: 'Wordless, and says nothing',
+            features: [
+              { label: 'Wordless check-in', score: 'full' },
+              { label: 'Named in words', score: 'none' },
+              { label: 'No streaks', score: 'full' },
+              { label: 'Clear to receive', score: 'none' },
+              { label: 'Low-energy path', score: 'full' },
+            ],
+            gap: 'The one product that has already removed language: tap the bracelet and your partner feels the pattern, in a colour you chose. It is the right instinct and it costs almost nothing to send. But a buzz carries no vocabulary, so it says "I am here" and nothing about how the day went, which leaves the anxious partner exactly where they started.',
+          },
+        ],
+      },
+    },
+    personas: [
+      {
+        name: 'Sam',
+        age: 31,
+        type: 'The spoon-low partner',
+        description: 'Autistic, in a long-distance relationship. By 8pm the day is spent and the "how was your day" text feels like an interview with a right answer. Wants their partner to know they are loved without having to perform fluency to prove it.',
+        needs: [
+          'A check-in that costs almost nothing to make on the worst day of the week',
+          'A way to say something true without having to find the word for it first',
+          'No visible penalty on the evenings when nothing gets sent at all',
+        ],
+        frustrations: [
+          'Open-ended prompts are a blank page, and a blank page at 8pm is a no',
+          'Streaks and unlock mechanics turn a hard day into a visible failure',
+          'Voice notes and long replies are exactly the kind of effort there is none of left',
+        ],
+        goal: '"I want them to know I am here and I am okay, without having to perform being fine."',
+      },
+      {
+        name: 'Maya',
+        age: 29,
+        type: 'The anxious reader',
+        description: 'ADHD, anxious-leaning attachment. Does not need a paragraph. Needs unambiguous evidence that Sam is okay and thinking of her, because a one-word "fine" or a late reply can cost her the whole evening in guessing.',
+        needs: [
+          'A signal that means one specific thing and cannot be read three ways',
+          'Something stable to sit with, rather than a status that keeps changing',
+          'A way to reply with warmth that does not put more work on Sam',
+        ],
+        frustrations: [
+          'A vague emoji or a short reply spirals into hours of interpretation',
+          '"Last active" timestamps and read receipts give her more to over-read, not less',
+          'Asking for reassurance directly feels like adding to a partner who is already depleted',
+        ],
+        goal: '"I do not need a paragraph. I need to know, without guessing, that they are okay."',
+      },
+    ],
+    assumptions: {
+      intro: `Four assumptions I started with. Two broke against the research, and two broke against real users on real devices after launch, which is the more useful half.`,
+      items: [
+        {
+          phase: 'Week 1 · Competitive scan',
+          headline: 'Gentler prompt → no prompt at all',
+          assumption: `The fix for exhausting check-ins was a gentler, shorter prompt.`,
+          finding: `Every word-based app in the scan already had a gentle prompt, so the wording was never the exhausting part; language itself was the price of admission. And the one product that had dropped words entirely sent a buzz that said nothing.`,
+          pivot: `Removed words as a requirement entirely. A glow plus a one-word label became the whole unit of a check-in.`,
+        },
+        {
+          phase: 'Week 2 · Personas',
+          headline: 'One expressive input → three, always',
+          assumption: `A single expressive input, dragging the glow, would feel freeing after all that typing.`,
+          finding: `Open-ended input alone excludes people with alexithymia: an unlabelled gradient is just another blank page. And it leaves the receiving partner decoding a colour.`,
+          pivot: `Three ways to express, never one: drag the glow, tap a labelled preset, or type your own word. And every glow leaves carrying a word.`,
+        },
+        {
+          phase: 'Week 3 · Calendar',
+          headline: 'Month grid → day-by-day list',
+          assumption: `The archive should be a conventional seven-column month grid, because that is what a calendar looks like.`,
+          finding: `The grid failed on tap-target size, encoded mood by colour alone, made the two-glow concept invisible at that scale, and turned a quiet day into an empty cell.`,
+          pivot: `Rebuilt as a scrollable day list with a thin month strip for wayfinding. Quiet days get a full row and plain language, never a gap.`,
+        },
+        {
+          phase: 'Post-launch · v1.1',
+          headline: 'Paywall as a wall → paywall with a door',
+          assumption: `A signed-in user without a subscription would see the paywall and simply decide.`,
+          finding: `When the store products failed to load, that screen had no exit: no retry, no sign out. Signed-in non-paying users were trapped, and force-quitting did not help because the session persisted.`,
+          pivot: `Shipped v1.1 with an escape hatch: softer copy, a retry, and a sign-out link on the paywall itself. A dead end is an accessibility failure, not just a bug.`,
+        },
+      ],
+    },
+    story: {
+      challenge: {
+        paragraphs: [
+          `Sam is 31, autistic, and in a long-distance relationship. By 8pm the spoons are gone, and the daily "how was your day?" text reads like a job interview with a right answer. Maya is 29, has ADHD and an anxious-leaning attachment style. When Sam's reply is short or late, she spends the rest of the evening guessing.`,
+          `The connection products in market split two ways, and both fail this exact evening. Most charge words as the price of admission: text prompts, daily quizzes, long-form journalling, plus streaks and read receipts to make sure you pay. Alexithymia, difficulty naming your own feelings, is present in around half of autistic adults and about 40% of people with ADHD, so for the people who most need a low-cost way to stay close, the fee is the thing they cannot pay. The alternative on the shelf is a wordless buzz that costs nothing to send and says nothing on arrival, which leaves Maya holding a vibration and no idea how Sam's day went.`,
+          `Afterglow is self-initiated, built solo, and live on the iOS App Store since 25 July 2026.`,
+        ],
+        hmw: `How might two people share how a day actually felt without either of them having to find the words, and without the app turning care into a scoreboard?`,
+      },
+      summary: {
+        solution: `Afterglow is one loop plus two ways to look back: set a glow, name it in one word, send it once a day. Your partner receives it with the word already attached and can hold to send warmth back without typing anything. Nine weeks from written brief to an approved native app on the App Store.`,
+      },
+      timeline: {
+        label: 'Nine weeks, brief to App Store',
+        items: [
+          { when: 'Week 1', what: 'Inclusion principles and competitive scan' },
+          { when: 'Weeks 2–3', what: 'Design system: seven states, one language' },
+          { when: 'Weeks 4–5', what: 'Native build, Supabase backend, pairing' },
+          { when: 'Weeks 6–7', what: 'Subscriptions, paywall, accessibility pass' },
+          { when: 'Weeks 8–9', what: 'App Store review: two rejections, then live' },
+        ],
+      },
+      stages: [
+        {
+          label: 'Research',
+          kicker: 'Week 1',
+          moments: [
+            {
+              title: 'Four products, two ways to fail the same evening',
+              body: `I mapped the check-in loop across Paired, Lasting, Between, and Bond Touch: what each one asks you to produce, how it arrives at the other end, and what the interface does when you produce nothing at all.`,
+              visual: { kind: 'matrix' },
+              finding: `The market splits, and neither half works on a hard night. Three charge words as the price of admission. The fourth has already dropped words, and a tap that carries no vocabulary says "I am here" and nothing about the day. Nobody had built the half that matters: wordless to send, and unambiguous to receive.`,
+            },
+            {
+              title: 'Two people, opposite failure modes',
+              body: `Sam and Maya are the pair the product is designed for, drawn from the neurodivergent and long-distance couples the brief targets. They break in opposite directions, which is what makes the design hard.`,
+              visual: { kind: 'personas' },
+              finding: `Sam needs the check-in to cost almost nothing. Maya needs it to be unambiguous. Those pull against each other, because the fastest wordless input is also the vaguest signal. That tension set the two rules the whole product runs on: every glow carries a word, and there is never more than one check-in a day to interpret.`,
+            },
+          ],
+        },
+        {
+          label: 'Design',
+          kicker: 'Weeks 2–3',
+          dark: true,
+          moments: [
+            {
+              title: 'Seven states, one room',
+              body: `Not seven features. One loop, plus two ways to look back: Arrival, Reflect, Send, Receive, Together, Calendar, Our Story. Reflect was built first as the anchor screen with named Glow and Chip components, and every other state was generated as "duplicate Reflect, change these three things" so the visual language could not drift between screens.`,
+              visual: {
+                kind: 'image',
+                src: '/uploads/afterglow/ds-inputs.png',
+                caption: 'Left, Reflect, the anchor screen: drag the glow, tap a labelled chip, or type your own word, with the private note marked "just for you". Right, Receive, its mirror: the partner\'s glow fills the screen with the word already attached, and one hold sends warmth back.',
+              },
+              finding: `Meaning never rides on colour alone. Every glow carries a word, so a received check-in is legible to a screen reader, to a colour-blind partner, and to an anxious one at 11pm. And hard moods get a slower, wider, steadier breath: the interface co-regulates rather than mirroring agitation back.`,
+            },
+            {
+              title: 'The calendar failed its own test',
+              body: `The archive started as a conventional seven-column month grid, because that is what a calendar looks like. It read well and failed almost every inclusion principle I had written down in week one.`,
+              visual: {
+                kind: 'image',
+                src: '/uploads/afterglow/ds-archive.png',
+                caption: 'Left, the rebuilt archive: a thin month strip for wayfinding above a day-by-day list, both glows side by side, both moods in words, plain-language dates. Right, tap any day to reopen it as a letter: both glows, both words, both notes, and the times you each checked in.',
+              },
+              finding: `Tap targets were too small, mood was encoded by colour alone, the two-glow idea was invisible at grid scale, and a missed day read as an empty cell, which is a hole where a punishment used to be. The list version gives a quiet day a full row of its own and names it in plain language: "a quiet day, neither of you checked in."`,
+            },
+            {
+              screenScroll: [
+                {
+                  src: '/uploads/afterglow/ship-arrival.png',
+                  title: 'Presence before action',
+                  body: `Open the app and your partner's glow is already holding the room. Nothing is asked of you in order to feel met: no prompt, no empty field, no red dot waiting to be cleared. The footer states the contract out loud, "no streaks, no scores", so a new user knows what kind of place this is.`,
+                },
+                {
+                  src: '/uploads/afterglow/ship-reflect.png',
+                  title: 'Three ways to name a day',
+                  body: `Drag the glow, tap a labelled chip, or type your own word. Open-ended input alone would have excluded exactly the people this was built for, so the labelled presets are not a shortcut, they are the accessible path. The optional note is marked "just for you" and is never shared, not even with your partner.`,
+                },
+                {
+                  src: '/uploads/afterglow/ship-together.png',
+                  title: 'The reward is co-presence, not a streak',
+                  body: `Once you have both checked in, the two glows drift and merge into the day's shared colour, and the app offers a wordless minute of breathing together. It happens once a day, then you live in the merged state until midnight. Nothing to maintain, nothing to lose.`,
+                },
+                {
+                  src: '/uploads/afterglow/ship-both-here.png',
+                  title: 'Both here, and you can feel it',
+                  body: `The moment both of you are present, the screen says so in words — "both here", both moods named — and the phone joins in. The shared breath drives a tick of haptic feedback on each inhale, their glow landing is a soft rumble, and warmth arriving is a longer one. On an evening with no words left, the phone in your hand is doing the talking. Haptics are gentle by default and mutable in one tap.`,
+                },
+                {
+                  src: '/uploads/afterglow/ship-our-story.png',
+                  title: 'A run of evenings, as tree rings',
+                  body: `Our Story is the poetic archive to the Calendar's literal one: the same data, woven from both people's glows over time. Re-readable like a letter archive, rather than scrollable like a feed.`,
+                },
+                {
+                  src: '/uploads/afterglow/ship-paywall.png',
+                  title: 'A paywall that keeps the same promises',
+                  body: `It would be hypocritical to build a no-pressure app and then apply pressure at the till. One subscription unlocks Afterglow for both partners, only one of you needs to pay, the trial is stated plainly, and cancelling is one tap in store settings. No fake scarcity, no guilt on the way out.`,
+                },
+              ],
+              finding: `The line I held on monetisation: never paywall connection itself, only depth and memory. The daily ritual, receiving your partner's glow, and sending warmth back stay free forever. People pay to keep and revisit the story they built together, which is where the attachment actually lives.`,
+            },
+          ],
+        },
+        {
+          label: 'Ship',
+          kicker: 'Weeks 4–9',
+          moments: [
+            {
+              title: 'The half most case studies stop before',
+              body: `Design was the first half. The second was a Supabase backend, partner pairing, a per-day check-in cadence, RevenueCat subscriptions across two stores, and App Store review.`,
+              finding: `Two rejections, both mine, both instructive. The first was metadata: the description never named that a subscription was required, and both subscription tiers shared the same display name. The second was Guideline 4, on design: my Sign in with Apple button was text-only next to a Google button with a logo, so the two sign-in paths were not visually equal. Approved on the third submission, 25 July 2026.`,
+            },
+            {
+              title: 'Emotional data, handled like it matters',
+              body: `The app holds mental-health-adjacent data about two people at once, so the defaults had to be conservative from the first line of the schema rather than retrofitted before review.`,
+              finding: `No ad SDKs, no third-party sharing, encrypted in transit, in-app account deletion, and a "just for you" note that never reaches the partner. Plus one deliberate refusal: Afterglow never interprets your mood for you. No model reads your glow and tells you what you are feeling, because the entire premise is that you name it yourself.`,
+            },
+          ],
+        },
+        {
+          label: 'Pivots',
+          kicker: 'Week 1 – post-launch',
+          dark: true,
+          moments: [
+            { afp: true },
+          ],
+        },
+      ],
+      results: {
+        kicker: 'Live',
+        stats: [
+          { value: 'Live', label: 'on the iOS App Store, approved 25 July 2026' },
+          { value: '7', label: 'states of one ritual, one design language' },
+          { value: '9', label: 'weeks from written brief to approved app' },
+          { value: '0', label: 'streaks, badges, read receipts, or last-seen' },
+        ],
+        body: `Afterglow is live on the iOS App Store with subscriptions in production, and an Android build in closed testing on Google Play. It went from a written brief to an approved native app in nine weeks, solo: eight inclusion principles, seven states in one design language, a Supabase backend with partner pairing, cross-store subscriptions, and three trips through App Store review.\n\nWhat I would do next, in order: run a four-week diary study with ten neurodivergent couples, because the daily cadence and the no-streaks contract are the two design hypotheses I most want tested by people who are not me; get the Android build through the closed-testing gate to production; and revisit Our Story, which is the state with the least evidence behind it.`,
+        quote: `The bet was simple. If you remove words as the price of admission, more people get to be witnessed by their person more often. Everything else in the product is in service of not charging that fee.`,
+      },
+    },
+  },
+  {
     slug: 'mhclg-grants',
     title: 'Grants Services for 200+ UK Local Authorities',
     tagline: 'Research that evidenced WCAG 2.1 AA compliance across 200+ Local Authorities, and gave the delivery team an audit trail GDS assessors could trust, embedded into sprint, not bolted on at the end.',
@@ -381,332 +707,6 @@ export const projects: Project[] = [
     solution: `Research embedded into the delivery cadence rather than bolted onto it. Every design decision had a traceable evidence chain. Accessibility was tested with assistive-technology users from discovery onward, not as a final sign-off step. The team\'s insight repository was structured so any researcher, designer, or assessor could replay the path from observation to decision.\n\nThe shipped output was a set of grants services across 200+ Local Authorities that meet WCAG 2.1 AA across the full journey, not just the homepage. Colour contrast at 4.5:1, keyboard navigation through every flow, visible focus states, screen-reader compatibility, descriptive error messages, and content readable at a reasonable cognitive load.`,
     takeaway: `You can\'t audit your way to AA at the end, you have to design for it from the first wireframe and test for it throughout. That\'s the difference between a service that scrapes through assessment and one that\'s actually usable. The same goes for GDS as a whole: it isn\'t a compliance gate, it\'s a discipline. Internalise it and the work gets cleaner.`,
     tags: ['Government', 'GDS', 'Public Sector', 'WCAG 2.1 AA', 'Accessibility', 'User Research', 'Service Standard', 'Assistive Technology'],
-  },
-  {
-    slug: 'afterglow',
-    title: 'Afterglow: A Ritual for Two',
-    tagline: 'A two-person evening ritual where partners share how the day felt as light, not words. Designed for neurodivergent and long-distance couples, and shipped to the App Store in nine weeks.',
-    niche: ['Social Impact', 'Inclusive design', 'Consumer app'],
-    type: 'Social Impact',
-    featured: true,
-    client: 'Self-initiated · Made for Humans',
-    clientLabel: 'Built by',
-    duration: 'May – Jul 2026 · shipped',
-    tools: ['Google Stitch', 'Figma', 'Capacitor (iOS + Android)', 'Supabase', 'RevenueCat', 'Claude Code'],
-    prototype: 'https://afterglow.madeforhumans.tech',
-    prototypeLabel: 'Visit Afterglow',
-    wip: 'Live on the App Store · Android in closed testing',
-    heroImage: '/uploads/afterglow/hero.png',
-    overview: {
-      team: 'Solo, end to end: research, design, native build, backend, and store release',
-      industry: 'Consumer wellbeing / inclusive design',
-    },
-    processTitle: 'Process timeline',
-    problem: `Sam is 31, autistic, and in a long-distance relationship. By 8pm the spoons are gone and the daily "how was your day?" text reads like a job interview. Maya is 29, has ADHD and an anxious-leaning attachment style; when Sam's reply is short or late she spends the evening guessing.\n\nEvery connection app on the market charges the same price of admission: words. Text prompts, daily quizzes, long-form journalling, plus streaks and read receipts to make sure you pay it. For the people who find naming a feeling hardest, that is exactly the fee they cannot pay on a hard day.\n\nHow might two people share how a day actually felt without either of them having to find the words, and without the app turning care into a scoreboard?`,
-    insight: `The exhausting part of a check-in was never the wording of the prompt. It was that language itself was the entry fee. But removing words entirely creates a second problem, in the opposite direction: an unlabelled colour is a beautiful thing to send and an awful thing to receive. The product only works if the check-in is wordless to make and unambiguous to read.`,
-    process: [
-      { phase: 'Week 1 · Frame', step: 'Inclusion principles written first', detail: 'Eight non-negotiable principles set before a single screen: three ways to express, meaning never on colour alone, co-regulate never amplify, no streaks or badges, WCAG 2.2 AA throughout. Every later decision was checked against them.' },
-      { phase: 'Week 1 · Frame', step: 'Competitive scan', detail: 'Mapped the check-in loop across four connection apps: what each one asks you to produce, and what happens when you do not produce it.' },
-      { phase: 'Weeks 2–3 · Design', step: 'Seven states, one design language', detail: 'Built Reflect as the anchor screen with named Glow and Chip components, then generated every other state as "duplicate Reflect, change these three things" so the visual language could not drift.' },
-      { phase: 'Weeks 2–3 · Design', step: 'Calendar rebuilt as a list', detail: 'The conventional month grid failed the inclusion tests written in week one. Redesigned as a day-by-day list with a month strip for wayfinding.' },
-      { phase: 'Weeks 4–7 · Build', step: 'Native app and backend', detail: 'Capacitor build for iOS and Android over a Supabase backend: partner pairing, per-day check-in cadence, encrypted emotional data, and in-app account deletion.' },
-      { phase: 'Weeks 6–7 · Build', step: 'Subscriptions and the ethical paywall', detail: 'RevenueCat across both stores, with the line held that the daily ritual stays free forever and only depth and memory sit behind the trial.' },
-      { phase: 'Weeks 8–9 · Ship', step: 'App Store review', detail: 'Two rejections, both mine: metadata that never named the subscription requirement, then a Sign in with Apple button that was not visually equal to the Google one. Approved on the third submission.' },
-    ],
-    metrics: [
-      { label: 'Status', value: 'Live on the App Store' },
-      { label: 'States of one ritual, one design language', value: '7' },
-      { label: 'Weeks from written brief to approved app', value: '9' },
-      { label: 'Streaks, badges, or read receipts in the product', value: '0' },
-    ],
-    businessOutcomes: [
-      { metric: 'Shipped, not prototyped', translation: 'A native app in a real store with real subscriptions, which means the design had to survive backend constraints, two store review processes, and paying users, not just a Figma frame.' },
-      { metric: 'Accessibility as the product, not a pass', translation: 'The inclusion principles set the feature set: three input modes, word labels on every glow, and a designed reduced-motion variant. WCAG 2.2 AA was the floor rather than the goal.' },
-    ],
-    solution: `Afterglow is one loop plus two ways to look back. You set a glow, name it in one word, add an optional private note, and send it once a day. Your partner receives the glow with the word already attached, and can hold to send warmth back without typing anything. When you have both checked in, the two glows merge into the day's shared colour. The Calendar is the literal archive; Our Story is the poetic one.`,
-    takeaway: `A dead end is an accessibility failure, not just a bug. The sharpest lesson came after launch, when signed-in users without a subscription hit a paywall that had no exit if the store products failed to load: no retry, no sign out, and force-quitting did not help because the session persisted. I had written eight inclusion principles and still shipped a screen you could get trapped on. The fix took an afternoon; the habit of checking every screen for its exit is the thing I kept.`,
-    tags: ['Consumer app', 'Inclusive design', 'Neurodivergent', 'Accessibility', 'WCAG 2.2 AA', 'iOS', 'Shipped', 'Self-initiated'],
-    deskResearch: {
-      summary: `A scan of four two-person connection apps, mapping the check-in loop in each: what the app asks you to produce, how the other person receives it, and what the interface does when you produce nothing.`,
-      stats: [
-        { value: '4', label: 'Connection apps scanned across the check-in loop' },
-        { value: '0/4', label: 'Products where a check-in can be made without words' },
-        { value: '~50%', label: 'Of autistic adults live with alexithymia, difficulty naming one\'s own feelings' },
-        { value: '~40%', label: 'Of people with ADHD live with alexithymia' },
-      ],
-      findings: [
-        'Every audited app makes text the unit of a check-in, whether as a daily question, a journal entry, or a message in a shared timeline.',
-        'Three of the four add a visible cost to silence: streaks, unlock mechanics, or read receipts that make a missed evening legible to your partner.',
-        'Wordless gestures exist but carry no vocabulary. They say "I am here" and nothing about how the day actually went, which leaves an anxious partner exactly where they started.',
-        'None of the four treat naming a feeling as the hard part. They all assume the words are available and the energy to type them is there.',
-      ],
-      gap: 'The gap is not a gentler prompt. It is a check-in that costs no language to make and still arrives unambiguous.',
-      competitiveAudit: {
-        tools: [
-          {
-            name: 'Paired',
-            category: 'Couples app',
-            verdict: 'A daily question you both perform',
-            features: [
-              { label: 'Wordless check-in', score: 'none' },
-              { label: 'Named in words', score: 'none' },
-              { label: 'No streaks', score: 'none' },
-              { label: 'Clear to receive', score: 'partial' },
-              { label: 'Low-energy path', score: 'none' },
-            ],
-            gap: 'A daily question you both answer in text, then unlock each other. It works beautifully on a good day. On a draining one, the unlock mechanic turns a missed evening into something your partner can see you failed to do.',
-          },
-          {
-            name: 'Lasting',
-            category: 'Coaching',
-            verdict: 'Closer to homework than a check-in',
-            features: [
-              { label: 'Wordless check-in', score: 'none' },
-              { label: 'Named in words', score: 'partial' },
-              { label: 'No streaks', score: 'partial' },
-              { label: 'Clear to receive', score: 'partial' },
-              { label: 'Low-energy path', score: 'none' },
-            ],
-            gap: 'Structured sessions and exercises built on the assumption that both partners can articulate what they feel and have the energy to work on it. Valuable, and the wrong shape entirely for 8pm on a spoon-low evening.',
-          },
-          {
-            name: 'Between',
-            category: 'Couple space',
-            verdict: 'A better inbox, still an inbox',
-            features: [
-              { label: 'Wordless check-in', score: 'none' },
-              { label: 'Named in words', score: 'none' },
-              { label: 'No streaks', score: 'partial' },
-              { label: 'Clear to receive', score: 'none' },
-              { label: 'Low-energy path', score: 'none' },
-            ],
-            gap: 'A shared timeline of messages, photos, and dates. Everything still arrives as content you have to compose, and read receipts make silence legible as silence.',
-          },
-          {
-            name: 'Couple',
-            category: 'Messaging',
-            verdict: 'Presence gestures, no vocabulary',
-            features: [
-              { label: 'Wordless check-in', score: 'partial' },
-              { label: 'Named in words', score: 'none' },
-              { label: 'No streaks', score: 'partial' },
-              { label: 'Clear to receive', score: 'none' },
-              { label: 'Low-energy path', score: 'partial' },
-            ],
-            gap: 'The thumb-kiss gesture is the closest anything came to wordless presence, and it is the right instinct. But it carries no meaning beyond "I am here", so an anxious partner learns nothing from it about how the day actually went.',
-          },
-        ],
-      },
-    },
-    personas: [
-      {
-        name: 'Sam',
-        age: 31,
-        type: 'The spoon-low partner',
-        description: 'Autistic, in a long-distance relationship. By 8pm the day is spent and the "how was your day" text feels like an interview with a right answer. Wants their partner to know they are loved without having to perform fluency to prove it.',
-        needs: [
-          'A check-in that costs almost nothing to make on the worst day of the week',
-          'A way to say something true without having to find the word for it first',
-          'No visible penalty on the evenings when nothing gets sent at all',
-        ],
-        frustrations: [
-          'Open-ended prompts are a blank page, and a blank page at 8pm is a no',
-          'Streaks and unlock mechanics turn a hard day into a visible failure',
-          'Voice notes and long replies are exactly the kind of effort there is none of left',
-        ],
-        goal: '"I want them to know I am here and I am okay, without having to perform being fine."',
-      },
-      {
-        name: 'Maya',
-        age: 29,
-        type: 'The anxious reader',
-        description: 'ADHD, anxious-leaning attachment. Does not need a paragraph. Needs unambiguous evidence that Sam is okay and thinking of her, because a one-word "fine" or a late reply can cost her the whole evening in guessing.',
-        needs: [
-          'A signal that means one specific thing and cannot be read three ways',
-          'Something stable to sit with, rather than a status that keeps changing',
-          'A way to reply with warmth that does not put more work on Sam',
-        ],
-        frustrations: [
-          'A vague emoji or a short reply spirals into hours of interpretation',
-          '"Last active" timestamps and read receipts give her more to over-read, not less',
-          'Asking for reassurance directly feels like adding to a partner who is already depleted',
-        ],
-        goal: '"I do not need a paragraph. I need to know, without guessing, that they are okay."',
-      },
-    ],
-    assumptions: {
-      intro: `Four assumptions I started with. Two broke against the research, and two broke against real users on real devices after launch, which is the more useful half.`,
-      items: [
-        {
-          phase: 'Week 1 · Competitive scan',
-          headline: 'Gentler prompt → no prompt at all',
-          assumption: `The fix for exhausting check-ins was a gentler, shorter prompt.`,
-          finding: `Every audited app already had a gentle prompt. The exhausting part was not the wording, it was that language itself was the price of admission.`,
-          pivot: `Removed words as a requirement entirely. A glow plus a one-word label became the whole unit of a check-in.`,
-        },
-        {
-          phase: 'Week 2 · Personas',
-          headline: 'One expressive input → three, always',
-          assumption: `A single expressive input, dragging the glow, would feel freeing after all that typing.`,
-          finding: `Open-ended input alone excludes people with alexithymia: an unlabelled gradient is just another blank page. And it leaves the receiving partner decoding a colour.`,
-          pivot: `Three ways to express, never one: drag the glow, tap a labelled preset, or type your own word. And every glow leaves carrying a word.`,
-        },
-        {
-          phase: 'Week 3 · Calendar',
-          headline: 'Month grid → day-by-day list',
-          assumption: `The archive should be a conventional seven-column month grid, because that is what a calendar looks like.`,
-          finding: `The grid failed on tap-target size, encoded mood by colour alone, made the two-glow concept invisible at that scale, and turned a quiet day into an empty cell.`,
-          pivot: `Rebuilt as a scrollable day list with a thin month strip for wayfinding. Quiet days get a full row and plain language, never a gap.`,
-        },
-        {
-          phase: 'Post-launch · v1.1',
-          headline: 'Paywall as a wall → paywall with a door',
-          assumption: `A signed-in user without a subscription would see the paywall and simply decide.`,
-          finding: `When the store products failed to load, that screen had no exit: no retry, no sign out. Signed-in non-paying users were trapped, and force-quitting did not help because the session persisted.`,
-          pivot: `Shipped v1.1 with an escape hatch: softer copy, a retry, and a sign-out link on the paywall itself. A dead end is an accessibility failure, not just a bug.`,
-        },
-      ],
-    },
-    story: {
-      challenge: {
-        paragraphs: [
-          `Sam is 31, autistic, and in a long-distance relationship. By 8pm the spoons are gone, and the daily "how was your day?" text reads like a job interview with a right answer. Maya is 29, has ADHD and an anxious-leaning attachment style. When Sam's reply is short or late, she spends the rest of the evening guessing.`,
-          `Every connection app on the market charges the same price of admission: words. Text prompts, daily quizzes, long-form journalling, plus streaks and read receipts to make sure you pay it. Alexithymia, difficulty naming your own feelings, is present in around half of autistic adults and about 40% of people with ADHD. For exactly the people who need a low-cost way to stay close, the fee is the thing they cannot pay.`,
-          `Afterglow is self-initiated, built solo, and live on the iOS App Store since 25 July 2026.`,
-        ],
-        hmw: `How might two people share how a day actually felt without either of them having to find the words, and without the app turning care into a scoreboard?`,
-      },
-      summary: {
-        solution: `Afterglow is one loop plus two ways to look back: set a glow, name it in one word, send it once a day. Your partner receives it with the word already attached and can hold to send warmth back without typing anything. Nine weeks from written brief to an approved native app on the App Store.`,
-      },
-      timeline: {
-        label: 'Nine weeks, brief to App Store',
-        items: [
-          { when: 'Week 1', what: 'Inclusion principles and competitive scan' },
-          { when: 'Weeks 2–3', what: 'Design system: seven states, one language' },
-          { when: 'Weeks 4–5', what: 'Native build, Supabase backend, pairing' },
-          { when: 'Weeks 6–7', what: 'Subscriptions, paywall, accessibility pass' },
-          { when: 'Weeks 8–9', what: 'App Store review: two rejections, then live' },
-        ],
-      },
-      stages: [
-        {
-          label: 'Research',
-          kicker: 'Week 1',
-          moments: [
-            {
-              title: 'Four apps, one price of admission',
-              body: `I mapped the check-in loop across Paired, Lasting, Between, and Couple: what each one asks you to produce, how it arrives at the other end, and what the interface does when you produce nothing at all.`,
-              visual: { kind: 'matrix' },
-              finding: `All four charge the same fee: words. The one wordless gesture in the set, Couple's thumb kiss, carries no vocabulary, so it says "I am here" and nothing about the day. The gap is not a gentler prompt. It is a check-in that costs no language to make and still arrives unambiguous.`,
-            },
-            {
-              title: 'Two people, opposite failure modes',
-              body: `Sam and Maya are the pair the product is designed for, drawn from the neurodivergent and long-distance couples the brief targets. They break in opposite directions, which is what makes the design hard.`,
-              visual: { kind: 'personas' },
-              finding: `Sam needs the check-in to cost almost nothing. Maya needs it to be unambiguous. Those pull against each other, because the fastest wordless input is also the vaguest signal. That tension set the two rules the whole product runs on: every glow carries a word, and there is never more than one check-in a day to interpret.`,
-            },
-          ],
-        },
-        {
-          label: 'Design',
-          kicker: 'Weeks 2–3',
-          dark: true,
-          moments: [
-            {
-              title: 'Seven states, one room',
-              body: `Not seven features. One loop, plus two ways to look back: Arrival, Reflect, Send, Receive, Together, Calendar, Our Story. Reflect was built first as the anchor screen with named Glow and Chip components, and every other state was generated as "duplicate Reflect, change these three things" so the visual language could not drift between screens.`,
-              visual: {
-                kind: 'image',
-                src: '/uploads/afterglow/ds-inputs.png',
-                caption: 'Left, Reflect, the anchor screen: drag the glow, tap a labelled chip, or type your own word, with the private note marked "just for you". Right, Receive, its mirror: the partner\'s glow fills the screen with the word already attached, and one hold sends warmth back.',
-              },
-              finding: `Meaning never rides on colour alone. Every glow carries a word, so a received check-in is legible to a screen reader, to a colour-blind partner, and to an anxious one at 11pm. And hard moods get a slower, wider, steadier breath: the interface co-regulates rather than mirroring agitation back.`,
-            },
-            {
-              title: 'The calendar failed its own test',
-              body: `The archive started as a conventional seven-column month grid, because that is what a calendar looks like. It read well and failed almost every inclusion principle I had written down in week one.`,
-              visual: {
-                kind: 'image',
-                src: '/uploads/afterglow/ds-archive.png',
-                caption: 'Left, the rebuilt archive: a thin month strip for wayfinding above a day-by-day list, both glows side by side, both moods in words, plain-language dates. Right, tap any day to reopen it as a letter: both glows, both words, both notes, and the times you each checked in.',
-              },
-              finding: `Tap targets were too small, mood was encoded by colour alone, the two-glow idea was invisible at grid scale, and a missed day read as an empty cell, which is a hole where a punishment used to be. The list version gives a quiet day a full row of its own and names it in plain language: "a quiet day, neither of you checked in."`,
-            },
-            {
-              screenScroll: [
-                {
-                  src: '/uploads/afterglow/ship-arrival.png',
-                  title: 'Presence before action',
-                  body: `Open the app and your partner's glow is already holding the room. Nothing is asked of you in order to feel met: no prompt, no empty field, no red dot waiting to be cleared. The footer states the contract out loud, "no streaks, no scores", so a new user knows what kind of place this is.`,
-                },
-                {
-                  src: '/uploads/afterglow/ship-reflect.png',
-                  title: 'Three ways to name a day',
-                  body: `Drag the glow, tap a labelled chip, or type your own word. Open-ended input alone would have excluded exactly the people this was built for, so the labelled presets are not a shortcut, they are the accessible path. The optional note is marked "just for you" and is never shared, not even with your partner.`,
-                },
-                {
-                  src: '/uploads/afterglow/ship-together.png',
-                  title: 'The reward is co-presence, not a streak',
-                  body: `Once you have both checked in, the two glows drift and merge into the day's shared colour, and the app offers a wordless minute of breathing together. It happens once a day, then you live in the merged state until midnight. Nothing to maintain, nothing to lose.`,
-                },
-                {
-                  src: '/uploads/afterglow/ship-both-here.png',
-                  title: 'Both here, and you can feel it',
-                  body: `The moment both of you are present, the screen says so in words — "both here", both moods named — and the phone joins in. The shared breath drives a tick of haptic feedback on each inhale, their glow landing is a soft rumble, and warmth arriving is a longer one. On an evening with no words left, the phone in your hand is doing the talking. Haptics are gentle by default and mutable in one tap.`,
-                },
-                {
-                  src: '/uploads/afterglow/ship-our-story.png',
-                  title: 'A run of evenings, as tree rings',
-                  body: `Our Story is the poetic archive to the Calendar's literal one: the same data, woven from both people's glows over time. Re-readable like a letter archive, rather than scrollable like a feed.`,
-                },
-                {
-                  src: '/uploads/afterglow/ship-paywall.png',
-                  title: 'A paywall that keeps the same promises',
-                  body: `It would be hypocritical to build a no-pressure app and then apply pressure at the till. One subscription unlocks Afterglow for both partners, only one of you needs to pay, the trial is stated plainly, and cancelling is one tap in store settings. No fake scarcity, no guilt on the way out.`,
-                },
-              ],
-              finding: `The line I held on monetisation: never paywall connection itself, only depth and memory. The daily ritual, receiving your partner's glow, and sending warmth back stay free forever. People pay to keep and revisit the story they built together, which is where the attachment actually lives.`,
-            },
-          ],
-        },
-        {
-          label: 'Ship',
-          kicker: 'Weeks 4–9',
-          moments: [
-            {
-              title: 'The half most case studies stop before',
-              body: `Design was the first half. The second was a Supabase backend, partner pairing, a per-day check-in cadence, RevenueCat subscriptions across two stores, and App Store review.`,
-              finding: `Two rejections, both mine, both instructive. The first was metadata: the description never named that a subscription was required, and both subscription tiers shared the same display name. The second was Guideline 4, on design: my Sign in with Apple button was text-only next to a Google button with a logo, so the two sign-in paths were not visually equal. Approved on the third submission, 25 July 2026.`,
-            },
-            {
-              title: 'Emotional data, handled like it matters',
-              body: `The app holds mental-health-adjacent data about two people at once, so the defaults had to be conservative from the first line of the schema rather than retrofitted before review.`,
-              finding: `No ad SDKs, no third-party sharing, encrypted in transit, in-app account deletion, and a "just for you" note that never reaches the partner. Plus one deliberate refusal: Afterglow never interprets your mood for you. No model reads your glow and tells you what you are feeling, because the entire premise is that you name it yourself.`,
-            },
-          ],
-        },
-        {
-          label: 'Pivots',
-          kicker: 'Week 1 – post-launch',
-          dark: true,
-          moments: [
-            { afp: true },
-          ],
-        },
-      ],
-      results: {
-        kicker: 'Live',
-        stats: [
-          { value: 'Live', label: 'on the iOS App Store, approved 25 July 2026' },
-          { value: '7', label: 'states of one ritual, one design language' },
-          { value: '9', label: 'weeks from written brief to approved app' },
-          { value: '0', label: 'streaks, badges, read receipts, or last-seen' },
-        ],
-        body: `Afterglow is live on the iOS App Store with subscriptions in production, and an Android build in closed testing on Google Play. It went from a written brief to an approved native app in nine weeks, solo: eight inclusion principles, seven states in one design language, a Supabase backend with partner pairing, cross-store subscriptions, and three trips through App Store review.\n\nWhat I would do next, in order: run a four-week diary study with ten neurodivergent couples, because the daily cadence and the no-streaks contract are the two design hypotheses I most want tested by people who are not me; get the Android build through the closed-testing gate to production; and revisit Our Story, which is the state with the least evidence behind it.`,
-        quote: `The bet was simple. If you remove words as the price of admission, more people get to be witnessed by their person more often. Everything else in the product is in service of not charging that fee.`,
-      },
-    },
   },
   {
     slug: 'kaizen',

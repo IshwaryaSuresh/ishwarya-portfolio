@@ -12,6 +12,8 @@ type Project = {
   image?: string
   placeholder: string
   slug?: string
+  /** Flat logo/graphic: contain it, no parallax drift */
+  flat?: boolean
 }
 
 const PROJECTS: Project[] = [
@@ -77,6 +79,7 @@ const PROJECTS: Project[] = [
     metric: '200+ Local Authorities · WCAG 2.1 AA · GDS-assessed',
     tags: ['Government', 'GDS', 'Accessibility', 'WCAG 2.1 AA'],
     image: '/uploads/mhclg-hero.png',
+    flat: true,
     placeholder: 'Government, MHCLG grants',
     slug: 'mhclg-grants',
   },
@@ -115,9 +118,14 @@ function FeatureSpread({ p, index }: { p: Project; index: number }) {
   return (
     <Link to={`/work/${p.slug}`} className={`spread${flip ? ' spread--flip' : ''}`}>
       <figure className="spread__media">
-        <div className="spread__img-mask">
+        <div className={`spread__img-mask${p.flat ? ' spread__img-mask--flat' : ''}`}>
           {p.image
-            ? <img src={p.image} alt={p.title} data-parallax={PARALLAX_SPEEDS[index % 3]} loading="lazy" />
+            ? <img
+                src={p.image}
+                alt={p.title}
+                {...(p.flat ? {} : { 'data-parallax': PARALLAX_SPEEDS[index % 3] })}
+                loading="lazy"
+              />
             : <div className="placeholder">{p.placeholder}</div>}
         </div>
       </figure>

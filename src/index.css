@@ -2657,3 +2657,14 @@ body.hero-light .hero__caret { background: var(--teal-500); }
 @media (max-width: 580px) {
   :root { --radius-card: 12px; }
 }
+
+/* Flat logo cards (e.g. MHCLG) are graphics, not photography: contain them,
+   drop the parallax overscan, and match the plate colour so the lockup sits
+   dead centre instead of drifting and cropping. */
+.spread__img-mask--flat { background: rgb(0, 98, 94); }
+.spread__img-mask--flat img {
+  height: 100%;
+  top: 0;
+  object-fit: contain;
+  transform: none !important;
+}

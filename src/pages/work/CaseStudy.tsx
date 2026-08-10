@@ -140,21 +140,27 @@ function StoryAfp({ assumptions, dark }: { assumptions: NonNullable<Project['ass
 function StoryBody({ project }: { project: Project }) {
   const story = project.story!
 
-  const renderVisual = (visual: NonNullable<StoryMoment['visual']>) => {
+  // On a dark stage the screens are transparent PNGs that sit straight on the
+  // ink plate, so the figure drops its panel chrome and the caption inverts.
+  const renderVisual = (visual: NonNullable<StoryMoment['visual']>, dark?: boolean) => {
+    const frame = dark ? '' : 'rounded-2xl overflow-hidden border border-border'
+    const media = dark ? '' : 'bg-paper'
+    const caption = dark
+      ? 'pt-4 text-xs text-white/50 leading-relaxed'
+      : 'px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border'
+
     switch (visual.kind) {
       case 'image':
         return (
           <Reveal delay={120}>
-            <figure className="rounded-2xl overflow-hidden border border-border">
+            <figure className={frame}>
               <img
                 src={visual.src}
                 alt={visual.caption ?? ''}
-                className="w-full object-contain bg-paper"
+                className={`w-full object-contain ${media}`}
                 style={{ maxHeight: '560px' }}
               />
-              {visual.caption && (
-                <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{visual.caption}</figcaption>
-              )}
+              {visual.caption && <figcaption className={caption}>{visual.caption}</figcaption>}
             </figure>
           </Reveal>
         )
@@ -163,16 +169,14 @@ function StoryBody({ project }: { project: Project }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {visual.items.map((it, i) => (
               <Reveal key={it.src} delay={120 + i * 90}>
-                <figure className="rounded-2xl overflow-hidden border border-border flex flex-col h-full">
+                <figure className={`flex flex-col h-full ${frame}`}>
                   <img
                     src={it.src}
                     alt={it.label ?? ''}
-                    className="w-full object-contain bg-paper flex-1"
+                    className={`w-full object-contain flex-1 ${media}`}
                     style={{ maxHeight: '300px' }}
                   />
-                  {it.label && (
-                    <figcaption className="px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border">{it.label}</figcaption>
-                  )}
+                  {it.label && <figcaption className={caption}>{it.label}</figcaption>}
                 </figure>
               </Reveal>
             ))}
@@ -288,7 +292,7 @@ function StoryBody({ project }: { project: Project }) {
                     {m.body && <p className={`text-sm leading-relaxed ${stage.dark ? 'text-white/60' : 'text-muted'}`}>{m.body}</p>}
                   </Reveal>
                   <div className="space-y-4 min-w-0">
-                    {m.visual && renderVisual(m.visual)}
+                    {m.visual && renderVisual(m.visual, stage.dark)}
                     {m.finding && (
                       <Reveal>
                         <div className="bg-accent-light border border-accent/30 rounded-2xl p-5">

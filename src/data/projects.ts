@@ -593,7 +593,6 @@ export const projects: Project[] = [
         {
           label: 'Research',
           kicker: 'Week 1',
-          dark: true,
           moments: [
             {
               title: 'Four apps, one price of admission',
@@ -612,6 +611,7 @@ export const projects: Project[] = [
         {
           label: 'Design',
           kicker: 'Weeks 2–3',
+          dark: true,
           moments: [
             {
               title: 'Seven states, one room',
@@ -651,6 +651,11 @@ export const projects: Project[] = [
                   body: `Once you have both checked in, the two glows drift and merge into the day's shared colour, and the app offers a wordless minute of breathing together. It happens once a day, then you live in the merged state until midnight. Nothing to maintain, nothing to lose.`,
                 },
                 {
+                  src: '/uploads/afterglow/ship-both-here.png',
+                  title: 'Both here, and you can feel it',
+                  body: `The moment both of you are present, the screen says so in words — "both here", both moods named — and the phone joins in. The shared breath drives a tick of haptic feedback on each inhale, their glow landing is a soft rumble, and warmth arriving is a longer one. On an evening with no words left, the phone in your hand is doing the talking. Haptics are gentle by default and mutable in one tap.`,
+                },
+                {
                   src: '/uploads/afterglow/ship-our-story.png',
                   title: 'A run of evenings, as tree rings',
                   body: `Our Story is the poetic archive to the Calendar's literal one: the same data, woven from both people's glows over time. Re-readable like a letter archive, rather than scrollable like a feed.`,
@@ -668,7 +673,6 @@ export const projects: Project[] = [
         {
           label: 'Ship',
           kicker: 'Weeks 4–9',
-          dark: true,
           moments: [
             {
               title: 'The half most case studies stop before',
@@ -685,6 +689,7 @@ export const projects: Project[] = [
         {
           label: 'Pivots',
           kicker: 'Week 1 – post-launch',
+          dark: true,
           moments: [
             { afp: true },
           ],

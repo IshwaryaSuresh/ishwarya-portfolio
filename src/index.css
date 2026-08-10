@@ -2623,6 +2623,7 @@ body.hero-light .hero__caret { background: var(--teal-500); }
 .section--dark .jnl__row:hover .jnl__row-title { color: var(--teal-300); }
 .section--dark .jnl__row-date { color: rgba(255,255,255,0.4); }
 
+
 /* ===== ROUNDED CARDS: one radius across every card-like block ===== */
 :root { --radius-card: 16px; }
 
@@ -2633,7 +2634,6 @@ body.hero-light .hero__caret { background: var(--teal-500); }
 .proj-row__thumb,
 .proj-preview,
 .proj-card,
-.proj-card__media,
 .work-card,
 .about__portrait,
 .journal-card--link,
@@ -2641,17 +2641,18 @@ body.hero-light .hero__caret { background: var(--teal-500); }
   border-radius: var(--radius-card);
   overflow: hidden;
 }
-
-/* Case-study media and figures */
-.case-study figure,
-.case-study figure img,
-.screenscroll__frame,
-.svc__panel img {
-  border-radius: var(--radius-card);
-}
-
-/* Cards that sit inside a rounded parent keep square inner media */
 .proj-card__media { border-radius: var(--radius-card) var(--radius-card) 0 0; }
+.case-study figure,
+.case-study figure img { border-radius: var(--radius-card); }
+
+/* The parallax overscan (img is 116% tall) was anchored to the top, so the
+   bottom 16% was always clipped and artwork sat low in frame. Pull it up by
+   half the overflow to centre the travel, which recentres every spread image
+   (most visibly the MHCLG logo card). */
+.spread__img-mask img {
+  position: relative;
+  top: -8%;
+}
 
 @media (max-width: 580px) {
   :root { --radius-card: 12px; }

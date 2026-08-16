@@ -144,7 +144,7 @@ export default function Projects() {
       <div className="container">
         <div className="sec-head">
           <div>
-            <h2 className="h2" data-reveal="up" data-delay="80">Selected <span className="accent">work.</span></h2>
+            <h2 className="h2" data-reveal="up" data-delay="80"><span className="accent">Work.</span></h2>
           </div>
           <div className="sec-head__right" data-reveal="up" data-delay="160">Seven projects across healthcare, public sector, fintech and edtech.</div>
         </div>

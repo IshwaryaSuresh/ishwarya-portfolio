@@ -12,7 +12,7 @@ export default function Footer() {
             <ul>
               <li><a href="/">Home</a></li>
               <li><a href="/#about">About</a></li>
-              <li><a href="/work">Projects</a></li>
+              <li><a href="/#work">Work</a></li>
               <li><a href="/#journal">Articles</a></li>
               <li><a href="/#brief">Contact</a></li>
             </ul>

@@ -188,9 +188,9 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6 pt-16 text-center">
         <h2 className="text-2xl font-bold text-ink mb-4">Want to see my work in action?</h2>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/work" className="bg-ink text-paper px-6 py-3 rounded-full font-medium text-sm hover:bg-accent transition-colors">
+          <a href="/#work" className="bg-ink text-paper px-6 py-3 rounded-full font-medium text-sm hover:bg-accent transition-colors">
             View case studies
-          </Link>
+          </a>
           <Link to="/contact" className="border border-border text-ink px-6 py-3 rounded-full font-medium text-sm hover:border-accent hover:text-accent transition-colors">
             Get in touch
           </Link>

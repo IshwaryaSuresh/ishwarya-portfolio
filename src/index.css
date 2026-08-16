@@ -2668,3 +2668,6 @@ body.hero-light .hero__caret { background: var(--teal-500); }
   object-fit: contain;
   transform: none !important;
 }
+
+/* Hash links land just below the fixed nav, not underneath it */
+section[id] { scroll-margin-top: 24px; }

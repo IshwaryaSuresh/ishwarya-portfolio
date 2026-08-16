@@ -337,9 +337,9 @@ function StoryBody({ project }: { project: Project }) {
 
       {/* Nav between case studies */}
       <div className="flex justify-between pt-8 mt-8 border-t border-border">
-        <Link to="/work" className="text-sm font-medium text-accent hover:underline">
+        <a href="/#work" className="text-sm font-medium text-accent hover:underline">
           ← All projects
-        </Link>
+        </a>
         <a
           href="mailto:ishwaryasuresh@madeforhumans.tech"
           className="text-sm font-medium bg-ink text-paper px-5 py-2 rounded-full hover:bg-accent transition-colors"
@@ -518,8 +518,8 @@ export default function CaseStudy() {
   const project = getProject(slug ?? '')
   const [view, setView] = useState<'detailed' | 'tldr'>('detailed')
 
-  if (!project) return <Navigate to="/work" replace />
-  if (project.comingSoon) return <Navigate to="/work" replace />
+  if (!project) return <Navigate to="/#work" replace />
+  if (project.comingSoon) return <Navigate to="/#work" replace />
 
   const colorClass = typeColors[project.type] ?? 'bg-gray-50 text-gray-600 border-gray-200'
 
@@ -1871,9 +1871,9 @@ export default function CaseStudy() {
 
         {/* Nav between case studies */}
         <div className="flex justify-between pt-8 border-t border-border">
-          <Link to="/work" className="text-sm font-medium text-accent hover:underline">
+          <a href="/#work" className="text-sm font-medium text-accent hover:underline">
             ← All projects
-          </Link>
+          </a>
           <a
             href="mailto:ishwaryasuresh@madeforhumans.tech"
             className="text-sm font-medium bg-ink text-paper px-5 py-2 rounded-full hover:bg-accent transition-colors"

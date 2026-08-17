@@ -144,7 +144,10 @@ function StoryBody({ project }: { project: Project }) {
   // ink plate, so the figure drops its panel chrome and the caption inverts.
   const renderVisual = (visual: NonNullable<StoryMoment['visual']>, dark?: boolean) => {
     const frame = dark ? '' : 'rounded-2xl overflow-hidden border border-border'
-    const media = dark ? '' : 'bg-paper'
+    // On ink the figure carries no frame, so the rounding goes on the image
+    // itself: a screenshot cropped flush to the UI has none of its own, and
+    // rounding the figure instead would round the caption's corners too.
+    const media = dark ? 'rounded-2xl' : 'bg-paper'
     const caption = dark
       ? 'pt-4 text-xs text-white/50 leading-relaxed'
       : 'px-4 py-3 bg-paper text-xs text-muted leading-relaxed border-t border-border'
@@ -173,7 +176,7 @@ function StoryBody({ project }: { project: Project }) {
                   <img
                     src={it.src}
                     alt={it.label ?? ''}
-                    className={`w-full object-contain flex-1 ${media}`}
+                    className={`w-full object-contain ${media}`}
                     style={{ maxHeight: '300px' }}
                   />
                   {it.label && <figcaption className={caption}>{it.label}</figcaption>}

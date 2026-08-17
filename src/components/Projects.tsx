@@ -45,6 +45,19 @@ const PROJECTS: Project[] = [
   },
   {
     num: '03',
+    title: 'Setmore, scheduling at scale',
+    client: 'Full Creative · Setmore',
+    year: '',
+    role: '',
+    desc: 'Team work at Full Creative on a ten-year-old scheduling product used by around 30,000 people a day. Reputation management, booking-link sharing, and the appointment widget, delivered against a shared design system.',
+    metric: '~30K daily users · Earth Design System',
+    tags: ['SaaS', 'Design systems', 'B2B'],
+    image: '/uploads/setmore/spread.png',
+    placeholder: 'SaaS, Setmore scheduling',
+    slug: 'setmore',
+  },
+  {
+    num: '04',
     title: 'Ledgerline, B2B Fintech',
     client: 'Self-initiated',
     year: '2026',
@@ -57,7 +70,7 @@ const PROJECTS: Project[] = [
     slug: 'ledgerline',
   },
   {
-    num: '04',
+    num: '05',
     title: 'TFL, Payments campaign',
     client: 'Transport for London',
     year: '2023',
@@ -70,7 +83,7 @@ const PROJECTS: Project[] = [
     slug: 'tfl',
   },
   {
-    num: '05',
+    num: '06',
     title: 'MHCLG Grants Services',
     client: 'Ministry of Housing, Communities & Local Government',
     year: '2023–25',
@@ -84,7 +97,7 @@ const PROJECTS: Project[] = [
     slug: 'mhclg-grants',
   },
   {
-    num: '06',
+    num: '07',
     title: 'Me & You, Dementia care',
     client: 'NHS x King\'s College',
     year: '2024',
@@ -97,7 +110,7 @@ const PROJECTS: Project[] = [
     slug: 'me-and-you',
   },
   {
-    num: '07',
+    num: '08',
     title: 'Project Accord, Ambient air quality',
     client: 'Newcastle University · Open Lab',
     year: '2023',
@@ -146,7 +159,7 @@ export default function Projects() {
           <div>
             <h2 className="h2" data-reveal="up" data-delay="80"><span className="accent">Work.</span></h2>
           </div>
-          <div className="sec-head__right" data-reveal="up" data-delay="160">Seven projects across healthcare, public sector, fintech and edtech.</div>
+          <div className="sec-head__right" data-reveal="up" data-delay="160">Eight projects across healthcare, public sector, fintech, SaaS and edtech.</div>
         </div>
 
         <div className="spreads">

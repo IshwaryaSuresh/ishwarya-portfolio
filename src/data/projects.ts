@@ -53,7 +53,7 @@ export type Project = {
   title: string
   tagline: string
   niche: string[]
-  type: 'Social Impact' | 'Fintech B2B' | 'Fintech Consumer' | 'Edtech' | 'Healthcare' | 'Government' | 'Academic'
+  type: 'Social Impact' | 'Fintech B2B' | 'Fintech Consumer' | 'Edtech' | 'Healthcare' | 'Government' | 'Academic' | 'SaaS'
   featured: boolean
   comingSoon?: boolean
   client: string
@@ -249,6 +249,195 @@ export type Project = {
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'setmore',
+    title: 'Setmore, scheduling at scale',
+    tagline: 'Team work at Full Creative on Setmore, a ten-year-old scheduling product used by around 30,000 people a day. Reputation management, booking-link sharing, and the appointment widget, delivered against a shared design system.',
+    niche: ['SaaS', 'Design systems', 'B2B'],
+    type: 'SaaS',
+    featured: false,
+    client: 'Full Creative · Setmore',
+    clientLabel: 'Product',
+    tools: ['Figma', 'Figma design libraries', 'Design tokens', 'A/B testing'],
+    heroImage: '/uploads/setmore/spread.png',
+    overview: {
+      team: 'A cross-functional group across India, Scotland and Poland: Varun Sudarsan (senior UI/UX design), Yuvan Gupta (programme), Vitej Chauhan (product), Konrad Paszkiewicz (design systems lead), Sebastian Whitman (senior product design), with Ardent Code in Poland on engineering.',
+      industry: 'SaaS · Scheduling for small and medium businesses',
+      status: 'Reviews module was a work in progress at handover; conclusive post-launch metrics were still pending.',
+    },
+    problem: `Setmore is where a barber, a tattoo studio or a physiotherapist takes bookings, and the booking page it generates is that business's storefront. By this point Setmore was a ten-year-old product with around 30,000 people in it every day, which changes the maths on any redesign: the people most affected are the ones who know the current screens best.\n\nTwo of those screens were failing in opposite directions. The booking page had been rebuilt to lean on social proof, which left new businesses with nothing to show and long-standing ones with an unmoderated flood of reviews sitting on their own front door. And the product's growth had come almost entirely from word of mouth inside the small-business community, with no route out of the product into the places those businesses actually promote themselves.\n\nHow do you modernise a mature scheduling product, across several independently shipped micro-frontends, without throwing off the legacy users who rely on it daily?`,
+    insight: `Reputation and referral are the same problem seen from two ends: both are where a business's next customer is decided, and the product was treating one as content to display and the other as a link to copy. The constraint on fixing either was legacy familiarity rather than visual freshness, so every proposal had to be tested against long-tenured users before it shipped, and the fastest way to keep three independently shipped micro-frontends coherent was a shared design system rather than three teams solving the same problems apart.`,
+    process: [
+      {
+        step: 'Market and stakeholder research',
+        detail: 'Worked with programme managers to understand the market and set design strategy off the back of it, rather than designing to a feature list.',
+      },
+      {
+        step: 'Reviews, rebuilt from the ground up',
+        detail: 'Reputation management pulled into one place: reviews from multiple platforms surfaced together, moderated, and shown on the booking page, with a longer-term roadmap for a full reputation module. Approval sits before publication, so a business is never surprised by what its booking page says about it.',
+        image: '/uploads/setmore/reviews-dashboard.png',
+        imageCaption: 'Manage Reviews in the settings portal: approve or reject incoming reviews before they reach the public booking page.',
+      },
+      {
+        step: 'Google Reviews as the first connector',
+        detail: 'Rather than building an aggregation layer up front, the module opened with a single connector. Google carried the most existing reputation for the average small business, so it earned the first slot and set the pattern every later platform would follow.',
+        image: '/uploads/setmore/reviews-google.png',
+        imageCaption: 'The Google Reviews connector at the top of Manage Reviews: one action to pull existing Google reviews onto the booking page.',
+      },
+      {
+        step: 'Testing against legacy users',
+        detail: 'The redesign direction was A/B tested with existing customers before commitment, given how much of the base had a decade of muscle memory in the old interface. It came back with a 100% pick rate, which mattered less as a preference than as proof that long-tenured users could still find their way around.',
+      },
+      {
+        step: 'Selling share as an experiment, not a feature',
+        detail: 'Social sharing was a hard sell internally. Peers read the absence of the feature across every competitor as evidence there was no value in it. User interviews and research turned the argument, and what carried was a smaller commitment than the feature itself: run it as an experiment with a result everyone had agreed in advance to read.',
+      },
+      {
+        step: 'Sharing the booking link',
+        detail: 'Reworked how businesses share their booking page, starting with the plainest case: copy the link, or open availability and share a specific slot, with a single-use option for links that should expire once booked. The live preview on the left showed the business exactly what the recipient would see.',
+        image: '/uploads/setmore/share-link.png',
+        imageCaption: 'The share sheet, link tab: the booking page URL ready to copy, with a live preview of the shared card on the left.',
+      },
+      {
+        step: 'Sharing to social platforms',
+        detail: 'Small businesses already promote themselves on Facebook, Instagram, Twitter and LinkedIn, so the second tab sent the booking link straight into those posts with the service image and copy prefilled instead of asking the owner to assemble a post themselves.',
+        image: '/uploads/setmore/share-social.png',
+        imageCaption: 'The social tab: one route per platform, with the service card previewed as it will appear in the feed.',
+      },
+      {
+        step: 'Sharing over messaging and SMS',
+        detail: 'The third route covered the conversation a booking most often actually happens in. A prefilled message carries the link into Messenger, WhatsApp, iMessage or email, previewed as a thread so the tone can be checked before it is sent.',
+        image: '/uploads/setmore/share-messaging.png',
+        imageCaption: 'The instant messaging tab: an editable prefilled message and booking link, previewed as the customer will receive it.',
+      },
+      {
+        step: 'Appointment widget and the Earth Design System',
+        detail: 'Contributed atoms, molecules and templates back into Earth, the shared design system, built from the real use cases the appointment widget surfaced instead of from a hypothetical component list.',
+      },
+    ],
+    metrics: [
+      { label: 'Daily active users on the product', value: '~30K' },
+      { label: 'Pick rate in A/B testing with customers', value: '100%' },
+      { label: 'Increase in backlinks after Easy Share', value: '3×' },
+      { label: 'Coverage reached, Earth Design System v1.0', value: '60%' },
+    ],
+    solution: `Three connected pieces of work on the same product. Reviews became a single surface for reputation management, moderated before publication, with a Google Review integration first and a roadmap toward Yelp and Facebook Business behind it. Booking-link sharing was rebuilt around where businesses actually promote themselves, one to many into social platforms and one to one into a message, and shipped as a reusable micro-frontend that renamed its own screen from "Services and Classes" to "Easy Share". The appointment widget was redesigned and its patterns pushed back into the Earth design system, which reached 60% coverage at v1.0 and measurably sped up both design and implementation.`,
+    takeaway: `Working on a mature product with a large daily user base teaches restraint: the interesting design question is rarely what to add, it is what a decade of existing users can absorb without losing their footing. The other lesson was about arguing. "No competitor has this" is the weakest reason not to build something and the most persuasive one in a room, and the way past it was not a better opinion, it was a smaller commitment: run the experiment, agree how to read it beforehand. Contributing components back into a shared system was the clearest lever of the three, one pattern solved once made every subsequent screen cheaper for the whole team.`,
+    tags: ['SaaS', 'Design systems', 'Micro-frontends', 'A/B testing', 'Reputation management', 'Growth'],
+    story: {
+      challenge: {
+        paragraphs: [
+          `Setmore is where a barber, a tattoo studio or a physiotherapist takes bookings, and the booking page it generates is that business's storefront. Ten years old, around 30,000 people in it every day: on a product that mature, the people most affected by a redesign are the ones who know the current screens best.`,
+          `Two things were broken at once. Reviews landed on the booking page unmoderated, so a new business had nothing to show and a decade-old one had a flood of opinion on its own front door. And a product that had grown almost entirely by word of mouth gave its users no way out of it, into the places they actually promote themselves.`,
+        ],
+        hmw: `How do you modernise a mature scheduling product, across several independently shipped micro-frontends, without throwing off the legacy users who rely on it daily?`,
+      },
+      summary: {
+        solution: `Three tracks on one product: reviews rebuilt as a moderated reputation surface with Google as the first connector, sharing rebuilt around where small businesses already promote themselves, and the appointment widget turned into the first real use cases for Earth, the shared design system.`,
+      },
+      stages: [
+        {
+          label: 'Reviews',
+          kicker: 'Reputation, moderated',
+          dark: true,
+          moments: [
+            {
+              title: 'A storefront the business could not answer',
+              body: `Reviews arrived on the booking page unmoderated, including for owners who had never thought about their reviews until they were suddenly public.`,
+              visual: {
+                kind: 'imageGrid',
+                items: [
+                  { src: '/uploads/setmore/reviews-dashboard.png', label: 'Before: a flat list, rejected one at a time' },
+                  { src: '/uploads/setmore/reviews-new-ui.png', label: 'After: rating summary, search, date, rating and source filters, and review requests' },
+                ],
+              },
+              finding: `The old screen listed reviews and let you reject them one by one, which holds up until a decade of them arrives. The rebuild added what volume demands, and a request-a-review toggle for the opposite problem: the new business with nothing on its page at all.`,
+            },
+            {
+              title: 'One connector before an aggregator',
+              body: `The goal was Google, Yelp and Facebook Business under one roof. It opened with one: Google carried the most existing reputation for the average small business, so it set the pattern the rest would inherit.`,
+              visual: {
+                kind: 'image',
+                src: '/uploads/setmore/reviews-google.png',
+                caption: 'The Google connector: one action to pull existing reviews onto the booking page.',
+              },
+              finding: `The direction went to existing customers in A/B testing before commitment and came back at a 100% pick rate. The reassuring part was not that people preferred it, it was that a decade of muscle memory could still find its way around.`,
+            },
+          ],
+        },
+        {
+          label: 'Easy Share',
+          kicker: 'Closing the viral loop',
+          moments: [
+            {
+              title: 'The growth channel nobody had built',
+              body: `Setmore grew by word of mouth inside the small-business community, and the screen where a business defined its services stopped at the point of definition. So the share had two shapes to build: one to many, into social platforms, and one to one, into a message.`,
+            },
+            {
+              title: 'A hard sell inside the building',
+              body: `Peers read the absence of the feature across every competitor as evidence there was no value in it. Interviews and research turned the argument.`,
+              finding: `"No competitor has this" is the weakest reason not to build something and the most persuasive one in a room. What got past it was not a better opinion but a smaller commitment: run it as an experiment, agree beforehand how to read the result.`,
+            },
+          ],
+        },
+        {
+          label: 'The three routes',
+          kicker: 'One to many, one to one',
+          dark: true,
+          moments: [
+            {
+              screenScroll: [
+                {
+                  src: '/uploads/setmore/share-link.png',
+                  title: 'The plainest case first',
+                  body: `Copy the booking link, or open availability and share one specific slot. A single-use option expires the link once it has been booked.`,
+                },
+                {
+                  src: '/uploads/setmore/share-social.png',
+                  title: 'One to many',
+                  body: `Small businesses already promote themselves on Facebook, Instagram, Twitter and LinkedIn. The social tab sends the link into those posts with the service image and copy prefilled.`,
+                },
+                {
+                  src: '/uploads/setmore/share-messaging.png',
+                  title: 'One to one',
+                  body: `Most bookings are actually agreed in a conversation. A prefilled message carries the link into Messenger, WhatsApp, iMessage or email, previewed as a thread.`,
+                },
+              ],
+              finding: `Every route previews the thing being sent. A link shared blind is a link an owner sends once and never again, so the preview is what makes the feature repeatable.`,
+            },
+          ],
+        },
+        {
+          label: 'Design system',
+          kicker: 'Appointment widget into Earth',
+          moments: [
+            {
+              title: 'Components earned by use cases',
+              body: `The widget refresh landed alongside the company-wide design system effort. Atoms, molecules and templates went into Earth from the requirements the widget actually surfaced, not from a component list drawn up in advance.`,
+              visual: {
+                kind: 'image',
+                src: '/uploads/setmore/earth-board.png',
+                caption: 'The appointment widget in front of its component board: list items, dropdowns, guest lists, date and time pickers, repeat rules and label states, each one a contribution back into Earth.',
+              },
+              finding: `Earth reached 60% coverage at v1.0, and one pattern solved once made every later screen cheaper across micro-frontends shipped independently from three countries.`,
+            },
+          ],
+        },
+      ],
+      results: {
+        kicker: 'Outcomes',
+        dark: true,
+        stats: [
+          { value: '3×', label: 'increase in backlinks after Easy Share, feeding organic search' },
+          { value: '100%', label: 'pick rate for the new Reviews direction in A/B testing' },
+          { value: '60%', label: 'coverage at Earth Design System v1.0' },
+          { value: '~30K', label: 'people using the product every day' },
+        ],
+        body: `The micro-frontend was renamed from "Services and Classes" to "Easy Share", the clearest signal a feature has stopped being an addition to a screen and become the point of it. Backlinks tripled and fed organic search, feedback came back through Intercom, and the share experience was rebuilt as a reusable micro-frontend used elsewhere in the product.\n\nReviews is the honest asterisk: the direction won its test and the Google connector shipped, but the module was still in progress at handover, with Yelp and Facebook Business ahead of it.`,
+        quote: `On a ten-year-old product the interesting question is rarely what to add. It is what a decade of existing users can absorb without losing their footing.`,
+      },
+    },
+  },
   {
     slug: 'afterglow',
     title: 'Afterglow: A Ritual for Two',

@@ -9,3 +9,7 @@ IMG_4433.JPG
 *.pdf
 *.docx
 MHCLG-logo-blog.png
+
+# Scratch output from the shoot/record scripts
+scripts/_*
+scripts/_video*/

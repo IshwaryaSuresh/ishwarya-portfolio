@@ -261,7 +261,7 @@ export const projects: Project[] = [
     tools: ['Figma', 'Figma design libraries', 'Design tokens', 'A/B testing'],
     heroImage: '/uploads/setmore/spread.png',
     overview: {
-      team: 'A cross-functional group across India, Scotland and Poland: Varun Sudarsan (senior UI/UX design), Yuvan Gupta (programme), Vitej Chauhan (product), Konrad Paszkiewicz (design systems lead), Sebastian Whitman (senior product design), with Ardent Code in Poland on engineering.',
+      team: 'A cross-functional group across India, Scotland and Poland: a senior UI/UX designer, a programme manager, a product manager, a design systems lead and a senior product designer, with an engineering partner in Poland.',
       industry: 'SaaS · Scheduling for small and medium businesses',
       status: 'Reviews module was a work in progress at handover; conclusive post-launch metrics were still pending.',
     },

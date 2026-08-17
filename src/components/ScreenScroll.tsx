@@ -70,16 +70,18 @@ export default function ScreenScroll({ steps, finding, dark }: { steps: ScreenSc
               ))}
             </div>
 
-            {/* Screens, crossfading in place, no panel chrome */}
+            {/* Screens, crossfading in place, no panel chrome. The image sizes
+                to its own box rather than filling the stage, so the rounding
+                lands on the picture's edges instead of on empty letterbox. */}
             <div className="relative h-full overflow-hidden min-w-0">
               {steps.map((s, i) => (
-                <img
-                  key={s.src}
-                  src={s.src}
-                  alt={s.title}
-                  className="absolute inset-0 w-full h-full object-contain"
-                  style={fade(i)}
-                />
+                <div key={s.src} className="absolute inset-0 flex items-center justify-center" style={fade(i)}>
+                  <img
+                    src={s.src}
+                    alt={s.title}
+                    className="max-w-full max-h-full object-contain rounded-2xl"
+                  />
+                </div>
               ))}
               {/* Progress dots */}
               <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2" aria-hidden>
